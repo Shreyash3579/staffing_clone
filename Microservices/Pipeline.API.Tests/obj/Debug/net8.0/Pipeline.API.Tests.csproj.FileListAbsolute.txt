@@ -1,8 +1,0 @@
-C:\Projects\TSG-Staffing-BOSS\Microservices\Pipeline.API.Tests\bin\Debug\net8.0\.msCoverageSourceRootsMapping_Pipeline.API.Tests
-C:\Projects\TSG-Staffing-BOSS\Microservices\Pipeline.API.Tests\bin\Debug\net8.0\CoverletSourceRootsMapping_Pipeline.API.Tests
-C:\Projects\TSG-Staffing-BOSS\Microservices\Pipeline.API.Tests\obj\Debug\net8.0\Pipeline.API.Tests.csproj.AssemblyReference.cache
-C:\Projects\TSG-Staffing-BOSS\Microservices\Pipeline.API.Tests\obj\Debug\net8.0\Pipeline.API.Tests.GeneratedMSBuildEditorConfig.editorconfig
-C:\Projects\TSG-Staffing-BOSS\Microservices\Pipeline.API.Tests\obj\Debug\net8.0\Pipeline.API.Tests.AssemblyInfoInputs.cache
-C:\Projects\TSG-Staffing-BOSS\Microservices\Pipeline.API.Tests\obj\Debug\net8.0\Pipeline.API.Tests.AssemblyInfo.cs
-C:\Projects\TSG-Staffing-BOSS\Microservices\Pipeline.API.Tests\obj\Debug\net8.0\Pipeline.API.Tests.csproj.CoreCompileInputs.cache
-C:\Projects\TSG-Staffing-BOSS\Microservices\Pipeline.API.Tests\obj\Debug\net8.0\Pipeline.API.Tests.sourcelink.json

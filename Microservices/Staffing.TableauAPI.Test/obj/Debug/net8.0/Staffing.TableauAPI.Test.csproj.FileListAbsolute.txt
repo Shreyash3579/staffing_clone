@@ -1,8 +1,0 @@
-C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.TableauAPI.Test\bin\Debug\net8.0\.msCoverageSourceRootsMapping_Staffing.TableauAPI.Test
-C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.TableauAPI.Test\bin\Debug\net8.0\CoverletSourceRootsMapping_Staffing.TableauAPI.Test
-C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.TableauAPI.Test\obj\Debug\net8.0\Staffing.TableauAPI.Test.csproj.AssemblyReference.cache
-C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.TableauAPI.Test\obj\Debug\net8.0\Staffing.TableauAPI.Test.GeneratedMSBuildEditorConfig.editorconfig
-C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.TableauAPI.Test\obj\Debug\net8.0\Staffing.TableauAPI.Test.AssemblyInfoInputs.cache
-C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.TableauAPI.Test\obj\Debug\net8.0\Staffing.TableauAPI.Test.AssemblyInfo.cs
-C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.TableauAPI.Test\obj\Debug\net8.0\Staffing.TableauAPI.Test.csproj.CoreCompileInputs.cache
-C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.TableauAPI.Test\obj\Debug\net8.0\Staffing.TableauAPI.Test.sourcelink.json

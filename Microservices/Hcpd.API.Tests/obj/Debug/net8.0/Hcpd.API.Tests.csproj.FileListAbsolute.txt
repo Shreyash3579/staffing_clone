@@ -1,8 +1,0 @@
-C:\Projects\TSG-Staffing-BOSS\Microservices\Hcpd.API.Tests\bin\Debug\net8.0\.msCoverageSourceRootsMapping_Hcpd.API.Tests
-C:\Projects\TSG-Staffing-BOSS\Microservices\Hcpd.API.Tests\bin\Debug\net8.0\CoverletSourceRootsMapping_Hcpd.API.Tests
-C:\Projects\TSG-Staffing-BOSS\Microservices\Hcpd.API.Tests\obj\Debug\net8.0\Hcpd.API.Tests.csproj.AssemblyReference.cache
-C:\Projects\TSG-Staffing-BOSS\Microservices\Hcpd.API.Tests\obj\Debug\net8.0\Hcpd.API.Tests.GeneratedMSBuildEditorConfig.editorconfig
-C:\Projects\TSG-Staffing-BOSS\Microservices\Hcpd.API.Tests\obj\Debug\net8.0\Hcpd.API.Tests.AssemblyInfoInputs.cache
-C:\Projects\TSG-Staffing-BOSS\Microservices\Hcpd.API.Tests\obj\Debug\net8.0\Hcpd.API.Tests.AssemblyInfo.cs
-C:\Projects\TSG-Staffing-BOSS\Microservices\Hcpd.API.Tests\obj\Debug\net8.0\Hcpd.API.Tests.csproj.CoreCompileInputs.cache
-C:\Projects\TSG-Staffing-BOSS\Microservices\Hcpd.API.Tests\obj\Debug\net8.0\Hcpd.API.Tests.sourcelink.json

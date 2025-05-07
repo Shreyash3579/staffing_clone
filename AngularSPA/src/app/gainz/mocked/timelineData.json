@@ -1,9 +1,0 @@
-{
-  "months": [
-    { "name": "OCT 2024", "days": 31 },
-    { "name": "NOV 2024", "days": 30 },
-    { "name": "DEC 2024", "days": 31 },
-    { "name": "JAN 2025", "days": 31 },
-    { "name": "FEB 2025", "days": 28 }
-  ]
-}
