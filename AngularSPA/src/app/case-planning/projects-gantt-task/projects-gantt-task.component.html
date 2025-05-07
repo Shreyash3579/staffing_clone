@@ -1,0 +1,48 @@
+  <ng-container *ngIf="planningCards">
+    <div class="utilization-area">
+      <!-- <div class="utilization-rows"> -->
+        <div class="utilization-row">
+          <app-projects-gantt-project
+            [dateRange]="dateRange"
+            [planningCard]="planningCards"
+            (showQuickPeekDialog)="showQuickPeekDialogHandler($event)"
+            (openPlaceholderForm)="openPlaceholderFormhandler($event)">
+          </app-projects-gantt-project>
+        </div>
+      <!-- </div> -->
+    </div>
+  </ng-container>
+  
+  <ng-container *ngIf="casesGanttData">
+    <div class="utilization-area">
+      <!-- <div class="utilization-rows"> -->
+      <div class="utilization-row" #bounds>
+        <app-projects-gantt-project
+          [casesGanttData]="casesGanttData"
+          [dateRange]="dateRange"
+          [bounds]="bounds"
+          [caseIndex]="indexNumber"
+          (openCaseRollForm)="openCaseRollFormHandler($event)"
+          (showQuickPeekDialog)="showQuickPeekDialogHandler($event)"
+          (openPlaceholderForm)="openPlaceholderFormhandler($event)"
+          (openAddTeamSkuForm)="openAddTeamSkuFormHandler($event)"
+          (openCaseDetailsDialog)="openCaseDetailsDialogHandler($event)"
+          (skuTermClickForProject)="skuTermClickForProjectHandler($event)">
+        </app-projects-gantt-project>
+      </div>
+      <!-- </div> -->
+    </div>
+    <!-- <div
+      id="alloted-resources"
+      *ngIf="
+        (casesGanttData.oldCaseCode === selectedProject ||
+          casesGanttData.pipelineId === selectedProject) &&
+        showPlaceholdersOverlay
+      ">
+      <app-allocated-placeholder
+        [skuResources]="casesGanttData"
+        (closePlaceholdersOverlayEmitter)="closePlaceholdersOverlayHandler()">
+      </app-allocated-placeholder>
+    </div> -->
+  </ng-container>
+  

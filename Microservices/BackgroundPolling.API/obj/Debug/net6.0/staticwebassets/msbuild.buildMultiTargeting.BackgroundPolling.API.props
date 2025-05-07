@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\BackgroundPolling.API.props" />
+</Project>

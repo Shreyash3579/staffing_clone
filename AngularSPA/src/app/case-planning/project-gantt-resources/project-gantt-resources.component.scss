@@ -1,0 +1,349 @@
+@import "variables";
+
+.resources-wrapper {
+  background: #fff;
+  font-family: "Graphik";
+  display: grid;
+  gap: 8px;
+  height: 100%;
+  max-height: 100%;
+  max-width: 400px;
+  padding: 8px 10px;
+
+  &.collapsed {
+    max-height: 32px;
+    overflow: hidden;
+  }
+
+  .bain-red {
+    color: $bain-red !important;
+  }
+
+  button {
+    border: none;
+    font-size: 10px;
+    outline: none;
+    padding: 0px;
+  }
+
+  // Info
+  .resources-info-wrapper {
+    align-items: center;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 35px 79px 71px 49px 48px 22px 16px;
+
+    p {
+      color: #616568;
+      font-size: 10px;
+      line-height: 16px;
+      margin: 0px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &.sku {
+        font-weight: 500;
+      }
+    }
+
+    // Expand & Collapse CTA
+    button {
+      background: #ecf0ff;
+      border: none;
+      border-radius: 2px;
+      color: #284ce0;
+      height: 16px;
+      outline: none;
+      padding: 0px;
+      // width: 16px;
+
+      // &.sku {
+      //     background: none;
+      //     color: #616568;
+      //     font-size: 10px;
+      //     font-weight: 400;
+      // }
+    }
+  }
+
+  .resources-info-wrapper2 {
+    align-items: center;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 35px 257px 22px 16px;
+
+    p {
+      color: #616568;
+      font-size: 10px;
+      line-height: 16px;
+      margin: 0px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &.sku {
+        font-weight: 500;
+      }
+    }
+
+    // Expand & Collapse CTA
+    button {
+      background: #ecf0ff;
+      border: none;
+      border-radius: 2px;
+      color: #284ce0;
+      height: 16px;
+      outline: none;
+      padding: 0px;
+      // width: 16px;
+
+      &.sku {
+        background: none;
+        color: #616568;
+        font-size: 10px;
+        font-weight: 400;
+        max-width: 230px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  // Notes Wrapper
+  .notes-wrapper {
+    box-sizing: border-box;
+    // margin-top: 12px;
+    max-height: 999px;
+    transition: all 0.2s ease-in-out;
+
+    span {
+      color: #616568;
+      display: inline-block;
+      font-size: 10px;
+      text-transform: capitalize;
+
+      &.header-label {
+        font-weight: 500;
+      }
+    }
+
+    // When collapsed
+    &.collapsed {
+      max-height: 18px;
+      overflow: hidden;
+    }
+
+    // Buttons
+    button {
+      background-color: transparent;
+      border: none;
+      color: #616568;
+      height: 16px;
+      padding: 0px;
+      width: 16px;
+
+      &.expand-collapse-notes {
+        color: #284ce0 !important;
+
+        &.collapsed i {
+          transform: rotate(180deg);
+        }
+
+        i {
+          transition: all 0.2s ease-in-out;
+        }
+      }
+    }
+
+    // Notes Header
+    .notes-header-wrapper {
+      background-color: #ecf0ff;
+      border: 1px solid #e0e4e0;
+      height: 18px;
+      justify-content: space-between;
+      padding: 0px 0px 0px 7px;
+    }
+
+    // New Note Wrapper
+    .new-note-wrapper {
+      padding: 6px;
+
+      &.hidden {
+        display: none;
+      }
+
+      .new-note-content {
+        border: 1px solid #284ce0;
+        border-radius: 4px;
+        box-shadow: 0px 0px 4px rgba($color: #7597ff, $alpha: 1);
+        height: auto;
+        margin-bottom: 6px;
+        padding: 4px;
+
+        // Note input area
+        textarea {
+          border: none;
+          color: #616568;
+          font-size: 10px;
+          font-weight: 400;
+          line-height: 12px;
+          min-height: 20px;
+          outline: none;
+          width: 100%;
+
+          &:focus {
+            border: none;
+            outline: none;
+          }
+        }
+
+        // Specific users
+        .user-pills {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 4px;
+          margin-top: 6px;
+
+          .user {
+            background-color: #ecf0ff;
+            border-radius: 2px;
+            color: #616568;
+            font-size: 8px;
+            gap: 4px;
+            height: 16px;
+            padding: 0px 6px 0px 4px;
+
+            p {
+              font-weight: 500;
+              margin: 0px;
+            }
+
+            button {
+              background: none;
+              border: none;
+              padding: 0px;
+
+              i {
+                transform: rotate(45deg);
+              }
+            }
+          }
+        }
+      }
+
+      // Sharing Options & Add Note | Save Note
+      .new-note-ctas {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+          align-items: center;
+          background: none;
+          border: none;
+          border-radius: 2px;
+          display: flex;
+          font-size: 8px;
+          font-weight: 500;
+          gap: 3px;
+          height: 20px;
+          line-height: 10px;
+          width: auto;
+
+          &.primary {
+            background-color: #284ce0;
+            color: #fff;
+            padding: 0px 10px;
+
+            &:disabled {
+              opacity: 0.5;
+            }
+          }
+
+          &.secondary {
+            background-color: #f0f2f3;
+            color: #616568;
+            padding: 0px 6px;
+          }
+        }
+      }
+
+      // Share With Container
+      .share-with-wrapper {
+        margin-top: 6px;
+        width: 100%;
+      }
+    }
+
+    // Notes Content
+    .notes-content-wrapper {
+      background-color: #fff;
+      border-top: 1px solid #e0e4e8;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 150px;
+      overflow-y: auto;
+      padding: 7px 5px 7px 7px;
+
+      .last-edited {
+        position: relative;
+
+        p {
+          font-size: 9px;
+          // height: auto;
+          margin: 0px;
+        }
+
+        i {
+          font-size: 7px;
+        }
+
+        // Context Menu - Edit & Delete Note Options
+        .note-context-menu-wrapper {
+          .note-context-menu {
+            background-color: #fff;
+            border: 1px solid #c2c9d1;
+            border-radius: 4px;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+            display: none;
+            position: absolute;
+            right: 20px;
+            width: 86px;
+
+            &.show {
+              display: inline-block;
+            }
+
+            button {
+              align-items: center;
+              display: flex;
+              height: 24px;
+              padding: 0px 16px;
+              text-align: left;
+              width: 100%;
+
+              &:hover {
+                background-color: #f7f9ff;
+              }
+            }
+          }
+        }
+      }
+
+      .notes-content {
+        margin-top: 4px;
+        width: 100%;
+
+        & * {
+          border: none;
+          color: #616568;
+          font-size: 10px;
+          margin: 0px;
+          outline: none;
+        }
+      }
+    }
+  }
+}

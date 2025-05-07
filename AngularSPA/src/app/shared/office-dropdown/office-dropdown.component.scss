@@ -1,0 +1,24 @@
+@import "variables.scss";
+
+.treeview-container .row-item .fa {
+  margin-left: -12.8px;
+  margin-right: 0px !important;
+}
+
+.btn-outline-secondary {
+  color: $grey-darkest;
+  border-color: $grey-medium-dark;
+  background-color: $grey-light;
+  &:hover {
+    background-color: $grey-medium-dark;
+    border-color: $grey-medium-dark;
+  }
+}
+
+.show > .btn-outline-secondary.dropdown-toggle {
+  background-color: $grey-medium-dark;
+  border-color: $grey-medium-dark;
+}
+.treeview-container {
+  width: 280px !important;
+}

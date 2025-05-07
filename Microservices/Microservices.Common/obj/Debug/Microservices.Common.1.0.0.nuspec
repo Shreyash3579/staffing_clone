@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Microservices.Common</id>
+    <version>1.0.0</version>
+    <authors>Microservices.Common</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="2aa265a42a2d820aab46c1ca20884cd054de0b19" />
+    <dependencies>
+      <group targetFramework="net8.0">
+        <dependency id="Azure.Identity" version="1.11.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNet.WebApi.Client" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Http.Abstractions" version="2.2.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Http.Features" version="5.0.17" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Configuration" version="8.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="8.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Graph" version="5.56.0" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="13.0.3" exclude="Build,Analyzers" />
+        <dependency id="System.Text.Json" version="8.0.4" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Projects\TSG-Staffing-BOSS\Microservices\Microservices.Common\bin\Debug\net8.0\Microservices.Common.dll" target="lib\net8.0\Microservices.Common.dll" />
+  </files>
+</package>

@@ -1,0 +1,63 @@
+<div class="staffing-menubar">
+  <!-- Commenting all the click functions -->
+  <div class="staffing-menubar__wrapper">
+    <!-- header -->
+    <div class="header">
+      <button (click)="toggleMenubar()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- filter -->
+    <div class="menu-item">
+      <button
+        *ngFor="let filter of filters"
+        (click)="selectFilterTab(filter.tab)"
+        [class.selected]="filter.selected || showFilterTab == filter.tab"
+      >
+        {{ filter.label }}
+      </button>
+    </div>
+    
+
+      <!-- filters section -->
+      <div class="filters-wrapper">
+        <!-- if resource is selected -->
+        <resources-advanced-filter
+          class="filters-wrapper__resources"
+          [class.show]="isMenuOpen && showFilterTab == 1"
+          [userPreferences]="userPreferences"
+          [levelGrades]="levelGrades"
+          [staffingTagsHierarchy]="staffingTagsHierarchy"
+          [officeHierarchy]="officeHierarchy"
+          [practiceAreas]="practiceAreas"
+          [positionsHierarchy]="positionsHierarchy"
+          [availabilityIncludes]="availabilityIncludes"
+          [groupsBy]="groupsBy"
+          [sortsBy]="sortsBy"
+          [affiliationRoles]="affiliationRoles"
+          [dateRange]="selectedDateRange"
+          (getResourcesOnAdvancedFilterChange)="getResourcesOnAdvancedFilterChangeHandler($event)"
+        ></resources-advanced-filter>
+
+        <!-- if case / opps is selected -->
+        <projects-advanced-filter
+          class="filters-wrapper__opportunities"
+          [class.show]="isMenuOpen && showFilterTab == 2"
+          [userPreferences]="userPreferences"
+          [opportunityStatusTypes]="opportunityStatusTypes"
+          [industryPracticeAreas]="industryPracticeAreas"
+          [capabilityPracticeAreas]="capabilityPracticeAreas"
+          [staffingTagsHierarchy]="staffingTagsHierarchy"
+          [officeHierarchy]="officeHierarchy"
+          [isStaffedFromSupply]="isStaffedFromSupply"
+          [isMinOppProbabilityFilterShown]="isMinOppProbabilityFilterShown"
+          [demandTypes]="demandTypes"
+          [caseTypes]="caseTypes"
+          (getProjectsOnAdvancedFilterChange)="getProjectsOnAdvancedFilterChangeHandler($event)"
+          (getAllocationsSortedBySelectedValueEmitter)="getAllocationsSortedBySelectedValueHandler($event)"
+        >
+        </projects-advanced-filter>
+      </div>
+  </div>
+</div>

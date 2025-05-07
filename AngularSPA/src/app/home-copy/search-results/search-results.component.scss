@@ -1,0 +1,39 @@
+.terminated{
+    background-color: antiquewhite !important;
+}
+.searchbar
+{
+    &__user {
+
+    &-item {
+        display: grid;
+        // grid-template-columns: 7% 17% 7% 7% 7% 9% 7% 7% 1fr;
+        grid-template-columns: 5% 22% 5% 15% 10% 5% 8% 15% 1fr;
+        margin-bottom: 0.7rem;
+        border-radius: 4px;
+        font-size: 12px;
+        background-color: #eaeaea;
+        justify-content: center;
+        align-items: center;
+        padding: .2rem 1rem;
+        color: #000;
+        cursor: pointer;
+
+        img {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    &-name{
+        font-size: 14px;
+        margin-left: 6px;
+    }
+
+    // &-language{
+    // }
+
+    // &-certificate{
+    // }
+}
+}

@@ -1,0 +1,8 @@
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.Authentication.Tests\bin\Debug\net8.0\.msCoverageSourceRootsMapping_Staffing.Authentication.Tests
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.Authentication.Tests\bin\Debug\net8.0\CoverletSourceRootsMapping_Staffing.Authentication.Tests
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.Authentication.Tests\obj\Debug\net8.0\Staffing.Authentication.Tests.csproj.AssemblyReference.cache
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.Authentication.Tests\obj\Debug\net8.0\Staffing.Authentication.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.Authentication.Tests\obj\Debug\net8.0\Staffing.Authentication.Tests.AssemblyInfoInputs.cache
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.Authentication.Tests\obj\Debug\net8.0\Staffing.Authentication.Tests.AssemblyInfo.cs
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.Authentication.Tests\obj\Debug\net8.0\Staffing.Authentication.Tests.csproj.CoreCompileInputs.cache
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.Authentication.Tests\obj\Debug\net8.0\Staffing.Authentication.Tests.sourcelink.json

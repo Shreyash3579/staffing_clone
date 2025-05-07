@@ -1,0 +1,131 @@
+<!-- Display AccessDeniedComponent if planning card is not found -->
+<app-page-not-found *ngIf="isPlanningCardNotFound"></app-page-not-found>
+
+<div class="intakeform-container" *ngIf="!isPlanningCardNotFound">
+  <div class="intake-form">  
+    <section>
+      <div class="case-info-section">
+        <div class="inf-container d-flex justify-content-between align-items-center">
+          <h3>Case Staffing Info</h3>
+          <div class="inf-update">
+            <span class="last-updated">
+            <span class="text-black-12 weighed">Last Updated:</span>
+              <span>  
+                {{ lastUpdated ? (lastUpdated | date:'EEE MMM dd yyyy HH:mm:ss') : 'N/A' }} 
+              </span>
+              <span *ngIf="lastUpdated">{{ getTimezoneAbbreviation() }}</span>
+            </span>
+            <span class="modified-user">
+                <i class="fa fa-user"></i>
+                <span>{{lastUpdatedByName ? lastUpdatedByName : "N/A"}}</span>
+            </span>
+            <a class="nav-link" title="Write Feedback To Us" href="mailto:staffingsystemsupport.global@bain.com?subject=Case intake questions and feedback">
+              <span class="feedback-comments-container">
+                <i class="fa-solid fa-circle-question"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Case/opp -->
+        <div class="case-info mt-4" *ngIf="caseBasicDetails">
+          <div class="d-flex flex-column">
+            <span class="text-black-12 weighed">Case/Opportunity Name:</span>
+            <div>  {{caseBasicDetails.caseName ?? caseBasicDetails.opportunityName}} </div>
+          </div>
+          <div class="d-flex flex-column">
+            <span class="text-black-12 weighed">Case Code:</span>
+            <div>  {{caseBasicDetails.oldCaseCode ?? "Opportunity"}} </div>
+          </div>
+          <div class="d-flex flex-column">
+            <span class="text-black-12 weighed">Industry/Sector:</span>
+            <div>  {{caseBasicDetails.primaryIndustry}} </div>
+          </div>
+          <div class="d-flex flex-column">
+            <span class="text-black-12 weighed">Capability/Solution:</span>
+            <div> {{caseBasicDetails.primaryCapability}} </div>
+          </div>
+        </div>
+
+        <!-- Planning Card -->
+        <div class="case-info mt-4" *ngIf="planningCardBasicDetails">
+            <div class="d-flex flex-column">
+              <span class="text-black-12 weighed">Planning Card Name:</span>
+              <div>  {{planningCardBasicDetails.name}} </div>
+            </div>
+            <div class="d-flex flex-column">
+              <span class="text-black-12 weighed">Case Code:</span>
+              <div>  {{"N/A"}} </div>
+            </div>
+
+            <!-- get these 2 fields from early input and ng-select -->
+            <div class="d-flex flex-column" style="width: 18vw;">
+              <span class="text-black-12 weighed">Industry/Sector:</span>
+              <ng-select name="industryPracticeAreas" [items]="industryPracticeAreas" [multiple]="false" class="custom-dd "
+                [(ngModel)]="selectedIndustryPracticeAreas" bindLabel="practiceAreaName"
+                placeholder="Select Industry/Sector"
+                (ngModelChange)="onIndustryPracticeAreaChange($event)">
+              </ng-select>
+            </div>
+            <div class="d-flex flex-column" style="width: 18vw;">
+              <span class="text-black-12 weighed">Capability/Solution:</span>
+              <ng-select name="capabilityPracticeAreas" [items]="capabilityPracticeAreas" [multiple]="false" class="custom-dd "
+                [(ngModel)]="selectedCapabilityPracticeAreas" bindLabel="practiceAreaName"
+                placeholder="Select Capability/Solution"
+                (ngModelChange)="onCapabilityPracticeAreaChange($event)">
+              </ng-select>
+            </div>
+    
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <app-leadership-component
+      [opportunityId]="opportunityId"
+      [oldCaseCode]="oldCaseCode"
+      [planningCardId]="planningCardId"
+      [leadershipsData]="leadershipDetails"
+      (upsertLeadershipEventEmitter)="upsertLeadershipHandler($event)"
+      (deleteLeadershipEventEmitter)="deleteLeadershipHandler($event)">
+    </app-leadership-component>
+
+    <app-early-input-form
+      [opportunityId]="opportunityId"
+      [oldCaseCode]="oldCaseCode"
+      [planningCardId]="planningCardId"
+      [expertises]="expertiseList"
+      [combinedExpertiseList]="combinedExpertiseList"
+      [languages]="languages"
+      [caseIntakeDetails]="caseIntakeDetails"
+      (caseIntakeDetailsChangeEmitter)="caseIntakeDetailsChangeHandler($event)"
+      (newExpertiseEmitter)="newExpertiseListChangeHandler($event)">
+    </app-early-input-form>
+
+    <app-staff-details-form
+      [opportunityId]="opportunityId"
+      [oldCaseCode]="oldCaseCode"
+      [planningCardId]="planningCardId"
+      [expertises]="expertiseList"
+      [combinedExpertiseList]="combinedExpertiseList"
+      [languages]="languages"
+      [positionGroups]="positionGroups"
+      [serviceLine]="serviceLines"
+      [roleDetails]="roleDetails"
+      [workstreamDetails]="workstreamDetails"
+      [caseIntakeDetails]="caseIntakeDetails"
+      (caseIntakeDetailsChangeForNotesEmitter)="caseIntakeDetailsChangeHandler($event)">
+    ></app-staff-details-form>
+
+    <!-- will remove the commented code once the component is finalised
+    <app-staff-details-form
+    [expertises]="expertiseList"
+    [languages]="languages"
+    [officeFlatList]="officeFlatList"
+    [reportRoles]="generic"
+    [roles]="generic"
+    [serviceLine]="serviceLines"
+  ></app-staff-details-form> -->
+
+  </div>
+</div>

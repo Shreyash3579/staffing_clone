@@ -1,0 +1,26 @@
+<div id="ag-grid-notes-header" class="modal-header">
+  <h5 class="modal-title">
+    Update Notes <label class="user-message">(Max 140 characters)</label>
+  </h5>
+
+  <button type="button" class="close" (click)="closeForm()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div id="ag-grid-notes-body" class="modal-body">
+  <form class="data-collection" novalidate>
+    <div class="col-12">
+      <textarea name="commitmentNotes" class="form-control form-control-sm" id="field-notes" [(ngModel)]="notes"
+        maxlength="140" rows="4">
+    </textarea>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button id="ag-grid-notes-cancel" type="button" class="btn btn-sm btn-secondary" (click)="closeForm()">
+    Cancel
+  </button>
+  <button id="ag-grid-notes-update" type="button" class="btn btn-sm btn-primary" (click)="updateCommitment()">
+    Update
+  </button>
+</div>

@@ -1,0 +1,55 @@
+button {
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    color: #284ce0;
+    display: flex;
+    font-size: 14px;
+    justify-content: center;
+    padding: 0px;
+
+    i {
+      transition: all 0.2s ease-in-out;
+    }
+
+    &.remove-make-default {
+        color: #616568;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 12px;
+        padding-left: 86px;
+    }
+    &.remove-default {
+      padding-left: 72px !important;
+    }
+}
+
+// CTA Options Wrapper
+.cta-options-wrapper {
+    gap: 12px;
+
+    button {
+      background-color: transparent;
+      color: #616568;
+      font-size: 14px;
+    }
+  }
+
+  .remove-make-default-wrapper {
+    p {
+      color: #b0b5bb;
+      cursor: default;
+      font-size: 12px;
+      font-weight: 500;
+      padding-left: 63px;
+      margin: 0px;
+    }
+  }
+
+  .blueColor {
+    fill: #284ce0;
+  }
+
+  .greyColor {
+    fill: #616568;
+  }

@@ -1,0 +1,91 @@
+<main>
+    <!-- If Planning Cards -->
+    <ng-container *ngIf="planningCards">
+        <div
+            class="resource-gantt-row d-flex"
+            *ngFor="let planningCard of planningCards; trackBy: trackByid; let rowIndex = index">
+            <!-- Left Side | Case Info -->
+            <div
+                class="left-side-bar" [class.collapsed]="isLeftSideCollapsed">
+                <app-project-gantt-resources
+                    [planningCards]="planningCard"
+                    [rowIndex]="rowIndex"
+                    [allRowsCollapsed]="allRowsCollapsed"
+                    [leftBarCollapsed]="leftBarCollapsed"
+                    (openPlaceholderForm)="openPlaceholderFormhandler($event)"
+                    (openAddTeamEmitter)="openAddTeamSkuFormHandler($event)"
+                    (upsertCasePlanningNote)="upsertCasePlanningNoteHandler($event)"
+                    (deleteCasePlanningNotes)="deleteCasePlanningNotesHandler($event)"
+                ></app-project-gantt-resources>
+            </div>
+
+            <!-- Right Side | Case Chart -->
+            <div class="right-side-gantt">
+                <div class="grid-lines">
+                    <div
+                        class="day"
+                        *ngFor="let day of perDayClass; let i = index"
+                        [ngClass]="perDayClass ? perDayClass[i] : ''"></div>
+                </div>
+                <app-projects-gantt-task
+                    [planningCards]="planningCard"
+                    [dateRange]="dateRange"
+                    (openCaseRollForm)="openCaseRollFormHandler($event)"
+                    (showQuickPeekDialog)="showQuickPeekDialogHandler($event)"
+                    (openPlaceholderForm)="openPlaceholderFormhandler($event)"
+                    (openAddTeamSkuForm)="openAddTeamSkuFormHandler($event)"
+                    (openCaseDetailsDialog)="openCaseDetailsDialogHandler($event)"
+                ></app-projects-gantt-task>
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- If Cases -->
+    <ng-container *ngIf="casesGanttData">
+        <div
+            class="resource-gantt-row d-flex"
+            *ngFor="let case of casesGanttData; trackBy: trackByid; let rowIndex = index">
+            <!-- Left Side | Case Info -->
+            <div
+                class="left-side-bar" [class.collapsed]="isLeftSideCollapsed">
+                <app-project-gantt-resources
+                    [casesGanttData]="case"
+                    [rowIndex]="rowIndex"
+                    (openAddTeamEmitter)="openAddTeamSkuFormHandler($event)"
+                    (skuTermClickForProject)="skuTermClickForProjectHandler($event)"
+                    (upsertCasePlanningNote)="upsertCasePlanningNoteHandler($event)"
+                    (deleteCasePlanningNotes)="deleteCasePlanningNotesHandler($event)"
+                ></app-project-gantt-resources>
+            </div>
+            <!-- Allocated Placeholders pop-up-->
+            <div id="alloted-resources" *ngIf="(case.oldCaseCode === selectedProjectId || case.pipelineId === selectedProjectId ) && showPlaceholdersOverlay">
+                <app-allocated-placeholder
+                    [skuResources]="case"
+                    (closePlaceholdersOverlayEmitter)="closePlaceholdersOverlayHandler()"
+                ></app-allocated-placeholder>
+            </div>
+
+            <!-- Right Side | Case Chart -->
+            <div class="right-side-gantt">
+                <div class="grid-lines">
+                    <div
+                        class="day"
+                        *ngFor="let day of perDayClass; let i = index"
+                        [ngClass]="perDayClass ? perDayClass[i] : ''"></div>
+                </div>
+                <div class="task-wrapper">
+                    <app-projects-gantt-task
+                        [casesGanttData]="case"
+                        [dateRange]="dateRange"
+                        (openCaseRollForm)="openCaseRollFormHandler($event)"
+                        (showQuickPeekDialog)="showQuickPeekDialogHandler($event)"
+                        (openPlaceholderForm)="openPlaceholderFormhandler($event)"
+                        (openAddTeamSkuForm)="openAddTeamSkuFormHandler($event)"
+                        (openCaseDetailsDialog)="openCaseDetailsDialogHandler($event)"
+                    ></app-projects-gantt-task>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+</main>

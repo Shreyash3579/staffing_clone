@@ -1,0 +1,309 @@
+@import "variables";
+
+// Remove unwanted margins and padding
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+::ng-deep .note-popover-wrapper {
+  background: #616568;
+  max-width: 200px;
+  width: fit-content;
+
+  .arrow {
+      display: none;
+  }
+
+  .popover-body {
+      padding: 0px;
+
+      .notes {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          padding: 10px;
+          max-height: 150px;
+          overflow-y: auto;
+          overflow-x: hidden;
+
+          .note-wrapper {
+              color: #fff;
+              font-family: "Graphik";
+              font-size: 10px;
+              line-height: 12px;
+
+              p {
+                  margin: 0px;
+
+                  &.header {
+                      font-weight: 500;
+                  }
+              }
+
+              &__header {
+                  align-items: center;
+                  display: flex;
+                  gap: 4px;
+                  position: relative;
+
+                  i {
+                      font-size: 7px;
+                  }
+              }
+
+              &__content {
+                  margin-top: 4px;
+              }
+          }
+      }
+  }
+}
+
+.drag-box {
+  border: none !important;
+  box-sizing: border-box;
+  cursor: grab;
+  margin: 0px;
+  width: 100%;
+  /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
+  mat-card.card-container {
+    background-color: #fff;
+    border-bottom: 1px solid #e0e4e8;
+    border-left: 4px solid;
+    border-right: 1px solid #e0e4e8;
+    border-top: 1px solid #e0e4e8;
+    box-shadow: 0px 4px 8px rgb(63, 63, 68, 0.15);
+    padding: 7px 10px 10px 6px;
+    position: relative;
+
+    &.Opportunity {
+      border-left-color: $accent-1;
+    }
+
+    &.NewDemand {
+      border-left-color: $accent-2;
+    }
+
+    &.ActiveCase {
+      border-left-color: $accent-3;
+    }
+
+    &.PlanningCard {
+      border-left-color: $accent-4;
+    }
+  }
+  /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
+  // mat-card-content.mat-mdc-card-content {
+  //   margin-bottom: 0px;
+  //   padding: 0px;
+  // }
+
+  &.Opportunity,
+  &.NewDemand,
+  &.ActiveCase {
+    border: solid #999999 1px;
+  }
+
+  &.PlanningCard {
+    border: 2px dashed #07c29f;
+  }
+}
+
+// Mat Card Content
+.card-content {
+  font-family: "Graphik";
+  padding: 0px !important;
+
+  // Case Detail Wrapper
+  .detail-wrapper {
+    flex-direction: column;
+    gap: 8px;
+
+    .color-gray {
+      color: #616568;
+    }
+
+    //New Note wrapper
+    .new-note-wrapper {
+      button {
+        border: none;
+        display: flex;
+        outline: none;
+        padding: 0px;
+        margin-left: 2px !important;
+
+        i {
+          font-size: 11px;
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    .sku-container{
+      display: flex;
+      gap: 8px;
+    }
+  }
+
+  // Expand & Collapse CTA Wrapper
+  .expand-collapse-wrapper {
+    bottom: 0px;
+    left: 0px;
+    position: absolute;
+    width: 100%;
+
+    button {
+      background-color: transparent;
+      border: none;
+      height: 10px;
+      width: 100%;
+
+      span {
+        background-color: #c2c9d1;
+        border-radius: 10px;
+        display: block;
+        height: 2px;
+        width: 20px;
+      }
+    }
+  }
+}
+
+.word-wrap {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.width {
+  width: 150px;
+}
+
+.office {
+  width: 100px;
+  text-align: right;
+  padding-right: 8px;
+}
+
+.cp-font {
+  font-size: 10px;
+  font-family: "Graphik";
+  font-weight: 400;
+  line-height: 11px;
+
+  &.cp-font-medium {
+    font-weight: 500 !important;
+  }
+}
+
+.inputBox {
+  background-color: transparent;
+  border: none;
+  color: #616568;
+  display: flex;
+  max-width: 70px;
+  width: 100%;
+
+  &.color-red {
+    color: $bain-red !important;
+  }
+
+  &::-webkit-input-placeholder {
+    color: black;
+  }
+}
+
+// Context Menu
+.context-title {
+  pointer-events: none !important;
+  border-top: none;
+  margin-left: -10px;
+}
+
+.context-option {
+  margin-top: 4px;
+}
+
+span.error {
+  outline: 1px solid $bain-red;
+  outline-offset: -1px;
+
+  div.error-message {
+    text-align: left;
+    position: absolute;
+    -ms-transform: translate(-103px, 3px);
+    transform: translate(-103px, 3px);
+    width: 200px;
+    padding: 12px;
+    background-color: #c00;
+    color: #fff;
+    white-space: normal;
+    border: 1px solid;
+    margin-left: 100px;
+    margin-top: 14px;
+    z-index: 99;
+  }
+
+  i.hide-error {
+    display: inline;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+}
+
+.date-wrapper {
+  overflow: visible;
+  position: relative;
+
+  .error-message {
+    background-color: $bain-red;
+    border-radius: 4px;
+    color: #fff;
+    display: grid;
+    font-family: "Graphik";
+    font-size: 12px;
+    gap: 10px;
+    grid-template-columns: 160px auto;
+    padding: 10px;
+    position: absolute;
+    top: calc(100% + 4px);
+    z-index: 999;
+
+    span {
+      white-space: normal;
+    }
+
+    i {
+      align-items: center;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+@media (max-width: $width-xlarge) {
+  .probability-percent {
+    margin: 0px 0px 0px 4px !important;
+  }
+}
+
+.fence-icon {
+  border: none !important;
+  border-radius: 0 !important;
+  opacity: 0.4 !important;
+  width: 15px;
+  /* height: 20px; */
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.rf-overlay-icon-container {
+  background-color: #f7f7f7;
+}

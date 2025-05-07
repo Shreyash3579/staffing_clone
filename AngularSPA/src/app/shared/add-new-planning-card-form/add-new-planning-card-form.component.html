@@ -1,0 +1,101 @@
+<!-- COMPONENT: ADD NEW PLANNING CARD FORM-->
+<div class="modal-header">
+  <h5 class="modal-title">Add New Planning Card</h5>
+  <button type="button" class="close" (click)="closeForm()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <form class="needs-validation data-collection" >
+    <div class="form-row mb-2" *ngIf="errorList.length">
+      <div class="col-12 text-danger">
+        <ul>
+          <li *ngFor="let error of errorList">{{error}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="form-row mb-3">
+      <div class="col-6">
+        <label for="name" [class.text-danger]="formModel.name.isInvalid">Name</label>
+        <input type="text" name="name" class="form-control form-control-sm" [(ngModel)]="formModel.name.value" placeholder="Enter name">
+      </div>
+    </div>
+
+    <div class="form-row mb-3">
+      <div class="col-6">
+        <label for="startDate" [class.text-danger]="formModel.startDate.isInvalid">Start Date</label>
+        <div class="input-group">
+          <input type="text" name="startDate" placeholder="dd-mmm-yyyy" id="startDate"
+            class="form-control form-control-sm border-right-0" autocomplete="off" [bsConfig]="bsConfig"
+            [(ngModel)]="formModel.startDate.value" bsDatepicker #dpStart="bsDatepicker" />
+          <div class="input-group-append">
+            <span class="input-group-text" (click)="dpStart.toggle()">
+              <i class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-6">
+        <label for="endDate" [class.text-danger]="formModel.endDate.isInvalid">End Date</label>
+        <div class="input-group">
+          <input type="text" name="endDate" placeholder="dd-mmm-yyyy" id="endDate"
+            class="form-control form-control-sm border-right-0" autocomplete="off" [bsConfig]="bsConfig"
+            [(ngModel)]="formModel.endDate.value" bsDatepicker #dpEnd="bsDatepicker" />
+          <div class="input-group-append">
+            <span class="input-group-text" (click)="dpEnd.toggle()">
+              <i class="fa fa-calendar-alt fa-fw ngx-daterangepicker-action"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="form-row mb-3">
+      <div class="col-6">
+        <label for="office">Office</label>
+        <ng-select name="office" [items]="offices" [multiple]="true" bindLabel="officeName" bindValue="officeCode" [(ngModel)]="formModel.office.value">
+        </ng-select>
+      </div>
+    </div> -->
+
+    <div class="form-row mb-3">
+      <div class="col-6">
+        <label for="office" [class.text-danger]="formModel.office.isInvalid">Offices</label>
+        <app-office-dropdown
+          [officeHierarchy]="officeHierarchy"
+          [title]="'Offices'"
+          [selectedOfficeList]="selectedOfficeList"
+          (refreshView)="setSelectedOfficeList($event)">
+        </app-office-dropdown>
+      </div>
+      <div class="col-6">
+        <label for="staffingTags" [class.text-danger]="formModel.staffingTag.isInvalid">Staffing Tags</label>
+        <app-multi-select-dropdown
+          [dropdownList]="staffingTagDropdownList"
+          [title]="'Staffing Tags'"
+          [selectedItems]="selectedStaffingTagList"
+          (refreshView)="setSelectedStaffingTagList($event)">
+        </app-multi-select-dropdown>
+      </div>
+    </div>
+
+    <div class="form-row mb-3">
+      <div class="col-6">
+        <label for="includeInCapacity">Include in Capacity</label>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="includeInCapacity" [(ngModel)]="formModel.includeInCapacity.value" name="includeInCapacity">
+          <label class="custom-control-label" for="includeInCapacity">Yes</label>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-sm btn-secondary" (click)="closeForm()">Cancel</button>
+  <button type="button" class="btn btn-primary" (click)="savePlanningCard()">Create & Save</button>
+</div>

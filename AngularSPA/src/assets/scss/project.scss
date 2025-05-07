@@ -1,0 +1,339 @@
+@use 'sass:math';
+.project {
+  @extend .rounded;
+  border: 2px solid $grey-light;
+  margin-bottom: $base-padding;
+
+  header {
+    background-color: $white;
+    padding: math.div($base-padding, 4) math.div($base-padding, 3) math.div($base-padding, 4) math.div($base-padding, 2);
+    border-left: 8px solid transparent;
+    border-top-left-radius: $border-radius/2;
+    overflow: hidden;
+    position: relative;
+
+    div.drawer {
+      position: absolute;
+      height: 100%;
+      background-color: $grey-extra-light;
+      right: 0;
+      top: 0;
+      width: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      z-index: 2;
+
+      &:hover {
+        max-width: 200px !important;
+
+        i.fa-ellipsis-v {
+          display: none;
+        }
+
+        i.fa-caret-down,
+        i.fa-caret-up {
+          font-size: 24px;
+        }
+
+        i.case-roll {
+          width: 18px;
+          min-width: 18px;
+          height: 18px;
+          position: relative;
+          top: -2px;
+          background-image: url("../../assets/img/case-roll.png");
+          background-size: 18px 18px;
+          cursor: pointer;
+
+          &:hover {
+            background-image: url("../../assets/img/case-roll-hover.png");
+            background-repeat: no-repeat;
+          }
+        }
+
+        i.case-rolled {
+          width: 18px;
+          min-width: 18px;
+          height: 18px;
+          position: relative;
+          top: -2px;
+          background-image: url("../../assets/img/case-roll-hover.png");
+          background-size: 18px 18px;
+          cursor: pointer;
+        }
+      }
+
+      i {
+        cursor: pointer;
+        margin-right: math.div($base-padding, 2);
+
+        &:first-child {
+          margin-left: math.div($base-padding, 2);
+        }
+      }
+
+      a {
+        color: inherit;
+      }
+    }
+
+    &:hover {
+      div.drawer {
+        width: 200px;
+      }
+    }
+
+    i.fa-user {
+      cursor: pointer;
+      color: $grey-alt-1;
+      transition: 0.5s color;
+
+      &:hover {
+        color: $black;
+      }
+    }
+
+    .name {
+      color: $sky;
+      font-size: 16px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      a {
+        position: relative;
+        max-width: 100%;
+        padding-right: $base-padding;
+      }
+
+      i {
+        position: absolute;
+        right: math.div($base-padding, 4);
+        top: 50%;
+        transform: translatey(-50%);
+        color: $grey-dark;
+        display: none;
+      }
+    }
+
+    &:hover {
+      .name {
+        &>i {
+          display: block;
+        }
+      }
+
+      .details {
+        i.case-roll {
+          display: inline-block;
+        }
+      }
+    }
+
+    .details {
+      align-self: center;
+      text-align: right;
+      white-space: nowrap;
+      font-size: 14px;
+
+      i.not-case-roll {
+        width: 16px;
+        height: 16px;
+        display: none;
+        margin-right: math.div($base-padding, 4);
+        top: 2px;
+        position: relative;
+        background-image: url("../../assets/img/case-roll.png");
+        background-size: contain;
+        cursor: pointer;
+
+        &:hover {
+          background-image: url("../../assets/img/case-roll-hover.png");
+        }
+      }
+
+      i.case-roll {
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        margin-right: math.div($base-padding, 4);
+        top: 2px;
+        position: relative;
+        background-image: url("../../assets/img/case-roll.png");
+        background-size: contain;
+        cursor: pointer;
+
+        &:hover {
+          background-image: url("../../assets/img/case-roll-hover.png");
+        }
+      }
+
+      .location {
+        color: $grey-darkest;
+        padding-left: math.div($base-padding, 4);
+      }
+
+      i.fas {
+        cursor: pointer;
+        margin-right: math.div($base-padding, 2);
+
+        &:first-child {
+          margin-left: math.div($base-padding, 2);
+        }
+
+        &:hover:not(.fa-caret-down):not(.fa-caret-up) {
+          color: $bain-red;
+        }
+      }
+    }
+  }
+
+  &.accent-1 header {
+    border-left-color: $accent-1;
+  }
+
+  &.accent-2 header {
+    border-left-color: $accent-2;
+  }
+
+  &.accent-3 header {
+    border-left-color: $accent-3;
+  }
+
+  .content {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    transition: height linear 0.4s;
+    overflow: auto;
+    border-top: 1px solid $grey-light;
+    background-color: $white;
+    font-size: 13px;
+
+    div.row {
+      color: $grey-darkest;
+
+      &.sku-details {
+        display: none;
+
+        &.active {
+          display: block;
+        }
+
+        background-color: $grey-extra-light;
+        padding: math.div($base-padding, 4) $base-padding * 3/4;
+
+        .col {
+          text-align: left;
+          color: $grey-alt-4;
+
+          .title {
+            font-weight: bold;
+          }
+        }
+      }
+
+      //comment this once new design for project is in place
+      &:not(.cdk-drag-placeholder):first-of-type {
+        padding-top: math.div($base-padding, 4);
+      }
+
+      .name {
+        padding-left: math.div($base-padding, 4);
+        padding-right: math.div($base-padding, 4);
+        text-align: left !important;
+        position: relative;
+
+        a {
+          display: block;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          max-width: 100%;
+
+          i.fa-times {
+            display: none;
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: $black;
+          }
+        }
+
+        &:hover {
+          padding-right: 20px;
+
+          a {
+            text-decoration: none;
+          }
+
+          i.fa-times {
+            display: block;
+          }
+        }
+      }
+
+      i.hide-error {
+        display: none;
+        color: $white;
+      }
+
+      div.error {
+        outline: 1px solid $bain-red;
+        outline-offset: -1px;
+
+        >div {
+          position: relative;
+          z-index: 2;
+
+          .error-message {
+            text-align: left;
+            position: absolute;
+            transform: translate(-103px, 3px);
+            width: 200px;
+            padding: math.div($base-padding, 2);
+            background-color: $bain-red;
+            color: $white;
+            white-space: normal;
+            border: solid 1px;
+          }
+
+          i.hide-error {
+            display: inline;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+          }
+        }
+      }
+
+      .date {
+        padding-right: math.div($base-padding, 4);
+        text-align: right !important;
+        width: 30%;
+        max-width: 30%;
+        flex: 0 0 30%;
+      }
+    }
+  }
+
+  &.expanded {
+    .content {
+      height: 254px;
+    }
+  }
+
+  &.minimized {
+    .content {
+      display: none;
+    }
+  }
+
+  &.has-error {
+    .content {
+      overflow: hidden;
+    }
+  }
+}

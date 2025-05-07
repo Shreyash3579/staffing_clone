@@ -1,0 +1,14 @@
+<div class="input-group w-auto mr-3 incremental-input">
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-secondary" type="button" (click)="decrementSelectedValue()">
+      -
+    </button>
+  </div>
+  <input type="number" restrictSpecialChar class="form-control" [(ngModel)]="selectedValue" (change)="updateSelectedValue()" placeholder=""
+    aria-label="" />
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" (click)="increamentSelectedValue()">
+      +
+    </button>
+  </div>
+</div>

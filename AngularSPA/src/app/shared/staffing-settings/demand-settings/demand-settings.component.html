@@ -1,0 +1,149 @@
+<form class="demand-settings">
+  <!--------------------Office Dropdown---------------------->
+  <div id="demand-settings-office" class="form-row mb-3">
+    <div class="col-3">
+      <label for="field-resource">Offices</label>
+    </div>
+    <div class="col-6">
+      <app-office-dropdown
+        [officeHierarchy]="officeHierarchy"
+        [title] ="'Offices'"
+        [selectedOfficeList]="selectedDemandViewOfficeList"
+        (refreshView)="setSelectedDemandViewOfficeList($event)"
+      >
+      </app-office-dropdown>
+    </div>
+  </div>
+
+  <!--------------------Staffing Tag Dropdown (Case Attribute)---------------------->
+  <div id="demand-settings-project-tag" class="form-row mb-3">
+    <div class="col-3">
+      <label for="field-resource">Tag</label>
+    </div>
+    <div class="col-6">
+      <app-multi-select-dropdown
+        [dropdownList]="staffingTagDropdownList"
+        [title] ="'Case/Opp Tags'"
+        [selectedItems]="selectedStaffingTagDropdownList"
+        (refreshView)="setSelectedStaffingTagDropdownList($event)"
+      >
+      </app-multi-select-dropdown>
+    </div>
+  </div>
+
+  <!--------------------Case Type Dropdown---------------------->
+  <div id="demand-settings-case-type" class="form-row mb-3">
+    <div class="col-3">
+      <label for="field-resource">Type</label>
+    </div>
+    <div class="col-6">
+      <app-multi-select-dropdown
+        [dropdownList]="caseTypeDropdownList"
+        [title] ="'Case Types'"
+        [selectedItems]="selectedCaseTypeList"
+        (refreshView)="setSelectedCaseTypeList($event)"
+      >
+      </app-multi-select-dropdown>
+    </div>
+  </div>
+
+  <!--------------------Demand Status Dropdown---------------------->
+  <div id="demand-settings-demand-status" class="form-row mb-3">
+    <div class="col-3">
+      <label for="field-resource">Demand Status</label>
+    </div>
+    <div class="col-6">
+      <app-multi-select-dropdown
+        [dropdownList]="demandTypeList"
+        [title]="'Demand Status'"
+        [selectedItems]="selectedDemandTypeList"
+        (refreshView)="setSelectedDemandTypeList($event)">
+      </app-multi-select-dropdown>
+    </div>
+  </div>
+
+  <!--------------------Opportunity Status Type Dropdown---------------------->
+  <div id="demand-settings-opp-status" class="form-row mb-3">
+    <div class="col-3">
+      <label for="field-resource">Opp Status</label>
+    </div>
+    <div class="col-6">
+      <app-multi-select-dropdown
+        [dropdownList]="opportunityStatusTypeDropdownList"
+        [title] ="'Opp Staus Types'"
+        [selectedItems]="selectedOpportunityStatusTypeList"
+        (refreshView)="setSelectedOpportunityStatusTypeList($event)"
+      >
+      </app-multi-select-dropdown>
+    </div>
+  </div>
+
+  <!--------------------Min Probability---------------------->
+  <div id="demand-settings-min-opp-probability" class="form-row mb-3">
+    <div class="col-3">
+      <label for="field-resource">Min Probability Percentage</label>
+    </div>
+    <div class="col-6" id="settingsOppProbability">
+      <shared-slide-bar [selectedValue]="userPreferences.minOpportunityProbability"
+        (valueChanged)="getDemandsFilteredByMinProbabilityHandler($event)">
+      </shared-slide-bar>
+    </div>
+  </div>
+
+  <!--------------------Industry Practice Area---------------------->
+  <div id="demand-settings-industry-practice-area" class="form-row mb-3">
+    <div class="col-3">
+      <label for="field-resource">Industry Practice Area</label>
+    </div>
+    <div class="col-6" id="settingsIndustryPracticeArea">
+      <app-multi-select-dropdown
+        [dropdownList]="industryPracticeAreaDropdownList"
+        [title]="'Industry Practice Area'"
+        [selectedItems]="selectedIndustryPracticeAreaList"
+        (refreshView)="setSelectedIndustryPracticeAreaList($event)">
+      </app-multi-select-dropdown>
+    </div>
+  </div>
+
+  <!--------------------Capability Practice Area---------------------->
+  <div id="demand-settings-capability-practice-area" class="form-row mb-3">
+    <div class="col-3">
+      <label for="field-resource">Capability Practice Area</label>
+    </div>
+    <div class="col-6" id="settingsCapabilityPracticeArea">
+      <app-multi-select-dropdown
+        [dropdownList]="capabilityPracticeAreaDropdownList"
+        [title]="'Capability Practice Area'"
+        [selectedItems]="selectedCapabilityPracticeAreaList"
+        (refreshView)="setSelectedCapabilityPracticeAreaList($event)">
+      </app-multi-select-dropdown>
+    </div>
+  </div>
+
+  <!--------------------Date Thresholds---------------------->
+  <div id="demand-settings-date-interval" class="form-row mb-3">
+    <div class="col-3">
+      <label for="field-resource">Date Interval</label>
+    </div>
+    <div class="col-6">
+      <shared-increment-decrement-buttons [selectedValue]="userPreferences.demandWeeksThreshold" [minValue]="1"
+        (valueChanged)="setDemandWeeksThreshold($event)">
+      </shared-increment-decrement-buttons>
+
+      <div class="text-nowrap display-inline">Weeks</div>
+    </div>
+  </div>
+
+  <!--------------------Case Allocation Sort By Dropdown---------------------->
+  <div id="demand-settings-case-allocations-sort-by" class="form-row mb-3">
+    <div class="col-3">
+      <label for="field-resource">Sort By (on cards)</label>
+    </div>
+    <div class="col-6">
+      <app-single-select-dropdown
+      [dropdownList]="caseAllocationsSortByList" [selectedItem]="selectedSortByItem"
+      [title]="'Sort By'" (valueChange)="setCaseAllocationsSortedBySelectedValue($event)">
+      </app-single-select-dropdown>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,398 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BackgroundPolling.API</name>
+    </assembly>
+    <members>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Insert(`0,System.String)">
+            <summary>
+                Generic insert
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Insert(`0,System.String,System.Object)">
+            <summary>
+                Generic insert with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Insert(System.Object,System.String)">
+            <summary>
+                Generic insert with dynamic parameters
+            </summary>
+            <returns>A list of the inserted objects</returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Insert(System.String,System.Object)">
+            <summary>
+                Generic insert with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.InsertAsync(System.String,System.Object)">
+            <summary>
+                Async insert with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.InsertAsync(System.Object,System.String)">
+            <summary>
+                Async insert with dynamic parameters which return inserted object
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Insert(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic insert in a scope of a transaction
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Insert(System.Data.IDbConnection,`0,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+                Generic insert with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Update(`0,System.String)">
+            <summary>
+                Generic update
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Update(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic update in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Update(`0,System.String,System.Object)">
+            <summary>
+                Generic update with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Update(System.Object,System.String)">
+            <summary>
+                Generic update with dynamic parameters
+            </summary>
+            <returns>A list of the updated objects</returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Update(System.Data.IDbConnection,`0,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+                Generic update with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Update(System.String,System.Object)">
+            <summary>
+                Generic Update with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.UpdateAsync(System.String,System.Object)">
+            <summary>
+                Async Update with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.UpdateAsync(System.Object,System.String)">
+            <summary>
+                Async update with dynamic parameters which return updated object
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Delete(`0,System.String)">
+            <summary>
+                Generic delete
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Delete(System.Guid,System.String)">
+            <summary>
+                Generic delete with uniqueidentifier as the id
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Delete(System.String,System.Object)">
+            <summary>
+                Generic delete with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.DeleteAsync(System.String,System.Object)">
+            <summary>
+                Async Delete with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Delete(System.Object,System.String)">
+            <summary>
+                Generic delete with dynamic parameters
+            </summary>
+            <returns>A list of the deleted objects</returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,System.Guid,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete with uniqueidentifier as the id, in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,System.Object,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Core.Repository.BaseRepository`1.DeleteAsync(System.Object,System.String)">
+            <summary>
+                Async Delete with dynamic parameters which return deleted object
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.ADPollingController.GetADSecurityUsers(System.String)">
+            <summary>
+            Gets Security Users from AD Group to Staffing DB to provide access to BOSS
+            </summary>
+            <param name="accountName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.AnalyticsAuditController.GetAnalyticsRecordsNotSyncedWithCAD">
+            <summary>
+            Gets all timestamps from SMD and RA that are not synced with CAD
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.BasisPollingController.UpsertPracticeAffiliations">
+            <summary>
+            Upsert Practice affiliation in analytics DB
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.BasisPollingController.InsertMonthlySnapshotForPracticeAffiliations">
+            <summary>
+            Insert snapshot every month
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.CCMPollingController.ConvertOpportunityToCase">
+            <summary>
+             Update old case code, client code, case code for all opportunity transactions that converted to case 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.CCMPollingController.UpsertCaseAdditionalInfoFromCCM(System.Boolean,System.Nullable{System.DateTime})">
+            <summary>
+            Upserts Case Additonal Info in basis and analytics DB incrementally or full load based on params
+            </summary>
+            <param name="isFullLoad">[True]: If need full refresh of table, [False]: For incremental</param>
+            <param name="lastUpdated">[Optional] Gets cases updated after the specified date</param>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.CCMPollingController.UpsertCurrencyRate(System.Nullable{System.DateTime})">
+            <summary>
+            This API is used to upsert currency rates from basis database in Analytics database
+            
+            </summary>
+            <returns>Success message</returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.CCMPollingController.UpdateUSDCostForCurrencyRateChangedRecently(System.Nullable{System.DateTime})">
+            <summary>
+            This API is used to update the cost data in the Analytics database tables for changed currencies after last polled time 
+            
+            </summary>
+            <returns>Success message</returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.EmailUtilityController.TestEmailWithO365">
+            <summary>
+            Send an email for the audit logs of allocation done by staffing officers
+            </summary>
+            <param name="staffingUserECode">comma separated list of staffing office ECode</param>
+            <param name="auditLogsFromDate">Date since logs required</param>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.EmailUtilityController.SendEmailForAuditsOfAllocationByStaffingUser(System.String,System.DateTime)">
+            <summary>
+            Send an email for the audit logs of allocation done by staffing officers
+            </summary>
+            <param name="staffingUserECode">comma separated list of staffing office ECode</param>
+            <param name="auditLogsFromDate">Date since logs required</param>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.EmailUtilityController.SendEmailsForCasesServedByRingfenceByOfficeAndCaseType(System.String,System.String)">
+            <summary>
+            Send Email to EMEA staffing officer for the case served by Ringfence
+            </summary>
+            <param name="officeCodes">Comma separated list of offices</param>
+            <param name="caseTypeCodes">Comma separated list of case types</param>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.EmailUtilityController.SendMonthlyStaffingAllocationsEmailToExperts(System.String)">
+            <summary>
+            triggers email to Exoert group on staffing data. 
+            Send to all experts is null is passed or to select group 
+            </summary>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:BackgroundPolling.API.Controllers.EmailUtilityController.SendMonthlyStaffingAllocationsEmailToApacInnovationAndDesign(System.String)" -->
+        <member name="M:BackgroundPolling.API.Controllers.FinanceDataPollingController.UpsertBillRates">
+            <summary>
+            This API is used to upsert bill rates from FinAPI to bill rates table in Analytics database
+            It also updates the cost data in the Analytics database tables for changed bill rates
+            
+            </summary>
+            <returns>Success message</returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.FinanceDataPollingController.UpsertRevenueTransactions">
+            <summary>
+            This API is used to upsert revenue transactions since last polled date from Revenue API and saves it in revenue transactions table in Analytics database
+            
+            </summary>
+            <returns>Success message</returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.FinanceDataPollingController.DeleteRevenueTransactionsById(System.Nullable{System.DateTime})">
+            <summary>
+            This API is used to delete revenue transactions since last polled date from Revenue API and deletes it in revenue transactions table in Analytics database
+            
+            </summary>
+            <returns>Success message</returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.FinanceDataPollingController.SaveOfficeListForTableau">
+            <summary>
+            Save CCM office hierarchy to Analytics database
+            
+            </summary>
+            <returns>Office Hierarchy</returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.HoidayPollingController.InsertHolidays">
+            <summary>
+            Saves all Holiday data from Basis to Analytics database
+            
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.IrisPollingController.UpsertWorkAndSchoolHistoryForAllActiveEmployeesFromIris">
+            <summary>
+            Saves all school and employment data for all active employees from Iris to Analytics database
+            
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.IrisPollingController.InsertWorkAndEducationHistoryAfterLastModifiedDateForActiveEmployeesFromIris(System.Nullable{System.DateTime})">
+            <summary>
+            Saves all school and employment data for active employees who data has been updated after the modified date
+            
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.NotificationController.InsertCasesEndingNotification">
+            <summary>
+            Insert cases that are ending soon
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.NotificationController.InsertBackFillNotification">
+            <summary>
+            Insert employees who needs backfill
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.PipelinePollingController.UpsertOpportunitiesFlatDataFromPipeline(System.Boolean,System.Nullable{System.DateTime})">
+            <summary>
+            Gets all the records from opportunity_master and related tables for analyticss
+            </summary>
+            <param name="isFullLoad">[True]: If need full refresh of table, [False]: For incremental</param>
+            <param name="lastUpdated">[Optional] Gets cases updated after the specified date</param>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.PolarisPollingController.UpsertPolarisSecurityUsers">
+            <summary>
+            Upsert security users saved in Polaris system and AD groups into Boss system
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.SharepointPollingController.UpsertSignedOffSMAPMissions">
+            <summary>
+            Upsert SMAP Mission notes from Sharepoint Site to Notes table
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.SharepointPollingController.UpsertStaffingPreferences">
+            <summary>
+            Upsert Staffing prefrences for Sharepoint site to employee preferences table
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.StaffingPollingController.DeleteSecurityUsersWithExpiredEndDate">
+            <summary>
+            delete security users from boss system whose endDate is expired
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.TrainingPollingController.UpsertTrainings">
+            <summary>
+            Saves all Trainings data from BVU_CD to Analytics database
+            
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.VacationPollingController.UpsertVacations">
+            <summary>
+            Saves all Vacations from VRS database to Analytics database
+            
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.WorkdayPollingController.UpdateAnalyitcsDataForPendingTransactions(System.Nullable{System.DateTime})">
+            <summary>
+                Update Cost for pending Promotions, LoAs, Transfers, Transitions and Terminations
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.WorkdayPollingController.UpdateOverrideFlagForStaffingCommtimentsFromSource">
+            <summary>
+                Update the commitments created as placeholder in staffing system once they are added/updated in the source system 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.WorkdayPollingController.DeleteStaffingAndCommitmentDataForTermedEmployeesAfterTerminationDate">
+            <summary>
+                deletes the additional/extra staffing data for employees who have been terminated after their termination date
+                Updates Schedulemaster allocations to the last day of termination
+                Deletes rows from SchedulemasterDetail and resource Availability tables after their termination date
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.WorkdayPollingController.UpdateAnalyticsDataHavingIncorrectWorkdayInfo">
+            <summary>
+               FAllback mechanism to find and update the analytics records having incorrect workday info.
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.WorkdayPollingController.UpdateAvailabilityDataHavingIncorrectWorkdayInfo">
+            <summary>
+               FAllback mechanism to find and update the analytics records having incorrect workday info in RA table.
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.WorkdayPollingController.UpsertWorkdayEmployeeStaffingTransactionToDB">
+            <summary>
+               Save workday employee staffing transaction in Databse for anlaytics report verification
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.WorkdayPollingController.UpsertWorkdayEmployeeLoATransactionToDB">
+            <summary>
+               Save workday employee LOA transaction in Databse for anlaytics report verification
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.WorkdayPollingController.SaveWorkdayEmployeeDataForTableau">
+            <summary>
+               Save workday employee data to be used in tableau
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.WorkdayPollingController.DeleteAvailabilityDataForRescindedEmployees(System.String)">
+            <summary>
+               Delete Availability Data for Rescinded employees
+               employeeCodes (optional) : If passed, will delete data for only these rescinded employees
+                               Else, delete for all rescinded employees
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.WorkdayPollingController.ArchiveStaffableAsRoleForPromotedEmployees">
+            <summary>
+                Update the staffabl-as flag for promoted employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.WorkdayPollingController.updateCapacityAnalysisMonthlyForChangesinEmployeePracticeAffiliations">
+            <summary>
+            Update Capacity Analysis Monthly table for changes in Practice Affiliations of employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.WorkdayPollingController.SaveWorkdayEmployeesCertificationsToDB">
+            <summary>
+               Save workday employee certifications in DB to be used in Coveo
+            </summary>
+        </member>
+        <member name="M:BackgroundPolling.API.Controllers.WorkdayPollingController.SaveWorkdayEmployeesLanguagesToDB">
+            <summary>
+               Save workday employees languages in DB to be used in Coveo
+            </summary>
+        </member>
+    </members>
+</doc>

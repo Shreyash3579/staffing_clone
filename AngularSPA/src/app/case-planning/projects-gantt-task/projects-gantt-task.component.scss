@@ -1,0 +1,37 @@
+// .utilization-area {
+//     height: 43px;
+//     margin-bottom: 2px;
+//     padding: 2px 0px 2px 0px;
+//     border-bottom: 1px solid #c9c9c9;
+//     min-width: 127% !important;
+// }
+
+// // .utilization-rows {
+// //     margin-bottom: 8px;
+// // }
+// .utilization-row:first-child {
+//     margin-top: 0px !important;
+// }
+
+// .utilization-row {
+//     height: 40px !important;
+//     margin-bottom: 0px !important;
+// }
+
+// #alloted-resources {
+//     height: 0px;
+// }
+
+.utilization-area {
+    height: 100%;
+    width: 100%;
+  
+    // Row
+    .utilization-row {
+      height: 100%;
+      padding: 4px 0px;
+      position: relative;
+      width: 100%;
+    }
+  }
+  

@@ -1,0 +1,46 @@
+    <!-- Repeatable Advisors Cards -->
+    <div class="card-leadership">
+      <span class="tag-section">{{ leadershipGroup.caseRoleName }}</span>
+      <div class="content-leadership">
+        <div class="d-flex flex-column">
+          <label class="user-name-form">Likely to be filled by</label>
+          <div class="search-wrapper" style="width: 350px;">
+            <div class="align-items-center">
+              <div *ngIf="!showTypeAhead" class="inline-editable inline-editable-text" style="width: 350px;"
+                  [class.active]="editableCol == 'leadershipName'"
+                  [ngClass]="{'empty': !leadershipGroup.leadershipNames}"
+                  (click)="editLedershipEmployeeName($event)">
+                  <p>{{ leadershipNames }}</p>
+                  <i class="fa fa-pencil-alt edit-icon"></i>
+              </div>
+              <div *ngIf="showTypeAhead" class="align-items-center" style="width: 350px; position:relative; z-index:100;">
+                  <shared-resources-typeahed
+                    [multiple]="true"
+                    [selectedResource]="selectedResource"
+                    (onSearchItemSelect)="onSearchItemSelectHandler($event)"
+                    (focusout)="onSearchBoxBlur($event)"
+                    #searchBox
+                  >
+                  </shared-resources-typeahed>
+
+              </div>
+            </div>
+
+            <div class="form-row mb-2" *ngIf="errorList.length">
+              <div class="col-12 text-danger">
+                <ul>
+                  <li *ngFor="let error of errorList">{{error}}</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="form-row mb-2" *ngIf="errorList.length">
+              <div class="col-12 text-danger">
+                <ul>
+                  <li *ngFor="let error of errorList">{{error}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>

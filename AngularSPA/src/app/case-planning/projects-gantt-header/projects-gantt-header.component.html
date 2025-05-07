@@ -1,0 +1,56 @@
+<header class="d-flex">
+  <!-- Case | Client Info -->
+  <div class="left-side-bar" [class.collapsed]="isLeftSideCollapsed">
+      <div class="left-side-wrapper bordered-cell">
+          <h5></h5>
+          <h5>Client</h5>
+
+          <ng-container *ngIf="!isLeftSideCollapsed">
+              <h5>Name</h5>
+              <h5>Start</h5>
+              <h5>End</h5>
+              <h5>Office</h5>
+
+              <!-- Expand & Collapse All Rows -->
+              <!-- <button class="toggle-all-rows d-flex align-items-center" (click)="toggleAllRows($event)">
+                  <i class="fas fa-chevron-{{ allRowsCollapsed ? 'down' : 'up' }}"></i>
+                  <span>All</span>
+              </button> -->
+          </ng-container>
+
+          <!-- Expand & Collapse Left Side Bar -->
+          <button class="toggle-header d-flex align-items-center"
+                [class.collapsed]="isLeftSideCollapsed"
+                (click)="expandCollapseSidebar($event)">
+              <i class="fas fa-arrow-{{ isLeftSideCollapsed ? 'right' : 'left' }}"></i>
+          </button>
+      </div>
+  </div>
+
+  <!-- Gantt Dates -->
+  <div class="right-side-wrapper">
+      <tr class="weeks-row d-flex align-items-center">
+          <ng-container *ngFor="let perDayDate of perDayDates; let i = index">
+              <th
+                  class="week-cell bordered-cell d-flex align-items-center justify-content-center"
+                  [ngClass]="perDayDates ? perDayDates[i].className : ''"
+                  *ngIf="perDayDates[i].weekName != '' && perDayDates[i].weekLength != ''"
+              >
+                  <span title="{{ perDayDates[i].weekName }}">{{
+                      perDayDates[i].weekLength > 1 ? perDayDates[i].weekName : "..."
+                  }}</span>
+              </th>
+          </ng-container>
+      </tr>
+
+      <tr class="dates-row d-flex align-items-center">
+          <th
+              *ngFor="let perDayDate of perDayDates; let i = index"
+              class="dates-cell bordered-cell d-flex justify-content-center align-items-center"
+              [ngClass]="perDayDate ? perDayDate.className : ''"
+          >
+              <span title="{{ perDayDate.fullDate }}">{{ perDayDate.date }}</span>
+          </th>
+      </tr>
+  </div>
+</header>

@@ -1,0 +1,75 @@
+<div class="row no-gutters">
+  <!-- <div id="demandAdvanceFilterSection" class="col-1 text-nowrap section-title">
+    <label class="control-label">Advanced Filters</label>
+  </div>
+  <div class="col-3 mr-3">
+    <label class="control-label small">Projects</label>
+    <input type="text" class="form-control" placeholder="Search for new demand...">
+  </div> -->
+
+  <!-- Component: Case resources Sort by -->
+  <div class="col-3 mr-3" id="caseAllocationsSortByFilter">
+    <label class="control-label small">Sort By (on cards)</label>
+    <app-single-select-dropdown [dropdownList]="caseAllocationsSortByList" [selectedItem]="selectedSortByItem"
+      [title]="'Sort By'" (valueChange)="getAllocationsSortedBySelectedValue($event)">
+    </app-single-select-dropdown>
+  </div>
+
+  <!-- Component: Opportunity Status Type Dropdown -->
+  <div class="col-3 mr-3" id="demandOpportunityStatusTypeFilter">
+    <label class="control-label small">Opportunity Status</label>
+    <app-multi-select-dropdown [dropdownList]="opportunityStatusTypeDropdownList" [selectedItems]="selectedOpportunityStatusTypeList"
+      [title]="'Opp Status Types'" (refreshView)="getProjectsBySelectedOppStatusTypes($event)">
+    </app-multi-select-dropdown>
+  </div>
+
+  <!-- Component: Case/Opp Tag Dropdown -->
+  <div class="col-3 mr-3" id="demadCaseAttributeFilter">
+    <label class="control-label small">Case/Opp Tags</label>
+    <app-multi-select-dropdown [dropdownList]="staffingTagDropdownList" [selectedItems]="selectedStaffingTagList"
+      [title]="'Case/Opp Tags'" (refreshView)="getProjectsBySelectedStaffingTags($event)">
+    </app-multi-select-dropdown>
+  </div>
+  <!-- End Component: Case/Opp Tag Dropdown -->
+
+  <!-- Opportunity Slider -->
+  <div class="col-3 mr-3" id="demandOppProbabilityFilter" *ngIf="isMinOppProbabilityFilterShown">
+    <label class="control-label small">Min Opportunity Probability</label>
+    <shared-slide-bar [selectedValue]="minOpportunityProbability"
+      (valueChanged)="getOpportunitiesByMinProbability($event)">
+    </shared-slide-bar>
+  </div>
+  <!-- Opportunity Slider -->
+
+  <!-- Component: Industry Practice Area Dropdown -->
+  <div class="col-3 mr-3" id="demandIndustryPracticeAreaFilter">
+    <label class="control-label small">Industry Practice Area</label>
+    <app-multi-select-dropdown [dropdownList]="industryPracticeAreaDropdownList" [selectedItems]="selectedIndustryPracticeAreaList"
+      [title]="'Industry Practice Area'" (refreshView)="getProjectsBySelectedIndustryPracticeAreas($event)">
+    </app-multi-select-dropdown>
+  </div>
+  <!-- End Component: Industry Practice Area Dropdown -->
+
+  <!-- Component: Capability Practice Area Dropdown -->
+  <div class="col-3 mr-3" id="demandCapabilityPracticeAreaFilter">
+    <label class="control-label small">Capability Practice Area</label>
+    <app-multi-select-dropdown [dropdownList]="capabilityPracticeAreaDropdownList" [selectedItems]="selectedCapabilityPracticeAreaList"
+      [title]="'Capability Practice Area'" (refreshView)="getProjectsBySelectedCapabilityPracticeAreas($event)">
+    </app-multi-select-dropdown>
+  </div>
+  <!-- End Component: Capability Practice Area Dropdown -->
+
+  <!-- Staff from my supply Toggle -->
+  <div class="col-3 mr-3" id="staffFromMySupplyFilter" >
+    <label class="control-label small">Staff From My Supply</label>
+    <div>
+    <label class="switch">
+        <input type="checkbox" (click)="toggleStaffFromSupply()"
+        [checked]="isStaffedFromSupply">       
+        <span class="slider round"></span>
+    </label>
+    </div>
+  </div>
+  <!-- Staff from my supply Toggle -->
+
+</div>

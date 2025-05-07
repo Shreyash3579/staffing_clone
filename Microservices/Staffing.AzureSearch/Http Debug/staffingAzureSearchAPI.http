@@ -1,0 +1,9 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@baseUrl = https://localhost:7137/api
+@mustHavesSearchString = managers%20in%20boston
+@niceToHaveSearchString = %20who%20worked%20on%20retail%20cases
+
+###
+#trigger expert emails
+GET {{baseUrl}}/search/resourcesBySearchString2?mustHavesSearchString={{mustHavesSearchString}}&niceToHaveSearchString={{niceToHaveSearchString}}&searchTriggeredFrom=postman&loggedInUser=39209
+Authorization: <Add Token Here>

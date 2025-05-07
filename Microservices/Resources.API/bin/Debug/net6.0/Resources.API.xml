@@ -1,0 +1,463 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Resources.API</name>
+    </assembly>
+    <members>
+        <member name="M:Resources.API.Controllers.LookupController.GetPDGradesHierarchy">
+            <summary>
+                Get lookup list for PD grades in hierarchy
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.LookupController.GetPDGrades">
+            <summary>
+                Get lookup list for PD grades
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.LookupController.GetPositionList">
+            <summary>
+                Get lookup list for position
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.LookupController.GetServiceLineList">
+            <summary>
+                Get lookup list for service line
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.LookupController.GetServiceLinesHierarchy">
+            <summary>
+            Get Service lines hierarchically
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.LookupController.GetCertificates">
+            <summary>
+            Get all the certificates
+            </summary>
+            <returns>certificates</returns>
+        </member>
+        <member name="M:Resources.API.Controllers.LookupController.GetLanguages">
+            <summary>
+            Get all the languages
+            </summary>
+            <returns>languages</returns>
+        </member>
+        <member name="M:Resources.API.Controllers.LookupController.GetJobProfiles(System.Boolean)">
+            <summary>
+            Get Active Job Profiles
+            </summary>
+            <returns>Job Profiles</returns>
+        </member>
+        <member name="M:Resources.API.Controllers.LookupController.GetJobProfilesHierarchy">
+            <summary>
+            Get Active Job Profiles
+            </summary>
+            <returns>Job Profiles</returns>
+        </member>
+        <member name="T:Resources.API.Controllers.ResourcesController">
+            <summary>
+                Resources Controller
+            </summary>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesController.GetReadinessProbe">
+            <summary>
+            Readiness Probe for Containers
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesController.GetActiveEmployeesFilteredBySelectedValues(System.Object)">
+            <summary>
+                Get active resources filtered by selected values
+            </summary>
+            <param name="officeCodes">Multiple offices separated by comma</param>
+            <param name="startDate"></param>
+            <param name="endDate"></param>
+            <param name="levelGrades">Multiple Level Grades separated by comma</param>
+            <returns>Active Employees</returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesController.GetActiveEmployeesFilteredBySelectedGroupValues(System.Object)">
+            <summary>
+                Get active resources filtered by selected values
+            </summary>
+            <param name="payload">Multiple employees separated by comma, start date and end date</param>
+            <returns>Active Employees</returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesController.GetEmployeesBySearchString(System.String,System.Nullable{System.Boolean})">
+            <summary>
+                Get active employees by search string
+            </summary>
+            <param name="searchString"></param>
+            <param name="addTransfers"></param>
+            <returns>Employee Details along with office</returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesController.GetEmployeesIncludingTerminatedBySearchString(System.String,System.Nullable{System.Boolean})">
+            <summary>
+                Get employees including terminated by search string
+            </summary>
+            <param name="searchString"></param>
+            <param name="addTransfers"></param>
+            <returns>Employee Details along with office</returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesController.GetAllActiveAndNotYetStartedEmployees">
+            <summary>
+                Get all employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesController.GetNotYetStartedEmployees">
+            <summary>
+                Get all Not yet started employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesController.GetAllEmployeesIncludingTerminatedBasicData">
+            <summary>
+                Get all employees basic data needed by other teams
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesController.GetEmployeeByEmployeeCode(System.String)">
+            <summary>
+                Get Employee by employeeCode
+            </summary>
+            <param name="employeeCode"></param>
+            <param name="fields">Fields required in response</param>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesLanguageController.GetEmployeeLanguagesByEmployeeCodes(System.Object)">
+            <summary>
+            Get Languages for employees
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Resources.API.Controllers.ResourcesLOAController">
+            <summary>
+                Resources LOA Controller
+            </summary>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesLOAController.GetLOAsByEmployeeCode(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+                Get LOAs For a single employee between date range
+            </summary>
+            <param name="employeeCode"></param>
+            <param name="effectiveFromDate"></param>
+            <param name="effectiveToDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesLOAController.GetEmployeesAllLoAs(System.Object)">
+            <summary>
+            Get employees all LOA trasnactions
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesLOAController.GetLOAsWithinDateRangeByEmployeeCodes(System.Object)">
+            <summary>
+                Get LOA For employees between date range specified
+            </summary>
+            <remarks>
+                Sample Request:
+                {"employeeCodes":"42NBL,42SWG,42PRS,42SLS,42DIR","startDate":"2019-05-10T00:00:00","endDate":"2019-05-26T00:00:00"}
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesLOAController.GetFutureLOAs">
+            <summary>
+            Get LOAs ending in future for all employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesLOAController.GetPendingLOATransactions">
+            <summary>
+            Get pending LOA transactions
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesLOAController.GetEmployeesLoATransactions(System.Object)">
+            <summary>
+            Get Employees All LOA transactions
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTimeInLevelController.GetTimeInLevelByEmployeeCode(System.String)">
+            <summary>
+            Gets time in level for a single employee
+            </summary>
+            <param name="employeeCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTimeOffController.GetTimeOffsByEmployeeCodes(System.Object)">
+            <summary>
+            Get Employees Time Offs
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTimeOffController.GetTimeOffsByEmployeeCode(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Get Employee Time Offs
+            </summary>
+            <param name="employeeCode"></param>
+            <param name="effectiveFromDate"></param>
+            <param name="effectiveToDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTimeOffController.GetTimeOffsBetweenDateRange(System.DateTime,System.Nullable{System.DateTime})">
+            <summary>
+            Get Vacations (Time offs) from workday between selected Date Range
+            </summary>
+            <param name="effectiveFromDate"></param>
+            <param name="effectiveToDate">optional</param>
+            <returns></returns>
+        </member>
+        <member name="T:Resources.API.Controllers.ResourcesTransactionsController">
+            <summary>
+                Resources Controller
+            </summary>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTransactionsController.GetEmployeesPendingTransactions(System.String)">
+            <summary>
+            Get employee pending transfers, promotions, transition and termination
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTransactionsController.GetEmployeesStaffingTransactions(System.Object)">
+            <summary>
+            Get Employees All staffing transactions
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTransactionsController.GetEmployeesLevelGradeHistory(System.Object)">
+            <summary>
+            Get Employees All staffing transactions
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTransactionsController.GetPendingTerminationsWithinDateRangeByEmployeeCodes(System.Object)">
+            <summary>
+            Get employees terminations within date range effective in future/Today
+            </summary>
+            <remarks>
+            Sample Request:
+            {employeeCodes:"39311", "startDate":"","endDate":""}
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTransactionsController.GetFutureTerminations">
+            <summary>
+            Get future transitions for all employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTransactionsController.GetTransitionsWithinDateRangeByEmployeeCodes(System.Object)">
+            <summary>
+            Get transition for employees within date range
+            </summary>
+            /// <remarks>
+                Sample Request:
+                {"employeeCodes":"38475,42SWG,42PRS,42SLS,42DIR","startDate":"2019-11-10T00:00:00","endDate":"2020-05-26T00:00:00"}
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTransactionsController.GetTransitionByEmployeeCode(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Get transition for employee
+            </summary>
+            <param name="employeeCode"></param>
+            <param name="effectiveFromDate"></param>
+            <param name="effectiveToDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTransactionsController.GetFutureTransitions">
+            <summary>
+            Get future transitions for all employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTransactionsController.GetFuturePromotions">
+            <summary>
+            Get all pending promotions for all employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTransactionsController.GetAllFutureTransfers">
+            <summary>
+            Get all pending (future) transfers for all employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTransactionsController.GetEmployeesPendingTransfersByEndDate(System.Object)">
+            <summary>
+            Gets the pending transfers (effective today or after) for INPUT EMPLOYEES
+            *  if no dates are passed as input , returns ALL THE FUTURE TRANSFERS DATA
+            *  if  dates are passed as input, returns the future transfers ENDING BEFORE A SPECIFIC DATE ,
+            </summary>
+            <remarks>
+                Sample Request:
+                {"employeeCodes":"38475,42SWG,42PRS,42SLS,42DIR","startDate":"2019-11-10T00:00:00","endDate":"2020-05-26T00:00:00"}
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Controllers.ResourcesTransactionsController.GetEmployeeTransfersWithinDateRange(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Gets the transfers (including historical) for a single employee 
+            * returns all transfers data if no dates are passed as input
+            * returns transfers within date range if  dates are passed as input
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Insert(`0,System.String)">
+            <summary>
+                Generic insert
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Insert(`0,System.String,System.Object)">
+            <summary>
+                Generic insert with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Insert(System.Object,System.String)">
+            <summary>
+                Generic insert with dynamic parameters
+            </summary>
+            <returns>A list of the inserted objects</returns>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Insert(System.String,System.Object)">
+            <summary>
+                Generic insert with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.InsertAsync(System.String,System.Object)">
+            <summary>
+                Async insert with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.InsertAsync(System.Object,System.String)">
+            <summary>
+                Async insert with dynamic parameters which return inserted object
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Insert(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic insert in a scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Insert(System.Data.IDbConnection,`0,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+                Generic insert with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Update(`0,System.String)">
+            <summary>
+                Generic update
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Update(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic update in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Update(`0,System.String,System.Object)">
+            <summary>
+                Generic update with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Update(System.Object,System.String)">
+            <summary>
+                Generic update with dynamic parameters
+            </summary>
+            <returns>A list of the updated objects</returns>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Update(System.Data.IDbConnection,`0,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+                Generic update with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Update(System.String,System.Object)">
+            <summary>
+                Generic Update with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.UpdateAsync(System.String,System.Object)">
+            <summary>
+                Async Update with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.UpdateAsync(System.Object,System.String)">
+            <summary>
+                Async update with dynamic parameters which return updated object
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Delete(`0,System.String)">
+            <summary>
+                Generic delete
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Delete(System.Guid,System.String)">
+            <summary>
+                Generic delete with uniqueidentifier as the id
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Delete(System.String,System.Object)">
+            <summary>
+                Generic delete with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.DeleteAsync(System.String,System.Object)">
+            <summary>
+                Async Delete with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Delete(System.Object,System.String)">
+            <summary>
+                Generic delete with dynamic parameters
+            </summary>
+            <returns>A list of the deleted objects</returns>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,System.Guid,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete with uniqueidentifier as the id, in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,System.Object,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Resources.API.Core.Repository.BaseRepository`1.DeleteAsync(System.Object,System.String)">
+            <summary>
+                Async Delete with dynamic parameters which return deleted object
+            </summary>
+        </member>
+        <member name="T:Resources.API.Redis.Models.RedisOfficeHierarchy">
+            <summary>
+            Text field --> use to display value
+            Value field --> code use to pass to backEnd
+            </summary>
+        </member>
+        <member name="P:Resources.API.Redis.Models.RedisOfficeHierarchy.Children">
+            
+        </member>
+        <member name="T:Resources.API.Redis.Models.RedisServiceLineHierarchy">
+            <summary>
+                Text field --> use to display value
+                Value field --> code use to pass to backEnd
+            </summary>
+        </member>
+    </members>
+</doc>

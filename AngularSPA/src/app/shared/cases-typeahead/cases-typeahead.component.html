@@ -1,0 +1,69 @@
+ <!--Search Box-->
+ <div class="searchbar">
+    <div class="searchbar__input">
+        <input id="projectSearchInput"   class="form-control border-right-0"autocomplete="off" 
+            [(ngModel)]="searchString"
+            [typeahead]="searchedProjects$" 
+            [typeaheadAsync]="true"
+            [typeaheadItemTemplate]="customProjectTypeAheadTemplate"
+            typeaheadOptionField="projectName" [typeaheadOptionsLimit]="50" 
+            [typeaheadMinLength]="3"  [typeaheadScrollable]="true"
+            (typeaheadOnSelect)="typeaheadOnSelect($event)"
+            [typeaheadOptionsInScrollableView]="10"
+            (focus)="projectSearchInputFocus = true"
+            (blur)="projectSearchInputFocus = false; (null)"
+            placeholder="Search Case/Opps..." typeaheadGroupField="projectStatus">
+        <div class="input-group-append" [class.input-group-append-focus]="projectSearchInputFocus">
+            <span class="input-group-text search-icon-width">
+                <i *ngIf="searchString.length < 3" class="fa fa-search fa-fw"></i>
+                <i *ngIf="searchString.length > 2" class="fa fa-times" (click)="clearSearchBox()"></i>
+            </span>
+        </div>
+    </div>
+</div>
+<!--End Search Box-->
+
+<!--Search Box Template-->
+<ng-template #customProjectTypeAheadTemplate let-model="item" let-index="index">
+    <div *ngIf="model.oldCaseCode" id="{{ 'demandProjectSearch-option-' + index }}" class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="color-box case"></div>
+                <div class="col-7 padding-left x10 textWrap"
+                    title="{{model.oldCaseCode + ' - ' + model.clientName + ' - ' + model.caseName}}">
+                    {{model.oldCaseCode + ' - ' + model.clientName + ' - ' + model.caseName}}
+                </div>
+                <div class="col-1">
+                    {{model.managingOfficeAbbreviation}}
+                </div>
+                <div class="col-3">
+                    {{model.startDate | date:'dd-MMM-yyyy'}} - {{model.endDate | date:'dd-MMM-yyyy'}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="model.pipelineId" id="{{ 'demandProjectSearch-option-' + index }}" class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="color-box opportunity"></div>
+                <div *ngIf="model.probabilityPercent" class="col-7 padding-left x10 textWrap"
+                    title="{{model.probabilityPercent + ' - ' + model.clientName + ' - ' + model.opportunityName}}">
+                    {{model.probabilityPercent + '% - ' + model.clientName + ' - ' + model.opportunityName}}
+                </div>
+                <div *ngIf="!model.probabilityPercent" class="col-7 padding-left x10 textWrap"
+                    title="{{model.clientName + ' - ' + model.opportunityName}}">
+                    {{model.clientName + ' - ' + model.opportunityName}}
+                </div>
+                <div class="col-1">
+                    {{model.managingOfficeAbbreviation}}
+                </div>
+                <div class="col-3" *ngIf="model.endDate">
+                    {{model.startDate | date:'dd-MMM-yyyy'}} - {{model.endDate | date:'dd-MMM-yyyy'}}
+                </div>
+                <div class="col-3" *ngIf="!model.endDate">
+                    {{model.startDate | date:'dd-MMM-yyyy'}}
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,602 @@
+@use 'sass:math';
+
+@import "assets/scss/main.scss";
+@import "~@ag-grid-community/styles/ag-grid.css";
+@import "~@ag-grid-community/styles/ag-theme-balham.css";
+@import "~@ag-grid-community/styles/ag-theme-material.css";
+@import "~@ag-grid-community/styles/ag-theme-alpine.css";
+@import "@ng-select/ng-select/themes/default.theme.css";
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker"; /* Importing Datepicker SCSS file. */
+
+@import './node_modules/@perfectmemory/ngx-contextmenu/src/assets/stylesheets/base.scss'; // This is needed for ngx-context menu to work. Remove these css once we migrate from ngx-context menu to angular material context menu
+@import "assets/scss/angular-material.scss"; //this class should be added after imporitng materil theme so that any overrides in app  are not affected
+//HTML elements CSS overrides
+
+//This is done to prevent showing "Not Found TExt in Ng-Multiselect"
+//TODO: remove this once we replace ngx bootstap typeahead with Ng-Select typeahead
+
+// Adding Graphik Font
+@font-face {
+  font-family: "Graphik";
+  font-weight: 400;
+  src: local("Graphik"), url("./assets/fonts/GraphikRegular.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Graphik";
+  font-weight: 500;
+  src: local("Graphik"), url("./assets/fonts/GraphikMedium.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Graphik";
+  font-weight: 600;
+  src: local("Graphik"), url("./assets/fonts/GraphikBold.otf") format("truetype");
+}
+
+// AG Grid Alpine Theme Override
+.ag-theme-alpine {
+      font-family: ("Graphik", sans-serif);
+      font-size: 12px;
+  .ag-header-cell {
+      background-color: #f7f9ff;
+  }
+
+  .ag-header-cell-text {
+    color: #626568;
+  }
+
+  .ag-root-wrapper {
+    border: 1px solid #f0f2f2;
+  }
+
+  .ag-header {
+    border-bottom: 1px solid #f0f2f2;
+  }
+
+  .ag-row {
+    border-color: #f0f2f2;
+  }
+
+  .ag-cell .ag-icon {
+    color: #c2c9d1;
+  }
+
+  .ag-menu {
+    border: none;
+    box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .ag-menu-option-active {
+    background-color: #f7f9ff;
+  }
+
+  .ag-menu-option-icon {
+    display: none;
+  }
+
+  .ag-menu-option-text {
+    padding: 9px 16px;
+  }
+}
+
+// .modal {
+//   background-color: rgba($color: #000000, $alpha: 0.5);
+// }
+
+.ng-dropdown-panel {
+  min-width: max-content !important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-disabled {
+  display: none;
+}
+
+.center {
+  text-align: center;
+}
+
+.padding-left {
+  &.x5 {
+    padding-left: 5px;
+  }
+
+  &.x10 {
+    padding-left: 10px;
+  }
+}
+
+label.user-message {
+  font-size: 14px !important;
+  color: #aeaeae !important;
+  padding-left: 5px !important;
+}
+
+//Angular material styling overrides
+
+.mat-expansion-panel-body
+// .mat-dialog-container 
+{
+  padding: 0 !important;
+}
+
+// .mat-expansion-panel-body {
+//   margin-top: 16px;
+// }
+
+.mat-expansion-panel {
+  padding-right: 1px;
+}
+
+.mat-expansion-panel-header {
+  padding: 0 !important;
+  height: inherit !important;
+}
+
+// cdk drag drop placehodler style
+.cdk-drag-placeholder {
+  border: dotted 3px #005999;
+  width: 100%;
+
+  .row {
+    flex-wrap: nowrap;
+  }
+
+  .col-6 {
+    flex-shrink: 1;
+  }
+
+  .list-group-item {
+    @include staff-group-item;
+  }
+}
+
+#placeholderid {
+  position: relative;
+
+  app-resourceview {
+    position: absolute;
+  }
+}
+
+.cdk-drag-preview {
+  .list-group-item {
+    @include staff-group-item;
+  }
+
+  &.project-resource-preview-wrapper{
+    @include staff-group-item;
+    overflow: hidden;
+    min-height: 30px;
+    background: #fff;
+    border: 1px solid #e0e4e8;
+    box-shadow: 0 1px 5px #0000001a;
+    border-radius: 4px;
+    display: flex;
+    width: 100%;
+    gap: 7px;
+    font-size: 10px;
+    font-weight: 400;
+    color: black;
+    margin-top: 3px;
+    padding: 5px 7px;
+    .name{
+      padding-left: 0px !important;
+    }
+  }
+
+}
+
+//set border to be consistent for datepicker
+.bs-datepicker {
+  border-radius: 0.3rem !important;
+
+
+  // .bs-datepicker-container {
+  //   padding: 10px;
+  // }
+
+  // &.theme-dark-blue {
+  //   box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.3), 0px 2px 6px rgba($color: #000000, $alpha: 0.15) !important;
+  //   left: 145px;
+  //   top: 2px;
+
+  //   .bs-datepicker-head {
+  //     background-color: #fff;
+  //     padding: 10px;
+  //     position: relative;
+  //     text-align: left;
+
+  //     button {
+  //       color: #616568;
+  //       font-size: 16px;
+  //       font-weight: bold;
+  //       height: auto;
+  //       padding: 0px;
+  //       visibility: visible !important;
+
+  //       &:hover {
+  //         background: none;
+  //       }
+
+  //       &.next {
+  //         position: absolute;
+  //         right: 0px;
+  //       }
+
+  //       &.previous {
+  //         position: absolute;
+  //         right: 30px;
+  //       }
+  //     }
+  //   }
+
+  //   .bs-datepicker-body {
+  //     table td {
+  //       color: #616568;
+
+  //       span.selected,
+  //       &.selected span,
+  //       span[class*=select-]:after,
+  //       &[class*=select-] span:after {
+  //         background-color: #284ce0;
+  //       }
+  //     }
+
+  //     table.days td.active:not(.select-start):before,
+  //     table.days td.in-range:not(.select-start):before,
+  //     table.days span.active:not(.select-start):before,
+  //     table.days span.in-range:not(.select-start):before {
+  //       background-color: #ecf0ff;
+  //     }
+  //   }
+  // }
+}
+
+.calendar-pop-up {
+  &.calendar-align-middle {
+    left: 22px !important;
+  }
+
+  &.calendar-align-planning-board {
+    left: 50px !important;
+  }
+}
+
+app-resourceview[cdkdrag].cdk-drag-placeholder {
+  .list-group-item {
+    font-size: 14px;
+    padding: 0 math.div($base-padding, 2) 0 math.div($base-padding, 3) !important;
+    margin-bottom: 0;
+
+    .name {
+      padding-left: 0;
+    }
+
+    &:before {
+      display: none;
+    }
+  }
+}
+
+//TODO: added this to make drag outlines on case planning white-board
+.cdk-drag-placeholder {
+  .list-group-item {
+    font-size: 14px;
+    padding: 0 math.div($base-padding, 2) 0 math.div($base-padding, 3) !important;
+    margin-bottom: 0;
+
+    .name {
+      padding-left: 0;
+    }
+
+    &:before {
+      display: none;
+    }
+  }
+}
+
+//Multi-select dropdown
+
+.multiselect-dropdown {
+  min-width: 155px !important;
+}
+
+// Gantt Popup
+.right-alignment {
+  text-align: -webkit-right;
+}
+
+.center-alignment {
+  text-align: -webkit-center;
+}
+
+.gantt_cal_light {
+  min-width: 590px;
+}
+
+// Supply Side Resources/Teams ta styles
+
+
+// Remove padding between columns
+.padding-0 {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+// Override defult behavior
+.dropdown-header {
+  font-weight: bold;
+  padding: 0.5rem 0.5rem !important;
+}
+
+// Popup Dragable
+// .modal-content {
+//   position: absolute;
+//   text-align: center !important;
+// }
+
+// .modal-body form {
+//   text-align: left !important;
+// }
+
+// .modal-header {
+//   -webkit-user-select: none;
+//   -moz-user-select: none;
+//   -o-user-select: none;
+//   -ms-user-select: none;
+//   -khtml-user-select: none;
+//   user-select: none;
+// }
+
+// overlay
+
+.overlay {
+  z-index: 16;
+}
+
+//Terminated Employees setting background color for terminated employees
+.terminated {
+  background-color: antiquewhite !important;
+}
+
+.terminated:hover {
+  background-color: antiquewhite !important;
+}
+
+.dropdown-menu {
+  border: none;
+  box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+  min-width: 120px;
+}
+
+.dropdown-menu>li>a {
+  display: block;
+  padding: 5px 16px;
+  clear: both;
+  font-weight: 400;
+  line-height: 20px;
+  color: #000;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.dropdown-menu>li>a:hover {
+  background-color: #f7f9ff;
+}
+
+.dropdown-menu .divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+
+// Multi select
+
+.ng-select.ng-select-focused:not(.ng-select-opened)>.ng-select-container {
+  border-color: darkgray !important;
+  box-shadow: none;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+  color: #fff !important;
+  text-decoration: none !important;
+  background-color: #007bff !important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  color: #fff !important;
+  background-color: #007bff !important;
+}
+
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+  background-color: #fff !important;
+}
+
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon.left {
+  border-right: 1px solid;
+}
+
+.caseOppDragCustomStyle {
+  background-color: #fff !important;
+  color: black;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+//Ag-grid css update
+
+.aggrid-datePicker {
+  position: relative;
+  width: 100px;
+  height: 24px !important;
+  color: white;
+}
+
+.aggrid-datePicker:before {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  content: attr(data-date);
+  display: inline-block;
+  color: black;
+}
+
+.aggrid-datePicker::-webkit-datetime-edit,
+.aggrid-datePicker::-webkit-inner-spin-button,
+.aggrid-datePicker::-webkit-clear-button {
+  display: none;
+}
+
+.aggrid-datePicker::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0;
+  color: black;
+  opacity: 1;
+}
+
+.cozy-cottage {
+  background-color : #f2dfd8;
+}
+/* typeahead-container being a dynamic selector, doesn't accept css properties from its parents and
+since its a container and not a class neither we can apply ng-deep, hence declaring it here like below for the mentioned reasons*/
+.planningCard-typeahead-box+typeahead-container {
+  max-height: 100px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 390px;
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e0e4e8;
+  background-clip: content-box;
+  border: 3px solid #fff;
+  border-radius: 10px;
+}
+
+.custom-today-class {
+  background: lightgray;
+}
+
+// div.modal-content {
+//   width: 100vh;
+// }
+
+// Bootstrap modal backdrop backgound color
+// .modal-backdrop {
+//   background-color: #fff;
+// }
+// .modal-backdrop.show {
+//   opacity: .8;
+// }
+
+.share-align {
+  text-align: right;
+  padding: 5px;
+}
+
+.share-link {
+  display: inline-block;
+  padding: 2px;
+  width: 1000px;
+}
+
+.share-action {
+  display: inline-block;
+  padding: 2px;
+  width: 150px;
+}
+
+.read-only {
+  pointer-events: none;
+}
+
+.terminated{
+  background-color: #faebd7!important
+}
+
+.word-wrap {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// Staffing - Overlapped Teams Table
+.overlapped-teams-form-popup {
+  max-width: 1000px !important;
+}
+
+.peg-opportunity-popup {
+  max-width: 1150px !important;
+  height: 726px !important;
+}
+
+
+//Admin Ringfence Dropdown 
+.admin-ringfence-dropdown {
+  .btn-outline-secondary {
+    color: #212529!important;
+    background-color: #f2f2f2!important;
+    border-color: #f2f2f2!important;
+  }
+}
+
+//Quick Add Typeahead Override
+.planning-card-project-typeahead {
+  typeahead-container.dropdown {
+    width: 200%!important;
+  }
+}
+
+#alertIcon {
+  color: $bain-red;
+  margin-left: 3px; /* Adjust the margin as needed */
+  transition: color 0.3s ease; /* Add a smooth transition effect */
+}
+
+.hover-text {
+  display: none;
+  position: absolute;
+  background: #616568;
+  color: black;
+  padding: 5px;
+  border: none;
+  color: #fff;
+  font-family: "Graphik";
+  border-radius: 4px;
+  font-size: 11px;
+  z-index: 1;
+}
+
+.user__icon:hover #alertIcon {
+  color: darkred; /* Change color on hover */
+}
+
+.user__icon:hover .hover-text {
+  display: block; /* Show text on hover */
+}
+
+.notes-container {
+  display: flex;
+  align-items: center;
+}
+

@@ -1,0 +1,57 @@
+<div class="sorting-wrapper">
+    <!-- Button -->
+    <button class="toggle-sort-cta" (click)="toggleDropdownMenu($event)">
+        <span class="sort-by">Sort By:</span>
+
+        <!--  -->
+        <ng-container *ngIf="sortBy.label">
+            <i class="fas fa-{{ sortBy.icon }} ml-2 mr-2"></i>
+            <span>{{ sortBy.label }}</span>
+        </ng-container>
+
+        <!--  -->
+        <i class="fas fa-angle-{{ sortBy.direction ? 'up' : 'down' }} ml-auto"></i>
+    </button>
+
+    <!-- Dropdown Wrapper -->
+    <div class="sort-dropdown-wrapper" [ngClass]="isDropdownOpen ? '' : 'collapsed'">
+        <!-- Sorting Options (Title, Level, etc) -->
+        <button class="option-cta" *ngFor="let option of sortOptions" (click)="handleOptionClick(option,$event)">
+            <span class="option">{{ option.label }}</span>
+
+            <!-- Checkmar & Remove Button -->
+            <button
+                class="remove-active-cta ml-auto"
+                *ngIf="option.active"
+                (click)="handleOptionRemoval($event, option)"
+            >
+                <i class="remove-active-icon fas fa-check"></i>
+                <i class="remove-active-icon fas fa-times"></i>
+            </button>
+        </button>
+
+        <!-- Split Line -->
+        <hr />
+
+        <!-- Sorting Directions (Asc, Desc) -->
+        <button
+            class="option-cta"
+            *ngFor="let option of sortDirections"
+            [title]="!sortBy.label ? 'First select a sorting option above' : ''"
+            [disabled]="!sortBy.label"
+            (click)="handleDirectionClick(option, $event)"
+        >
+            <div class="d-flex align-items-center" style="min-width: 140px">
+                <span class="option">{{ option.label }}</span>
+
+                <!--  -->
+                <i class="fas fa-{{ option.icon }} ml-auto"></i>
+            </div>
+
+            <!--  -->
+            <button class="remove-active-cta" *ngIf="option.active">
+                <i class="fas fa-check ml-auto"></i>
+            </button>
+        </button>
+    </div>
+</div>

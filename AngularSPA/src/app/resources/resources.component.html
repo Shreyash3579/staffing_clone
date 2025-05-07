@@ -1,0 +1,61 @@
+<app-notification-banner [sharedNotes]="sharedNotes" [caseIntakeAlerts]="caseIntakeAlerts"></app-notification-banner>
+
+<!-- Progress Bar Section-->
+<div class="row">
+  <mat-progress-bar mode="indeterminate" color="warn" *ngIf="showProgressBar">
+  </mat-progress-bar>
+</div>
+
+<div id="stage" class="col resources">
+  <!-- Filter Section on the page-->
+  <resources-filter [dateRange]="dateRange" [clearSearch]="clearEmployeeSearch"
+    [savedResourceFilters]="savedResourceFilters" [supplyGroupPreferences]="supplyGroupPreferences"
+    [allSupplyDropdownOptions]="allSupplyDropdownOptions" [userPreferences]="userPreferences"
+    [resourcesRecentCDList]="resourcesRecentCDList" [resourcesCommercialModelList]="resourcesCommercialModelList"
+    (getResourcesIncludingTerminatedBySearchString)="getResourcesIncludingTerminatedBySearchStringHandler($event)"
+    (getResourcesByDateRange)="getResourcesByDateRangeHandler($event)"
+    (onSupplyGroupFilterChanged)="onSupplyGroupFilterChangedHandler($event)"
+    (openQuickAddFormEmitter)="openQuickAddFormHandler($event)" (openInfoModal)="openInfoModal($event)"
+    (updateThresholdRangeEmitter)="updateThresholdRangeHandler($event)"
+    (filterResourcesBySelectedValues)="filterResourcesBySelectedValuesHandler($event)"
+    (sortResourcesBySelectedValues)="sortResourcesBySelectedValuesHandler($event)"
+    (onToggleEmployeeCaseGroup)="onToggleEmployeeCaseGroupHandler($event)"
+    (onToggleWeeklyMonthlyGroup)="onToggleWeeklyMonthlyViewHandler($event)"
+    (onToggleWeeklyMonthlyGroup)="onToggleWeeklyMonthlyViewHandler($event)"
+    (onTogglePracticeView)="onTogglePracticeViewHandler($event)" (printPdfEmitter)="printPdfHandler()"
+    (upsertResourceFilter)="upsertResourceFilterHandler($event)"
+    (upsertUserPreferencesSupplyGroupEmitter)="upsertUserPreferencesSupplyGroupHandler($event)"
+    (openCustomGroupModalEmitter)="openCustomGroupModalHandler($event)"
+    (deleteSupplyGroupsRefresh)="deleteSupplyGroupsRefreshHandler($event)"
+    (deleteSavedFilter)="deleteSavedFilterHandler($event)"></resources-filter>
+
+  <!-- Gantt Section-->
+  <ng-container *ngIf="resources">
+    <!-- resources.slice(0, pageNumber * resourcesPerPage) does pagination here without needed extra variable -->
+    <resources-gantt [resourcesStaffing]="resources" [dateRange]="dateRange"
+      [selectedCommitmentTypes]="selectedCommitmentTypes" [resourcesCountOnCaseOpp]="resourcesCountOnCaseOpp"
+      [thresholdRangeValue]="thresholdRangeValue"
+      [selectedEmployeeCaseGroupingOption]="selectedEmployeeCaseGroupingOption"
+      [selectedWeeklyMonthlyGroupingOption]="selectedWeeklyMonthlyGroupingOption"
+      [isSelectedPracticeView]="isSelectedPracticeView" [isPdfExport]="isPdfExport"
+      (openQuickAddForm)="openQuickAddFormHandler($event)"
+      (updateResourceAssignmentToProject)="updateResourceAssignmentToProjectHandler($event)"
+      (upsertResourceAllocationsToProject)="upsertResourceAllocationsToProjectHandler($event)"
+      (upsertPlaceholderAllocationsToProject)="upsertPlaceholderAllocationsToProjectHandler($event)"
+      (updateResourceCommitment)="updateResourceCommitmentHandler($event)"
+      (openResourceDetailsDialog)="openResourceDetailsDialogHandler($event)"
+      (openSplitAllocationPopup)="openSplitAllocationPopupHandler($event)"
+      (openCaseDetailsDialog)="openCaseDetailsDialogHandler($event)"
+      (upsertResourceViewNote)="upsertResourceViewNoteHandler($event)"
+      (deleteResourceViewNotes)="deleteResourceViewNotesHandler($event)"
+      (upsertResourceRecentCD)="upsertResourceRecentCDHandler($event)"
+      (deleteResourceRecentCD)="deleteResourceRecentCDHandler($event)"
+      (upsertResourceCommercialModel)="upsertResourceCommercialModelHandler($event)"
+      (deleteResourceCommercialModel)="deleteResourceCommercialModelHandler($event)"
+      (selectedResourceViewTab)="selectedResourceViewTabHandler($event)"
+      (openOverlappedTeamsForm)="openOverlappedTeamsPopupHandler($event)" #resourcesGantt
+      (ganttBodyLoadedEmitter)="ganttBodyLoadedEmitterHandler()">
+    </resources-gantt>
+  </ng-container>
+
+</div>

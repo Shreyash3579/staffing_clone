@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="52" height="52" viewBox="0 0 52 52">
+  <defs>
+    <clipPath id="clip-Email-icon">
+      <rect width="52" height="52"/>
+    </clipPath>
+  </defs>
+  <g id="Email-icon" clip-path="url(#clip-Email-icon)">
+    <g id="Group_516" data-name="Group 516" transform="translate(1 0.802)">
+      <circle id="Ellipse_24" data-name="Ellipse 24" cx="25" cy="25" r="25" transform="translate(0 0.198)" fill="#c00"/>
+      <path id="envelope-solid_1_" data-name="envelope-solid (1)" d="M29.017,71.325a.348.348,0,0,1,.56.272V83.409A2.774,2.774,0,0,1,26.8,86.182H2.773A2.774,2.774,0,0,1,0,83.409V71.6a.345.345,0,0,1,.56-.271c1.294,1.005,3.01,2.282,8.9,6.562,1.219.89,3.275,2.761,5.326,2.75,2.062.017,4.159-1.895,5.332-2.75C26.013,73.612,27.723,72.33,29.017,71.325ZM14.788,78.788c1.34.023,3.27-1.687,4.24-2.392,7.666-5.563,8.249-6.048,10.017-7.435a1.382,1.382,0,0,0,.531-1.092v-1.1A2.774,2.774,0,0,0,26.8,64H2.773A2.774,2.774,0,0,0,0,66.773v1.1a1.391,1.391,0,0,0,.531,1.092C2.3,70.343,2.883,70.834,10.548,76.4,11.519,77.1,13.448,78.811,14.788,78.788Z" transform="translate(10.371 -49.059)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

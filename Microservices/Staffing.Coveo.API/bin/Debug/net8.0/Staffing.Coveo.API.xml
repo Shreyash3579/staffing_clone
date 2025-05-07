@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Staffing.Coveo.API</name>
+    </assembly>
+    <members>
+        <member name="M:Staffing.Coveo.API.Controllers.CoveoController.SearchByQuery(System.String,System.String,System.String,System.String)">
+            <summary>
+            This method gets the data from Coveo based on the source and searchTerm passed by user as params
+            </summary>
+            <param name="searchTerm">Pass search term like e-code or old case code here. For Example: Molly</param>
+            <param name="source">Pass name of the source here.
+            For Example: resource or project.
+            In case nothing is mentioned, everthing will be searched</param>
+            <param name="userDisplayName">Name of user who is searching</param>
+            <param name="username">Email Id of user who is searching</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Coveo.API.Controllers.CoveoController.SearchByQueryTest(System.String,System.String,System.String,System.String,System.Nullable{System.Boolean})">
+            <summary>
+            This method gets the data from Coveo based on the source and searchTerm passed by user as params
+            </summary>
+            <param name="searchTerm">Pass search term like e-code or old case code here. For Example: Molly</param>
+            <param name="source">Pass name of the source here.
+            For Example: resource or project.
+            In case nothing is mentioned, everthing will be searched</param>
+            <param name="userDisplayName">Name of user who is searching</param>
+            <param name="username">Email Id of user who is searching</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Coveo.API.Controllers.CoveoController.UpsertOrDeleteAllocationIndexes(System.Object)">
+            <summary>
+            This method is used to upsert or delete the allocations indexes in Coveo Cloud Platform using Push APIs.
+            </summary>
+            <param name="payload"></param>
+            <returns>The allocations that were successfully indexed in coveo cloud platform.
+            If return Empty object then indexing failed.</returns>
+        </member>
+        <member name="M:Staffing.Coveo.API.Controllers.CoveoController.LogClickEventInCoveoAnalytics(System.Object)">
+            <summary>
+            Log click event unsing this API end point
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Coveo.API.Core.Client.CoveoClient.SearchByResource(System.String,System.String,System.String,System.Nullable{System.Boolean})">
+            <summary>
+            This will search only on QA source based on all the fields or first name,last name or employee code
+            </summary>
+            <param name="searchTerm"></param>
+            <param name="userDisplayName"></param>
+            <param name="username"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Coveo.API.Core.Client.CoveoClient.SearchByAllocation(System.String)">
+            <summary>
+            This will search on SM source based on all fields or old case code
+            </summary>
+            <param name="searchTerm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Coveo.API.Core.Client.CoveoClient.SearchByCase(System.String,System.String,System.String)">
+            <summary>
+            This will search on cases source based on case name or old case code
+            </summary>
+            <param name="searchTerm"></param>
+            <param name="userDisplayName"></param>
+            <param name="username"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Coveo.API.Core.Client.CoveoClient.SearchByOpportunity(System.String,System.String,System.String)">
+            <summary>
+            This will search on opportunity source based on opportunity name
+            </summary>
+            <param name="searchTerm"></param>
+            <param name="userDisplayName"></param>
+            <param name="username"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Staffing.Coveo.API.Core.Helpers.HttpQueryBuilder">
+            <summary>
+            This will generate the queries based on multiple scenarios such as appending q(query) or aq(advanced query) in the coveo search url
+            </summary>
+        </member>
+    </members>
+</doc>

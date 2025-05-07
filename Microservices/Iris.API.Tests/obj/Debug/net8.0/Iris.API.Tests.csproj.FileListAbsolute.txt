@@ -1,0 +1,8 @@
+C:\Projects\TSG-Staffing-BOSS\Microservices\Iris.API.Tests\bin\Debug\net8.0\.msCoverageSourceRootsMapping_Iris.API.Tests
+C:\Projects\TSG-Staffing-BOSS\Microservices\Iris.API.Tests\bin\Debug\net8.0\CoverletSourceRootsMapping_Iris.API.Tests
+C:\Projects\TSG-Staffing-BOSS\Microservices\Iris.API.Tests\obj\Debug\net8.0\Iris.API.Tests.csproj.AssemblyReference.cache
+C:\Projects\TSG-Staffing-BOSS\Microservices\Iris.API.Tests\obj\Debug\net8.0\Iris.API.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\TSG-Staffing-BOSS\Microservices\Iris.API.Tests\obj\Debug\net8.0\Iris.API.Tests.AssemblyInfoInputs.cache
+C:\Projects\TSG-Staffing-BOSS\Microservices\Iris.API.Tests\obj\Debug\net8.0\Iris.API.Tests.AssemblyInfo.cs
+C:\Projects\TSG-Staffing-BOSS\Microservices\Iris.API.Tests\obj\Debug\net8.0\Iris.API.Tests.csproj.CoreCompileInputs.cache
+C:\Projects\TSG-Staffing-BOSS\Microservices\Iris.API.Tests\obj\Debug\net8.0\Iris.API.Tests.sourcelink.json

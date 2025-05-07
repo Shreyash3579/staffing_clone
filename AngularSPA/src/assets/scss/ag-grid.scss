@@ -1,0 +1,221 @@
+//Ag-Grid CSS overwrite
+
+$color_1: rgb(51, 51, 51);
+$color_2: #fda427;
+$color_3: #fb0019;
+$font_family_1: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$background_color_1: white;
+
+.ag-theme-balham {
+  // .ag-header-cell {
+  //   cursor: pointer;
+  //   padding-left: 5px !important;
+  //   padding-left: 1px !important;
+  //   padding-right: 0px !important;
+  // }
+  .ag-ltr {
+    .ag-cell-focus {
+      border: none;
+    }
+  }
+  .ag-cell-no-focus {
+    border: none;
+    border-right: 1px solid #d4d4d4 !important;
+  }
+  // .ag-header-cell-label {
+  //   .ag-header-cell-text {
+  //     text-overflow: ellipsis !important;
+  //     white-space: nowrap !important;
+  //     -ms-text-overflow: clip !important;
+  //     -o-text-overflow: clip !important;
+  //     font-family: $font_family_1 !important;
+  //     font-size: 12px !important;
+  //     position: absolute !important;
+  //     font-weight: 700 !important;
+  //     padding-left: 5px !important;
+  //   }
+  // }
+  background-color: $background_color_1 !important;
+  color: $color_1 !important;
+  font-family: $font_family_1 !important;
+  font-size: 13px !important;
+  .ag-cell {
+    line-height: 30px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    //border-right: 1px solid !important;
+    //border-bottom: 1px solid !important;
+    //border-color: #d4d4d4 !important;
+    font-size: 12px !important;
+    font-family: $font_family_1 !important;
+  }
+  .ag-root {
+    box-sizing: content-box;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 6px;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  // .ag-icon-asc {
+  //   background: none !important;
+  // }
+  // .ag-icon-desc {
+  //   background: none !important;
+  // }
+  // .ag-header-group-cell {
+  //   padding-left: 1px !important;
+  //   padding-right: 0px !important;
+  // }
+}
+.editable-cell {
+  background: #ffffbf !important;
+}
+.ag-floating-bottom {
+  position: relative !important;
+  border-bottom: 1px solid #d4d4d4 !important;
+  border-top: 1px solid #d4d4d4 !important;
+  overflow: hidden !important;
+  font-weight: bold !important;
+  background: #f3f3f3 !important;
+  background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, #eeeeee),
+    color-stop(1, #ffffff)
+  ) !important;
+  background: linear-gradient(to bottom, #eeeeee, #ffffff) !important;
+  background: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 100%) !important;
+  background: -o-linear-gradient(#ffffff, #eeeeee) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0) !important;
+  -webkit-border-top-right-radius: -1px !important;
+  -webkit-border-bottom-right-radius: 0 !important;
+  -webkit-border-bottom-left-radius: 0 !important;
+  -webkit-border-top-left-radius: -1px !important;
+  -moz-border-radius-topright: -1px !important;
+  -moz-border-radius-bottomright: 0 !important;
+  -moz-border-radius-bottomleft: 0 !important;
+  -moz-border-radius-topleft: -1px !important;
+  border-top-right-radius: -1px !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-top-left-radius: -1px !important;
+  -moz-background-clip: padding-box !important;
+  -webkit-background-clip: padding-box !important;
+  background-clip: padding-box !important;
+}
+.ag-floating-bottom-viewport {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(white), to(lightgrey)) !important;
+  background-image: linear-gradient(to bottom, white, lightgrey) !important;
+  .ag-cell {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(white), to(lightgrey)) !important;
+    background-image: linear-gradient(to bottom, white, lightgrey) !important;
+  }
+}
+.ag-icon-checkbox-checked {
+  padding-left: 15px;
+}
+.ag-icon-checkbox-unchecked {
+  padding-left: 15px;
+}
+.ag-icon-checkbox-indeterminate {
+  padding-left: 15px;
+}
+.imageButton {
+  cursor: pointer;
+}
+// .gridHeaderPadding {
+//   padding-top: 3px !important;
+//   padding-left: 5px !important;
+//   padding-right: 5px !important;
+//   float: right !important;
+// }
+// .gridHeaderImageOrange {
+//   padding-right: 5px !important;
+//   padding-bottom: 2px !important;
+//   color: $color_2 !important;
+//   font-size: medium;
+// }
+// .gridHeaderImageRed {
+//   padding-right: 5px !important;
+//   padding-bottom: 2px !important;
+//   color: $color_3 !important;
+//   font-size: medium;
+// }
+// .super-header {
+//   font-family: $font_family_1 !important;
+//   font-size: 12px !important;
+//   font-weight: 700 !important;
+//   padding-left: 5px !important;
+// }
+// .super-header-text {
+//   font-family: $font_family_1 !important;
+//   font-size: 12px !important;
+// }
+// .ag-icon {
+//   .ag-icon-asc {
+//     background: none !important;
+//   }
+//   .ag-icon-desc {
+//     background: none !important;
+//   }
+// }
+// .ag-icon-desc {
+//   &:before {
+//     background: none !important;
+//     display: inline-block;
+//     font: normal normal normal 14px/1 FontAwesome;
+//     font-size: inherit;
+//     text-rendering: auto;
+//     -webkit-font-smoothing: antialiased;
+//     content: "\f0dd" !important;
+//   }
+//   &:after {
+//     background: none !important;
+//   }
+//   float: right !important;
+//   margin-top: -5px !important;
+// }
+// .ag-icon-asc {
+//   &:before {
+//     background: none !important;
+//     display: inline-block;
+//     font: normal normal normal 14px/1 FontAwesome;
+//     font-size: inherit;
+//     text-rendering: auto;
+//     -webkit-font-smoothing: antialiased;
+//     content: "\f0de" !important;
+//   }
+//   float: right !important;
+// }
+// .ag-sort-ascending-icon {
+//   width: 100% !important;
+//   background: none !important;
+// }
+// .ag-sort-descending-icon {
+//   width: 100% !important;
+//   background: none !important;
+// }
+// .ag-header-cell-label {
+//   width: 100% !important;
+// }
+// .ag-header-select-all {
+//   .ag-checkbox-unchecked {
+//     padding-left: 5px !important;
+//   }
+//   .ag-checkbox-checked {
+//     padding-left: 5px !important;
+//   }
+//   .ag-checkbox-indeterminate {
+//     padding-left: 5px !important;
+//   }
+// }
+.ag-root.ag-layout-normal {
+  height: 99.5% !important;
+}

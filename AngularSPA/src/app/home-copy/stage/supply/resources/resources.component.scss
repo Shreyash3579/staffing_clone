@@ -1,0 +1,37 @@
+.info-icon-pad {
+  padding-top: 4px;
+}
+
+.resources-available-today {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  font-family: "Graphik";
+  height: 100%;
+
+  // staffs
+  .resources {
+    align-items: center;
+    color: #121212;
+    display: grid;
+    font-size: 12px;
+    font-weight: 500;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(max(220px, 10vw), 1fr));
+    height: 100%;
+    overflow: overlay;
+    padding: 10px;
+
+    &.availableToday {
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    }
+  }
+
+  // dropzone
+  .resource-drop-zone {
+    border: 1px dashed #c2c9d1;
+    border-radius: 4px;
+    height: auto;
+    min-height: 15px;
+  }
+}

@@ -1,0 +1,50 @@
+<div class="row no-gutters">
+    <div id="ganttContainerDiv" class="col-12 resources case-planning-view" infiniteScroll
+      [infiniteScrollDistance]="scrollDistance" [scrollWindow]="false" (scrolled)="loadMoreCases()" #ganttContainer>
+      <!-- Header -->
+      
+      <div style="position: sticky; top: 0px; z-index: 2;">
+      <app-gantt-header  id="component-styling" 
+        [dateRange]="dateRange" [show]="false" [planningCards]="planningCards" [cases]="ganttCasesData"
+        (expandCollapseSidebarEmitter)="expandCollapseSidebarEmitterHandler($event)">
+      </app-gantt-header>
+  
+      <!-- Metric Table Row -->
+      <ng-container *ngIf="planningBoard.length && planningBoardColumnMetrics.length" >
+        <app-case-planning-metrics-table 
+          id="component-styling" 
+          [planningBoardColumnMetrics]="planningBoardColumnMetrics"
+          [planningBoard]="planningBoard">
+        </app-case-planning-metrics-table>
+      </ng-container>
+  
+      <!-- Header -->
+      <ng-container *ngIf="ganttCasesData.length || planningCards.length">
+        <app-gantt-header 
+          id="component-styling" 
+          [dateRange]="dateRange" 
+          [planningCards]="planningCards" 
+          [cases]="ganttCasesData"
+          (sortEmitter)="sortEmitterHandler($event)"
+          (filterProjectsEmitter)="filterEmitterHandler($event)"
+          (expandCollapseSidebarEmitter)="expandCollapseSidebarEmitterHandler($event)">
+        </app-gantt-header>
+      </ng-container>
+      </div>
+  
+      <!-- Body -->
+      <ng-container *ngIf="ganttCasesData.length || planningCards.length">
+        <app-gantt-body 
+          id="component-styling" 
+          [casesGanttData]="filteredGanttCasesData" 
+          [planningCards]="filteredPlanningCards"
+          [projects]="projects"
+          [dateRange]="dateRange" 
+          [isLeftSideCollapsed]="isLeftSideCollapsed"
+          (upsertCasePlanningNote)="upsertCasePlanningNoteHandler($event)"
+          (openAddTeamSkuForm)="openAddTeamSkuFormHandler($event)"
+          (deleteCasePlanningNotes)="deleteCasePlanningNotesHandler($event)" >
+        </app-gantt-body>
+      </ng-container>
+    </div>
+  </div>

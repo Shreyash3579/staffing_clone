@@ -1,0 +1,7 @@
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.HttpAggregator.Tests\bin\Debug\net6.0\CoverletSourceRootsMapping
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.HttpAggregator.Tests\obj\Debug\net6.0\Staffing.HttpAggregator.Tests.csproj.AssemblyReference.cache
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.HttpAggregator.Tests\obj\Debug\net6.0\MvcTestingAppManifest.json
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.HttpAggregator.Tests\obj\Debug\net6.0\Staffing.HttpAggregator.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.HttpAggregator.Tests\obj\Debug\net6.0\Staffing.HttpAggregator.Tests.AssemblyInfoInputs.cache
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.HttpAggregator.Tests\obj\Debug\net6.0\Staffing.HttpAggregator.Tests.AssemblyInfo.cs
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.HttpAggregator.Tests\obj\Debug\net6.0\Staffing.HttpAggregator.Tests.csproj.CoreCompileInputs.cache

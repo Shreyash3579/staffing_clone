@@ -1,0 +1,152 @@
+@use "sass:math";
+@import "variables";
+
+::ng-deep .modal {
+  background: none !important;
+}
+
+::ng-deep .commitments-detail-popup {
+  margin: 0px;
+  max-width: max-content !important;
+  position: absolute;
+
+  @for $i from 1 through 10000 {
+    &.left-#{$i} {
+      left: #{$i}px;
+    }
+
+    &.right-#{$i} {
+      right: #{$i}px;
+    }
+
+    &.top-#{$i} {
+      top: #{$i}px;
+    }
+  }
+}
+
+// Popup Modal
+.popup-modal {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  max-width: 260px;
+  min-width: 160px;
+  padding: 10px;
+
+  // Header
+  .popup-header {
+    border-radius: 4px;
+    height: 32px;
+    padding: 0px 7px;
+
+    span {
+      color: #616568;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 20px;
+    }
+
+    // Background Colors
+    &.blue {
+      background-color: $resources-commitment-blue;
+    }
+
+    &.pink {
+      background-color: $resources-commitment-pink;
+    }
+    &.orange {
+      background-color: orange;
+    }
+  
+    &.teal {
+      background-color: teal;
+    }
+  
+    &.grey {
+      background-color: grey;
+    }
+
+    &.purple {
+      background-color: $resources-commitment-purple;
+    }
+
+    &.light-purple{
+      background-color: $resources-commitment-light-purple;
+    }
+
+    &.light-red {
+      background-color: $resources-commitment-light-red;
+    }
+
+    &.green-pc {
+      background-color: $resources-commitment-green-pc;
+      border-color: $resources-commitment-green-pc-border;
+      border-style : dotted;
+    }
+    &.red-pc {
+      border-color: $resources-commitment-red-pc-border;
+      border-style : dotted;
+    }
+    
+    &.yellow-opp {
+      background-color: $resources-commitment-yellow;
+    }
+
+    &.yellow {
+      background-color: $resources-tab-commitment-yellow;
+    }
+
+    &.green {
+      background-color: $resources-tab-commitment-green;
+    }
+
+    &.grey {
+      background-color: $resources-tab-commitment-grey;
+    }
+
+    &.teal {
+      background-color: $resources-commitment-teal;
+    }
+
+    &.lavender {
+      background-color: $resources-commitment-lavender;
+    }
+
+    &.blue-grey {
+      background-color: $resources-commitment-blue-grey;
+
+      span {
+          color: #fff;
+      }
+    }
+  }
+
+  // Details
+  .popup-details-wrapper {
+    display: flex;
+    flex-direction: column;
+    font-family: "Graphik";
+    gap: 4px;
+    margin-top: 10px;
+
+    .popup-details-row {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 40% 60%;
+      text-align: left;
+
+      span {
+        color: #000;
+        font-family: "Graphik";
+        font-size: 12px;
+        line-height: 20px;
+
+        &.label {
+          color: #616568;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+.calendar {
+  .input-group-prepend {
+    margin-right: -2px;
+  }
+
+  .btn {
+    font-size: 12px;
+    border-color: $grey-medium-dark;
+
+    &.calendar-button {
+      border-radius: 0;
+    }
+  }
+
+  input {
+    cursor: pointer;
+  }
+
+  input:focus {
+    z-index: 1000;
+    outline-offset: -1px;
+    border: none;
+  }
+}
+
+#date-range-calendar {
+  background-color: $grey-lighter;
+  min-width: 195px;
+  padding-left: 0px;
+  padding-right: 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  border-left: none;
+}
+
+#date-picker-icon {
+  background-color: $grey-lighter;
+  border-right: none;
+  cursor: pointer;
+}

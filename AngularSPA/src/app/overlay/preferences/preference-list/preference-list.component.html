@@ -1,0 +1,37 @@
+<div class="preference__likes" cdkScrollable>
+    <div class="row">
+        <div class="col-4 preference__text">{{preferenceTitle}}</div>
+        <div class="col-3 preference__interest">Interest</div>
+        <div class="col-3 preference__nointerest">No Interest</div>
+    </div>    
+        <div class="about__dragzone">
+            <ul class="about__preference-item" 
+                cdkDropList 
+                #preferenceSetOneList="cdkDropList"
+                [cdkDropListConnectedTo]="[preferenceInterestList,preferenceNoInterestList]"
+                [cdkDropListData]="preferenceSet" 
+                (cdkDropListDropped)="drop($event)">
+                <li class="about__preference-list" *ngFor="let item of preferenceSet" cdkDrag>{{item.label}}</li>
+            </ul>            
+            <ul class="about__preference-item" 
+                cdkDropList
+                #preferenceInterestList="cdkDropList"
+                [cdkDropListData]="preferenceInterest"
+                [cdkDropListConnectedTo]="[preferenceSetOneList,preferenceInterestList,preferenceNoInterestList]"                
+                (cdkDropListDropped)="drop($event)"
+                (cdkDropListEntered)="dropEnteredInterest($event)">
+                <li class="about__preference-list" *ngFor="let item of preferenceInterest" cdkDrag>{{item.label}}</li>
+                <div *ngIf="preferenceInterest.length == 0 && showInterestDropArea" class="drag-drop-area">Drag and drop items according to preference</div>
+            </ul>                     
+            <ul class="about__preference-item"
+                cdkDropList 
+                #preferenceNoInterestList="cdkDropList"
+                [cdkDropListConnectedTo]="[preferenceSetOneList,preferenceInterestList,preferenceNoInterestList]"
+                [cdkDropListData]="preferenceNoInterest" 
+                (cdkDropListDropped)="drop($event)"
+                (cdkDropListEntered)="dropEnteredNoInterest($event)">
+                <li class="about__preference-list" *ngFor="let item of preferenceNoInterest" cdkDrag>{{item.label}}</li>
+                <div *ngIf="preferenceNoInterest.length == 0 && showNoInterestDropArea" class="drag-drop-area">Drag and drop items according to preference</div>
+            </ul>                     
+        </div>    
+</div>

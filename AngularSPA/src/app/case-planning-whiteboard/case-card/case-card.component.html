@@ -1,0 +1,278 @@
+<div  class="drag-box"  [ngClass]="project.type"  (contextmenu)="onRightClick()"  [contextMenu]="oneContextMenu"  [contextMenuValue]="project">
+  <mat-card appearance="outlined" class="card-container" *ngIf="project" [ngClass]="project.type">
+    <mat-card-content class="card-content">
+      <!-- Case Detail Wrapper -->
+      <div class="detail-wrapper d-flex">
+        <!-- Client, Office, Probability -->
+        <div class="d-flex align-items-center">
+          <!-- Client Name -->
+          <div class="word-wrap mr-2 width" title="{{ projectNameWithPriority }}">
+            <p class="cp-font cp-font-medium word-wrap">
+              {{ projectNameWithPriority }}
+            </p>
+          </div>
+
+          <!-- Office -->
+          <div class="color-gray ml-auto word-wrap office"
+            title="{{ project.staffingOfficeAbbreviation || project.managingOfficeAbbreviation || project.sharedOfficeAbbreviations}}">
+            <p class="cp-font cp-font-medium word-wrap">
+              {{ project.staffingOfficeAbbreviation || project.managingOfficeAbbreviation ||  project.sharedOfficeAbbreviations }}
+            </p>
+          </div>
+
+          <!-- Case Code or Probability Percentage -->
+          <ng-container *ngIf="project.type !== 'PlanningCard'">
+            <div class="probability-percent color-gray ml-2 mr-2">
+              <p class="cp-font cp-font-medium" title="{{ project.probabilityPercent }}%"
+                *ngIf="!project.oldCaseCode && project.probabilityPercent">
+                {{ project.probabilityPercent }}%
+              </p>
+
+              <!-- If Case Code exists -->
+              <p class="cp-font cp-font-medium word-wrap" title="{{ project.oldCaseCode }}"
+                *ngIf="project.oldCaseCode">
+                {{ project.oldCaseCode }}
+              </p>
+            </div>
+          </ng-container>
+          <!-- Add notes icon here -->
+          <!-- New Note Modal Trigger -->
+          <div class="new-note-wrapper">
+            <button (click)="toggleNoteModal()" [style.color]="project.latestCasePlanningBoardViewNote ? '#cc0000' : '#616568'"
+              [ngbPopover]="project.latestCasePlanningBoardViewNote ? popoverContent : noContentPopover" popoverClass="note-popover-wrapper"
+              triggers="mouseenter:mouseleave" placement="bottom-left bottom-right top-left top-right" container="body">
+              <i class="fas fa-file-alt"></i>
+            </button>
+
+            <!-- Popover content -->
+            <ng-template #popoverContent>
+              <div class="notes">
+                <div class="note-wrapper">
+                  <!-- Author, Date.. -->
+                  <div class="note-wrapper__header">
+                    <i class="fas fa-user"></i>
+                    <p class="header">{{ project.latestCasePlanningBoardViewNote.createdByName }}</p>
+                    <p >{{ project.latestCasePlanningBoardViewNote.lastUpdated | date : "M/d/yy h:mm a" }}</p>
+                  </div>
+
+                  <!-- Content -->
+                  <div class="note-wrapper__content">
+                    <p>{{ project.latestCasePlanningBoardViewNote.note }}</p>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+
+            <!-- No Notes popover -->
+            <ng-template #noContentPopover>
+              <div class="notes">
+                <div class="note-wrapper">
+                  <p class="header">There a 0 notes</p>
+                </div>
+
+                <div class="note-wrapper">
+                  <p>To add a new note, click the note icon.</p>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+
+          <!-- Toggle In Demand -->
+          <div class="include-in-demand-wrapper" *ngIf="showIncludeInDemandCheckbox" [ngbPopover]="includeInDemandPopover"
+            popoverClass="note-popover-wrapper"
+            placement="bottom-left bottom-right top-left top-right" container="body">
+            <app-custom-checkbox 
+              [isChecked]="project.includeInDemand" 
+              (toggleCheckbox)="toggleIncludeInDemand()"
+              title="{{ project.includeInDemand ? 'Included in demand' : 'Include in demand' }}">
+            </app-custom-checkbox>
+          </div>
+        </div>
+
+          
+        <!-- Client, SKU, Probability -->
+
+        <!-- Project Name, SKUs -->
+        <div class="d-flex align-items-center justify-content-between">
+
+          <!-- PEG RF Icon -->
+          <ng-container *ngIf="showPegRFIcon">
+            <img src="assets/img/fence-icon.png" alt="PEG Opportunity Details" class="fence-icon"
+              title="PEG Opportunity Details" (click)="openPegRFPopUpHandler()" />
+          </ng-container>
+
+          <!-- Project Name -->
+          <div class="word-wrap mr-2" title="{{ project.caseName || project.opportunityName }}"
+            *ngIf="project.caseName || project.opportunityName">
+            <p class="cp-font word-wrap color-gray">
+              {{ project.caseName || project.opportunityName }}
+            </p>
+          </div>
+
+          <!-- Case SKUs -->
+          <ng-container>
+            <div class="color-gray ml-auto sku-container">
+              <p class="cp-font cp-font-medium word-wrap cursor-pointer"
+               (click)="openAddTeamSkuFormHandler($event)">
+                <span *ngIf="project.combinedSkuTerm"  class="word-wrap" title="{{ project.combinedSkuTerm }}">
+                  {{ project.combinedSkuTerm }}
+                </span>
+                <span *ngIf="!project.combinedSkuTerm">
+                  <i class="fas fa-user-plus" title="Add PlaceHolder"></i>
+                </span>
+              </p>
+
+              <span *ngIf="project.estimatedTeamSize"  class="cp-font word-wrap" title="{{ project.combinedSkuTerm }}">
+                Cortex : {{ project.estimatedTeamSize }}
+              </span>
+            </div>
+          </ng-container>
+        </div>
+        <!-- Project Name, SKUs -->
+
+        <!-- Only display when expanded -->
+        <ng-container *ngIf="isExpanded">
+          <!-- Start Date -->
+          <div class="d-flex align-items-center">
+            <!-- Label -->
+            <div class="word-wrap color-gray mr-2">
+              <p class="cp-font cp-font-medium word-wrap">Start:</p>
+            </div>
+
+            <!-- Value or Input -->
+            <div class="date-wrapper word-wrap color-gray position-relative" [class.error]="!startDateValidationObj.isValid">
+              <ng-container *ngIf="project.type === 'NewDemand' || project.type === 'ActiveCase';else editProjectTemplate">
+                <p class="cp-font word-wrap" title="{{ project.startDate }}">
+                  {{ project.startDate | date: "dd-MMM-yyy" }}
+                </p>
+              </ng-container>
+
+              <!-- Start Date Picker -->
+              <ng-template #editProjectTemplate>
+                <p>
+                  <input
+                    type="text"
+                    name="cardStartDate"
+                    title="{{ project.startDate }}"
+                    class="cp-font inputBox word-wrap"
+                    [class.color-red]="project.isStartDateUpdatedInBOSS"
+                    autocomplete="off"
+                    [ngModel]="project.startDate"
+                    [bsConfig]="bsConfig"
+                    (ngModelChange)="onDateChange($event, 'startDate')"
+                    bsDatepicker/>
+                </p>
+                <div  class="error-message row" *ngIf="startDateValidationObj.showMessage">
+                  <span>
+                    {{ startDateValidationObj.errorMessage }}
+                  </span>
+                  <i  class="fa fa-times clickable hide-error ml-1" (click)="hideErrorMessage('startDate')"></i>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+          <!-- Start Date -->
+        </ng-container>
+      </div>
+
+      <!-- Expand & Collapse Card -->
+      <div class="expand-collapse-wrapper">
+        <button  class="d-flex align-items-center justify-content-center" (click)="toggleCardExpansion()">
+          <span></span>
+        </button>
+      </div>
+    </mat-card-content>
+
+    <mat-card-content class="card-content mt-2" *ngIf="isExpanded">
+      <!-- Case Detail Wrapper -->
+      <div class="detail-wrapper d-flex">
+        <!-- End Date -->
+        <div class="d-flex align-items-center">
+          <!-- Label -->
+          <div class="word-wrap color-gray mr-2">
+            <p class="cp-font cp-font-medium word-wrap">End:</p>
+          </div>
+
+          <!-- Value or Input -->
+          <div class="date-wrapper word-wrap color-gray position-relative" [class.error]="!endDateValidationObj.isValid">
+            <ng-container *ngIf="project.type === 'NewDemand' || project.type === 'ActiveCase';else editProjectTemplate">
+              <p class="cp-font word-wrap" title="{{ project.endDate }}">
+                {{ project.endDate | date: "dd-MMM-yyy" }}
+              </p>
+            </ng-container>
+
+            <!-- End Date Picker -->
+            <ng-template #editProjectTemplate>
+              <span>
+                <input
+                  type="text"
+                  name="cardEndDate"
+                  title="{{ project.endDate }}"
+                  class="cp-font inputBox word-wrap"
+                  [class.color-red]="project.isEndDateUpdatedInBOSS"
+                  autocomplete="off"
+                  [ngModel]="project.endDate"
+                  [bsConfig]="bsConfig"
+                  (ngModelChange)="onDateChange($event, 'endDate')"
+                  bsDatepicker
+                  #dpStart="bsDatepicker"/>
+              </span>
+              <div class="error-message row" *ngIf="endDateValidationObj.showMessage">
+                <span>
+                  {{ endDateValidationObj.errorMessage }}
+                </span>
+                <i class="fa fa-times clickable hide-error ml-1" (click)="hideErrorMessage('endDate')"></i>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        <!-- End Date -->
+
+        <!-- Case Manager -->
+        <div class="d-flex align-items-center">
+          <!-- Label -->
+          <div class="word-wrap mr-2" title="{{ project.caseManagerName }}">
+            <p class="cp-font cp-font-medium word-wrap color-gray">Mgr:</p>
+          </div>
+
+          <!-- Case Manager -->
+          <div class="word-wrap" title="{{ project.caseManagerName }}">
+            <p class="cp-font word-wrap color-gray">
+              {{ project.caseManagerName ? project.caseManagerName : "" }}
+            </p>
+          </div>
+        </div>
+        <!-- Case Manager -->
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- Right Click Menu -->
+<context-menu #oneContextMenu>
+  <ng-template contextMenuItem [enabled]="false">
+    <h5 class="context-title"
+      style="
+        color: #000;
+        font-family: 'Graphik';
+        font-size: 12px;
+        font-weight: 500;
+        margin: 4px 0px;
+        vertical-align: middle;
+      ">
+      Send to:
+    </h5>
+  </ng-template>
+  <ng-template *ngFor="let option of contextMenuOptions"
+    contextMenuItem (execute)="contextMenuHandler(option, project)">
+    <span class="context-option"
+      style="
+        color: #000;
+        font-family: 'Graphik';
+        font-size: 12px;
+        margin-top: 5px;
+      ">
+      {{ option }}
+    </span>
+  </ng-template>
+</context-menu>

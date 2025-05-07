@@ -1,0 +1,18 @@
+<div class="modal-container">
+  <div class="modal-header">
+    <h2 mat-dialog-title>Share Staffing Plan link</h2>
+    <button class="close-btn" (click)="onNoClick()">
+      <i class="fa-solid fa-x"></i>
+    </button>
+  </div>
+  <mat-dialog-content>
+    <p>Create a link to share the generated staffing plan with your team, any messages you add after sharing will be private</p>
+    <div class="d-flex" *ngIf="showUrl">
+      <input class="p-2 input-url" type="text" disabled [value]="url">
+      <button class="btn" (click)="copyUrlToClipboard()">Copy</button>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions *ngIf="!showUrl">
+    <button  class="btn" (click)="createUrl()"> Create link </button>
+  </mat-dialog-actions>
+</div>

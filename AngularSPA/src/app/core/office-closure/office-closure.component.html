@@ -1,0 +1,104 @@
+<div class="modal-header">
+    <h5 class="modal-title">Bulk Update for Office Closure</h5>
+    <button type="button" class="close popup-drag-not-effected" (click)="closeForm()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body modal-scroll">
+
+     <!-- Validation message -->
+     <div class="text-danger">{{officeClosureValidationMessage}}</div>
+     <p></p>
+
+    <!--------------------Office Dropdown---------------------->
+    <div id="office-closure" class="form-row mb-3">
+        <div class="col-3">
+            <label for="field-resource">Resource Offices</label>
+        </div>
+        <div class="col-7">
+            <app-office-dropdown class="ddl-panel" [officeHierarchy]="officeHierarchy"
+                            [selectedOfficeList]="selectedOfficeList" [title]="'Offices'"
+                            (refreshView)=setOfficesBySelectedValue($event)>
+                        </app-office-dropdown>
+            <div class="error-message" *ngIf="selectedOfficeList?.length === 0">
+                Office is required.
+            </div>
+        </div>
+    </div>
+
+    <!--------------------Service Line Dropdown---------------------->
+    <div id="office-closure" class="form-row mb-3">
+        <div class="col-3">
+            <label for="field-resource">Resource Service Lines</label>
+        </div>
+        <div class="col-7">
+          <app-multi-select-dropdown [dropdownList]="serviceLinesDropdownList" [title]="'Service Lines'"
+          [selectedItems]="selectedServiceLineList"
+          (refreshView)="setServiceLinesBySelectedValue($event)">
+          </app-multi-select-dropdown>
+          <div class="error-message" *ngIf="selectedServiceLineList?.length == 0">
+              Service Line is required.
+          </div>
+        </div>
+    </div>
+
+    <!--------------------Case Dropdown---------------------->
+    <div id="office-closure-case" class="form-row mb-3">
+        <div class="col-3">
+            <label for="field-resource">Case Types</label>
+        </div>
+        <div class="col-7">
+            <app-multi-select-dropdown [dropdownList]="caseTypeDropdownList" [selectedItems]="selectedCaseTypeList"
+                [title]="'Case Types'" (refreshView)=setCaseType($event)>
+            </app-multi-select-dropdown>
+            <div class="error-message" *ngIf="selectedCaseTypeList?.length == 0">
+                Case type is required.
+            </div>
+        </div>
+    </div>
+
+    <!--------------------Date Range---------------------->
+    <div id="office-closure-date" class="form-row mb-3">
+        <div class="col-3">
+            <label for="field-resource">Un-staff date Range</label>
+        </div>
+        <div class="col-7">
+            <div id="officeClosureDateRangePicker" class="input-group mr-3 calendar">
+                <div class="input-group-prepend">
+                    <button type="button" id="btnDateShiftLeft" class="btn btn-secondary"
+                        (click)="shiftDateRange('left')">
+                        <i class="fa fa-chevron-left fa-fw"></i>
+                    </button>
+                </div>
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="date-picker-icon" (click)="dp.toggle()"
+                        [attr.aria-expanded]="dp.isOpen">
+                        <i class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+                <input #dateRange="ngModel" required type="text" id="date-range-calendar" name="daterange" readonly [ngModel]="selectedDateRange"
+                    class="form-control" #dp="bsDaterangepicker" (ngModelChange)="setSelectedDateRange($event)" bsDaterangepicker [bsConfig]="bsConfig">
+
+                <div class="input-group-append">
+                    <button type="button" id="btnDateShiftRight" class="btn btn-secondary"
+                        (click)="shiftDateRange('right')">
+                        <i class="fa fa-chevron-right fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="error-message" *ngIf="dateRange.errors?.['required']">
+                Date is required.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal-footer popup-drag-not-effected">
+    <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+    <button type="button" [ngClass]="loadingCasesData ? 'btn btn-primary disabled' : 'btn btn-primary'" (click)="verifyOfficeClosureAndCases()">Proceed</button>
+</div>

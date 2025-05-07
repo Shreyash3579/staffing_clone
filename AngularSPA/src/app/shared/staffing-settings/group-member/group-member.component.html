@@ -1,0 +1,21 @@
+<div class="group-staff-wrapper d-flex align-items-center justify-content-between">
+  <!-- Staff Profile Pic & Name -->
+  <h3 class="staff-name word-wrap">{{ groupMember.employeeName }}</h3>
+
+  <!-- Staff Position -->
+  <p class="position word-wrap" title="{{groupMember.positionName}}">{{ groupMember.positionName }}</p>
+
+  <!-- Staff Level -->
+  <p class="level">{{ groupMember.currentLevelGrade }}</p>
+
+  <!-- Staff Office -->
+  <p class="office">{{ groupMember.operatingOfficeAbbreviation }}</p>
+
+  <!-- Staff Code -->
+  <p class="employee-code">{{ groupMember.employeeCode }}</p>
+
+  <!-- Delete -->
+  <button (click)="deleteMemberFromGroupHandler()">
+    <i class="fa fa-trash"></i>
+  </button>
+</div>

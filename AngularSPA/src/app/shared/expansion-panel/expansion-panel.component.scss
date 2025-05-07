@@ -1,0 +1,44 @@
+.custom-header .mat-expansion-panel-header {
+    justify-content: space-between;
+    margin: 0 2rem;
+    align-items: center;
+    font-size: 1.1875rem;
+    cursor: unset;
+}
+
+::ng-deep {
+  .custom-header .mat-content {
+    flex-basis: 100% !important;
+    color: #000;
+    margin-top: -8px;
+  }
+}
+
+.custom-header .mat-expansion-panel-header-description {
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 0;
+}
+
+.filter-ml {
+    margin-left: 20px;
+  }
+  
+  .filter-mt {
+    margin-top: 10px;
+  }
+  
+  .mat-expansion-panel {
+    box-sizing: content-box;
+      display: unset;
+      margin: 0;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: margin 225ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+  }
+
+  .mat-expansion-panel-header-title {
+    font-size: 16px;
+  }

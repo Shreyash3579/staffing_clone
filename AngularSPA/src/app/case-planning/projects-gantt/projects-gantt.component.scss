@@ -1,0 +1,28 @@
+#stage {
+    padding: 0px;
+    padding-left: 0px;
+    width: 1800px !important;
+}//TODO:check if needed
+
+.flex-container {
+    display: flex !important;
+    flex-direction: row !important;
+    //width: 1510px !important;
+}
+.flex-item {
+    display: block !important;
+}
+.inflexible {
+    flex: 0 0 auto !important;
+    width: 100px;
+}
+.flexible {
+    flex: 1 0 auto;
+    width: 100px;
+    flex-wrap: wrap;
+    word-wrap: break-word;
+}
+
+.case-planning-view {
+    height: calc(100vh - 145px) !important;
+}

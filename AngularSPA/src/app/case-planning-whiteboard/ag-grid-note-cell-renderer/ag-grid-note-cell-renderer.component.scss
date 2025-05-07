@@ -1,0 +1,12 @@
+.ag-grid-notes-cell-renderer {
+  align-items: center;
+  display: flex;
+  height: 100%;
+
+  .toggle-notes-button {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0px;
+  }
+}

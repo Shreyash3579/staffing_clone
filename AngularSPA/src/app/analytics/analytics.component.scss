@@ -1,0 +1,77 @@
+@import "variables";
+
+#analyticsNav .navbar {
+  height: auto;
+  min-height: 32px;
+  padding: 5px;
+  margin: 1px;
+}
+
+#analyticsNav .nav-item>a {
+  color: $grey-darker;
+  transition: background-color 0.2s, color 0.2s;
+  padding: 5px 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $bain-red;
+    color: #fff !important;
+  }
+}
+
+
+#analyticsNav {
+  .nav-item {
+    a.nav-link {
+      @include parent-append(".active") {
+        color: $bain-red;
+        background-color: none !important;
+
+        &:after {
+          display: none;
+          position: relative;
+          width: 100%;
+          background-color: $bain-red;
+        }
+      }
+
+      &.dropdown-item {
+        background-color: $grey-light;
+        color: black;
+
+        &.active &:active,
+        &:hover {
+          color: $bain-red;
+        }
+      }
+    }
+  }
+}
+
+// Popover content
+::ng-deep .analytics-popover-wrapper {
+  font-family: "Graphik";
+  max-width: max-content;
+
+  .popover-body {
+    color: #121212;
+    padding: 10px 0px;
+    width: auto;
+
+    a {
+      align-items: center;
+      background: #fff;
+      border: none;
+      color: #121212;
+      display: flex;
+      font-size: 14px;
+      outline: none;
+      padding: 5px 20px;
+      width: 100%;
+
+      &:hover {
+        color: #cc0000;
+      }
+    }
+  }
+}

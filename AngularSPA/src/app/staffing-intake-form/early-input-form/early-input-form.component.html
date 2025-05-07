@@ -1,0 +1,76 @@
+<form class="early input">
+    <hr>
+    <div class="title-section">
+      <span class="sect-number weighed">Sect 2 of 3</span>
+      <h2>Early input - case level information</h2>
+    </div>
+    <div class="form-container">
+      <div class="double-input-container">
+        <div class="dropdown">
+          <label>
+            <div class="text-black-12">Geographic location of work {{selectedPlace.length > 0 ? "(" + selectedPlace.length + ")" : ""}} <span class="text-gray-12 font-weight-normal">(country/state/city - where the case team will be physically located, does not have to be a Bain office)</span></div>
+            <shared-places-typeahed
+              [multiple]="true"
+              [selectedPlace]="selectedPlace"
+              (onSearchItemSelect)="onSearchItemSelectHandler($event)"
+          ></shared-places-typeahed>
+          </label>
+        </div>
+        <div class="dropdown" [ngClass]="{'w-40' : selectedClientEngagementModelCodes === '5'}">
+          <label>
+            <div class="text-black-12 ">Client Engagement Model</div>
+            <ng-select name="clientEngagementModel" [items]="clientEngagementModel" [closeOnSelect]="true" [multiple]="false" class="custom-dd not-multiple "
+                       [(ngModel)]="selectedClientEngagementModelObject" bindLabel="name"
+                       placeholder="Select Engagement Model"
+                       (ngModelChange)="onClientEngagementModelChange($event)">
+            </ng-select>
+          </label>
+        </div>
+        <div class="input-control" *ngIf="selectedClientEngagementModelCodes === '5'">
+          <label>
+            <div class="text-black-12 ">Please describe</div>
+            <input [(ngModel)]="selectedClientEngagementModel" name="describeOtherClientEngagementModel" placeholder="Please describe" type="text"
+                   (change)="onDescribeOtherClientEngagementModelChange($event)">
+          </label>
+        </div>
+      </div>
+      <div class="w-100">
+        <label class="w-100">
+          <div maxlength="1000" class="text-black-12">Shareable case description <span class="text-gray-12 font-weight-normal">(will be widely visible)</span></div>
+          <textarea class="w-100" placeholder="Case Description" (input)="onInputChange($event)"
+          (change)="updateCaseDescription($event)">{{caseIntakeDetails?.caseDescription}}</textarea>
+        </label>
+      </div>
+      <div class="double-input-container">
+        <div class="dropdown">
+          <label>
+            <div class="text-black-12">Helpful resource profile {{selectedExpertise.length > 0 ? "(" + selectedExpertise.length + ")" : ""}}</div>
+            <ng-select name="expertise" [items]="combinedExpertiseList" [closeOnSelect]="false" [multiple]="true" class="custom-dd "
+              [(ngModel)]="selectedExpertise" bindLabel="expertiseAreaName"
+              placeholder="Select Helpful resource profile "
+                       addTagText="Create New Expertise"
+                       [addTag]="createNewExpertise"
+              (ngModelChange)="onExpertiseChange($event)">
+            </ng-select>
+          </label>
+        </div>
+        <div class="dropdown">
+          <label>
+            <div class="text-black-12 ">Language {{selectedLanguages.length > 0 ? "(" + selectedLanguages.length + ")" : ""}}</div>
+            <ng-select name="languages" [items]="languages" [closeOnSelect]="false" [multiple]="true" class="custom-dd "
+              [(ngModel)]="selectedLanguages" bindLabel="name"
+              placeholder="Select Languages"
+              (ngModelChange)="onLanguageChange($event)">
+            </ng-select>
+          </label>
+        </div>
+      </div>
+      <div class="w-100">
+        <label class="w-100">
+          <div class="text-black-12">Any required background checks or security restictions? </div>
+            <input class="text-area-takein" [(ngModel)]="selectedbackgroundCheckNotes" name="backgroundCheckNotes" placeholder="Enter notes for any background check or security restrictions" type="text"
+            (change)="onBackgroundCheckModelChange($event)">
+        </label>
+      </div>
+    </div>
+  </form>

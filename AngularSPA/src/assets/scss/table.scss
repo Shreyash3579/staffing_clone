@@ -1,0 +1,84 @@
+@use 'sass:math';
+.scrollable-table-container {
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+.table {
+  border: 1px solid $grey-alt-1;
+  color: $text-dark !important;
+
+  th {
+    vertical-align: middle!important;
+    background-color: $grey-extra-light;
+
+    &.darker{
+      background-color: $grey-lighter;
+    }
+
+    button{
+      background-color: $grey-alt-1!important;
+      color:$grey-darkest!important;
+      padding:8px 16px!important;
+    }
+  }
+
+  td{
+    &.darker{
+      background-color: $grey-extra-light;
+    }
+
+    i.hide-error{
+      display: none;
+      color:$white;
+    }
+
+    &.error{
+      outline:1px solid $bain-red;
+      outline-offset: -1px;
+
+      > div{
+        position: relative;
+        z-index: 2;
+
+        .error-message{
+          text-align: left;
+          position: fixed;
+          transform: translate(-5px, 3px);
+          width:200px;
+          padding:math.div($base-padding, 2);
+          background-color: $bain-red;
+          color: $white;
+        }
+
+        i.hide-error{
+          display: inline;
+          position: absolute;
+          top:5px;
+          right: 5px;
+        }
+      }
+    }
+    &.deletable {
+      position: relative;
+      padding-right: 20px;
+      i.fa-times {
+        display: none;
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      &:hover i.fa-times {
+        display: block;
+      }
+    }
+  }
+
+  input[type=checkbox]{
+    width:20px;
+    height:20px;
+    background-color: $white;
+    border-color: $grey-medium-dark;
+  }
+}

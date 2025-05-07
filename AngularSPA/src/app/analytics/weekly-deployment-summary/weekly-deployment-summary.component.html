@@ -1,0 +1,33 @@
+<!-- <div class= "share-align">
+  <ng-container *ngIf="bshowUrlValue">
+    <a style="display: inline-block;" title="Copy to clipboard" [cdkCopyToClipboard]="taburl" href="javascript:void(0)">
+      <span>
+        <i class="far fa-copy"></i>
+      </span>
+    </a>&nbsp;
+    <a style="display: inline-block;" title="Send Url To Us" href={{hrefurl}}>
+      <span class="feedback-comments-container">
+        <i class="far fa-envelope"></i>
+      </span>
+    </a>
+    &nbsp;
+    <input title={{taburl}} class="share-link form-control"
+      placeholder="Generated Tableau Custom View Url" type="text" id="taburl" value={{taburl}} name="taburl">&nbsp;
+  </ng-container>
+  &nbsp; &nbsp;
+  <Button class="share-action btn btn-primary" (click)="generateUrl()">Share
+    Custom View</Button>
+  &nbsp; &nbsp;
+</div> -->
+<analytics-share-url [url]="url" [envPageName]="envPageName" [serviceInstance] = "tableauServiceInstance" >
+</analytics-share-url>
+<div id="vizContainerWDS" style="display: flex; justify-content: center"></div>
+
+
+<!-- <script type='text/javascript' src='https://tableauqa.bain.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1536px; height: 753px;'>
+    <object class='tableauViz' width='1536' height='753' style='display:none;'>
+    <param name='host_url' value='https%3A%2F%2Ftableauqa.bain.com%2F' /> 
+    <param name='embed_code_version' value='3' /> 
+    <param name='site_root' value='&#47;t&#47;Staffing' />
+    <param name='name' value='WeeklyDeployment_Summary&#47;WeeklyDeployment-Summary-AcrossWeeks&#47;54474@bain.com&#47;BossCustomViewFilters' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='iid' value='5' />
+    </object></div> -->

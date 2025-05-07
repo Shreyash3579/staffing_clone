@@ -1,0 +1,28 @@
+#stage {
+  height: calc(100vh - #{$header-height});
+  overflow-y: auto;
+  padding: $base-padding;
+  //background-color: $grey-extra-light;
+
+  h2{
+    font-size:28px;
+  }
+
+  button.filter {
+    display: block;
+    width: 38px;
+    height: 36px;
+    background-image: url("../../assets/img/filter.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+
+    &:hover {
+      background-image: url("../../assets/img/filter-hover.png");
+    }
+
+    &.active {
+      background-image: url("../../assets/img/filter-active.png");
+    }
+  }
+}

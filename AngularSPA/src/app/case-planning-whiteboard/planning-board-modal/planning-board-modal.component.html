@@ -1,0 +1,35 @@
+<!-- Progress Bar Section-->
+<div class="row">
+  <mat-progress-bar
+      mode="indeterminate"
+      color="warn"
+      *ngIf="showProgressBar">
+  </mat-progress-bar>
+</div>
+
+<div class="container">
+  <!-- <div class="modal-header border-bottom-0"> -->
+    <button type="button" class="close" aria-label="Close" *ngIf="showModalCloseButton">
+      <span aria-hidden="true" (click)="checkPlayGroundIdAndCloseForm()">&times;</span>
+    </button>
+  <!-- </div> -->
+
+    <!-- Modal Body -->
+  <div class="modal-body">
+    <div class="form-row mb-3">
+      <div style="padding-left:30px !important;" class="col-12">
+        <!--Modal Content -->
+        <app-planning-board-stage
+          (showProgressBarEmitter)="showProgressBarHandler($event)"
+          (showModalCloseButtonEmitter)="showModalCloseButtonHandler($event)">
+        </app-planning-board-stage>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Footer -->
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-secondary" (click)="closeForm()">Cancel</button>
+  </div> -->
+
+</div>

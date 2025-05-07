@@ -1,0 +1,48 @@
+.mat-expansion-panel {
+  margin-bottom: 12px;
+  padding-left: 24px;
+  background-color: #FFF;
+  mat-expansion-panel-header {
+    // height: 75px !important;
+      .mat-content {
+        margin-left: 12px !important;
+      }
+
+    }
+  }
+  .sidebar-area{
+  header{
+  color: #3C3C3C;
+  font-size: 16px;
+  margin-bottom: 0.25rem !important;
+  margin-left: 1rem !important;
+  }
+  }
+  ::ng-deep .mat-expansion-indicator::after {
+      margin-right: 12px !important;
+      margin-left: 12px;
+    }
+  .fix {
+  .fix-subtitle {
+    color: gray;
+    font-size: 12px;
+
+  }
+  }
+  .first-div {
+    height: 30px !important;
+  }
+  .first-div-collapsed{
+    height: 75px !important;
+  }
+  .mat-expansion-panel-header:before {
+    content: "\f58e";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 10px;
+    color: #D7D7D7;
+    position: absolute;
+    left: 7px;
+    top: 34%;
+    transform: translateY(-50%);
+   }

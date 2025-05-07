@@ -1,0 +1,29 @@
+@use 'sass:math';
+ul.draggable-buttons {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+
+  li {
+    padding-top: math.div($base-padding, 4);
+    padding-bottom: math.div($base-padding, 4);
+    background-color: $grey-extra-light;
+    color: $grey-darkest;
+    border: 1px solid $grey-medium-dark;
+    border-radius: 5px;
+    width: 65px;
+    text-align: center;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    &:not(:first-child) {
+      margin-left: math.div($base-padding, 2);
+    }
+
+    &:hover {
+      background-color: $grey-light;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<div class="weekly-header-wrapper d-flex">
+  <div *ngFor="let weekData of weeklyArray">
+    <!-- weeks -->
+    <div class="block week">{{ weekData.week | date : "dd-MMM-yyyy" }}</div>
+
+    <!-- dates -->
+    <div class="d-flex">
+      <!-- days -->
+      <div
+        class="block dates"
+        *ngFor="let day of weekData.dates; let dayIndex = index"
+        [class.weekend]="dayIndex == 5 || dayIndex == 6"
+      >
+        {{ day | date : "dd" }}
+      </div>
+    </div>
+  </div>
+</div>

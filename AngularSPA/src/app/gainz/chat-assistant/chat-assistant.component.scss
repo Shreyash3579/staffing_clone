@@ -1,0 +1,162 @@
+.initial-message{
+  width:782px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-bottom: 166px;
+  h1{
+    font-weight: 500;
+    font-size: 48px;
+    color: #000;
+    &.ai-text{
+      color: #284CE0;
+
+    }
+  }
+  .sparkles-header{
+    margin-top: 20px;
+  }
+  .initial-description .options{
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--Text-text-secondary, #4B4949);
+
+  }
+
+}
+.input-container{
+  position: absolute;
+  width: 1438px;
+  bottom: 120px;
+}
+.input-box {
+  position: relative;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 10px 40px;
+  font-size: 16px;
+  border: 1px solid #E0E4E8;
+  border-radius: 4px;
+}
+.chat-bot{
+  padding-left: 60px;
+  padding-right: 60px;
+  position: relative;
+}
+.input-box .sparkles {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+}
+.input-box .ask-button {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 12px;
+}
+.tab-title{
+  font-weight: 500;
+  font-size: 16px;
+  i{
+    padding-top: 10px;
+  }
+  input{
+    padding: 8px;
+    width: 183px;
+    border: none;
+    &:focus-visible{
+      border: none;
+      outline: none;
+    }
+    background-color: transparent;
+    &:hover{
+      cursor: pointer;
+      input{
+        background-color: #E7EAF6;
+      }
+    }
+  }
+  .active{
+    color: #CC0000;
+  }
+}
+::ng-deep {
+  .cdk-focused,
+  .cdk-program-focused {
+    background-color: #fff;
+
+    input {
+      background-color: #E7EAF6;
+    }
+  }
+
+  .mat-mdc-tab-body-wrapper {
+    height: 100%;
+  }
+
+  .mdc-tab {
+    max-width: 200px;
+    padding: 0 !important;
+
+    &:last-child {
+      max-width: 100px;
+      button {
+        color: #284CE0;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .mat-mdc-tab {
+    .mdc-tab-indicator__content--underline {
+      border-color: #CC0000 !important;
+    }
+  }
+
+  .mat-mdc-tab-ripple {
+    display: none;
+  }
+}
+.main-container {
+  ::ng-deep {
+    .mat-mdc-tab.mat-mdc-tab-disabled {
+      opacity: 1;
+    }
+    .mat-mdc-tab.mdc-tab {
+      border-bottom: none !important;
+    }
+    .mat-mdc-tab-labels {
+      border-bottom: 1px solid #c2c9d1 !important;
+    }
+  }
+
+  .add-new-tab {
+    border: none;
+    background-color: transparent;
+  }
+
+  .share-btn {
+    position: fixed;
+    right: 10px;
+    top: 68px;
+    width: 95px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid #284CE0;
+    color: #284CE0;
+    background-color: transparent;
+    z-index: 900;
+  }
+}
+.staffing-plan-table{
+  position: absolute;
+  bottom: 190px;
+  overflow: scroll;
+  max-height: -webkit-fill-available;
+  width: 100%;
+  padding-right: 110px;
+}

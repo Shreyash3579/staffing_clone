@@ -1,0 +1,8 @@
+<div class="menu" [ngStyle]="{'left.px': xCordinateValue, 'top.px': yCordinateValue}">
+    <ul class="list-group" *ngFor="let option of contextMenuOptions">
+        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+        (click)="menuOptionClick(option)">
+            {{option.text}}
+        </li>
+    </ul>
+</div>

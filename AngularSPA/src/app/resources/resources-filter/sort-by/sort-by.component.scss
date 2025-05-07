@@ -1,0 +1,56 @@
+.sort-by-wrapper {
+  display: grid;
+  font-family: "Graphik";
+  gap: 10px;
+
+  #sort-by-label {
+    color: #616568;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    margin: 0px;
+  }
+
+  // Sort container..
+  .sort-by-container {
+    display: grid;
+    gap: 10px;
+  }
+
+  // ..controls
+  .sort-controls-wrapper {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn {
+    background: none;
+    border: none;
+    color: #616568;
+    display: flex;
+    font-size: 12px;
+    font-weight: 500;
+    gap: 5px;
+    line-height: 14px;
+    padding: 5px 10px;
+
+    &:hover {
+      background: #dae5fd;
+    }
+  }
+}
+
+// ..sort row - had to be placed here in order to capture the "cdk-drag-preview" class
+.cdk-drag-preview,
+// ..added this for when dragging in sort menu, outside of group modal - fixes issue where UI breaks when dragging a row
+.sort-row {
+  align-items: center;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(140px, 1fr)) repeat(2, auto);
+
+  .fa-grip-vertical {
+    cursor: grab;
+  }
+}

@@ -1,0 +1,26 @@
+<div *ngIf="!isLoading">
+    <div *ngIf="levelGradeHistoryData?.length > 0; else noData">
+        <span class="level-grade-history-table-title">Level Grade History</span>
+        <table border="1" class="level-grade-history-table">
+            <tr class="thead-grey">
+                <th scope="col">Date</th>
+                <th scope="col">Level Grade</th>
+            </tr>
+            <tr *ngFor="let transaction of levelGradeHistoryData" scope="row">
+                <td>{{getFormattedDate(transaction.effectiveDate)}}</td>
+                <td>
+                    {{transaction.levelGrade}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <ng-template #noData>
+        <div class="empty-grid-message">
+        <span>No Records to show</span>
+    </div>
+    </ng-template>
+</div>
+
+<div *ngIf="isLoading">
+    <span>Loading....</span>
+</div>

@@ -1,0 +1,39 @@
+<div class="col-12 placeholder-wrapper2">
+  <div class="place_holder_user">
+    <!-- Service Line -->
+    <ng-select placeholder="ServiceLine" [(ngModel)]="selectedServiceLine" [multiple]="false" [items]="serviceLines"
+      [hideSelected]="true" (change)="addGuessedPlaceholder($event,'serviceLine')" [clearable]="false"
+      name="selectedServiceLine" bindLabel="serviceLineName" bindValue="serviceLineCode" class="placeholder_userInfo">
+    </ng-select>
+
+    <!-- Office -->
+    <ng-select placeholder="Office" [(ngModel)]="selectedOffice" [multiple]="false" [items]="offices"
+      [hideSelected]="true" (change)="addGuessedPlaceholder($event,'office')" [clearable]="false" name="selectedOffice"
+      class="placeholder_userinfo placeholder_details" bindLabel="officeAbbreviation" bindValue="officeCode">
+    </ng-select>
+
+    <!-- PD -->
+    <ng-select placeholder="PD" [(ngModel)]="selectedLevelGrade" [multiple]="false" [items]="levelGrades"
+      (change)="addGuessedPlaceholder($event,'pdGrade')" [clearable]="false" name="selectedLevelGrade"
+      class="placeholder_details" bindLabel="pdGradeName" bindValue="pdGradeName">
+    </ng-select>
+
+
+    <!-- Position Group -->
+    <ng-select *ngIf="positionGroups.length" placeholder="Position Group" [(ngModel)]="selectedPositionGroup"
+      [multiple]="false" [items]="positionGroups" (change)="addGuessedPlaceholder($event,'positionGroup')"
+      [clearable]="false" name="selectedPositionGroup" bindLabel="positionGroupName" bindValue="positionGroupCode">
+    </ng-select>
+
+    <!-- Ringfence -->
+    <ng-select placeholder="Ringfence" [(ngModel)]="selectedRingfence" [multiple]="false" [items]="ringfences"
+      [hideSelected]="true" (change)="addGuessedPlaceholder($event,'ringfence')" [clearable]="false"
+      name="selectedRingfence" bindLabel="commitmentTypeName" bindValue="commitmentTypeCode"
+      class="placeholder_userInfo">
+    </ng-select>
+
+    <!-- Buttons -->
+    <i class="fas fa-times placeholder_removeicon" (click)="removePlaceHolderEmitter()"></i>
+    <i *ngIf="showConfirmIcon" class="fas fa-check placeholder_confirmicon" (click)="confirmPlaceholder()"></i>
+  </div>
+</div>

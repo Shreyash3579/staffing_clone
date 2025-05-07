@@ -1,0 +1,168 @@
+<!-- stage view -->
+<div class="stage-wrapper">
+  <!-- header -->
+  <div class="top-section-wrapper">
+    <!-- week view header -->
+    <div
+      class="weekly-resource-wrapper"
+    >
+      <div
+        *ngFor="let data of weeksOrDaysToShow; let weekIndex = index; let first = first;let last = last;"
+        class="week-wrapper column-{{ weekIndex + 1 }} right-side"
+      >
+      <span>{{ data | date : "dd-MMM-yyyy" }}</span>
+      <!-- Left Side Pagination Button -->
+      <button
+        id = "align-left"
+        *ngIf="first && showPreviousWeekOrDayButton"
+        class="pagination-cta previous-week-cta"
+        ngbPopover='Show previous week'
+        container="body"
+        triggers="mouseenter:mouseleave"
+        popoverClass="staffing-page-popover"
+        (click)="onPreviousWeekClick()"
+      >
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      
+      <!-- Exapnd Collapse Button -->
+      <button class="expand-collapse-cta"
+        (click)="toggleWeeksExpandCollapse(weekIndex + 1)"
+        ngbPopover="Expand column"
+        triggers="mouseenter:mouseleave"
+        container="body"
+        popoverClass="staffing-page-popover"
+      ></button>
+
+      <!-- Right Side Pagination Button -->
+      <button
+        *ngIf="last && showNextWeekOrDayButton"
+        class="pagination-cta next-week-cta"
+        ngbPopover= 'Show next week' 
+        container="body"
+        triggers="mouseenter:mouseleave"
+        popoverClass="staffing-page-popover"
+        (click)="onNextWeekClick()"
+      >
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
+      </div>
+    </div>
+
+    <!-- applied filters -->
+    <div *ngIf="distinctResourceGroupObj.length > 0" class="applied-filters-wrapper">
+      <span id="bolder">Viewing Group: </span>
+      <span id="bolder-highlighted" *ngIf="selectedViewingGroup">{{ selectedViewingGroup?.name }}</span>
+      <!-- buttons -->
+      <button
+        class="filter-item"
+        *ngFor="let group of distinctResourceGroupObj | slice : 0 : maxVisibleGroups; let groupIndex = index"
+        (click)="getSelectedViewingGroup(group)"
+      >
+        {{ group.name }}
+      </button>
+
+      <!-- dropdown for excess groups -->
+      <div
+        *ngIf="distinctResourceGroupObj && distinctResourceGroupObj.length > maxVisibleGroups"
+        class="btn-group"
+        dropdown
+      >
+        <button
+          aria-controls="viewing-group-picker"
+          dropdownToggle
+          id="button-viewing-group-picker"
+        >
+          <i class="fas fa-ellipsis-h"></i>
+        </button>
+
+        <ul
+          *dropdownMenu
+          role="menu"
+          id="viewing-group-picker"
+          class="dropdown-menu custom-dropdown-menu"
+          aria-labelledby="button-viewing-group-picker"
+        >
+          <li
+            role="menuitem"
+            *ngFor="let group of distinctResourceGroupObj | slice : maxVisibleGroups; let groupIndex = index"
+          >
+            <button
+              class="dropdown-item"
+              (click)="getSelectedViewingGroup(group)"
+            >
+              {{ group.name }}
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="new-stage-area"
+    (contextmenu)="openContextMenu($event)"
+  >
+
+    <!-- right side -->
+    <!-- split area -->
+    <as-split direction="vertical">
+      <!-- top -->
+      <as-split-area>
+        <!-- To-do: Move this supply section to a separate component for better readability and maintainability-->
+        <div
+          class="top-section-wrapper"
+          style="height: 100%"
+        >
+          <app-supply-week-bucket
+            [groupingArray]="weeksOrDaysToShow"
+            (resourceSelectedEmitter)="resourceSelectedEmitterHandler($event)"
+            (resourcesMultipleSelectionDeselectionEmitter) = "resourcesMultipleSelectionDeselectionEmitterHandler($event)"
+            [availableResourcesGroup]="resourceGroups"
+            [selectedViewingGroup]="selectedViewingGroup"
+            [selectedGroupingOption]="selectedGroupingOption"
+            [distinctResourceGroupObj]="distinctResourceGroupObj"
+          ></app-supply-week-bucket>
+        </div>
+        <!-- end | top section -->
+      </as-split-area>
+
+      <as-split-area cdkScrollable>
+        <div
+          class="bottom-section-wrapper"
+          style="height: 100%"
+        >
+          <app-demand
+            [planningCards]="planningCards"
+            [projects]="projects"
+            [groupingArray]="weeksOrDaysToShow"
+            [highlightedResourcesInPlanningCards]="highlightedResourcesInPlanningCards"
+            [selectedGroupingOption]="selectedGroupingOption"
+            (upsertResourceAllocationsToProjectEmitter)="upsertResourceAllocationsToProjectHandler($event)"
+            (mergePlanningCardAndAllocations)="mergePlanningCardAndAllocationsHandler($event)"
+            (removePlaceHolderEmitter)="removePlaceHolderHandler($event)"
+            (openPegRFPopUpEmitter)="openPegRFPopUpHandler($event)"
+            (showQuickPeekDialog)="showQuickPeekDialogHandler($event)"
+            (openCaseRollForm)="openCaseRollPopUpHandler($event)"
+            (openPlaceholderForm)="openPlaceholderFormHandler($event)"
+            (upsertPlaceholderEmitter)="upsertPlaceholderHandler($event)"
+            (updatePlanningCardEmitter)="updatePlanningCardEmitterHandler($event)"
+            (addProjectToUserExceptionHideListEmitter)="addProjectToUserExceptionHideListHandler($event)"
+            (addProjectToUserExceptionShowListEmitter)="addProjectToUserExceptionShowListHandler($event)"
+            (removeProjectFromUserExceptionShowListEmitter)="removeProjectFromUserExceptionShowListHandler($event)"
+            (removePlanningCardEmitter)="removePlanningCardEmitterHandler($event)"
+            (addCardPlaceholderEmitter)="addPlanningCardHandler($event)"
+            (sharePlanningCardEmitter)="sharePlanningCardEmitterHandler($event)"
+            (openOverlappedTeamsForm)="openOverlappedTeamsPopupHandler($event)"    
+          >
+          </app-demand>
+        </div>
+      </as-split-area>
+    </as-split>
+  </div>
+
+  <app-context-menu *ngIf="showContextMenu" [contextMenuOptions]="contextMenuOptions"
+  [xCordinateValue]="xCordinateForContextMenu" [yCordinateValue]="yCordinateForContextMenu"
+  (menuOptionClicked)="contextMenuOptionClickHandler($event)"></app-context-menu>
+</div>

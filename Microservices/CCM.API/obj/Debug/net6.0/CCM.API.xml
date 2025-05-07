@@ -1,0 +1,316 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CCM.API</name>
+    </assembly>
+    <members>
+        <member name="M:CCM.API.Controllers.CaseAttributeController.GetCaseAttributeByLastUpdatedDate(System.Nullable{System.DateTime})">
+            <summary>
+            Get Case Attributes as per Last Updated Date
+            </summary>
+            <param name="lastupdateddate"></param>
+            <returns>Collection of Case Attributes with their respective case attribute code and names</returns>
+        </member>
+        <member name="M:CCM.API.Controllers.CaseController.GetNewDemandCasesByOffices(System.DateTime,System.DateTime,System.String,System.String,System.String)">
+            <summary>
+            Get new demand cases for multiples offices active in specified date range
+            </summary>
+            <param name="startDate"></param>
+            <param name="endDate"></param>
+            <param name="officeCodes">comma separated list of office codes</param>
+            <param name="caseTypeCodes">comma separated list of case type codes</param>
+            <param name="clientCodes">[Optional] comma separated list of client codes</param>
+            <returns>cases that start between the given dates filtered by offices, case types and optional clients</returns>
+        </member>
+        <member name="M:CCM.API.Controllers.CaseController.GetActiveCasesExceptNewDemandsByOffices(System.DateTime,System.DateTime,System.String,System.String,System.String)">
+            <summary>
+            Get active cases other than new demand for multiples offices active in specified date range
+            </summary>
+            <param name="startDate"></param>
+            <param name="endDate"></param>
+            <param name="officeCodes">comma separated list of office codes</param>
+            <param name="caseTypeCodes">comma separated list of case type codes</param>
+            <param name="clientCodes">[Optional] comma separated list of client codes</param>
+            <returns>cases that start or are in progress between the given dates filtered by offices, case types and optional clients</returns>
+        </member>
+        <member name="M:CCM.API.Controllers.CaseController.GetCaseDetailsByCaseCode(System.String)">
+            <summary>
+                Get case details for single case by old case code
+            </summary>
+            <param name="oldCaseCode">old case code of a case</param>
+        </member>
+        <member name="M:CCM.API.Controllers.CaseController.GetCaseDetailsByCaseCodes(System.String)">
+            <summary>
+                Get case details for by multiple old case code
+            </summary>
+        </member>
+        <member name="M:CCM.API.Controllers.CaseController.GetCaseDataBasicByCaseCodes(System.String)">
+            <summary>
+                Get basic case data like case name, client name along with taxonomy data like case primary industry and capability
+            </summary>
+            <param name="oldCaseCodeList">comma separated list of case codes</param>
+        </member>
+        <member name="M:CCM.API.Controllers.CaseController.GetCaseDataByCaseCodes(System.String)">
+            <summary>
+                Get case details for one or more cases
+            </summary>
+            <param name="oldCaseCodes">comma seperated list of one or more case codes</param>
+        </member>
+        <member name="M:CCM.API.Controllers.CaseController.GetCasesForTypeahead(System.String)">
+            <summary>
+                Get cases for typeahead
+            </summary>
+            <param name="searchString">Search cases by case name or case Code or client name</param>
+        </member>
+        <member name="M:CCM.API.Controllers.CaseController.GetCasesEndingBySpecificDate(System.Int32)">
+            <summary>
+                Get cases ending soon
+            </summary>
+            <param name="caseEndsBeforeNumberOfDays"></param>
+        </member>
+        <member name="M:CCM.API.Controllers.CaseController.GetCasesWithTopLevelTaxonomiesByCaseCodes(System.String)">
+            <summary>
+                Get basic case data like case name, client name along with taxonomy data like case primary industry and capability
+            </summary>
+            <param name="oldCaseCodeList">comma separated list of case codes</param>
+        </member>
+        <member name="M:CCM.API.Controllers.CaseController.GetCasesActiveAfterSpecifiedDate(System.Nullable{System.DateTime})">
+            <summary>
+            Get Cases active after specified date
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CCM.API.Controllers.CaseController.GetCasesWithStartOrEndDateUpdatedInCCM(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Gets all the cases whose start date or end date have been updated in CCM
+            </summary>
+            <param name="columnName">Its value can be "startdate" or "enddate"</param>
+            <param name="lastPollDateTime">It's value can be "null" - to get updates after NOW or specific datetime - if we want updates after that time</param>
+            <returns></returns>
+        </member>
+        <member name="M:CCM.API.Controllers.CaseController.GetCaseMasterAndCaseMasterHistoryChangesSinceLastPolled(System.Nullable{System.DateTime})">
+            <summary>
+            Gets all the records from case_master and case_master_history that have been updated in CCM after a specific datetime
+            </summary>
+            <param name="lastPolledDateTime">Pass null to get all the data from case_master and case_master_history</param>
+            <returns></returns>
+        </member>
+        <member name="M:CCM.API.Controllers.CaseController.GetCaseAdditionalInfo(System.Nullable{System.DateTime})">
+            <summary>
+            Get case additional info for analytics
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CCM.API.Controllers.CaseOpportunityMapController.GetCasesForOpportunityConversion(System.Object)">
+            <summary>
+                Get opportunities converted to case
+            </summary>
+            <param name="payload">Comma separated list of Pipeline Id that might converted to case</param>
+            <returns>Case Code, Client Code and Old Case code for opportunity converted to case</returns>
+        </member>
+        <member name="M:CCM.API.Controllers.CaseTypeController.GetCaseTypeList">
+            <summary>
+            Get Case Types from CCM
+            </summary>
+        </member>
+        <member name="M:CCM.API.Controllers.ClientCaseAPIController.GetModifiedCasesAfterLastPolledTime(System.Nullable{System.DateTime})">
+            <summary>
+            Get all the cases modified after a specific date.
+            For e.g. On passing lastPolledTime as 2022-10-25, result will be of all the cases modified on or after 26th Oct 2022.
+            If lastPolledTime is NULL then by default, todays date will be picked.
+            </summary>
+            <param name="lastPolledTime">NULL for today</param>
+            <returns></returns>
+        </member>
+        <member name="M:CCM.API.Controllers.ClientCaseAPIController.GetClientsForTypeahead(System.String)">
+            <summary>
+                Get clients for typeahead
+            </summary>
+            <param name="searchString">Search cases by client name</param>
+            <returns></returns>
+        </member>
+        <member name="M:CCM.API.Controllers.FinAPIController.GetOfficesFlatListByRegionOrCluster(System.Int32)">
+            <summary>
+            Get Flat list of offices within the specified region or cluster
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CCM.API.Controllers.FinAPIController.GetOfficeList">
+            <summary>
+            Get flat lookup list for active offices
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CCM.API.Controllers.FinAPIController.GetOfficeHierarchy">
+            <summary>
+            Get office lookup hierarchy list for active offices
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CCM.API.Controllers.FinAPIController.GetOfficeHierarchyByOffices(System.String)">
+            <summary>
+            Get office hierarchy list for selected Offices
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CCM.API.Controllers.FinAPIController.GetOfficeListFromFinance">
+            <summary>
+            Get all office data from REV to be saved in database for tableau
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CCM.API.Controllers.FinAPIController.GetBillRateByOffices(System.String)">
+            <summary>
+            Get all historical bill rates for selected offices
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CCM.API.Controllers.FinAPIController.GetBillRates">
+            <summary>
+            Get all historical bill rates for worldwide
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CCM.API.Controllers.LookupController.GetCaseAttributeLookupList">
+            <summary>
+            Get Case Attribute for lookup
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Insert(`0,System.String)">
+            <summary>
+                Generic insert
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Insert(`0,System.String,System.Object)">
+            <summary>
+                Generic insert with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Insert(System.Object,System.String)">
+            <summary>
+                Generic insert with dynamic parameters
+            </summary>
+            <returns>A list of the inserted objects</returns>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Insert(System.String,System.Object)">
+            <summary>
+                Generic insert with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.InsertAsync(System.String,System.Object)">
+            <summary>
+                Async insert with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.InsertAsync(System.Object,System.String)">
+            <summary>
+                Async insert with dynamic parameters which return inserted object
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Insert(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic insert in a scope of a transaction
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Insert(System.Data.IDbConnection,`0,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+                Generic insert with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Update(`0,System.String)">
+            <summary>
+                Generic update
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Update(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic update in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Update(`0,System.String,System.Object)">
+            <summary>
+                Generic update with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Update(System.Object,System.String)">
+            <summary>
+                Generic update with dynamic parameters
+            </summary>
+            <returns>A list of the updated objects</returns>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Update(System.Data.IDbConnection,`0,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+                Generic update with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Update(System.String,System.Object)">
+            <summary>
+                Generic Update with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.UpdateAsync(System.String,System.Object)">
+            <summary>
+                Async Update with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.UpdateAsync(System.Object,System.String)">
+            <summary>
+                Async update with dynamic parameters which return updated object
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Delete(`0,System.String)">
+            <summary>
+                Generic delete
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Delete(System.Guid,System.String)">
+            <summary>
+                Generic delete with uniqueidentifier as the id
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Delete(System.String,System.Object)">
+            <summary>
+                Generic delete with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.DeleteAsync(System.String,System.Object)">
+            <summary>
+                Async Delete with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Delete(System.Object,System.String)">
+            <summary>
+                Generic delete with dynamic parameters
+            </summary>
+            <returns>A list of the deleted objects</returns>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,System.Guid,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete with uniqueidentifier as the id, in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,System.Object,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Repository.BaseRepository`1.DeleteAsync(System.Object,System.String)">
+            <summary>
+                Async Delete with dynamic parameters which return deleted object
+            </summary>
+        </member>
+        <member name="M:CCM.API.Core.Services.CaseTypeService.GetCaseTypeList">
+            <summary>
+                This method returns the list of different case type 
+            </summary>
+            <returns>Case types like billiable, non-billable etc</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,106 @@
+@use "sass:math";
+@import "variables";
+
+// Commitments
+.commitment {
+  align-items: center;
+  bottom: 0px;
+  box-sizing: border-box;
+  display: flex;
+  font-family: "Graphik", sans-serif;
+  font-size: 10px;
+  height: 24px;
+  overflow: hidden;
+  padding: 0px 4px;
+  position: absolute;
+  top: 2px;
+
+  // Commitment Title
+  .title .allocation-title {
+    color: #616568;
+    font-size: 10px;
+    font-weight: 500;
+    text-decoration: underline;
+    white-space: nowrap;
+  }
+
+  // Commitment Subheader
+  .subheader {
+    color: #616568;
+    font-size: 10px;
+    white-space: nowrap;
+
+    &.no-allocation {
+      font-weight: 500;
+    }
+  }
+
+  // Setting commitment start & end positions
+  @for $i from 1 through $resources-max-days {
+    &.start-#{$i} {
+      left: calc((#{$i} - 1) * #{$resources-day-width});
+    }
+
+    &.duration-#{$i} {
+      width: calc((#{$i}) * #{$resources-day-width} + 0px);
+      max-width: calc((#{$i}) * #{$resources-day-width} + 0px);
+    }
+  }
+
+  // Background Colors
+  &.commitment-blue {
+    background-color: $resources-commitment-blue;
+  }
+
+  &.commitment-orange {
+    background-color: orange;
+  }
+
+  &.commitment-teal {
+    background-color: teal;
+  }
+
+  &.commitment-grey {
+    background-color: grey;
+  }
+
+  &.commitment-pink {
+    background-color: $resources-commitment-pink;
+  }
+
+  &.commitment-purple {
+    background-color: $resources-commitment-purple;
+  }
+
+  &.commitment-light-red {
+    background-color: $resources-commitment-light-red;
+  }
+
+  &.commitment-yellow {
+    background-color: $resources-tab-commitment-yellow;
+  }
+
+  &.commitment-green {
+    background-color: $resources-tab-commitment-green;
+  }
+
+  &.commitment-grey {
+    background-color: $resources-tab-commitment-grey;
+  }
+
+  &.commitment-teal {
+    background-color: $resources-commitment-teal;
+  }
+
+  &.commitment-lavender {
+    background-color: $resources-commitment-lavender;
+  }
+
+  &.commitment-purple {
+    background-color: $resources-commitment-purple;
+  }
+
+  &.commitment-blue-grey {
+    background-color: $resources-commitment-blue-grey;
+  }
+}

@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Basis.API</name>
+    </assembly>
+    <members>
+        <member name="M:Basis.API.Controllers.CurrencyController.GetCurrencyRatesByEffectiveDate(System.Nullable{System.DateTime})">
+            <summary>
+            get currency rates as per effective from date
+            </summary>
+            <param name="effectiveFromDate">effective from date of currency rate</param>
+            <returns>collective of currency rates with their respective currency codes</returns>
+        </member>
+        <member name="M:Basis.API.Controllers.CurrencyController.GetCurrencyRatesByCurrencyCodesBetweenEffectiveDate(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Get currency rates by vurrency codes between effective dates
+            </summary>
+            <param name="currencyCodes"></param>
+            <param name="currencyRateTypeCodes"></param>
+            <param name="effectiveFromDate"></param>
+            <param name="effectiveToDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Basis.API.Controllers.HolidayController.GetOfficeHolidaysByEmployee(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Get holidays for employee's scheduling office effective from date
+            </summary>
+            <param name="employeeCode"></param>
+            <param name="effectiveFromDate"></param>
+            <param name="effectiveToDate"></param>
+            <returns>Get holidays for employee's scheduling office</returns>
+        </member>
+        <member name="M:Basis.API.Controllers.HolidayController.GetOfficeHolidaysWithinDateRangeByEmployees(System.Object)">
+            <summary>
+            Get Holidays For employees between date range specified
+            </summary>
+            <remarks>
+            Sample Request:
+            {"employeeCodes":"09PTS,31JWE","startDate":"2019-07-12 00:00:00","endDate":"2019-09-15 00:00:00"}
+            or {"employeeCodes":"09PTS,31JWE","startDate":"2019-07-12 00:00:00","endDate": null}
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Basis.API.Controllers.HolidayController.GetHolidays">
+            <summary>
+            Get all holidays
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Basis.API.Controllers.HolidayController.GetOfficeHolidaysWithinDateRangeByOffices(System.Object)">
+            <summary>
+            Get Holidays For employees between date range specified
+            </summary>
+            <remarks>
+            Sample Request:
+            {"officeCodes":110,416","startDate":"2019-07-12 00:00:00","endDate":"2019-09-15 00:00:00"}
+            or {"officeCodes":110,416","startDate":"2019-07-12 00:00:00","endDate": null}
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Basis.API.Controllers.PracticeAffiliationController.GetAllPracticeAffiliation">
+            <summary>
+            Get Practice Affiliations for employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Basis.API.Controllers.PracticeAreaController.GetAllPracticeArea">
+            <summary>
+            get all practice areas from basis db
+            </summary>
+            <returns>collection of distinct practice areas</returns>
+        </member>
+        <member name="M:Basis.API.Controllers.PracticeAreaController.GetAffiliationsByEmployeeCodesAndPracticeAreaCodes(System.Object)">
+            <summary>
+            get affiliations by employee codes and practice areas
+            </summary>
+            <param name="payload">list of employee codes and practice area codes</param>
+            <returns>collection of distinct employee codes with their corresponding practice areas</returns>
+        </member>
+        <member name="M:Basis.API.Controllers.PracticeAreaController.GetAffiliationRoleList">
+            <summary>
+            get all Affiliation Role names from basis db
+            </summary>
+            <returns>collection of distinct practice affiliation roles areas</returns>
+        </member>
+        <member name="M:Basis.API.Controllers.PracticeAreaController.GetIndustryPracticeAreaLookupList">
+            <summary>
+            Get Industry Practice Area for lookup list
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Basis.API.Controllers.PracticeAreaController.GetCapabilityPracticeAreaLookupList">
+            <summary>
+            Get Capability Practice Area for lookup list
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Insert(`0,System.String)">
+            <summary>
+                Generic insert
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Insert(`0,System.String,System.Object)">
+            <summary>
+                Generic insert with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Insert(System.Object,System.String)">
+            <summary>
+                Generic insert with dynamic parameters
+            </summary>
+            <returns>A list of the inserted objects</returns>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Insert(System.String,System.Object)">
+            <summary>
+                Generic insert with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.InsertAsync(System.String,System.Object)">
+            <summary>
+                Async insert with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.InsertAsync(System.Object,System.String)">
+            <summary>
+                Async insert with dynamic parameters which return inserted object
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Insert(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic insert in a scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Insert(System.Data.IDbConnection,`0,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+                Generic insert with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Update(`0,System.String)">
+            <summary>
+                Generic update
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Update(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic update in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Update(`0,System.String,System.Object)">
+            <summary>
+                Generic update with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Update(System.Object,System.String)">
+            <summary>
+                Generic update with dynamic parameters
+            </summary>
+            <returns>A list of the updated objects</returns>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Update(System.Data.IDbConnection,`0,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+                Generic update with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Update(System.String,System.Object)">
+            <summary>
+                Generic Update with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.UpdateAsync(System.String,System.Object)">
+            <summary>
+                Async Update with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.UpdateAsync(System.Object,System.String)">
+            <summary>
+                Async update with dynamic parameters which return updated object
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Delete(`0,System.String)">
+            <summary>
+                Generic delete
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Delete(System.Guid,System.String)">
+            <summary>
+                Generic delete with uniqueidentifier as the id
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Delete(System.String,System.Object)">
+            <summary>
+                Generic delete with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.DeleteAsync(System.String,System.Object)">
+            <summary>
+                Async Delete with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Delete(System.Object,System.String)">
+            <summary>
+                Generic delete with dynamic parameters
+            </summary>
+            <returns>A list of the deleted objects</returns>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,System.Guid,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete with uniqueidentifier as the id, in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,System.Object,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Basis.API.Core.Repository.BaseRepository`1.DeleteAsync(System.Object,System.String)">
+            <summary>
+                Async Delete with dynamic parameters which return deleted object
+            </summary>
+        </member>
+    </members>
+</doc>

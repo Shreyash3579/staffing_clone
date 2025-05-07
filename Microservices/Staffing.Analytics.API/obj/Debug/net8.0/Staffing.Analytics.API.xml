@@ -1,0 +1,372 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Staffing.Analytics.API</name>
+    </assembly>
+    <members>
+        <member name="M:Staffing.Analytics.API.Controllers.AnalyticsController.UpdateCostForResourcesAvailableInFullCapacity(System.Object)">
+            <summary>
+            Updates Analytics Data with cost and other point in time data for employee codes
+            Requires comma separated list of employee Codes
+            </summary>
+            <remarks>
+            Sample Request:
+            { "listEmployeeCodes" : "x,y,z"}
+            </remarks>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.AnalyticsController.CreateAnalyticsReport(System.String)">
+            <summary>
+            Creates Analytics Data for upserted allocations based on allocation Ids
+            Requires comma separated list of allocation Ids
+            </summary>
+            <remarks>
+            Sample Request:
+            "789eecad-145c-4506-881b-be28eb77c05a"
+            </remarks>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.AnalyticsController.UpsertCapacityAnalysisDaily(System.Nullable{System.Boolean},System.Nullable{System.DateTime})">
+            <summary>
+            Upsert Capacity Analysis daily table for tableau reporting
+            </summary>
+            <param name="fullLoad">Truncate and insert all records</param>
+            <param name="loadAfterLastUpdated"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.AnalyticsController.UpdateCapacityAnalysisDailyForChangeInCaseAttribute(System.Nullable{System.DateTime})">
+            <summary>
+            Upsert Capacity Analysis daily table for tableau reporting
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.AnalyticsController.UpsertCapacityAnalysisMonthly(System.Nullable{System.Boolean})">
+            <summary>
+            Upsert Capacity Analysis Monthly table for tableau reporting
+            </summary>
+            <param name="fullLoad">Reload Full dataset</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.AnalyticsController.UpdateAnlayticsDataForUpsertedCommitment(System.String)">
+            <summary>
+            Update Analytics data for commitments created in BOSS
+            </summary>
+            <param name="commitmentIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.AnalyticsController.UpdateAnlayticsDataForUpsertedExternalCommitment(System.Nullable{System.DateTime})">
+            <summary>
+            Update Analytics Data for commitments updated in external system
+            </summary>
+            <param name="updatedAfter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.AnalyticsController.UpdateAnlayticsDataForDeletedCommitment(System.String)">
+            <summary>
+             Update analytics data for commitments deleted from BOSS
+            </summary>
+            <param name="commitmentIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.AnalyticsController.UpsertAvailabilityDataBetweenDateRange(System.Collections.Generic.IEnumerable{Staffing.Analytics.API.Models.AvailabilityDateRange})">
+            <summary>
+            Upsert availability data
+            </summary>
+            <remarks>
+             Sample Request:
+            [
+                {
+                    "employeeCode" : "39209",
+                    "startDate" : "2023-01-01",
+                    "endDate" : "2023-07-01",
+                }
+            ]
+            </remarks>
+            <param name="availabilityData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.AnalyticsController.InsertDailyAvailabilityTillNextYearForAll(System.String)">
+            <summary>
+            used to :-
+            1) create availability data for all active employees that have no data 
+            2) Insert daily avalability data for all active employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.AnalyticsController.UpdateCostAndAvailabilityDataByScheduleId(System.String)">
+            <summary>
+            Trigger this for data correction in schedulemasterdetail and Resource availability table by scheduleId
+            USE ONLY WHEN we want to correect production data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.AnalyticsController.GetResourcesAllocationAndAvailability(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.String,System.Int16,System.Int32)">
+            <summary>
+            Get all allocation and availability within the selected start date and end date or after last updated date.
+            </summary>
+            <param name="startDate">End Date is mandatory with Start Date</param>
+            <param name="endDate">Start Date is mandatory with End Date</param>
+            <param name="lastUpdatedFrom">last Updated From is a manadatory field</param>
+            <param name="lastUpdatedTo">last Updated To is a manadatory field</param>
+            <param name="action">
+            Send 'upserted' to get inserted and updated records
+            Send 'deleted' to get deleted records
+            </param> 
+            <param name="sourceTable">used to fetch data of particular source table i.e SMD or RA</param>
+            <param name="pageNumber">tells the system to skip x number of values</param>
+            <param name="pageSize">tells the system about the page number whose data needs to be fetched</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.CasePlanningMetricsController.GetAvailabilityMetricsByFilterValues(System.Object)">
+            <summary>
+            This API end point is used to fetch the case plannig supply metrics based on filter values
+            </summary>
+            <param name="payload"></param>
+            <remarks>
+            Sample Request:
+            {
+                "startDate":"2022-11-14","endDate":"2022-12-23","officeCodes":"110",
+                "levelGrades":"A0,A1,A2,A3,A4,A5,A6,A7,M1,M2,M3,M4,M5,M6,M7,M8,M9","staffingTags":"SL0001",
+                "availabilityIncludes":"transition","groupBy":"office,levelGrade,dateFirstAvailable","sortBy":"dateFirstAvailable",
+                "affiliationRoleCodes":"","certificates":"","languages":"","practiceAreaCodes":"","employeeStatuses":"",
+                "positionCodes":"","staffableAsTypeCodes":""
+            }
+            </remarks>
+            <returns>
+                1) Weekly aggregate of availablity for 6 weeks
+                2) Employee details with "First day available" within each week for all available employees
+            </returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.CasePlanningMetricsController.GetAvailabilityMetricsForPlaygroundById(System.String)">
+            <summary>
+            This API end point is used to fetch the case plannig supply metrics from cache for the playground session 
+            Used to fetch metrics data when users join a playground session
+            </summary>
+            <param name="playgroundId">Id of the session</param>
+            <returns>
+                1) Weekly aggregate of availablity for 6 weeks from playground cache
+                2) Employee details with "First day available" within each week for all available employees from playground cache
+            </returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.CasePlanningMetricsController.UpsertAndGetCasePlanningBoardMetricsPlaygroundCacheForUpsertedAllocations(System.Object)">
+            <summary>
+            This API end point is used to recalculate the metrics in cache when allocations are upserted/deleted during playground session
+            </summary>
+            <param name="payload"></param>
+            <remarks>
+            Sample Request:
+            {
+                "playgroundId":"","employeeCode":"39209","newStartDate":"2022-10-22","newEndDate": "2022-11-22", "newAllocation":100,
+                "oldStartDate":NULL,"oldEndDate": NULL, "oldAllocation": NULL, "isOpportunity": false,
+                "lastUpdatedBy":"60074"
+            }
+            </remarks>
+            <returns>
+                1) Weekly aggregate of availablity for 6 weeks from playground cache
+                2) Employee details with "First day available" within each week for all available employees from playground cache
+            </returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.CasePlanningMetricsController.DeleteCasePlanningBoardMetricsPlaygroundById(System.Guid,System.String)">
+            <summary>
+            Delete Playground Cache data by Id. Deletes all the saved filters, cache data and the playground session
+            </summary>
+            <param name="playgroundId"></param>
+            <param name="lastUpdatedBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.CasePlanningMetricsController.GetCasePlanningBoardPlaygroundFiltersByPlaygroundId(System.String)">
+            <summary>
+            This API end point is used to fetch the case plannig supply metrics Filters that were used to create the playground session
+            Used when user joins a session
+            </summary>
+            <param name="playgroundId">Id of the session</param>
+            <returns>Supply And Demand Filters that were used to create the playground session</returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Controllers.CasePlanningMetricsPlaygroundController.CreateCasePlanningBoardMetricsPlayground(System.Object)">
+             <summary>
+             This API end point is used to create API end point using the demand and supply filters of the user.
+             </summary>
+             <param name="payload"></param>
+             <returns></returns>
+             <remarks>
+             Sample Request:
+                    {
+               "demandFilterCriteriaObj":{
+                  "startDate":"2022-11-14",
+                  "endDate":"2022-12-23",
+                  "officeCodes":"115,110,210,512,215,536",
+                  "caseTypeCodes":"1",
+                  "demandTypes":"Opportunity,NewDemand,PlanningCards",
+                  "opportunityStatusTypeCodes":"0,1,2,3,4,5",
+                  "caseAttributeNames":"",
+                  "minOpportunityProbability":0,
+                  "industryPracticeAreaCodes":"",
+                  "capabilityPracticeAreaCodes":"",
+                  "caseExceptionShowList":"",
+                  "caseExceptionHideList":"",
+                  "opportunityExceptionShowList":"",
+                  "opportunityExceptionHideList":"",
+                  "caseAllocationsSortBy":"",
+                  "planningCardsSortOrder":"",
+                  "caseOppSortOrder":""
+               },
+               "supplyFilterCriteriaObj":{
+                  "startDate":"2022-11-14",
+                  "endDate":"2022-12-23",
+                  "officeCodes":"115",
+                  "levelGrades":"",
+                  "staffingTags":"SL0001",
+                  "availabilityIncludes":"",
+                  "groupBy":"serviceLine",
+                  "sortBy":"levelGrade",
+                  "affiliationRoleCodes":"",
+                  "certificates":"",
+                  "languages":"",
+                  "practiceAreaCodes":"",
+                  "employeeStatuses":"",
+                  "positionCodes":"",
+                  "staffableAsTypeCodes":""
+               },
+               "lastUpdatedBy":"45088"
+            }
+             </remarks>
+        </member>
+        <member name="T:Staffing.Analytics.API.Core.Helpers.SkipConcurrentExecutionAttribute">
+            <summary>
+            Attribute to skip a job execution if the same job is already running.
+            Mostly taken from: http://discuss.hangfire.io/t/job-reentrancy-avoidance-proposal/607
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Insert(`0,System.String)">
+            <summary>
+                Generic insert
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Insert(`0,System.String,System.Object)">
+            <summary>
+                Generic insert with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Insert(System.Object,System.String)">
+            <summary>
+                Generic insert with dynamic parameters
+            </summary>
+            <returns>A list of the inserted objects</returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Insert(System.String,System.Object)">
+            <summary>
+                Generic insert with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.InsertAsync(System.String,System.Object)">
+            <summary>
+                Async insert with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.InsertAsync(System.Object,System.String)">
+            <summary>
+                Async insert with dynamic parameters which return inserted object
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Insert(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic insert in a scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Insert(System.Data.IDbConnection,`0,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+                Generic insert with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Update(`0,System.String)">
+            <summary>
+                Generic update
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Update(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic update in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Update(`0,System.String,System.Object)">
+            <summary>
+                Generic update with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Update(System.Object,System.String)">
+            <summary>
+                Generic update with dynamic parameters
+            </summary>
+            <returns>A list of the updated objects</returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Update(System.Data.IDbConnection,`0,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+                Generic update with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Update(System.String,System.Object)">
+            <summary>
+                Generic Update with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.UpdateAsync(System.String,System.Object)">
+            <summary>
+                Async Update with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.UpdateAsync(System.Object,System.String)">
+            <summary>
+                Async update with dynamic parameters which return updated object
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Delete(`0,System.String)">
+            <summary>
+                Generic delete
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Delete(System.Guid,System.String)">
+            <summary>
+                Generic delete with uniqueidentifier as the id
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Delete(System.String,System.Object)">
+            <summary>
+                Generic delete with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.DeleteAsync(System.String,System.Object)">
+            <summary>
+                Async Delete with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Delete(System.Object,System.String)">
+            <summary>
+                Generic delete with dynamic parameters
+            </summary>
+            <returns>A list of the deleted objects</returns>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,System.Guid,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete with uniqueidentifier as the id, in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,System.Object,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.Repository.BaseRepository`1.DeleteAsync(System.Object,System.String)">
+            <summary>
+                Async Delete with dynamic parameters which return deleted object
+            </summary>
+        </member>
+        <member name="M:Staffing.Analytics.API.Core.AnalyticsService.AnalyticsService.VerifyProcessedAllocationExistsInDB(System.Collections.Generic.IEnumerable{Staffing.Analytics.API.Models.ResourceAllocation})">
+            Occassionaly when allocation is created and deleted in quick succession, 
+            Analytics API takes time to process the allocation that results in delete request complete first and then processed data for analytics gets inserted in DB
+            We want to avoid this situation and hence reverifying if allocation exists in DB before saving the analytics data.
+        </member>
+    </members>
+</doc>

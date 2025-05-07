@@ -1,0 +1,175 @@
+header {
+    font-family: "Graphik", sans-serif !important;
+    width: 100%;
+    z-index: 1;
+  
+    // Left Side
+    .left-side-bar {
+      background-color: #ecf0ff;
+      left: 0px;
+      max-width: 100%;
+      min-width: 670px;
+      position: sticky;
+  
+      &.collapsed {
+        max-width: 144px;
+        min-width: 143px;
+      }
+  
+      .left-side-wrapper {
+        align-items: center;
+        display: grid;
+        gap: 10px;
+        height: 100%;
+        padding: 0px 10px;
+        grid-template-columns: repeat(3, 100px) 27px 26px repeat(2, 65px) 38px 47px;
+        position: relative;
+  
+        .header-column {
+          .resource-header-button {
+            background: none;
+            border: none;
+            color: #616568;
+            font-size: 10px;
+            font-weight: 500;
+            outline: none;
+            padding: 0px;
+            position: relative;
+            text-align: left;
+            text-transform: capitalize;
+            width: fit-content;
+  
+            &:hover {
+              color: #284ce0;
+            }
+  
+            // filters treeview
+            .case-planning-treeview-dropdown {
+              background-color: #fff;
+              border: 1px solid #e0e4e8;
+              border-radius: 4px;
+              display: none;
+              left: 0px;
+              padding: 10px;
+              position: absolute;
+  
+              &::ng-deep {
+                .treeview-header .form-control {
+                  align-items: center;
+                  border: 1px solid #284ce0;
+                  border-radius: 2px;
+                  color: #121212;
+                  display: flex;
+                  font-size: 12px;
+                  height: 32px;
+                  padding: 0px 10px;
+  
+                  &::placeholder {
+                    color: #616568;
+                  }
+                }
+  
+                .treeview-container {
+                  color: #121212;
+                  font-size: 12px;
+                  line-height: 16px;
+                  padding-right: 0px;
+                  width: 100% !important;
+  
+                  .row-item {
+                    margin-bottom: 10px;
+  
+                    // input[type=checkbox] {
+                    //   visibility: hidden;
+                    // }
+  
+                    // input[type=checkbox]+label::before {
+                    //   align-items: center;
+                    //   background-color: #fff;
+                    //   border: 1px solid #e0e4e8;
+                    //   content: "";
+                    //   cursor: pointer;
+                    //   display: flex;
+                    //   height: 16px;
+                    //   justify-content: center;
+                    //   left: 0px;
+                    //   margin: 0px 4px 0px 0px;
+                    //   padding: 0px;
+                    //   position: absolute;
+                    //   width: 16px;
+                    // }
+  
+                    // input[type=checkbox]:checked+label::before {
+                    //   color: #284ce0;
+                    //   content: "\2713";
+                    //   font-size: 12px;
+                    //   font-weight: bold;
+                    // }
+                  }
+                }
+              }
+            }
+  
+            &.resource-header-filter:hover .case-planning-treeview-dropdown {
+              display: block;
+            }
+          }
+  
+          .action-buttons-wrapper {
+            display: flex;
+            gap: 5px;
+          }
+        }
+      }
+    }
+  
+    // Right Side Wrapper
+    .right-side-wrapper {
+      background: #ecf0ff;
+  
+      // Week Cells
+      .week-cell {
+        color: #616568;
+        font-size: 10px;
+        font-weight: 500;
+        height: 24px;
+        line-height: 16px;
+  
+        // width: calc(32px * 7);
+        @for $i from 1 through 7 {
+          &.week-length-#{$i} {
+            width: calc(28px * #{$i});
+          }
+        }
+      }
+  
+      .dates-row {
+        height: 100%;
+  
+        // Dates Cells
+        .dates-cell {
+          color: #616568;
+          font-size: 10px;
+          font-weight: 400;
+          height: 56px;
+          line-height: 10px;
+          width: 28px;
+  
+          &.weekend {
+            background-color: #dae5fd;
+          }
+        }
+      }
+    }
+  
+    // Bordered Cell
+    .bordered-cell {
+      border: solid #c2c9d1;
+      border-width: 1px 1px 1px 0px;
+      box-sizing: border-box;
+  
+      &.show {
+        border-width: 0px 1px 1px 0px !important;
+      }
+    }
+  }

@@ -1,0 +1,73 @@
+.resource-overlay {
+  overflow: auto;
+
+  .detail-container {
+      .resource-details {
+          background: #f7f9ff;
+          border-radius: 4px;
+          height: auto;
+          padding: 20px;
+          width: 100%;
+      }
+
+      // grid design
+      .grid-level {
+          display: grid;
+          grid-template-rows: 1fr;
+          grid-template-columns: repeat(3, minmax(100px, 1fr));
+      }
+
+      .profile-pic-cont {
+          border-radius: 50%;
+          height: 150px;
+          overflow: hidden;
+          width: 150px;
+      }
+
+      img.profile-pic {
+          height: 100%;
+          width: 100%;
+      }
+
+      .name {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-size: 12px;
+          padding-right: 12px;
+      }
+
+      .circle {
+          font-size: 6px;
+          margin-right: 6px;
+          position: relative;
+          top: -2px;
+      }
+
+      .card {
+          align-items: center;
+          background: #4a8cff;
+          border-radius: 4px;
+          flex-direction: row;
+          min-height: 45px;
+          font-size: 12px;
+          padding: 5px 10px;
+          color: #fff;
+          gap: 10px;
+
+          .vertical-bars {
+              width: 22px;
+              height: 17px;
+
+              @media only screen and (max-width: 1200px) {
+                  width: 19px;
+              }
+          }
+      }
+  }
+
+  .tab-content {
+      /*margin-top: 26px; */
+      background-color: white !important;
+  }
+}

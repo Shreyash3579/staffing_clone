@@ -1,0 +1,24 @@
+<div
+  class="loading-spinner-wrapper"
+  *ngIf="!hasInfoLoaded && !hasCommitmentLoaded"
+>
+  <mat-spinner [diameter]="50"></mat-spinner>
+</div>
+
+<section *ngIf="hasInfoLoaded && hasCommitmentLoaded && weeklyArray.length">
+  <div class="resource-staffing-popup">
+    <div class="resource-staffing-popup-wrapper">
+      <app-resource-header></app-resource-header>
+      <app-weekly-header [weeklyArray]="weeklyArray"></app-weekly-header>
+    </div>
+
+    <div class="resource-staffing-popup-wrapper" style="flex: 1;">
+      <app-resource-body [employee]="employeeDetails.employee"></app-resource-body>
+      <app-commitments-body
+        id="commitments-body"
+        [weeklyArray]="weeklyArray"
+        [commitments]="employeeCommitments"
+      ></app-commitments-body>
+    </div>
+  </div>
+</section>

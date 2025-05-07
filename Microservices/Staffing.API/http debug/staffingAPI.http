@@ -1,0 +1,26 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@baseUrl = https://localhost:44355/api
+
+###
+#get Notes for Profile Page
+POST {{baseUrl}}/note/getResourceViewNotes
+#Authorization: <Add Bearer Toekn Here>
+Content-Type: application/json
+
+{
+    "employeeCodes": "53471",
+    "loggedInUser": "58749",
+    "noteTypeCode": "RP"
+}
+
+###
+#get Notes for Profile Page
+POST {{baseUrl}}/note/getResourceViewNotes
+#Authorization: <Add Bearer Toekn Here>
+Content-Type: application/json
+
+{
+    "employeeCodes": "29ACH",
+    "loggedInUser": "39209",
+    "noteTypeCode": "RA"
+}

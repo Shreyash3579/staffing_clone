@@ -1,0 +1,58 @@
+// Switch CTA
+.switch-cta {
+    display: inline-block;
+    height: 26px;
+    margin: 0px;
+    position: relative;
+    width: 167px;
+  
+    input {
+      height: 0px;
+      opacity: 0;
+      width: 0px;
+    }
+  
+    input:checked+.slider::before {
+      transform: translateX(80px);
+    }
+  
+    .slider {
+      background-color: #f5f5f5;
+      border-radius: 4px;
+      bottom: 0px;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      height: 26px;
+      left: 0px;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+  
+      div {
+        align-items: center;
+        color: #616568;
+        display: flex;
+        font-family: "Graphik";
+        font-size: 10px;
+        font-weight: 500;
+        justify-content: center;
+        width: 100%;
+        z-index: 1;
+      }
+  
+      &::before {
+        background-color: #fff;
+        border-radius: 2px;
+        bottom: 3px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        content: "";
+        height: 20px;
+        left: 4px;
+        position: absolute;
+        transition: all 0.2s ease-in-out;
+        width: 79px;
+      }
+    }
+  }
+  

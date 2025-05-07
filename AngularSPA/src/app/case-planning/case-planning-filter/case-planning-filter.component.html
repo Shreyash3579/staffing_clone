@@ -1,0 +1,112 @@
+<div class="col-xl-12 col-12 pb-1 mb-1 px-0 d-flex justify-content-between flex-wrap">
+    <div class="left-part d-flex align-items-center">
+        <!--Search Box-->
+        <div class="searchbar">
+            <div class="searchbar__input">
+                <input type="text" id="projectSearchInput" [(ngModel)]="asyncProjectString" [ngModelOptions]="{standalone:true}"
+                    autocomplete="off" [typeahead]="searchedProjects" [typeaheadItemTemplate]="customProjectTypeAheadTemplate"
+                    typeaheadOptionField="projectName" [typeaheadOptionsLimit]="100" [typeaheadMinLength]="3"
+                    (typeaheadOnSelect)="typeaheadOnSelect($event)" [typeaheadScrollable]="true"
+                    [typeaheadOptionsInScrollableView]="10" (focus)="projectSearchInputFocus = true"
+                    (blur)="projectSearchInputFocus = false; (null)" class="form-control border-right-0"
+                    placeholder="Search Case/Opps..." typeaheadGroupField="projectStatus" #projectSearchInput>
+                <div class="input-group-append" [class.input-group-append-focus]="projectSearchInputFocus">
+                    <span class="input-group-text search-icon-width">
+                        <i *ngIf="asyncProjectString.length < 3" class="fa fa-search fa-fw"></i>
+                        <i *ngIf="asyncProjectString.length > 2" class="fa fa-times" (click)="clearSearchBox()"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!--End Search Box-->
+
+        <!--Filter Icon-->
+        <div>
+            <div class="filter-icon ml-1 filtericon" (click)="toggleFiltersSection()">
+                <!-- <svg-advanced-filter-icon></svg-advanced-filter-icon> -->
+                <svg width="2.5rem" height="3.25rem" viewBox="0 0 49 49" fill="none">
+                    <g filter="url(#filter0_d)">
+                    <rect x="5" y="3" width="39" height="39" rx="5" fill="white"/>
+                    <rect x="5.5" y="3.5" width="38" height="38" rx="4.5" stroke="#DADADA"/>
+                    </g>
+                    <path d="M38.25 11H10.75L21.75 23.6133V32.3333L27.25 35V23.6133L38.25 11Z" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <filter id="filter0_d" x="0" y="0" width="49" height="49" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="2.5"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                    </filter>
+                    </defs>
+                </svg> 
+            </div>
+        </div>
+        <!--End Filter Icon-->
+    </div>
+
+    <div class="center-part flex-row d-flex justify-content-center align-items-center">
+    </div>
+
+    <div class="right-part d-flex flex-row justify-content-end align-items-end">
+
+        <!--WhiteBoard Button-->
+        <ng-container *appFeaturesAccess = "feature.casePlanningBoard">
+            <button class="btn custom-btn" (click)="openCasePlanningWhiteboard()">
+                <span class="popup-icon">
+                    <span class="custom-btn-text">Planning Board</span>
+                    <img src="assets/img/hyperlink_image.png" class="hyperlink-btn">
+                </span>
+            </button>
+        </ng-container>
+        <!--End WhiteBoard Button-->
+
+    </div>
+
+</div>
+
+<ng-template #customProjectTypeAheadTemplate let-model="item" let-index="index">
+    <div *ngIf="model.oldCaseCode" id="{{ 'demandProjectSearch-option-' + index }}" class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="color-box case"></div>
+                <div class="col-7 padding-left x10 textWrap"
+                    title="{{model.oldCaseCode + ' - ' + model.clientName + ' - ' + model.caseName}}">
+                    {{model.oldCaseCode + ' - ' + model.clientName + ' - ' + model.caseName}}
+                </div>
+                <div class="col-1">
+                    {{model.managingOfficeAbbreviation}}
+                </div>
+                <div class="col-3">
+                    {{model.startDate | date:'dd-MMM-yyyy'}} - {{model.endDate | date:'dd-MMM-yyyy'}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="model.pipelineId" id="{{ 'demandProjectSearch-option-' + index }}" class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="color-box opportunity"></div>
+                <div *ngIf="model.probabilityPercent" class="col-7 padding-left x10 textWrap"
+                    title="{{model.probabilityPercent + ' - ' + model.clientName + ' - ' + model.opportunityName}}">
+                    {{model.probabilityPercent + '% - ' + model.clientName + ' - ' + model.opportunityName}}
+                </div>
+                <div *ngIf="!model.probabilityPercent" class="col-7 padding-left x10 textWrap"
+                    title="{{model.clientName + ' - ' + model.opportunityName}}">
+                    {{model.clientName + ' - ' + model.opportunityName}}
+                </div>
+                <div class="col-1">
+                    {{model.managingOfficeAbbreviation}}
+                </div>
+                <div class="col-3" *ngIf="model.endDate">
+                    {{model.startDate | date:'dd-MMM-yyyy'}} - {{model.endDate | date:'dd-MMM-yyyy'}}
+                </div>
+                <div class="col-3" *ngIf="!model.endDate">
+                    {{model.startDate | date:'dd-MMM-yyyy'}}
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

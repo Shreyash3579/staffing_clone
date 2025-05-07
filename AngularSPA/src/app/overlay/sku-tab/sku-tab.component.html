@@ -1,0 +1,38 @@
+<!--Tab Header-->
+<ng-template tabHeading>
+    <div class="tab-name" *ngIf="!tabEditing" (dblclick)="enableTabDateEdit($event)">{{skuTab.effectiveDate}}</div>
+    
+    <input type="text" placeholder="dd-mmm-yyyy" *ngIf="tabEditing" 
+      [ngModel]="skuEffectiveDate" [bsConfig]="bsConfig" 
+      (ngModelChange)="onSkuDateChange($event)" (blur)="disableTabDateEdit($event)"
+      bsDatepicker #skuDateEl >
+    <i class="fa fa-times" (click)="deleteSkuTabHandler()" *ngIf="!tabEditing"></i>
+
+</ng-template>
+<!--END Tab Header-->
+
+<!--Tab Content-->
+<div class="row validation" *ngIf="!validationObj.isValid">
+    <label>{{validationObj.errorMessage}}</label>
+</div>
+
+<div class="d-flex">
+  <div class="tags">
+    <div *ngFor="let skuCaseTerm of skuCaseTerms" class="tag">
+      {{skuCaseTerm.name}} <i class="fa fa-times" (click)="deleteSkuTerm(skuCaseTerm)"></i>
+    </div>
+    
+    <i class="fa fa-plus" (click)="enableSkuTermEdit()" *ngIf="!termEditing"></i>
+
+    <input type="text" class="form-control"  *ngIf="termEditing" name="skuTerm" autofocus
+        [(ngModel)]="asyncSkuString" 
+        [typeahead]="skuTermList"
+        typeaheadOptionField="name"
+        [typeaheadOptionsLimit]="10"
+        [typeaheadMinLength]="1"
+        (typeaheadOnSelect)="addSkuTerm($event)"
+        placeholder="Search...">
+    
+  </div>
+</div>
+  <!--End Tab Content-->

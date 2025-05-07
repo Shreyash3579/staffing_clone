@@ -1,0 +1,27 @@
+<app-notification-banner [sharedNotes] = "sharedNotes" [caseIntakeAlerts] = "caseIntakeAlerts"></app-notification-banner>
+<div class="filter-wrapper filter-option-end">
+    <div class="option-details">   
+      <div>
+        <app-grouping 
+          [selectedValue]="selectedSecurityType"
+          [option1]="{value: 'U', text: 'User'}"
+          [option2]="{value: 'UG', text: 'User Group'}"
+          (onToggleClicked)="onSecurityTypeToggled($event)"
+        ></app-grouping>
+      </div>
+      <div class="input-search">
+        <input id="searchBossUser" type="text" placeholder="Search in list" class="search-input"
+          (keyup)="searchFilterHandler($event)" #staffingUsersSearchInput autocomplete="off">
+        <i class="fa fa-search"></i>
+      </div>
+      <button id="btnAddUser" class="btn btn-user" (click)="onAddButtonClick()">{{selectedSecurityType === 'U' ? 'Add a New User' : 'Add a new Group'}}</button>
+      <button id="btnAddPracticeRingfence" class="btn btn-ringfence" (click)="openAddRingfenceModal()">Manage Ringfence</button>
+    </div>
+  </div>
+
+<div [ngClass]="selectedSecurityType === 'U'  ? 'd-inline' : 'd-none' ">
+    <app-users-list #usersListComponent (deleteUserEmitter)="openDeleteConfirmationPopUp($event)"></app-users-list>
+</div>
+<div [ngClass]="selectedSecurityType === 'UG'  ? 'd-inline' : 'd-none'">
+    <app-groups-list #groupsListComponent (deleteGroupEmitter)="openDeleteConfirmationPopUp($event)"></app-groups-list>
+</div>

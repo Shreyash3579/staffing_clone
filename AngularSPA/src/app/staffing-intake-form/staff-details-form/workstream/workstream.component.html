@@ -1,0 +1,120 @@
+<div *ngFor="let workstream of workstreamDetails; let i = index trackBy: trackByWorkstream">
+  <div class="workstream-header d-flex align-items-center justify-content-between">
+    <!-- Centered Workstream Name -->
+    <div class="workstream-title text-center flex-grow-1">
+        <label class="m-0 p-0">
+            <input (click)="$event.stopPropagation();" (keydown)="handleKeydown($event)" 
+                   class="name-workstream-default text-center" 
+                   [title]="workstream.name" 
+                   type="text" 
+                   (input)="adjustWidth($event)"
+                   value="{{workstream.name}}" 
+                   (change)="onWorkstreamNameChange($event, workstream)">
+        </label>
+    </div>
+
+    <!-- Right-Aligned Buttons -->
+    <div class="action-buttons d-flex">
+        <button class="remove-btn add-new-rol mr-2" (click)="addNewRole(i)">
+            <i class="fa fa-plus"></i> Add new role
+        </button>
+        <button class="remove-btn remove-btn__from-workstream" (click)="removeWorkstream(workstream);">
+            <i class="fa-solid fa-trash"></i>
+        </button>
+    </div>
+  </div>
+
+  <!-- <ng-container *ngIf="workstream.roles.length == 0">
+    <section  class="w-100 mb-4 mt-3">
+      <ng-container>
+        <p class="text-black"><strong>Select a team size from cortex or input your own</strong></p>
+        <div class="d-flex">
+          <div class="d-flex flex-column pr-5">
+            <span class="text-black-12">Cortex SKU:</span>
+            <button class="sku-btn blue-border" (click)="standardSku(1, 2, i)">M + 2</button>
+          </div>
+          <div class="d-flex flex-column">
+          <span class="text-black-12">
+            Configure your own SKU
+          </span>
+            <ng-select
+              [items]="mockSkuOptions"
+              [multiple]="true"
+              [closeOnSelect]="false"
+              bindLabel="skuName"
+              [(ngModel)]="selectedSKU[i]"
+              class="custom-dd sku-select"
+              (input)="searchedValueSkuChange($event, i)"
+              placeholder="Select SKU"
+              (ngModelChange)="onSKUChange(i)">
+              <ng-template ng-header-tmp>
+                <div class="header-content p-3 mb-3">
+                  <span class="text-black"><i>Select a SKU </i></span>
+                  <button *ngFor="let size of [2,3,4,5,6]"
+                          type="button"
+                          class="sku-btn small-btn gray-border mx-1"
+                          (click)="standardSku(1, size, i)">
+                    M + {{size}}
+                  </button>
+                </div>
+                <div class="p-3 pt-0" *ngIf="selectedSKU[i]?.length > 0">
+                  <div class="d-flex justify-content-between">
+                    <span class="text-black">Current selection ({{ selectedSKU[i].length }})</span>
+                    <button class="text-btn" (click)="customSku(i)">Apply SKU</button>
+                  </div>
+                  <div>
+                    {{ selectedSKULabel[i] }}
+                  </div>
+                </div>
+                <span class="pl-3" *ngIf="searchedValueSku[i]?.length >= 2">Search results</span>
+              </ng-template>
+              <ng-template ng-option-tmp let-item="item" let-index="index">
+                <ng-container>
+                  <div class="option-content pl-3" (click)="addToskuSelection(item, i)" *ngIf="searchedValueSku[i]?.length >= 2">
+                    <span>{{ item.skuName }}</span>
+                  </div>
+                </ng-container>
+              </ng-template>
+              <ng-template ng-footer-tmp>
+                <div class="footer-content p-2">
+                  <div class="inf-label p-1">
+                    <i class="fa-regular fa-circle-question"></i>
+                    <span > You can edit your SKU after selecting one from the list</span>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template ng-multi-label-tmp let-items="items">
+                <div class="selected-items d-flex">
+      <span *ngFor="let item of items;" class=" ng-value mr-1">
+        <button type="button" class="ng-value-icon left">x</button>
+        <span class=" ng-value-label">{{ item.skuName }}</span>
+
+      </span>
+
+                </div>
+              </ng-template>
+            </ng-select>
+          </div>
+        </div>
+      </ng-container>
+    </section>
+  </ng-container> -->
+  <div class="d-flex roles-container flex-wrap">
+    <app-role-form
+      (changeLeadEmitter)="changeLeadHandler($event)"
+      (openedPanels)="counterOpenedPanels($event)"
+      (roleDetailsChangeEmitter)="roleDetailsChangeHandler($event)"
+      (updateRoleEmitter)="onRoleChangeHandler($event)"
+      (deleteRoleEmitter)="deleteRoleFromWorkstream($event)"
+      *ngFor="let role of workstream.roles; let j = index; trackBy: trackByRole"
+      [combinedExpertiseList]="combinedExpertiseList"
+      [currentState]="currentState"
+      [languages]=languages
+      [positionGroups]=positionGroups
+      [renderInWorkstream]="true"
+      [role]="role"
+      [serviceLine]=" serviceLine"
+      [workstream]="workstream"
+    ></app-role-form>
+  </div>
+</div>

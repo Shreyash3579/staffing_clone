@@ -1,0 +1,48 @@
+// .margin {
+//     margin-left: 7px;
+// }
+
+.custom-btn {
+    color: #000;
+    background: #fff;    
+    box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.30);
+    border-radius: 4px;
+    padding-top: 2px;
+    padding-bottom: 0px;
+    text-align: left;
+    position: relative;
+    bottom: 15%;
+    margin-right: 10px;
+    border: 1px solid #C4C4C4;
+    //box-sizing: border-box;
+
+    .custom-btn-text {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 500;
+        color: #666666;
+        padding-right: 6px;
+    }
+    .hyperlink-btn {
+        width: 10px;
+        height: 10px;
+        margin-bottom: 4px;
+        margin-left: 1px;
+    }
+}
+.searchbar__input {
+    margin-right: 10px;
+    max-width: 400px;
+    margin-left: -2px;
+    min-width: 200px;
+    width: 100%;
+    background-color: #fff;
+    outline: none;
+    display: flex;
+    //border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 4px;
+}

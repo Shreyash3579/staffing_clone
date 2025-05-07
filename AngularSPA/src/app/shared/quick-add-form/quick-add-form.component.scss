@@ -1,0 +1,25 @@
+:host ::ng-deep {
+  .modal-flex-height {
+    overflow-y: scroll;
+    min-height: 40vh;
+    max-height: 60vh;
+    overflow: auto;
+  }
+}
+
+:host ::ng-deep {
+  .typeahead-input {
+    margin-left: 18px;
+    border: aliceblue;
+    outline-width: 0;
+
+    &:focus {
+      border: aliceblue;
+      outline-width: 0;
+    }
+  }
+}
+
+#quick-add-surge {
+  margin-top: 38px;
+}

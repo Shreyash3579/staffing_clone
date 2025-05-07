@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Staffing.Coveo.API.props" />
+</Project>

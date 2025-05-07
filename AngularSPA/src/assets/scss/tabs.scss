@@ -1,0 +1,104 @@
+@use "sass:math";
+.tabs .tab-bar {
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            width: 135px;
+            max-width: 135px;
+            display: inline-block;
+            position: relative;
+            padding: 0;
+            font-size: 14px;
+            border: 1px solid $grey-alt-1;
+            border-radius: 4px 4px 0 0;
+            top: 1px;
+            cursor: pointer;
+
+            &:not(:first-child) {
+                &:not(.active) {
+                    border-left: 0;
+                }
+                position: relative;
+                left: -1px;
+            }
+
+            &.active {
+                background-color: $grey-extra-light;
+                border-bottom-color: $grey-extra-light;
+                // z-index: 1000;
+            }
+
+            input {
+                @extend .form-control;
+                @extend .form-control-sm;
+                width: 110px;
+                border: 1px solid $black;
+                margin: math.div($base-padding, 8) math.div($base-padding, 2);
+                //display: none;
+                height: 26px;
+            }
+
+            .fa-times {
+                display: none;
+                position: absolute;
+                right: 16px !important;
+            }
+
+            &:hover:not(.add) {
+                i.fa-times {
+                    display: block;
+                }
+            }
+
+            a {
+                color: #495057;
+
+                &.nav-link {
+                    display: initial;
+                    border: 0;
+                    padding: 0 !important;
+                }
+            }
+
+            .tab-name {
+                padding: math.div($base-padding, 4) $base-padding;
+            }
+
+            &.add {
+                width: auto;
+                cursor: pointer;
+                color: $grey-medium !important;
+                padding-left: math.div($base-padding, 2);
+                padding-right: math.div($base-padding, 2);
+                transition: color 0.5s;
+
+                .tab-name {
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+                &:hover {
+                    color: $grey-dark;
+                }
+            }
+
+            i.fa-times {
+                color: $grey-dark;
+                position: absolute;
+                cursor: pointer;
+                right: math.div($base-padding, 4);
+                top: 50%;
+                transform: translateY(-50%);
+                //display: none;
+            }
+        }
+    }
+    .tab-content {
+        display: block;
+        padding: 10px 8px;
+        border: 1px solid $grey-alt-1;
+        background-color: $grey-extra-light;
+    }
+}

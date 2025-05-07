@@ -1,0 +1,1567 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Staffing.API</name>
+    </assembly>
+    <members>
+        <member name="M:Staffing.API.Controllers.AuditTrailController.GetAuditTrailForCaseOrOpportunity(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+                Get Audit trail for case or opportunity
+            </summary>
+            <param name="oldCaseCode">Case code to get audit trail for case</param>
+            <param name="pipelineId">Id to get audit trail for opportunity</param>
+            <param name="limit"></param>
+            <param name="offset"></param>
+            <returns>Audit history</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.AuditTrailController.GetAuditTrailForEmployee(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+                Get Audit trail for an employee
+            </summary>
+            <param name="employeeCode"></param>
+            <param name="limit"></param>
+            <param name="offset"></param>
+            <returns>Audit history</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.AzureSearchQueryLogController.InsertAzureSearchQueryLog(Staffing.API.Models.AzureSearchQueryLog)">
+            <summary>
+            Update Query log from the azure search query
+            </summary>
+            <param name="azureSearchQueryLog"></param>
+            <returns></returns>
+            <remarks>
+            Sample Request:
+               {
+                  "oldCaseCodes":"Q6BK",
+                  "employeeCodes":"39980",
+                  "lastUpdated":"2020-04-09",
+                  "startDate":"2020-04-01",
+                  "endDate":"2020-04-17",
+                  "caseRoleCodes": null
+               }
+            </remarks>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseOppChangesController.GetPipelineChangesByPipelineId(System.String)">
+            <summary>
+                 Get pipeline changes saved in staffing db id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseOppChangesController.GetPipelineChangesByPipelineIds(System.Object)">
+            <summary>
+                 Get pipeline changes saved in staffing db by ids
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseOppChangesController.UpsertPipelineChanges(Staffing.API.Models.CaseOppChanges)">
+            <summary>
+                Update pipeline changes in staffing db
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseOppChangesController.GetPipelineChangesByDateRange(System.DateTime,System.Nullable{System.DateTime})">
+            <summary>
+                 Get pipeline changes based on date range
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseOppChangesController.GetCaseChangesByOldCaseCode(System.String)">
+            <summary>
+                 Get Case changes saved in staffing db
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseOppChangesController.GetCaseChangesByOldCaseCodes(System.Object)">
+            <summary>
+                 Get Case changes saved in staffing db
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseOppChangesController.GetCaseTeamSizeByOldCaseCodes(System.String)">
+            <summary>
+                 Get case teamsize with oldCaseCode
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseOppChangesController.UpsertCaseChanges(Staffing.API.Models.CaseOppChanges)">
+            <summary>
+                Update Case changes in staffing db
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseOppChangesController.GetCaseChangesByDateRange(System.DateTime,System.Nullable{System.DateTime})">
+            <summary>
+                 Get case changes based on date range
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseOppChangesController.GetCaseOppChangesByOfficesAndDateRange(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+                 Get case changes based on office codes and date range
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CasePlanningController.GetCasePlanningBoardDataByProjectIds(System.Object)">
+            <summary>
+            Get Case Planning Board data by comma separated values of oldCases, pipelineIds, and planningCardIds
+            Sample Request:
+            {
+                "oldCaseCodes": "H3NB,P6VR,Y3PW",
+                "pipelineIds": "46D856E3-09AE-4A36-B210-958D0A173E88,CAE8B3E4-6BA4-4A86-9EB1-5FCAE952FDB4",
+                "planningCardIds": "EBE451F2-8F56-EB11-A9AD-005056ACCF10"
+            }
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CasePlanningController.UpsertCasePlanningBoardData(System.Object)">
+            <summary>
+            Used to insert/update case planning board data
+            </summary>
+            <param name="payload">IEnumerable of casePlanningBoard model data</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CasePlanningController.DeleteCasePlanningBoardByIds(System.String,System.String)">
+            <summary>
+            Use this API end point to delete case planning board data by passing the comma separated Ids
+            that need to be deleted with ecode as lastUpdatedBy
+            </summary>
+            <param name="planningBoardIds"></param>
+            <param name="lastUpdatedBy"></param>
+            <remarks>
+            Sample Request:
+            {
+               planningBoardIds = '5DF132A8-7077-EC11-A9B9-B327A03BC311,0257B8C2-8A73-EC11-A9B9-B327A03BC311',
+               lastUpdatedBy = '45088'
+            }
+            </remarks>
+        </member>
+        <member name="M:Staffing.API.Controllers.CasePlanningStaffableTeamsController.GetCasePlanningBoardStaffableTeamsByOfficesAndDateRange(System.Object)">
+            <summary>
+            Get Staffable Team data by comma separated values of officeCodes, startWeek, and endWeek
+            Sample Request:
+            {
+                "officeCodes": "110,115",
+                "startWeek": "2023-01-09",
+                "endWeek": "2023-02-13"
+            }
+            Only pass startWeek if you want to get staffable team for one week. Otherwise pass endWeek with startWeek only if you need the Staffable Teams for more than one week
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CasePlanningStaffableTeamsController.UpsertCasePlanningBoardStaffableTeams(System.Collections.Generic.IEnumerable{Staffing.API.Models.CasePlanningBoardStaffableTeams})">
+            <summary>
+            Used to insert/update case planning board staffable teams data
+            </summary>
+            <param name="staffableTeamsToUpsert">IEnumerable of staffableTeams model data</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseRollController.GetCasesOnRollByCaseCodes(System.Object)">
+            <summary>
+                Get Cases on Roll by Old Case codes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseRollController.UpsertCaseRolls(System.Object)">
+            <summary>
+            Upserts data for when case roll(s) are updated
+            </summary>
+            <remarks>
+            Sample Request:
+            [{
+                "rolledFromOldCaseCode": "K7FC",
+                "rolledFromOldCaseCode": null
+                "currentCaseEndDate": "10-Jul-2020",
+                "expectedCaseEndDate": "30-Jul-2020",
+                "lastUpdatedBy": "39209"
+            }]
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseRollController.DeleteCaseRollsByIds(System.String,System.String)">
+            <summary>
+            Deletes the case roll(s) and their corresponding data from caseRollScheduleMaster mapping table
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "caseRollIds": "",
+                "lastUpdatedBy" : "39209"
+            }
+            </remarks>
+            <param name="caseRollIds"></param>
+            <param name="lastUpdatedBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseRollController.DeleteRolledAllocationsByScheduleIds(System.String,System.String)">
+            <summary>
+            Deletes rolled allocations from caseRollScheduleMaster
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "rolledScheduleIds": "",
+                "lastUpdatedBy" : "39209"
+            }
+            </remarks>
+            <param name="rolledScheduleIds"></param>
+            <param name="lastUpdatedBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseRollController.GetAllUnprocessedCasesOnCaseRoll">
+            <summary>
+                Get All Cases that were rolled and have not been processed from CCM.
+                Needed for Polling purpose
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseRollController.DeleteRolledAllocationsMappingFromCaseRollTracking(System.String,System.String)">
+            <summary>
+            Deletes rolled allocations mapping (in caseRollScheduleMaster) for rolled Case Codes so that these allocations are not affected by changes in CCM case dates
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "rolledCaseCodes": "",
+                "lastUpdatedBy" : "39209"
+            }
+            </remarks>
+            <param name="lastUpdatedBy"></param>
+            <param name="rolledCaseCodes">pass case codes for deletions on these case codes else pass NULL for all</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CaseRollController.GetCaseRollsRecentlyProcessedInStaffing(System.DateTime)">
+            <summary>
+                Get all rolled cases that have been recently processed in Staffing. This will be used in correction job to convert billable to pre-post
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CommitmentController.GetCommitmentTypeLookupList(System.Nullable{System.Boolean})">
+            <summary>
+                Get commitments for lookup
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Controllers.CommitmentController.GetResourceCommitments(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+                Get Resource Commitments
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Controllers.CommitmentController.GetResourceCommitmentsByIds(System.String)">
+            <summary>
+                Get Resource Commitments By Ids
+               Input: comma spearated list of commitment ids
+            </summary>
+            <remarks>
+                Sample Request:
+                "abc, xyz, pqrs"
+            </remarks>
+        </member>
+        <member name="M:Staffing.API.Controllers.CommitmentController.GetResourceCommitmentsByDeletedIds(System.String)">
+            <summary>
+                Get Resource Commitments before it was deleted By Ids
+               Input: comma spearated list of commitment ids
+            </summary>
+            <remarks>
+                Sample Request:
+                "abc, xyz, pqrs"
+            </remarks>
+        </member>
+        <member name="M:Staffing.API.Controllers.CommitmentController.GetResourceCommitmentsWithinDateRangeByEmployees(System.Object)">
+            <summary>
+                Get Commitments by commitment type saved in staffing For employees between specified date range.
+                Pass null in dates for getting all future commitments. Pass null in commitmentTypeCode for getting all commitments
+            </summary>
+            <remarks>
+                Sample Request:
+                {"employeeCodes":"09PTS,31JWE","startDate":"2019-07-12 00:00:00","endDate":"2019-09-15 00:00:00",
+                "commitmentTypeCode":"P"}
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CommitmentController.GetCommitmentsWithinDateRange(System.DateTime,System.DateTime)">
+            <summary>
+                Get commitments within date range specified for supplied commitments
+            </summary>
+            <param name="startDate"></param>
+            <param name="endDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CommitmentController.DeleteResourceCommitmentById(System.Guid,System.String)">
+            <summary>
+                Delete Resource Commitment
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Controllers.CommitmentController.DeleteResourceCommitmentByIds(System.String,System.String)">
+            <summary>
+            Delete commitment(s) by Commitment Id(s)
+            </summary>
+            <param name="commitmentIds">comma separated list of commitment Ids</param>
+            <param name="lastUpdatedBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CommitmentController.GetCommitmentBySelectedValues(System.Object)">
+            <summary>
+            Gets commitment data on the basis of the parameters sent
+            </summary>
+            <remarks>
+                Sample Request:
+                {
+                "commitmentTypeCodes": "L",
+                "employeeCodes": "07GRP",
+                "startDate": "07-Jul-2019",
+                "endDate": "10-Jul-2019",
+                "ringfenceCommitmentsOnly": null
+                }
+            </remarks>
+            <param name="payload">Json representing Resources Commitments</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CommitmentController.GetRingfenceCommitmentBySelectedValues(System.Object)">
+            <summary>
+            Gets employee ringfence data on the basis of the parameters sent
+            </summary>
+            <remarks>
+                Sample Request:
+                {
+                "employeeCodes": "07GRP",
+                "startDate": "07-Jan-2025",
+                "endDate": "10-Jul-2025",
+                }
+            </remarks>
+            <param name="payload">Json representing Resources Commitments</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CommitmentController.UpsertResourcesCommitments(System.Object)">
+            <summary>
+                Insert Resources Commitments
+            </summary>
+            <remarks>
+                Sample Request:
+                {
+                "employeeCode": "07GRP",
+                "commitmentType": {
+                "commitmentTypeCode": "L",
+                "commitmentTypeName": "Leave",
+                "precedence": 2
+                },
+                "startDate": "07-Jul-2019",
+                "endDate": "10-Jul-2019",
+                "notes": "Testing",
+                "lastUpdatedBy": "37995"
+                },
+                {
+                "employeeCode": "39209",
+                "commitmentType": {
+                "commitmentTypeCode": "T",
+                "commitmentTypeName": "Training",
+                "precedence": 2
+                },
+                "startDate": "07-Jul-2019",
+                "endDate": "10-Jul-2019",
+                "notes": "Testing",
+                "lastUpdatedBy": "37995"
+                }
+            </remarks>
+            <param name="payload">Json representing Resources Commitments</param>
+            <response code="201">Returns saved commitments</response>
+            <response code="400">If Payload is null or wrongly formatted</response>
+        </member>
+        <member name="M:Staffing.API.Controllers.CommitmentController.CheckPegRingfenceAllocationAndInsertDownDayCommitments(System.Object)">
+            <summary>
+                Check PEG Ringfence Allocations and Upsert Down Day Commitments after Case Allocation End Date.
+            </summary>
+            <remarks>
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CommitmentController.IsSTACommitmentCreated(System.Object)">
+            <summary>
+                Returns IsSTACommitmentCreated based on oldCaseCode, opportunityId or planningCardId
+            </summary>
+            <remarks>
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CommitmentController.GetProjectSTACommitmentDetails(System.Object)">
+            <summary>
+                Returns ProjectSTACommitmentDetails based on oldCaseCode, opportunityId or planningCardId
+            </summary>
+            <remarks>
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CommitmentController.DeleteCaseOppCommitments(Staffing.API.Models.CommitmentBatch)">
+            <summary>
+            Delete CaseOppcCommitment(s) by Commitment Id(s)
+            </summary>
+            <param name="commitmentIds">comma separated list of commitment Ids</param>
+            <param name="lastUpdatedBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CortexSkuController.GetCortexSkuMappings">
+            <summary>
+                Get Cortex SKU Mappings with BOSS SKU
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Controllers.CortexSkuController.UpsertPlaceholderCreatedForCortexSKUs(System.Object)">
+            <summary>
+                Update isPlaceholderCreatedFromCortex data
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Controllers.CortexSkuController.GetOppCortexPlaceholderInfoByPipelineIds(System.Object)">
+            <summary>
+                 Get id placeholder created from cortex sku for an opp
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.CortexSkuController.UpsertPricingSKU(System.Object)">
+            <summary>
+                Update sku data from pricing configurator
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Controllers.CortexSkuController.UpsertPricingSkuDataLog(System.Object)">
+            <summary>
+                Update pricing sku data for logging purpose
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Staffing.API.Controllers.EmailUtilityDataLogController.GetEmailUtilityDataLogsByDateAndEmailType(System.DateTime,System.String)" -->
+        <member name="M:Staffing.API.Controllers.EmailUtilityDataLogController.UpsertEmailUtilityDataLog(System.Collections.Generic.IEnumerable{Staffing.API.Models.EmailUtilityData})">
+            <summary>
+            Save employees who successfully recieved email
+            </summary>
+            <returns>Saved employee(s)</returns>
+            <param name="emailUtilityData">array of one or more Email Utility Data</param>
+            <response code="201">Returns Added employee(s)</response>
+            <response code="400">If Payload is null or wrongly formatted</response>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Staffing.API.Controllers.EmployeeStaffingInfoController.GetResourceStaffingResponsibleByEmployeeCodes(System.String)" -->
+        <member name="M:Staffing.API.Controllers.EmployeeStaffingInfoController.UpsertResourceStaffingResponsible(System.Collections.Generic.IEnumerable{Staffing.API.Models.StaffingResponsible})">
+            <summary>
+            Inserts/Update changs to the staffing responsible data for an employee
+            </summary>
+            <remarks>
+            Sample Request:
+            [{
+            "id": null,
+            "employeeCode": "39209",
+            "responsibleForStaffing" : "39212",
+            "lastUpdatedBy" : "39202",
+            }]
+            </remarks>
+            <param name="staffingResponsibleData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.EmployeeStaffingPreferenceController.GetEmployeeStaffingPreferences(System.Object)">
+            <summary>
+                 Get Employee staffing preferences saved in staffing system
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.EmployeeStaffingPreferenceController.UpsertEmployeeStaffingPreferences(System.Collections.Generic.IEnumerable{Staffing.API.Models.EmployeeStaffingPreferences})">
+            <summary>
+            Upsert employee staffing preferences
+            </summary>
+            <param name="employeeStaffingPreferences"></param>
+            <returns></returns>
+            <remarks>
+            Sample Request:
+            [
+                {
+                    "employeeCode":"37995",
+                    "preferenceTypeCode": "I",
+                    "staffingPreference":"4",
+                    "priority":1,
+                    "lastUpdatedBy":"39209"
+                },
+                {
+                    "employeeCode":"37995",
+                    "preferenceTypeCode": "I",
+                    "staffingPreference":"16",
+                    "priority":2,
+                    "lastUpdatedBy":"39209"
+                },
+                {
+                    "employeeCode":"37995",
+                    "preferenceTypeCode": "I",
+                    "staffingPreference":"3",
+                    "priority":3,
+                    "lastUpdatedBy":"39209"
+                },
+                {
+                    "employeeCode":"37995",
+                    "preferenceTypeCode": "C",
+                    "staffingPreference":"11",
+                    "priority":1,
+                    "lastUpdatedBy":"39209"
+                },
+                 {
+                    "employeeCode":"37995",
+                    "preferenceTypeCode": "C",
+                    "staffingPreference":"10",
+                    "priority":2,
+                    "lastUpdatedBy":"39209"         
+                }
+            ]
+            </remarks>
+        </member>
+        <member name="M:Staffing.API.Controllers.LookupController.GetInvestmentCategoryLookupList">
+            <summary>
+                Get Investments for lookup
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Controllers.LookupController.GetCaseRoleTypeLookupList">
+            <summary>
+                Get Investments for lookup
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Controllers.LookupController.GetStaffableAsTypeLookupList">
+            <summary>
+            Get staffable as look up data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.LookupController.GetCasePlanningBoardBucketLookupListByEmployee(System.String)">
+            <summary>
+            Get Case Planning Board Bucket for lookup
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.LookupController.GetStaffingPreferences">
+            <summary>
+            Get all  preferences options look up data for PD, Priorites, Travel etc.
+            </summary>
+            <returns>staffing preferences object containing data about employee's staffing needs </returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.LookupController.GetSKUTermList">
+            <summary>
+            Get all SKU Terms
+            </summary>
+            <returns>Saved Master Data for SKU Terms</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.LookupController.GetCommitmentTypeLookupList(System.Nullable{System.Boolean})">
+            <summary>
+             Get commitments for lookup
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Controllers.LookupController.GetCommitmentTypeReasonLookupList">
+            <summary>
+             Get commitments for lookup
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Controllers.NoteController.GetResourceViewNotes(System.Object)">
+            <summary>
+            Get all Resource Profile or Resource Tab/Allocation Notes created for resource(s) that are private to or shared with the loggedInuser
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+            <remarks>
+            Sample Request:
+                 {
+                    "employeeCodes":"37995",
+                    "loggedInUser": "39209", (gets all notes that are private to this user or shared with this user)
+                    "noteTypeCode":"RP"   ("RP" for resource profile notes or "RA" for resource notes created for allocations)      
+                }
+            </remarks>
+        </member>
+        <member name="M:Staffing.API.Controllers.NoteController.GetCaseViewNotes(System.Object)">
+            <summary>
+            Get all Case/Opportunity/Planning Card Notes that are private to or shared with the loggedInuser
+            
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+            <remarks>
+            Sample Request:
+                 {
+                    "oldCaseCodes":"U8UB",
+                    "pipelineIds": null,
+                    "planningCardIds": null,
+                    "loggedInUser": "39209" (gets all notes that are private to this user or shared with this user)
+                }
+            </remarks>
+        </member>
+        <member name="M:Staffing.API.Controllers.NoteController.GetLatestCaseViewNotes(System.Object)">
+            <summary>
+            Get latest created/updated Case/Opportunity/Planning Card Notes that are private to or shared with the loggedInuser
+            
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+            <remarks>
+            Sample Request:
+                 {
+                    "oldCaseCodes":"U8UB",
+                    "pipelineIds": null,
+                    "planningCardIds": null,
+                    "loggedInUser": "39209" (gets all notes that are private to this user or shared with this user)
+                }
+            </remarks>
+        </member>
+        <member name="M:Staffing.API.Controllers.NoteController.GetResourceNotesByLastUpdatedDate(System.DateTime,System.String)">
+            <summary>
+            Get all Resource Notes modified after the selecetd date
+            </summary>
+            <param name="lastupdatedAfter"></param>
+            <param name="noteTypeCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.NotificationController.GetUserNotifications(System.String,System.String)">
+            <summary>
+                Get user notification for selected Offices in Demand view
+            </summary>
+            <param name="employeeCode"></param>
+            <param name="officeCodes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.NotificationController.UpdateUserNotificationStatus(System.Object)">
+            <summary>
+            Update notification status of notification from unread to read or archive
+            </summary>
+            <param name="notificationId"></param>
+            <param name="employeeCode"></param>
+            <param name="notificationStatus"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.PlanningCardController.DeletePlanningCardAndItsAllocations(System.Guid,System.String)">
+            <summary>
+            Deletes Planning card and the allocations that were created on the planning cards
+            </summary>
+            <param name="id">Id of the planning card to be deleted</param>
+            <param name="lastUpdatedBy">Employee code of the user who deleted it</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.PlanningCardController.SharePlanningCard(Staffing.API.Models.PlanningCard)">
+             <remarks>
+             Sample Request:
+            {
+                "id": "b594e120-8a9d-ed11-a9c4-005056accf10",
+                "name": "Affiliated consultants",
+                "startDate": null,
+                "endDate": null,
+                "isShared": true,
+                "sharedOfficeCodes": "115,125,128,110,160,539,127,152,153,542,511,165,400,112,504,521,150,151,120,116,508,524,176,395,170,175,535,177,500",
+                "sharedStaffingTags": "SL0001",
+                "lastUpdatedBy": "60074"
+            }
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.PlanningCardController.GetPlanningCardByPegOpportunityIds(System.String)">
+            <summary>
+            Get Planning Cards by Peg Opportunity Ids
+            </summary>
+            <param name="pegOpportunityIds">Comma separated list of Ids of the PEG lead coming from PEG systems</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.PlanningCardController.GetPlanningCardsForTypeahead(System.String)">
+            <summary>
+                Get planning card for typeahead
+            </summary>
+            <param name="searchString">Search planning card by its name</param>
+        </member>
+        <member name="M:Staffing.API.Controllers.PreponedCasesAllocationsAuditController.UpsertPreponedCaseAllocationsAudit(System.Object)">
+            <summary>
+                 Upsert Preponed Cases Allocations for audit purposes when CCM prepones a case
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.PreponedCasesAllocationsAuditController.GetPreponedCaseAllocationsAudit(System.Object)">
+            <summary>
+                 Gets all cases that have been preponed from CCM for offices and selected service lines 
+                 Return past two weeks by default or can use date range
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "startDate": "2023-05-25",
+                "endDate": "2023-06-15",
+                "serviceLineCodes": "SL0001",
+                "officeCodes": "110"
+            }
+            </remarks>
+            <param name="payload"></param>
+            <returns>Case audit details like which case was updated, who made the change and when and the impacted employees</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationController.GetResourceAllocationsBySelectedValues(System.Object)">
+            <summary>
+            Get resources allocations filtered by selected values
+            </summary>
+            <param name="payload">One Parameter needs to pass</param>
+            <returns></returns>
+            <remarks>
+            Sample Request:
+               {
+                  "oldCaseCodes":"Q6BK",
+                  "employeeCodes":"39980",
+                  "lastUpdated":"2020-04-09",
+                  "startDate":"2020-04-01",
+                  "endDate":"2020-04-17",
+                  "caseRoleCodes": null
+               }
+            </remarks>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationController.GetResourceAllocationsByScheduleIds(System.String)">
+            <summary>
+            Get Allocations by Ids
+            </summary>
+            <param name="scheduleIds">Comma separated Schedule Ids</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationController.GetResourceAllocationsByPipelineIds(System.Object)">
+            <summary>
+            Get Resource Allocations to selected opportunities
+            </summary>
+            <param name="payload">comma separated list of pipeline Id</param>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationController.GetResourceAllocationsByPipelineId(System.String)">
+            <summary>
+            Get Resource Allocations to a single Opportunity
+            </summary>
+            <param name="pipelineId"></param>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationController.GetResourceAllocationsByCaseCodes(System.Object)">
+            <summary>
+            Get Resource Allocations to selected cases
+            </summary>
+            <param name="payload">comma separated list of old case code</param>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationController.GetResourceAllocationsCountByCaseCodes(System.Object)">
+            <summary>
+            Get Resource Allocations to selected cases
+            </summary>
+            <param name="payload">comma separated list of old case code</param>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationController.GetResourceAllocationsByCaseCode(System.String)">
+            <summary>
+            Get Resource Allocations to specific case
+            </summary>
+            <param name="oldCaseCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationController.GetResourceAllocationsByEmployeeCodes(System.Object)">
+            <summary>
+            Get Resource allocations to cases on the basis of selected employees and Date Range
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "employeeCodes" : "37995,42AKS,42624", 
+                "startDate": "2019-10-01,
+                "endDate": "2020-01-31"
+            }
+            </remarks>
+            <param name="payload"></param>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationController.UpsertResourceAllocations(System.Object)">
+            <summary>
+            Assign Employee to case
+            </summary>
+            <remarks>
+            Sample Request:
+            [
+               {
+                  "oldCaseCode":"D6GR",
+                  "caseCode":2,
+                  "caseName":"ADAPT-Unilodgers",
+                  "clientCode":31021,
+                  "clientName":"Unilodgers",
+                  "caseTypeCode": 1,
+                  "caseTypeName": "Billable",
+                  "pipelineId":null,
+                  "opportunityName":null,
+                  "employeeCode":"47910",
+                  "employeeName":"Agarwal, Ayushya",
+                  "fte":1,
+                  "serviceLineName":"Traditional Consulting",
+                  "position":"Associate Consultant",
+                  "currentLevelGrade":"A1",
+                  "operatingOfficeCode":334,
+                  "operatingOfficeName":"Mumbai",
+                  "operatingOfficeAbbreviation":"MUB",
+                  "managingOfficeCode":334,
+                  "managingOfficeName":"Mumbai",
+                  "managingOfficeAbbreviation":"MUB",
+                  "billingOfficeCode":334,
+                  "billingOfficeName":"Mumbai",
+                  "billingOfficeAbbreviation":"MUB",
+                  "allocation":100,
+                  "startDate":"12/5/2019",
+                  "endDate":"22-Jan-2020",
+                  "investmentCode":null,
+                  "investmentName":null,
+                  "caseRoleCode":null,
+                  "caseRoleName":null,
+                  "lastUpdatedBy":"45088"
+               }
+            ]
+            </remarks>
+            <returns>Assigned resource(s) to case</returns>
+            <param name="payload">Json representing one or more Resource Allocation</param>
+            <response code="201">Returns Added and Updated resource(s) to case</response>
+            <response code="400">If Payload is null or wrongly formatted</response>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationController.DeleteResourceAllocationById(System.Guid,System.String)">
+            <summary>
+            Delete Resource Allocation by schedule id
+            </summary>
+            <param name="allocationId"></param>
+            <param name="lastUpdatedBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationController.DeleteResourceAllocationByIds(System.Object)">
+            <summary>
+            Delete allocation by Schedule Ids
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationController.GetAllocationsForEmployeesOnPrePost">
+            <summary>
+            Gets all allocations on prepost having end date more that last 2 months
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationController.GetResourceAllocationsBySelectedSupplyValues(System.Object)">
+            <summary>
+            Get resources allocations filtered by selected supply side values
+            </summary>
+            <param name="payload">Parameter needs to pass</param>
+            <returns></returns>
+            <remarks>
+            Sample Request:
+               {
+                  "startDate" : '2022-09-01',
+                  "endDate": '2023-10-01',
+                  "officeCodes": null,
+                  "staffingTags": null,
+                  "currentLevelGrades": ""
+               }
+            </remarks>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationController.GetLastTeamByEmployeeCode(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Get the overlapping allocations in the last cases for an employee
+            </summary>
+            <param name="employeeCode"></param>
+            <param name="date">Default value is today's date</param>
+            <returns>Overlapping allocations with other team members from the previous cases the resource has worked on based on the end date of the previous allocation</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationController.GetLastBillableDateByEmployeeCodes(System.Object)">
+            <summary>
+            Get the last billable date of employees in the last cases for an employee
+            </summary>
+            <param name="employeeCodes"></param>
+            <param name="date">Default value is today's date</param>
+            <returns>Overlapping allocations with other team members from the previous cases the resource has worked on based on the end date of the previous allocation</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationV2Controller.GetResourceAllocationsBySelectedValues(System.Object)">
+            <summary>
+            Get resources allocations filtered by selected values
+            </summary>
+            <param name="payload">One Parameter needs to pass</param>
+            <returns></returns>
+            <remarks>
+            Sample Request:
+               {
+                  "oldCaseCodes":"Q6BK",
+                  "employeeCodes":"39980",
+                  "lastUpdated":"2020-04-09",
+                  "startDate":"2020-04-01",
+                  "endDate":"2020-04-17",
+                  "caseRoleCodes": null
+                  "action": "inserted"
+               }
+            </remarks>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceAllocationV3Controller.GetResourceAllocationsBySelectedValues(System.Object)">
+            <summary>
+            Get resources allocations filtered by selected values
+            </summary>
+            <param name="payload">One Parameter needs to pass</param>
+            <returns></returns>
+            <remarks>
+            Sample Request:
+               {
+                  "oldCaseCodes":"Q6BK",
+                  "employeeCodes":"39980",
+                  "lastUpdated":"2020-04-09",
+                  "startDate":"2020-04-01",
+                  "endDate":"2020-04-17",
+                  "caseRoleCodes": null,
+                  "action": "upserted" or "deleted"
+               }
+            </remarks>
+        </member>
+        <member name="M:Staffing.API.Controllers.ResourceHistoryController.GetResourceHistoryData(System.String)">
+            <summary>
+            Get historical staffing data for the past one year of a specific employee.
+            </summary>
+            <param name="employeeCode"></param>
+        </member>
+        <member name="M:Staffing.API.Controllers.RingfenceManagementController.GetRingfencesDetailsByOfficesAndCommitmentCodes(System.Object)">
+            <summary>
+            gets count of resources available in specific ringfence and office as of today
+            </summary>
+            <remarks>
+            Sample Request: {"officeCodes": "115,125,128,110,160,539,127,152,153,542,511,165,400,112,504,521,150,151,120,116,508,524,176,395,170,175,535,177,500",    "commitmentTypeCodes": "P"}
+            </remarks>
+            <param name="payload">comma separated list of officeCodes, ringfence codes</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.RingfenceManagementController.GetRingfenceAuditLogByOfficeAndCommitmentCode(System.String,System.String)">
+            <summary>
+            Gets audit log of what changes were made to ringfence management data 
+            </summary>
+            <param name="officeCode">office code for which to get log</param>
+            <param name="commitmentTypeCode">Ringfence Code (P for Peg)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.ScheduleMasterPlaceholderController.GetAllocationsByPlaceholderScheduleIds(System.String)">
+            <summary>
+            Get Placeholder Allocations by Ids
+            </summary>
+            <remarks>
+            Sample Request: "xyz,abc"
+            </remarks>
+            <param name="placeholderScheduleIds">Comma separated Placeholder Schedule Ids</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.ScheduleMasterPlaceholderController.GetPlaceholderAllocationsByPipelineIds(System.Object)">
+            <summary>
+            Get Resource Allocations to selected opportunities
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "pipelineIds": ""
+            }
+            </remarks>
+            <param name="payload">comma separated list of pipeline Id</param>
+        </member>
+        <member name="M:Staffing.API.Controllers.ScheduleMasterPlaceholderController.GetPlaceholderAllocationsByCaseCodes(System.Object)">
+            <summary>
+            Get Resource Allocations to selected cases
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "oldCaseCodes": ""
+            }
+            </remarks>
+            <param name="payload">comma separated list of old case code</param>
+        </member>
+        <member name="M:Staffing.API.Controllers.ScheduleMasterPlaceholderController.GetPlaceholderAllocationsByPlanningCardIds(System.Object)">
+            <summary>
+            Get placeholder allocations to selected planning cards
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "planningCardIds": ""
+            }
+            </remarks>
+            <param name="payload">comma separated list of planning card ids</param>
+        </member>
+        <member name="M:Staffing.API.Controllers.ScheduleMasterPlaceholderController.GetAllocationsByPlanningCardIds(System.Object)">
+            <summary>
+            Get both placeholder allocations and regular allocations to selected Planning cards
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "planningCardIds": ""
+            }
+            </remarks>
+            <param name="payload">comma separated list of planning card ids</param>
+        </member>
+        <member name="M:Staffing.API.Controllers.ScheduleMasterPlaceholderController.UpsertPlaceholderAllocation(System.Object)">
+            <summary>
+            Add/Update placeholder allocation on case/opp
+            </summary>
+            <remarks>
+            </remarks>
+            <returns>Placeholder Allocation data</returns>
+            <param name="payload">Json representingPlaceholde Resource Allocation</param>
+            <response code="201">Returns Added and Updated resource </response>
+            <response code="400">If Payload is null or wrongly formatted</response>
+        </member>
+        <member name="M:Staffing.API.Controllers.ScheduleMasterPlaceholderController.DeletePlaceholderAllocationsByIds(System.String,System.String)">
+            <summary>
+            Delete Placeholder Resource Allocation by placeholder id
+            </summary>
+            <param name="placeholderIds"></param>
+            <param name="lastUpdatedBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.ScheduleMasterPlaceholderController.GetPlacedholdersAllocationsWithinDateRange(System.Object)">
+            <summary>
+            Get Placeholder Resource Allocations within date range
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "employeeCodes" : "37995,42AKS,42624", 
+                "startDate": "2019-10-01,
+                "endDate": "2020-01-31"
+            }
+            </remarks>
+            <param name="payload"></param>
+            <returns>list of placeholder allocations</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.ScheduleMasterPlaceholderController.GetPlaceholderAllocationsByEmployeeCodes(System.Object)">
+            <summary>
+            Get Placeholder allocations of selected employees and within Date Range
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "employeeCodes" : "37995,42AKS,42624", 
+                "startDate": "2019-10-01,
+                "endDate": "2020-01-31"
+            }
+            </remarks>
+            <param name="payload"></param>
+        </member>
+        <member name="M:Staffing.API.Controllers.SecurityUserController.GetAllSecurityUsers">
+            <summary>
+            Get all security / staffing users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.SecurityUserController.DeleteSecurityUserByEmployeeCode(System.String,System.String)">
+             <summary>
+             Delete security user by employee code
+             </summary>
+            <param name="employeeCode">employeeCode of the user about to delete</param>
+             <param name="lastUpdatedBy">employeeCode of the user who triggered the delete</param>
+             <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.SecurityUserController.UpsertSecurityUser(Staffing.API.Models.SecurityUser)">
+            <summary>
+            Update security user with admin rights
+            </summary>
+            <param name="securityUser"></param>
+            <remarks>
+            Sample Request:
+               {
+                  "employeeCode":"55555",
+                  "lastUpdatedBy":"51030",
+                  "isAdmin": false
+               }
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.SecurityUserController.GetAllSecurityGroups">
+            <summary>
+            Get all security / staffing groups
+            </summary>
+            <returns>List of security group names and roles they have access to</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.SecurityUserController.GetGroupNamesBySearchString(System.String)">
+            <summary>
+            Get group names by search string
+            </summary>
+            <returns>List of group names by their names</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.SecurityUserController.UpsertSecurityGroup(Staffing.API.Models.SecurityGroup)">
+            <summary>
+            Update security group
+            </summary>
+            <param name="securityGroup"></param>
+            <remarks>
+            Sample Request:
+               {
+                  "groupName":"Global Staffing Development Team",
+                  "lastUpdatedBy":"39209",
+                  "roleCodes": "1,12"
+               }
+            </remarks>
+            <returns>Upserted Data</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.SecurityUserController.DeleteSecurityGroupById(System.String,System.String)">
+             <summary>
+             Delete security user by employee code
+             </summary>
+            <param name="groupIdToDelete">database table id of the group to delete</param>
+             <param name="lastUpdatedBy">employeeCode of the user who triggered the delete</param>
+             <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.SKUCaseTermsController.GetSKUTermList">
+            <summary>
+            Get all SKU Terms
+            </summary>
+            <returns>Saved Master Data for SKU Terms</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.SKUCaseTermsController.GetSKUTermsForOppotunity(System.Guid)">
+            <summary>
+            Get saved SKU Terms for a specific opportunity
+            </summary>
+            <param name="pipelineId"></param>
+            <returns>Saved SKU Terms for a specific opportunity</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.SKUCaseTermsController.GetSKUTermsForCase(System.String)">
+            <summary>
+            Get saved SKU Terms for a specific case
+            </summary>
+            <param name="oldCaseCode"></param>
+            <returns>Saved SKU Terms for a specific case</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.SKUCaseTermsController.InsertSKUCaseTerms(System.Object)">
+            <summary>
+            Used to save the SKU Terms for a specfic case
+            </summary>
+            <param name="payload">Json representing SKU Terms for a specic case</param>
+            <sample>
+            {
+              "skuTermsCodes": "1,2,3,4",
+              "oldCaseCode": "K7FC",
+              "effectiveDate": "2019-09-11T06:49:00",
+              "lastUpdatedBy": 45088
+            }
+            </sample>
+            <returns>Return saved SKU Terms for the case</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.SKUCaseTermsController.UpdateSKUCaseTerms(System.Object)">
+            <summary>
+            Used to update the SKU Terms for a specfic case
+            </summary>
+            <param name="payload"></param>
+            <returns>Updated SKU Terms for the specific case</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.SKUCaseTermsController.GetSKUTermsForCasesOrOpportunitiesForDuration(System.Object)">
+            <summary>
+            This api end point is used to get the upcoming SKU Size Terms for any opportunity or case
+            on the basis of its pipelineId or oldCaseCode and the startDate and endDate between which 
+            this sku size must lie.
+            </summary>
+            <sample>
+            {
+              "oldCaseCodes": "K7FC",
+              "pipelineIds": null,
+              "startDate": "2022-09-11T06:49:00",
+              "endDate": "2022-10-11T06:49:00"
+            }
+            </sample>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.SkuController.GetSkuForProject(System.Object)">
+            <summary>
+            Get saved sku term for a case or opp or planning card
+            </summary>
+            <param name="payload">Pass comma separated list of oldCaseCodes, pipelineIds and planningCardsIds</param>
+            <remarks>
+            Sample Request:
+               {
+                  "oldCaseCodes":"Z4RJ,S3XF,G8MD",
+                  "pipelineIds":"646E2606-FF10-492D-BE0A-1187AAC90122,98F69747-6902-4F7A-A944-7A30C8B4C7B0,AEF80B09-B72E-4BED-BB5D-2C61B123AB61",
+                  "planningCardIds": ""
+               }
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.SkuController.UpsertSkuForProject(System.Object)">
+            <summary>
+            Upsert saved sku term for a case or opp or planning card
+            </summary>
+            <param name="payload">Sku model object</param>
+            <remarks>
+            Sample Request:
+            {
+               "id": null,
+               "skuTerm": "1M+2C+2AC",
+               "oldCaseCode": "G8MD"
+               "pipelineId": null,
+               "lastUpdatedBy": "45088"
+            }
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.StaffableAsController.GetResourceActiveStaffableAsByEmployeeCodes(System.Object)">
+            <summary>
+            Gets the active staffable as role for employee
+            </summary>
+            <sample>
+            {
+                "employeeCodes": "abc,xyz"
+            }
+            </sample>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.StaffableAsController.UpsertResourceStaffableAs(System.Collections.Generic.IEnumerable{Staffing.API.Models.StaffableAs})">
+            <summary>
+            Inserts/Update changs to the staffable as role for an employee
+            </summary>
+            <remarks>
+            Sample Request:
+            [{
+            "id": null,
+            "employeeCode": "39209",
+            "effectiveDaye" : "22-May-2021",
+            "staffableAsTypeCode" : 1,
+            "isActive" : 1
+            }]
+            </remarks>
+            <param name="employeesStaffableAs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.StaffableAsController.DeleteResourceStaffableAsById(System.String,System.String)">
+            <summary>
+            Deletes the staffable as role for the resource
+            </summary>
+            <param name="idToDelete"></param>
+            <param name="lastUpdatedBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.StaffingPreferencesController.GetEmployeePreferences(System.String)">
+            <summary>
+            Get all staffing preferences for employee
+            </summary>
+            <param name="employeeCode">employee for which preferences are to be fetched</param>
+            <returns>staffing preferences object containing data about employee's staffing needs </returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.StaffingPreferencesController.GetAllEmployeePreferences">
+            <summary>
+            Get all staffing preferences for employee
+            </summary>
+            <returns>staffing preferences object containing data about employee's staffing needs </returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.StaffingPreferencesController.UpsertEmployeePreferences(Staffing.API.Models.EmployeeStaffingPreferencesForInsightsTool)">
+            <summary>
+            Update staffig preferences for employee
+            </summary>
+            <param name="securityUser"></param>
+            <remarks>
+            Sample Request:
+               {
+                  "employeeCode":"55555",
+                  "lastUpdatedBy":"51030",
+                  "isAdmin": false
+               }
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.TaggedCaseController.GetCasesByResourceServiceLines(System.Object)">
+            <summary>
+            Get comma separated List of Old Cases codes signifies cases tagged due to resource having service line (AAG, ADAPT, FRWD) assigned on case
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+            "oldCaseCodes": "H5AC,W8VZ,D6GR",
+            "serviceLineNames": "AAG,ADAPT,FRWD"
+            }
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.TaggedCaseController.GetOpportunitiesByResourceServiceLines(System.Object)">
+            <summary>
+            Get comma separated List of pipeline Id signifies opportunities tagged due to resource having service line (AAG, ADAPT, FRWD) assigned on opportunity
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+            "pipelineIds": "6792E643-4BAA-4BAB-9021-24370F206B6F,C1F0D5D5-34C4-4EC6-AC36-5A16A2C0C219",
+            "serviceLineNames": "AAG,ADAPT,FRWD"
+            }
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.UserCustomFilterController.GetCustomResourceFiltersByEmployeeCode(System.String)">
+            <summary>
+            Get custom filters created by user for resources
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Controllers.UserCustomFilterController.UpsertCustomResourceFilters(System.Object)">
+            <summary>
+            Upsert custom filters created by user for resources
+            </summary>
+            <remarks>
+            Sample Request:
+            [{
+                "id": null,
+                "title": "Boston 2 weeks out",
+                "employeeCode": "39209",
+                "officeCodes": "110",
+                "levelGrades": "M1,M2",
+                "staffingTags":"SL0001",
+                "employeeStatuses":"active",
+                "lastUpdatedBy": "39209",
+                "staffableAsTypeCodes": "1,2"
+            }]
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.UserCustomFilterController.DeleteCustomResourceFilterById(System.String,System.String)">
+            <summary>
+            Delete custom filters created by user for resources
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "filterIdToDelete": "",
+                "lastUpdatedBy" : "39209"
+            }
+            </remarks>
+            <param name="filterIdToDelete"></param>
+            <param name="lastUpdatedBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.UserPreferenceGroupSharedInfoController.GetUserPreferenceGroupSharedInfo(System.String)">
+            <summary>
+            Get saved user supply groups set by user as their default settings.
+            </summary>
+            <param name="groupId"></param>
+            <returns>Saved user supply groups for employee</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.UserPreferenceGroupSharedInfoController.UpsertUserPreferenceGroupSharedInfo(System.Object)">
+            <summary>
+            Insert/Update the shared group info from staffing settings
+            </summary>
+            <remarks>
+            Sample Request:
+            [
+               {
+                  "id": "",
+                  "sharedWith": "58749",
+                  "isDefault" : false,
+                  "userPreferenceSupplyGroupId": "",
+                  "lastUpdatedBy": "58749"
+            }]
+            </remarks>
+            <returns>Assigned resource(s) to case</returns>
+            <param name="payload">Json representing one or more Resource Allocation</param>
+            <response code="201">Returns Added and Updated resource(s) to case</response>
+            <response code="400">If Payload is null or wrongly formatted</response>
+        </member>
+        <member name="M:Staffing.API.Controllers.UserPreferenceGroupSharedInfoController.UpdateUserPreferenceSupplyGroupSharedInfo(System.Object)">
+            <summary>
+            Insert/Update the shared group info from staffing settings
+            </summary>
+            <remarks>
+            Sample Request:
+            [
+               {
+                  "id": "",
+                  "sharedWith": "58749",
+                  "isDefault" : false,
+                  "userPreferenceSupplyGroupId": "",
+                  "lastUpdatedBy": "58749"
+            }]
+            </remarks>
+            <returns>Assigned resource(s) to case</returns>
+            <param name="payload">Json representing one or more Resource Allocation</param>
+            <response code="201">Returns Added and Updated resource(s) to case</response>
+            <response code="400">If Payload is null or wrongly formatted</response>
+        </member>
+        <member name="M:Staffing.API.Controllers.UserPreferencesController.GetUserPreferences(System.String)">
+            <summary>
+            Get user preferences set by user as their default settings.
+            </summary>
+            <param name="employeeCode"></param>
+            <returns>Saved user preferences for employee</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.UserPreferencesController.UpsertUserPreferences(Staffing.API.Models.UserPreferences)">
+            <summary>
+            Upsert User Preferences
+            </summary>
+            <param name="userPreferences"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.UserPreferencesController.DeleteUserPreferences(System.String)">
+            <summary>
+            Delete User Preferences for employee 
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Controllers.UserPreferenceSupplyGroupController.GetUserPreferenceSupplyGroups(System.String)">
+            <summary>
+            Get saved user supply groups set by user as their default settings.
+            </summary>
+            <param name="employeeCode"></param>
+            <returns>Saved user supply groups for employee</returns>
+        </member>
+        <member name="M:Staffing.API.Controllers.UserPreferenceSupplyGroupController.UpsertUserPreferenceSupplyGroups(System.Object)">
+            <summary>
+            Insert/Update the supply groups from staffing settings
+            </summary>
+            <remarks>
+            Sample Request:
+            [
+               {
+                  "id": null,
+                  "name": "Test Group 1",
+                  "description":"Test Group that manages some members",
+                  "isDefault" : false,
+                  "groupMemberCodes": "31021, 39209, 37995",
+                  "createdBy":"39209",
+                  "lastUpdatedBy": "39209"
+            }]
+            </remarks>
+            <returns>Assigned resource(s) to case</returns>
+            <param name="payload">Json representing one or more Resource Allocation</param>
+            <response code="201">Returns Added and Updated resource(s) to case</response>
+            <response code="400">If Payload is null or wrongly formatted</response>
+        </member>
+        <member name="M:Staffing.API.Controllers.UserPreferenceSupplyGroupController.DeletesUserPreferenceSupplyGroupByIds(System.String,System.String)">
+            <summary>
+            Deletes the user created groups
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "listSupplyGroupIdsToDelete": "",
+                "lastUpdatedBy" : "39209"
+            }
+            </remarks>
+            <param name="listSupplyGroupIdsToDelete"></param>
+            <param name="lastUpdatedBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Core.Helpers.Utilities.AddBusinessDays(System.DateTime,System.Int32)">
+            <summary>
+            Returns the date after adding the non-business days (i.e excluding the weekend)
+            Eg: AddBusinessDays("10-jun-2022", 3) will return 15-Jun-2022 (excludes 2 weekend days and add 3 business days)
+            </summary>
+            <param name="current"></param>
+            <param name="days"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Insert(`0,System.String)">
+            <summary>
+                Generic insert
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Insert(`0,System.String,System.Object)">
+            <summary>
+                Generic insert with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Insert(System.Object,System.String)">
+            <summary>
+                Generic insert with dynamic parameters
+            </summary>
+            <returns>A list of the inserted objects</returns>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Insert(System.String,System.Object)">
+            <summary>
+                Generic insert with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.InsertAsync(System.String,System.Object)">
+            <summary>
+                Async insert with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.InsertAsync(System.Object,System.String)">
+            <summary>
+                Async insert with dynamic parameters which return inserted object
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Insert(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic insert in a scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Insert(System.Data.IDbConnection,`0,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+                Generic insert with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Update(`0,System.String)">
+            <summary>
+                Generic update
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Update(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic update in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Update(`0,System.String,System.Object)">
+            <summary>
+                Generic update with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Update(System.Object,System.String)">
+            <summary>
+                Generic update with dynamic parameters
+            </summary>
+            <returns>A list of the updated objects</returns>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Update(System.Data.IDbConnection,`0,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+                Generic update with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Update(System.String,System.Object)">
+            <summary>
+                Generic Update with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.UpdateAsync(System.String,System.Object)">
+            <summary>
+                Async Update with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.UpdateAsync(System.Object,System.String)">
+            <summary>
+                Async update with dynamic parameters which return updated object
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Delete(`0,System.String)">
+            <summary>
+                Generic delete
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Delete(System.Guid,System.String)">
+            <summary>
+                Generic delete with uniqueidentifier as the id
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Delete(System.String,System.Object)">
+            <summary>
+                Generic delete with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.DeleteAsync(System.String,System.Object)">
+            <summary>
+                Async Delete with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Delete(System.Object,System.String)">
+            <summary>
+                Generic delete with dynamic parameters
+            </summary>
+            <returns>A list of the deleted objects</returns>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,System.Guid,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete with uniqueidentifier as the id, in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,System.Object,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Staffing.API.Core.Repository.BaseRepository`1.DeleteAsync(System.Object,System.String)">
+            <summary>
+                Async Delete with dynamic parameters which return deleted object
+            </summary>
+        </member>
+    </members>
+</doc>

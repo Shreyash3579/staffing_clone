@@ -1,0 +1,55 @@
+<div ngDraggable>
+    <div id="ag-grid-update-date-header" class="modal-header">
+        <h5 class="modal-title">
+            Update {{title}} Date
+        </h5>
+
+        <button type="button" class="close" (click)="closeForm()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div id="ag-grid-update-date-body" class="modal-body">
+        <form>
+            <div class="form-row mb-2" *ngIf="formModel.date.isInvalid">
+                <div class="col-12 text-danger">
+                  {{formModel.date.errorMessage}}
+                </div>
+              </div>
+            <div class="form-row mb-3">
+                <!-- Start Date Calendar: START -->
+                <div class="col-4" style="text-align: right;">
+                    <label for="date" [class.text-danger]="formModel.date.isInvalid">
+                        Date :
+                    </label>
+                </div>
+                <div class="col-4">
+                    <div class="input-group calendar-single">
+                        <input type="text" name="date" placeholder="dd-mmm-yyyy" id="date"
+                            class="form-control form-control-sm border-right-0" autocomplete="off"
+                            [(ngModel)]="formModel.date.value" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig" />
+
+                        <div class="input-group-append" (click)="dp.toggle()">
+                            <span class="input-group-text">
+                                <i class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- <div *ngIf="formModel.date.isInvalid" class="text-danger">
+                        {{formModel.date.errorMessage}}
+                    </div> -->
+                </div>
+                <!-- Start Date Calendar: END -->
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button id="ag-grid-update-date-cancel" type="button" class="btn btn-sm btn-secondary" (click)="closeForm()">
+            Cancel
+        </button>
+        <button id="ag-grid-update-date-update" type="button" class="btn btn-sm btn-primary"
+            (click)="updateAllocations()">
+            Update
+        </button>
+    </div>
+</div>

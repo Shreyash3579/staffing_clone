@@ -1,0 +1,90 @@
+<ng-container [formGroup]="childFormGroupName">
+  <!--Editable template for unnamed placeholders-->
+  <div *ngIf="!childFormGroupName.get('employeeCode').value; else namedPlaceholderTemplate"
+    class="col-12 placeholder-wrapper2">
+
+    <!-- Service Line -->
+    <ng-select formControlName="serviceLineCode" [items]="serviceLines" [multiple]="false" [selectOnTab]="true"
+      placeholder="Service Line" name="serviceLineName" bindLabel="serviceLineName" class="placeholder_userInfo"
+      [clearable]="false" bindValue="serviceLineCode">
+    </ng-select>
+
+    <!-- Office -->
+    <ng-select [items]="offices" [multiple]="false" [selectOnTab]="true" placeholder="Office"
+      formControlName="operatingOfficeCode" name="operatingOfficeAbbreviation"
+      class="disable-clear-all placeholder_details" [clearable]="false" bindLabel="officeAbbreviation"
+      bindValue="officeCode">
+    </ng-select>
+
+    <!-- PD Grades -->
+    <ng-select [items]="pdGrades" [multiple]="false" [selectOnTab]="true" placeholder="PD"
+      formControlName="currentLevelGrade" name="currentLevelGrade" class="disable-clear-all placeholder_details"
+      [clearable]="false" bindLabel="pdGradeName" bindValue="pdGradeName">
+    </ng-select>
+
+    <!-- Position Groups -->
+    <ng-select [items]="positionGroups" [multiple]="false" [selectOnTab]="true" placeholder="Position Group"
+      formControlName="positionGroupCode" name="positionGroupCode" class="disable-clear-all placeholder_details"
+      [clearable]="false" bindLabel="positionGroupName" bindValue="positionGroupCode">
+    </ng-select>
+
+    <!-- Ringfence -->
+    <ng-select [items]="commitmentTypes" [multiple]="false" [selectOnTab]="true" placeholder="Ringfence"
+      formControlName="commitmentTypeCode" name="selectedRingfence" class="disable-clear-all placeholder_details"
+      [clearable]="false" bindLabel="commitmentTypeName" bindValue="commitmentTypeCode">
+    </ng-select>
+
+    <div class="placeholder_alloc">
+      <input class="unnamedPlaceholder" type="text" formControlName="allocation" name="allocation" autocomplete="off"
+        (focus)="selectOnFocus($event)">
+    </div>
+
+    <div class="placeholder_remove">
+      <span>
+        <i class="fas fa-times placeholder_removeicon float-right mr-3"
+          (click)="removePlaceholderAllocationFromProjectHandler()"></i>
+      </span>
+    </div>
+  </div>
+
+  <!--Read Only template for named placeholders-->
+  <ng-template #namedPlaceholderTemplate>
+
+    <div class="col-12 placeholder-wrapper1">
+      <div class="place_holder_user">
+        <div class="placeholder_userInfo">
+          {{childFormGroupName.get('employeeName').value}}
+        </div>
+        <div class="place_holder_user">
+          <div class="placeholder_details text-center">
+            {{childFormGroupName.get('operatingOfficeAbbreviation').value}}
+          </div>
+
+          <div class="placeholder_details text-center">
+            {{childFormGroupName.get('currentLevelGrade').value}}
+          </div>
+
+          <!-- <div class="placeholder_alloc text-center">
+                      {{placeholderAllocation.allocation}}%
+                  </div> -->
+
+          <div class="placeholder_alloc text-center">
+            <input type="text" formControlName="allocation" autofocus name="allocation" autocomplete="off"
+              (focus)="selectOnFocus($event)">
+          </div>
+
+          <!-- <div class="placeholder_details text-center">
+                      {{dateRange}}
+                  </div> -->
+
+          <div class="placeholder_remove ml-auto">
+            <i class="fas fa-times placeholder_removeicon" (click)="removePlaceholderAllocationFromProjectHandler()"></i>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </ng-template>
+
+</ng-container>

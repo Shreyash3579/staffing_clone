@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <h5 class="modal-title">Add Card to Board</h5>
+    <button type="button" class="close popup-drag-not-effected" (click)="closeForm()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body modal-scroll">
+
+     <!-- Validation message -->
+     <div class="text-danger">{{validationMessage}}</div>
+     <p></p>
+
+    <!--------------------Send To Week Dropdown---------------------->
+
+    <div class="form-row mb-3">
+        <div class="col-3">
+            <label for="field-resource">Send To</label>
+        </div>
+        <div class="col-7">
+            <app-single-select-dropdown [dropdownList]="planningBoardColumnsList" [selectedItem]="selectedColumn"
+            [title]="'Week Of'" (valueChange)="setSelectedColumn($event)">
+            </app-single-select-dropdown>
+            <div class="error-message" *ngIf="selectedColumn?.length == 0">
+                *Required.
+            </div> 
+            <!-- <select required class="form-control" name="office-closure" id="btn-office-closure" #office="ngModel"
+                [(ngModel)]="selectedOffice" (ngModelChange)="setOfficeBySelectedValue()">
+                <option [ngValue]="null" disabled>Select</option>
+                <option *ngFor="let office of officesList" [ngValue]="office.value">{{office.text}}</option>
+            </select>    -->
+            <!-- <div class="error-message" *ngIf="office.errors?.['required']">
+                Office is required.
+            </div>          -->
+        </div>
+    </div>
+
+    <!--------------------Office Dropdown---------------------->
+    <div id="office-closure" class="form-row mb-3">
+        <div class="col-3">
+            <label for="field-resource">Office</label>
+        </div>
+        <div class="col-7">
+            <app-single-select-dropdown [dropdownList]="officeList" [selectedItem]="selectedOffice" [hasFilter]="true"
+                (valueChange)="setSelectedOffice($event)">
+            </app-single-select-dropdown>    
+            <div class="error-message" *ngIf="selectedOffice?.length == 0">
+                *Required.
+            </div>    
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer popup-drag-not-effected">
+    <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="addCardToBoard()">Add</button>    
+</div>

@@ -1,0 +1,31 @@
+.score{
+  width:94px;
+  background-color: $grey-extra-light;
+  color: $grey-darkest;
+  border:2px solid $grey-darkest;
+  text-align: center;
+  font-size: 36px;
+
+  footer{
+    position: relative;
+    color:$white;
+    height:30px;
+    background-color: $grey-darkest;
+    text-align: center;
+    line-height: 30px;
+    font-size: 13px;
+
+    &:before{
+      content: '';
+      width: 0; 
+      height: 0; 
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;      
+      border-bottom: 7px solid $grey-darkest;
+      position: absolute;
+      top:-7px;
+      left:50%;
+      transform: translateX(-50%);
+    }
+  }
+}

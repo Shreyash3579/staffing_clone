@@ -1,0 +1,25 @@
+<div class="list-group-item list-group-item-action">
+    <div>
+        <div class="list-group-item-heading" (click)="onSavedFilterClick(savedFilter)">
+            <h5 class="title ellipsis" title="{{savedFilter.title}}">
+                <b><u>{{savedFilter.title}}</u></b>
+            </h5>
+            <h6 class="list-group-item-icons">
+                <i class="icon-delete fa fa-trash" title="Delete"
+                    (click)="onDeleteSavedFilterClick($event,savedFilter)"></i>
+            </h6>
+            <h6 *ngIf="!savedFilter.isDefault" (click)="onSetDefaultClick($event,savedFilter,true)">
+                <button type="button" class="btn btn-secondary text-white">
+                    Set as Default
+                </button>
+            </h6>
+            <h6 *ngIf="savedFilter.isDefault" (click)="onSetDefaultClick($event,savedFilter,false)" class="center">
+                <span class="default-tag">Default</span>
+                <!-- <i class="fa fa-check icon-tick" title="Default Filter"></i> -->
+            </h6>
+        </div>
+        <p class="list-group-item-text ellipsis" title="{{filterDetails}}">
+            {{filterDetails}}
+        </p>
+    </div>
+</div>

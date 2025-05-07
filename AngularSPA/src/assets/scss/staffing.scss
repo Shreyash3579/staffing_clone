@@ -1,0 +1,31 @@
+@use 'sass:math';
+@import "staff-group";
+@import "project";
+
+#stage{
+  .search-form{
+    padding-bottom:$base-padding;
+
+    label{
+      font-size:14px;
+    }
+  }
+
+  #projects{
+    width: 130px;
+    @media (min-width: 1441px){
+      width: auto;
+    }
+  }
+
+  .advanced-filters{
+    background-color: $grey-extra-light;
+    margin-bottom: $base-padding;
+    padding: math.div($base-padding, 2) $base-padding;    
+    border-top: 1px solid $grey-light;
+    .row {max-width: 1000px;}
+    .section-title{
+      margin-right: $base-padding*3;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+
+.toggle{
+  display: inline-block;
+  width:40px;
+  height: 24px;
+  border-radius: 20px;
+  border: 2px solid $grey-medium;
+  background-color: $white;
+  position: relative;
+  cursor: pointer;
+  transition: background-color .3s, border-width .3s;
+  &:after{
+    content: '';
+    background-color: $white;
+    border-radius: 50%;
+    border: 2px solid $grey-medium;
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    right: 16px;  
+    top: 50%;
+    transform: translateY(-50%);  
+    transition: right .3s;      
+  }
+
+  &.on{
+    background-color: $grey-medium;
+    &:after{
+      right: -2px;
+    }
+  }
+}

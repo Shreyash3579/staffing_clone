@@ -1,0 +1,31 @@
+<div class="about__preference">
+    <div class="preference__nav">
+        <ul class="preference__list">
+            <li class="preference__item" style="border-radius: 4px 0 0 4px;" [style.background]="activeTab=='industry' ? '#fff': '#f0f2f5'" [style.color]="activeTab=='industry' ? '#000': '#9ba4ac'" (click)="toggleNav('industry',$event)">Industry</li>
+            <li class="preference__item" style="border-radius: 4px 0 0 4px;" [style.background]="activeTab=='capability' ? '#fff': '#f0f2f5'" [style.color]="activeTab=='capability' ? '#000': '#9ba4ac'" (click)="toggleNav('capability',$event)">Capability</li>
+            <!-- <li class="preference__item" [style.background]="activeTab=='travel' ? '#fff': '#f0f2f5'" [style.color]="activeTab=='travel' ? '#000': '#9ba4ac'" (click)="toggleNav('travel',$event)">Travel</li> -->
+        </ul>
+    </div>
+    <!-- <div class="about__preference-container" *ngIf="activeTab=='travel'">
+        <svg-clickable-map class="h-100"></svg-clickable-map>
+    </div> -->
+    <div class="about__preference-container" *ngIf="activeTab=='industry'">
+        <div class="preference__wrapper" appFeatureDisabled
+            [claimBasedFeatureDisabled]="accessibleFeatures.preferencesTab">
+            <app-preference-list [preferenceTitle]="'Industry Practice Area Preferences'"
+            [preferencesType]="'I'" [employeeStaffingPreferences]="employeeStaffingPreferences"
+            (updatePreferenceListEmitter)="updatePreferencesHandler($event)" class="preference-list-area">
+            </app-preference-list>
+        </div>
+    </div>
+
+    <div class="about__preference-container" *ngIf="activeTab=='capability'">
+        <div class="preference__wrapper" appFeatureDisabled
+            [claimBasedFeatureDisabled]="accessibleFeatures.preferencesTab">
+            <app-preference-list [preferenceTitle]="'Capability Practice Area Preferences'"
+            [employeeStaffingPreferences]="employeeStaffingPreferences"
+            [preferencesType]="'C'" (updatePreferenceListEmitter)="updatePreferencesHandler($event)" class="preference-list-area">
+            </app-preference-list>
+        </div>
+    </div>
+</div>

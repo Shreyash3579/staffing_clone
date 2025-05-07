@@ -1,0 +1,201 @@
+<!-- COMPONENT: RESOURCE-->
+<div
+  class="user"
+  (click)="resourceClickHandler($event)"
+  [ngClass]="{ terminated: resource.isTerminated, 'resource-selected': resource.isSelected }"
+>
+  <!-- resource image -->
+  <div class="user__image">
+      <app-profile-image [imageUrl]="resource.profileImageUrl "></app-profile-image>
+  </div>
+
+  
+  <div class="user__details">
+    <!-- 1st row | resource name -->
+    <div class="name user__name">
+      <button
+        ngbPopover="{{ resource.fullName }}"
+        triggers="mouseenter:mouseleave"
+        container="body"
+        popoverClass="staffing-page-popover"
+        (click)="openResourceDetailsDialogHandler(resource.employeeCode)"
+      >
+        {{ resource.fullName }}
+      </button>
+
+      <span *ngIf="resource.availabilityStatus?.includes('Include In Capacity')" class="prospective-label">
+        (Prospective Available)
+      </span>
+      
+      <div
+        *ngIf="resource.staffableAsTypeName"
+        class="staffableAs-flag-position"
+      >
+        <i
+          ngbPopover="Staffable as: {{ resource.staffableAsTypeName }}"
+          triggers="mouseenter:mouseleave"
+          container="body"
+          popoverClass="staffing-page-popover"
+          class="fas fa-flag"
+        ></i>
+      </div>
+    </div>
+
+    <!-- 2nd row -->
+    <div class="user__info">
+      <!-- level grade -->
+      <div
+        class="user__level"
+        ngbPopover="Level Grade: {{ resource.levelGrade }}"
+        triggers="mouseenter:mouseleave"
+        container="body"
+        popoverClass="staffing-page-popover"
+      >
+        {{ resource.levelGrade }}
+      </div>
+
+      <!-- office abbr -->
+      <div
+        class="user__location"
+        ngbPopover="Office: {{ resource.schedulingOffice.officeAbbreviation }}"
+        triggers="mouseenter:mouseleave"
+        container="body"
+        popoverClass="staffing-page-popover"
+      >
+        {{ resource.schedulingOffice.officeAbbreviation }}
+      </div>
+      <ng-container *ngIf="resource.isTerminated">
+        <div>Alumni</div>
+      </ng-container>
+
+      <!-- availability -->
+      <ng-container *ngIf="!resource.isTerminated && !resource.onTransitionOrTerminationAndNotAvailable">
+        <!-- percentage available -->
+        <div
+          class="user__allocation"
+          ngbPopover="Availability: {{ resource.percentAvailable }}%"
+          triggers="mouseenter:mouseleave"
+          container="body"
+          popoverClass="staffing-page-popover"
+        >
+          {{ resource.percentAvailable | number : "1.0-1" }}%
+        </div>
+
+        <!-- first date available -->
+        <div
+          class="user__date"
+          ngbPopover="Date Available: {{ resource.dateFirstAvailable | date : 'dd-MMM' }}"
+          triggers="mouseenter:mouseleave"
+          container="body"
+          popoverClass="staffing-page-popover"
+        >
+          {{ resource.dateFirstAvailable | date : "dd-MMM" }}
+        </div>
+      </ng-container>
+      <ng-container *ngIf="resource.onTransitionOrTerminationAndNotAvailable">
+        <div class="user__allocation">N/A</div>
+        <div class="user__date">N/A</div>
+      </ng-container>
+
+      <!-- Add notes icon -->
+      <div class="notifications-container">
+        <div class="user__date">
+          <div class="new-note-wrapper">
+            <button (click)="openNotesModalhandler()"
+              [ngbPopover]="resource.resourceViewNotes?.length > 0 ? popoverContentNotes : noContentPopover"
+              [style.color]="resource.resourceViewNotes?.length > 0 ? '#cc0000' : '#616568'"
+              popoverClass="note-popover-wrapper"
+              container="body"
+              triggers="mouseenter:mouseleave" 
+              placement="bottom-left bottom-right top-left top-right" 
+              >
+              <i class="fas fa-file-alt"></i>
+            </button>
+          </div>
+
+            <!-- Popover content -->
+            <ng-template #popoverContentNotes>
+              <div class="notes">
+                <div class="note-wrapper">
+                  <!-- Author, Date.. -->
+                  <div class="note-wrapper__header">
+                    <i class="fas fa-user"></i>
+                    <p class="header">{{ resource.resourceViewNotes[0].createdByName }}</p>
+                    <p >{{ resource.resourceViewNotes[0].lastUpdated | date : "M/d/yy h:mm a" }}</p>
+                  </div>
+            
+                  <!-- Content -->
+                  <div class="note-wrapper__content">
+                    <p>{{ resource.resourceViewNotes[0].note }}</p>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+
+            <!-- No Notes popover -->
+            <ng-template #noContentPopover>
+              <div class="notes">
+                <div class="note-wrapper">
+                  <p class="header">There are 0 notes</p>
+                </div>
+
+                <div class="note-wrapper">
+                  <p>To add a new note, click the note icon.</p>
+                </div>
+              </div>
+            </ng-template>
+
+        </div>
+        <!-- alert icon -->
+        <div
+        [ngClass] ="resource.upcomingCommitmentsForAlerts.allocations.length >= 1 ? 'allocation-alert' : 'commitment-alert'"
+          *ngIf="resource.upcomingCommitmentsForAlerts && (resource.upcomingCommitmentsForAlerts.commitments.length ||
+          resource.upcomingCommitmentsForAlerts.allocations.length) && showAlertDetails === false"
+          [ngbPopover]="popoverContent"
+          triggers="mouseenter:mouseleave"
+          container="body"
+          popoverClass="staffing-page-popover"
+          (click)="toggleAlertDetails()"
+        >
+          <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        
+        <!-- close alert -->
+        <div class="close-alert close-alert-btn-pos" *ngIf=" (resource.upcomingCommitmentsForAlerts.commitments.length ||
+        resource.upcomingCommitmentsForAlerts.allocations.length) && showAlertDetails" (click)="hideAlertDetails()">
+          <i class="fas fa-times close-icon"></i>
+        </div>
+
+        <!-- Popover content -->
+        <ng-template #popoverContent>
+        <!-- Content -->
+        <div class="d-flex flex-column" style="gap: 5px">
+          <span [ngClass] ="resource.upcomingCommitmentsForAlerts.allocations.length >= 1 ? 'allocation-alert' : 'commitment-alert'">
+            {{
+            resource.upcomingCommitmentsForAlerts.allocations.length +
+            resource.upcomingCommitmentsForAlerts.commitments.length > 1
+              ? 'Alerts'
+              : 'Alert'
+            }}
+            </span>
+        <span *ngFor="let alert of resource.upcomingCommitmentsForAlerts.allocations">{{ alert }}.</span>
+        <span *ngFor="let alert of resource.upcomingCommitmentsForAlerts.commitments">{{ alert }}.</span>
+        </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- alert section -->
+    <ng-container *ngIf="showAlertDetails">
+      <div *ngFor="let allocationAlert of resource.upcomingCommitmentsForAlerts.allocations" class="alert-details alerts-width allocation-alert-section">
+        <!-- header and message -->
+        <div class="alert-text"><strong>Alert:</strong> {{ allocationAlert }}</div>
+      </div>
+      <div *ngFor="let commitmentAlert of resource.upcomingCommitmentsForAlerts.commitments" class="alert-details alerts-width commitment-alert-section">
+        <!-- header and message -->
+        <div class="alert-text"><strong>Alert:</strong> {{ commitmentAlert }}</div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<!-- END COMPONENT: RESOURCE-->

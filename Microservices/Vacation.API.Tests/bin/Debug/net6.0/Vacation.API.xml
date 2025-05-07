@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Vacation.API</name>
+    </assembly>
+    <members>
+        <member name="T:Vacation.API.Controllers.QueryIntentOpenAIController">
+            <summary>
+            Vacation Requests Controller
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Controllers.QueryIntentOpenAIController.GetAzureSearchQueryFromSearchText(System.String,System.Double)">
+            <summary>
+            Creates query intent for text using OpenAI chat completions API
+            </summary>
+            <param name="searchQuery"></param>
+            <param name="temperature">0.7</param>
+            <returns>summarized text</returns>
+        </member>
+        <member name="M:Vacation.API.Controllers.QueryIntentOpenAIController.GetAzureSearchQueryFromText(System.String,System.Double)">
+            <summary>
+            Creates short summary for text using OpenAI completions API
+            </summary>
+            <param name="searchQuery"></param>
+            <param name="temperature">0.7</param>
+            <returns>summarized text</returns>
+        </member>
+        <member name="T:Vacation.API.Controllers.SearchController">
+            <summary>
+            Vacation Requests Controller
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Controllers.SearchController.GetResourcesBySearchString(System.String)">
+            <summary>
+            Get results TOP 30 from cognitive search based on search string
+            </summary>
+            <remarks>
+            Sample Request: Managers in Boston who are available today
+            </remarks>
+            <param name="searchString">Managers in Boston who are available today</param>
+            <returns>Searched Results</returns>
+        </member>
+        <member name="M:Vacation.API.Controllers.SearchController.GetResourcesByLuceneSearchQuery(Vacation.API.Models.BossSearchQuery)">
+            <summary>
+            Get results TOP 30 from cognitive search based on selected params
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "searchText": "levelname:'Managers' AND operatingofficeName: 'Boston'",
+                "filterQuery": "availabilityDates/any(a: a/date gt 2023-12-05T00:00:00Z) and languages/any(a: a/name eq 'English')"
+            }
+            </remarks>
+            <param name="searchData"></param>
+            <returns>Searched Results</returns>
+        </member>
+        <member name="T:Vacation.API.Controllers.VacationRequestController">
+            <summary>
+            Vacation Requests Controller
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Controllers.VacationRequestController.GetVacationRequestsByEmployee(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Get vacation requests for employee
+            </summary>
+            <param name="employeeCode"></param>
+            <param name="effectiveFromDate">optional</param>
+            <param name="effectiveToDate">optional</param>
+            <returns>Approved/Pending vacations</returns>
+        </member>
+        <member name="M:Vacation.API.Controllers.VacationRequestController.GetVacationsWithinDateRangeByEmployeeCodes(System.Object)">
+            <summary>
+            Get Vacation requests for employees between specified date range
+            </summary>
+            <remarks>
+            Sample Request:
+            {"employeeCodes":"09PTS,31JWE","startDate":"2019-07-12 00:00:00","endDate":"2019-09-15 00:00:00"}
+            </remarks>
+            <param name="payload"></param>
+            <returns>Approved/Pending vacations</returns>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Insert(`0,System.String)">
+            <summary>
+                Generic insert
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Insert(`0,System.String,System.Object)">
+            <summary>
+                Generic insert with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Insert(System.Object,System.String)">
+            <summary>
+                Generic insert with dynamic parameters
+            </summary>
+            <returns>A list of the inserted objects</returns>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Insert(System.String,System.Object)">
+            <summary>
+                Generic insert with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.InsertAsync(System.String,System.Object)">
+            <summary>
+                Async insert with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.InsertAsync(System.Object,System.String)">
+            <summary>
+                Async insert with dynamic parameters which return inserted object
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Insert(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic insert in a scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Insert(System.Data.IDbConnection,`0,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+                Generic insert with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Update(`0,System.String)">
+            <summary>
+                Generic update
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Update(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic update in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Update(`0,System.String,System.Object)">
+            <summary>
+                Generic update with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Update(System.Object,System.String)">
+            <summary>
+                Generic update with dynamic parameters
+            </summary>
+            <returns>A list of the updated objects</returns>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Update(System.Data.IDbConnection,`0,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+                Generic update with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Update(System.String,System.Object)">
+            <summary>
+                Generic Update with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.UpdateAsync(System.String,System.Object)">
+            <summary>
+                Async Update with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.UpdateAsync(System.Object,System.String)">
+            <summary>
+                Async update with dynamic parameters which return updated object
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Delete(`0,System.String)">
+            <summary>
+                Generic delete
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,`0,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Delete(System.Guid,System.String)">
+            <summary>
+                Generic delete with uniqueidentifier as the id
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Delete(System.String,System.Object)">
+            <summary>
+                Generic delete with dynamic parameters
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.DeleteAsync(System.String,System.Object)">
+            <summary>
+                Async Delete with dynamic parameters which does not return data
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Delete(System.Object,System.String)">
+            <summary>
+                Generic delete with dynamic parameters
+            </summary>
+            <returns>A list of the deleted objects</returns>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,System.Guid,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete with uniqueidentifier as the id, in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.Delete(System.Data.IDbConnection,System.Object,System.String,System.Data.IDbTransaction)">
+            <summary>
+                Generic delete with dynamic parameters in the scope of a transaction
+            </summary>
+        </member>
+        <member name="M:Vacation.API.Core.Repository.BaseRepository`1.DeleteAsync(System.Object,System.String)">
+            <summary>
+                Async Delete with dynamic parameters which return deleted object
+            </summary>
+        </member>
+    </members>
+</doc>

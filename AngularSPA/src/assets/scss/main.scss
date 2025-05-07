@@ -1,0 +1,48 @@
+/*Bootstrap is imported inside scss/bootstrap-theme.scss*/
+@import "variables";
+@import "bootstrap-theme";
+@import "navbar";
+@import "layout";
+@import "sidebar";
+@import "stage";
+@import "calendar";
+@import "overlay";
+@import "notifications";
+@import "score"; //stylings used inside overlay components
+@import "table"; //stylings used inside overlay component on HTML tables
+@import "link"; //stylings used to show error message on project view
+@import "inline-editor"; // styling used in project view and overlays for editable fields
+//@import "multi-select";
+@import "form"; //  stylings used in quick add form
+@import "modal"; //stlying sused in quick add form
+@import "vertical-tabs"; //stylings used in overlay component for showing tabs
+//@import "coloring";
+@import "common.scss";
+//@import "notifications";
+//@import "toggle";
+@import "incremental-input"; //used inside user preferences page to show "+" / "-" icons
+//@import "dropdown-filter";
+//@import "date-filter";
+@import  "tabs.scss"; //used inside case overlay
+@import  "tags.scss"; //used inside case overlay
+
+//overlays
+@import "resource-overlay";
+@import "project-overlay";
+
+//pages
+@import "staffing";
+@import "resources";
+@import "draggable-button";
+
+// stylings for typeahead suggestion
+@import "typeahead";
+
+// styling for ag grid
+@import "ag-grid";
+
+//teams
+@import "teams";
+
+//gantt-context-menu
+@import "gantt-context-menu";

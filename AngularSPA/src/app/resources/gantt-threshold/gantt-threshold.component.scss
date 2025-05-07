@@ -1,0 +1,78 @@
+@use 'sass:math';
+
+$resources-max-days: 365;
+$resources-day-width: 32px;
+$base-padding: 24px;
+
+// @for $i from 1 through $resources-max-days {
+//   .start-#{$i} {
+//     left: calc(((#{$i} - 1) * #{$resources-day-width}));
+//   }
+
+//   .duration-#{$i} {
+//     width: calc((#{$i}) * #{$resources-day-width} + 0px);
+//     max-width: calc((#{$i}) * #{$resources-day-width} + 0px);
+//   }
+
+//   .threshold-#{$i} {
+//     left: calc((#{$i}) * #{$resources-day-width} + 0px);
+//     // left: calc((((#{$i} - 1) * #{$resources-day-width}) + #{math.div($base-padding, 4)}) + ((#{$i}) * #{$resources-day-width} - #{math.div($base-padding, 4)}));
+
+//   }
+// }
+
+.start-1 {
+  left: 0px;
+  border-radius: 0px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: -3px;
+    z-index: 5;
+    background-color: transparent;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    opacity: 0.5;
+  }
+}
+
+.threshold-range {
+  // padding-left: 5px;
+  color: #616568;
+  text-align: left;
+  font-size: 10px;
+  font-weight: 500;
+  font-family: "Graphik";
+  background: rgba(204, 0, 0, 0.1);
+  height: 18px;
+  // position: absolute;
+  width: 32px;
+  border-width: 1px 0px 1px;
+  border-color: #e0e4e8;
+  border-style: solid;
+}
+
+.threshold-monthly-range {
+  color: #616568;
+  text-align: left;
+  font-size: 10px;
+  font-weight: 500;
+  font-family: "Graphik";
+  background: rgba(204, 0, 0, 0.1);
+  height: 18px;
+  // position: absolute;
+  width: 64px;
+  border-width: 1px 0px 1px;
+  border-color: #e0e4e8;
+  border-style: solid;
+}
+
+.threshold-wrapper {
+  // border-width: 1px 0px 1px;
+  // border-color: #e0e4e8;
+  // border-style: solid;
+  position: relative;
+  height: 18px;
+}

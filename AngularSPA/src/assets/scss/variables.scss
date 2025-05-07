@@ -1,0 +1,145 @@
+//colors
+$bain-red: #cc0000;
+$bain-blue: #284ce0;
+$text-regular: #949494;
+$text-dark: #3c3c3c;
+$text-darker: #636363;
+$white: #fff;
+$grey-alt-1: #e0e0e0;
+$grey-medium-light: #eee;
+$grey-light: #e4e4e4;
+$grey-lighter: #f2f2f2;
+$grey-extra-light: #f7f7f7;
+$grey-medium: #ccc;
+$grey-medium-dark: #d7d7d7;
+$grey-dark: #aeaeae;
+$grey-darker: #999;
+$grey-darkest: #6d6d6d;
+$black-light: #121212;
+
+$grey-alt-1: #c4c4c4;
+$grey-alt-2: #7f7f7f;
+$grey-alt-3: #767676;
+$grey-alt-4: #a1a1a1;
+$grey-alt-5: #f5f5f5;
+$grey-alt-6: #f1f1f1;
+
+$sky: #005999;
+$forest: #dce2d6;
+
+$accent-1: #fae62a;
+$accent-2: #f9a740;
+$accent-3: #4cb6fb;
+$accent-4: #07c29f;
+
+$light-accent-1: #fdf8d3;
+$light-accent-2: #fbe5cc;
+$light-accent-3: #c1eefc;
+$light-accent-4: #f6c0c4;
+$light-accent-5: #c0f1e0;
+$light-accent-6: #d3aee8;
+
+//resources page variables
+$resources-day-width: 32px;
+$resources-left-column-width: 182px;
+$resources-max-days: 365;
+$resources-commitment-height: 32px;
+$resources-max-depth: 1000;
+
+$resources-commitment-green: lightgreen;
+$resources-commitment-yellow: #fae62a;
+$resources-commitment-grey: #b1b1b1;
+$resources-tab-commitment-yellow: #ffeba6;
+$resources-tab-commitment-green: #c7ffa6;
+$resources-tab-commitment-grey: #eeeeee;
+$resources-commitment-blue: #b2e3ff;
+$resources-commitment-pink: #feccff;
+$resources-commitment-purple: #bab6f5;
+$resources-commitment-lavender: #ecf0ff;
+$resources-commitment-light-red: #ffccce;
+$resources-commitment-teal: #a6fff0;
+$resources-commitment-light-purple: #d9cef3;
+//keeping down day color as this
+//$resources-commitment-blue-grey: #bfb6cc;
+$resources-commitment-green-pc: #65c16f;
+$resources-commitment-green-pc-border: #3c9445;
+$resources-commitment-red-pc-border: #a80000;
+$resources-commitment-blue-grey: #94B6CD;
+$placeholder-commitment-blue: #a4d7f6;
+$resources-commitment-light-blue: #cae2f2;
+$resources-commitment-orange: #f9a740;
+$resources-commitment-lightgreen: #90ee90;
+
+//fonts
+$brand-font-size: 30px;
+$nav-item-font-size: 16px;
+$small-font-size: 14px;
+
+//measurements
+$header-height: 58px;
+$sidebar-width: 360px; //changed: from 350 to 360 as end date was not visible completly in sidebar datepicker
+$overlay-sidebar-width: 250px;
+$overlay-sidebar-xxl-width: 250px;
+$logo-width: 43px;
+$logo-height: 41px;
+$base-padding: 24px;
+
+// Widths
+$width-medium: 768px;
+$width-large: 1081px;
+$width-xlarge: 1281px;
+$width-xxlarge: 1440px;
+
+//animations
+@mixin color-fade {
+  transition: color 1s;
+}
+
+@function str-to-list($string, $separator: " ", $startAt: 1) {
+  $workStr: str-slice($string, $startAt);
+  $list: ();
+  $indexOfFirstSpace: str-index($workStr, $separator);
+
+  @if $indexOfFirstSpace==null {
+    $list: ($workStr);
+  }
+
+  @else {
+    $list: (str-slice($workStr, 1, $indexOfFirstSpace - 1));
+    $list: join($list, str-to-list($workStr, $startAt: $indexOfFirstSpace + 1));
+  }
+
+  @return $list;
+}
+
+@function parent-append($appendix, $parent, $at-start) {
+  $parentSelector: str-to-list(#{&});
+  $lenght: length($parentSelector);
+
+  @if $parent>=$lenght or $parent < 0 {
+    @error "Index '#{$parent}' is out of range";
+  }
+
+  $pos: $lenght - $parent;
+
+  @if $at-start==false {
+    $selector: set-nth($parentSelector, $pos, nth($parentSelector, $pos) + $appendix);
+    @return $selector;
+  }
+
+  @if $at-start==true {
+    $selector: set-nth($parentSelector, $pos, $appendix + nth($parentSelector, $pos));
+    @return $selector;
+  }
+}
+
+/// Append defined string to parent selector
+/// @require {function} parent-append
+/// @param {String} $appendix - selector that we want append to parent
+/// @param {Number} $parent [1] - index of parent selector
+/// @param {Boolean} $at-start [false] - append to start of parent selector
+@mixin parent-append($appendix, $parent: 1, $at-start: false) {
+  @at-root #{parent-append($appendix, $parent, $at-start)} {
+    @content;
+  }
+}

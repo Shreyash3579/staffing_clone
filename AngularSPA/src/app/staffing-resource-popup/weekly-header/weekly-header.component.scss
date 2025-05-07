@@ -1,0 +1,28 @@
+.weekly-header-wrapper {
+  .block {
+    align-items: center;
+    background-color: #ecf0ff;
+    border: 1px solid #c2c9d1;
+    border-width: 0px 1px 1px 0px;
+    color: #616568;
+    display: flex;
+    font-size: 10px;
+    justify-content: center;
+    line-height: 12px;
+
+    &.week {
+      font-weight: 500;
+      height: 24px;
+      width: 100%;
+    }
+
+    &.dates {
+      height: 32px;
+      width: 32px;
+    }
+
+    &.weekend {
+      background-color: #dae5fd;
+    }
+  }
+}

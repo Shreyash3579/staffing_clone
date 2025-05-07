@@ -1,0 +1,71 @@
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+) !default;
+
+$font-family-base: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+
+$secondary: $grey-lighter;
+$light: $white;
+
+$body-color: $text-regular;
+$input-placeholder-color: $grey-medium;
+
+$dropdown-border-color: $grey-medium-dark;
+$input-border-color: $grey-medium-dark;
+$input-focus-border-color:$grey-darker;
+$input-btn-focus-width:0;
+$input-focus-box-shadow: none!important;
+$input-group-addon-bg: $white;
+
+$table-border-width:0;
+$table-head-bg: $white;
+$table-accent-bg: $grey-extra-light;
+
+.btn-secondary{
+  border-color: $grey-medium-dark !important; 
+}
+
+.btn-default{
+  background-color: darken($grey-light, .6%) !important;
+  color:$grey-darkest !important;
+
+  &:hover{
+    background-color:$grey-medium-dark !important;
+    color: $text-dark !important;
+  }
+}
+
+$link-color:$sky;
+$link-hover-color:darken($sky, 5%);
+
+.input-group-append{  
+  span{
+    color:$grey-medium;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  &.input-group-append-focus span{
+    //box-shadow: none!important;
+    border-color:$input-focus-border-color;
+  }
+}
+
+input[type="checkbox"] {
+  height: 16px;
+  width: 16px;
+}
+
+@import "../../../node_modules/bootstrap/scss/bootstrap";

@@ -1,0 +1,41 @@
+<div class="sort-by-wrapper">
+  <p id="sort-by-label" *ngIf="showHeader">Sort By</p>
+
+  <div class="sort-by-container" cdkDropList (cdkDropListDropped)="drop($event)">
+    <!-- Sort.. -->
+    <div class="sort-row" cdkDrag *ngFor="let sort of sortRows; let i = index">
+      <!-- ..field -->
+      <app-resource-basic-menu [size]="'small'" [placeholder]="'Field'" [menuPosition]="menuPosition"
+        [menuOptions]="sortFieldOptions" [selectedValue]="sort.field"
+        (optionSelectedEmitter)="handleSortingFieldSelection($event, i)"></app-resource-basic-menu>
+
+      <!-- ..direction -->
+      <app-resource-basic-menu [size]="'small'" [placeholder]="'Ascending'" [menuPosition]="menuPosition"
+        [menuOptions]="sortDirectionOptions" [selectedValue]="sort.direction"
+        (optionSelectedEmitter)="handleSortingDirectionelection($event, i)"></app-resource-basic-menu>
+
+      <!-- ..drag icon -->
+      <i class="fas fa-grip-vertical"></i>
+
+      <!-- ..delete -->
+      <button class="btn" (click)="deleteRow(i)">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Controls.. -->
+  <div class="sort-controls-wrapper">
+    <!-- ..add sort -->
+    <button class="btn" *ngIf="sortRows.length < 3" (click)="addSortRow()">
+      <i class="fas fa-plus"></i>
+      <span>Add Sort</span>
+    </button>
+
+    <!-- ..delete all -->
+    <button class="btn" *ngIf="sortRows.length > 1" (click)="deleteAll()">
+      <i class="fas fa-trash"></i>
+      <span>Delete All</span>
+    </button>
+  </div>
+</div>

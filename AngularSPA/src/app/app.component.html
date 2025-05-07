@@ -1,0 +1,18 @@
+<!--Header goes here-->
+<div cdkDropListGroup>
+  
+  <ng-container *ngIf="urlStateBeforeAADRedirect?.indexOf('staffingInsightsTool') == -1 && urlStateBeforeAADRedirect?.indexOf('intakeForm') == -1 && urlStateBeforeAADRedirect?.indexOf('accessdenied') == -1">
+  <div *ngIf="!isSiteUnderMaintainance && isuserDetailsLoaded">
+    <app-header></app-header>
+  </div>
+  <div *ngIf="!isSiteUnderMaintainance && !isuserDetailsLoaded">
+    <app-header-skeleton></app-header-skeleton>
+  </div>
+</ng-container>
+  
+  <!--Pages load here-->
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

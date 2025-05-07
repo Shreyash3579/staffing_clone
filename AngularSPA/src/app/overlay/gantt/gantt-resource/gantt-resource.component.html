@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-12">
+    <div class="row ml-3">
+      <div class="col-1" *ngFor="let item of calendarOptions">
+        <label>
+          <input type="radio" name="{{item.name}}" [(ngModel)]="calendarRadioSelected" value="{{item.value}}"
+                 (change)="onCalendarChange(item)" />{{item.name}}
+        </label>
+      </div>
+      <div class="col-4 right-alignment">
+        <div class="btn-group" dropdown>
+          <button id="button-basic" dropdownToggle type="button" class="btn btn-info dropdown-toggle"
+                  aria-controls="dropdown-basic">
+            Export <span class="caret"></span>
+          </button>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem">
+              <a class="dropdown-item" href="javascript:void(0)" (click)="exportToHandler(downloadFileTypes.pdf)">
+                {{downloadFileTypes.pdf | uppercase}}
+              </a>
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" href="javascript:void(0)" (click)="exportToHandler(downloadFileTypes.png)">
+                {{downloadFileTypes.png | uppercase}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-2 right-alignment">
+        <div class="col-13 input-group">
+          <input type="text" name="commitmentStartDate" placeholder="dd-mmm-yyyy"
+                 class="form-control form-control-sm border-right-0" autocomplete="off" [bsConfig]="bsConfig"
+                 (ngModelChange)="getCommitmentForSelectedDate($event)" bsDatepicker [(ngModel)]="commitmentStartDate"
+                 #dpStart="bsDatepicker" [minDate]="minDate" (keydown.Tab)="dpStart.hide()" />
+
+          <div class="input-group-append">
+            <span class="input-group-text" (click)="dpStart.toggle()">
+              <i id="ganttResourceCalendarIcon" class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div #gantt_here class='gantt-chart resource-gantt-chart'></div>
+<div class="gantt-context-menu" id="ganttResourceContextMenuId">
+</div>

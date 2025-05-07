@@ -1,0 +1,19 @@
+html
+
+body > main {
+  min-height: calc(100vh - #{$header-height});
+  border-top:1px solid $grey-light;
+}
+
+html.no-scroll, html.no-scroll body {
+  // overflow-y: hidden; //header was going 25px up due to hidden. changing to "clip"
+  overflow-y: clip;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.display-inline{
+  display: inline;
+}

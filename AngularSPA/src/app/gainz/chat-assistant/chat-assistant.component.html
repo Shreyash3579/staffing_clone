@@ -1,0 +1,141 @@
+<section class="d-flex main-container">
+  <div>
+    <app-sidebar-project-list
+    [projects]="projects"
+    [selectedProjects]="chatTabs[activeTabIndex]"
+    (selectedProjectsChange)="onSelectedProjectsChange($event)">
+  </app-sidebar-project-list>
+  </div>
+  <mat-tab-group [(selectedIndex)]="activeTabIndex" class="w-100">
+    <mat-tab *ngFor="let chatTab of chatTabs; let i = index" [routerLink]="['/gainz', chatTab.id]">
+      <button (click)="openDialog(chatTab.id)" class="share-btn">
+        <svg fill="none" height="15" viewBox="0 0 14 15" width="14" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M11.4998 10.0001C11.1256 10.002 10.7565 10.0879 10.4199 10.2514C10.0833 10.415 9.78764 10.652 9.55485 10.9451L5.89985 8.6601C6.03306 8.23018 6.03306 7.77002 5.89985 7.3401L9.55485 5.0551C9.92582 5.51446 10.4474 5.82769 11.0272 5.93931C11.607 6.05092 12.2076 5.95372 12.7226 5.66491C13.2376 5.37611 13.6338 4.91435 13.8409 4.36143C14.048 3.8085 14.0528 3.20011 13.8543 2.64402C13.6558 2.08793 13.267 1.62003 12.7565 1.32322C12.2461 1.0264 11.6471 0.919827 11.0656 1.02237C10.4841 1.12491 9.95773 1.42996 9.57963 1.88346C9.20152 2.33697 8.99613 2.90966 8.99985 3.5001C9.00221 3.72369 9.03587 3.94585 9.09985 4.1601L5.44485 6.4451C5.12217 6.03889 4.68112 5.74313 4.18282 5.5988C3.68453 5.45447 3.15368 5.46873 2.66385 5.63961C2.17403 5.81048 1.74949 6.1295 1.44909 6.55245C1.14869 6.9754 0.987305 7.48133 0.987305 8.0001C0.987305 8.51888 1.14869 9.0248 1.44909 9.44775C1.74949 9.8707 2.17403 10.1897 2.66385 10.3606C3.15368 10.5315 3.68453 10.5457 4.18282 10.4014C4.68112 10.2571 5.12217 9.96131 5.44485 9.5551L9.09985 11.8401C9.03587 12.0544 9.00221 12.2765 8.99985 12.5001C8.99985 12.9946 9.14647 13.4779 9.42117 13.889C9.69588 14.3002 10.0863 14.6206 10.5431 14.8098C11 14.999 11.5026 15.0485 11.9876 14.9521C12.4725 14.8556 12.918 14.6175 13.2676 14.2679C13.6172 13.9182 13.8553 13.4728 13.9518 12.9878C14.0483 12.5029 13.9988 12.0002 13.8095 11.5434C13.6203 11.0866 13.2999 10.6961 12.8888 10.4214C12.4776 10.1467 11.9943 10.0001 11.4998 10.0001ZM11.4998 2.0001C11.7965 2.0001 12.0865 2.08808 12.3332 2.2529C12.5799 2.41772 12.7721 2.65199 12.8857 2.92608C12.9992 3.20017 13.0289 3.50177 12.971 3.79274C12.9131 4.08371 12.7703 4.35098 12.5605 4.56076C12.3507 4.77054 12.0835 4.9134 11.7925 4.97128C11.5015 5.02916 11.1999 4.99945 10.9258 4.88592C10.6517 4.77239 10.4175 4.58013 10.2526 4.33346C10.0878 4.08678 9.99985 3.79677 9.99985 3.5001C9.99985 3.10228 10.1579 2.72075 10.4392 2.43944C10.7205 2.15814 11.102 2.0001 11.4998 2.0001ZM3.49985 9.5001C3.20318 9.5001 2.91317 9.41213 2.66649 9.24731C2.41982 9.08248 2.22756 8.84822 2.11403 8.57413C2.0005 8.30004 1.97079 7.99844 2.02867 7.70747C2.08655 7.4165 2.22941 7.14922 2.43919 6.93944C2.64897 6.72966 2.91624 6.5868 3.20721 6.52892C3.49818 6.47105 3.79978 6.50075 4.07387 6.61428C4.34796 6.72781 4.58223 6.92007 4.74705 7.16675C4.91187 7.41342 4.99985 7.70343 4.99985 8.0001C4.99985 8.39793 4.84181 8.77946 4.56051 9.06076C4.2792 9.34207 3.89767 9.5001 3.49985 9.5001ZM11.4998 14.0001C11.2032 14.0001 10.9132 13.9121 10.6665 13.7473C10.4198 13.5825 10.2276 13.3482 10.114 13.0741C10.0005 12.8 9.97079 12.4984 10.0287 12.2075C10.0865 11.9165 10.2294 11.6492 10.4392 11.4394C10.649 11.2297 10.9162 11.0868 11.2072 11.0289C11.4982 10.971 11.7998 11.0008 12.0739 11.1143C12.348 11.2278 12.5822 11.4201 12.7471 11.6667C12.9119 11.9134 12.9998 12.2034 12.9998 12.5001C12.9998 12.8979 12.8418 13.2795 12.5605 13.5608C12.2792 13.8421 11.8977 14.0001 11.4998 14.0001Z"
+            fill="#284CE0"/>
+        </svg>
+
+        Share
+      </button>
+      <ng-template mat-tab-label>
+        <div class="d-flex justify-content-between tab-title">
+          <input (click)="onTabChange(i)"
+                 (dblclick)="enableEditMode(i, $event)"
+                 [(ngModel)]="chatTab.title"
+                 [ngClass]="{'active': i === activeTabIndex}"
+                 [routerLink]="['/gainz', chatTab.id]">
+          <i (click)="deleteTab(i)" *ngIf="activeTabIndex == i" [ngClass]="{'active': i === activeTabIndex}"
+             class="fa-solid fa-xmark"></i>
+        </div>
+      </ng-template>
+      <div *ngIf="chatTab.chat.length == 0" class="chat-bot w-100 h-100">
+        <div class="initial-message m-auto">
+          <div>
+            <h1>Hi there!</h1>
+            <div class="d-flex">
+              <h1 class="mr-3">Let's</h1>
+              <svg class="sparkles-header" fill="none" height="24" viewBox="0 0 23 24" width="23"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M18.7364 8.93665L20.0128 6.12859L22.8209 4.8522L20.0128 3.57582L18.7364 0.767761L17.46 3.57582L14.652 4.8522L17.46 6.12859L18.7364 8.93665ZM11.0781 9.4472L8.52533 3.83109L5.97255 9.4472L0.356445 12L5.97255 14.5528L8.52533 20.1689L11.0781 14.5528L16.6942 12L11.0781 9.4472ZM18.7364 15.0633L17.46 17.8714L14.652 19.1478L17.46 20.4241L18.7364 23.2322L20.0128 20.4241L22.8209 19.1478L20.0128 17.8714L18.7364 15.0633Z"
+                  fill="#284CE0"/>
+              </svg>
+              <h1 class="ai-text mr-3">generate a plan</h1>
+              <h1>together</h1>
+            </div>
+            <p class="initial-description">
+              Welcome to your staffing assistant, a new powerful AI tool for generating
+              the best allocation plans for your new cases, based on resource attributes that are best suited for the
+              job
+            </p>
+            <div class="options d-flex">
+              <div class="d-flex align-items-center mr-5">
+                <svg class="mr-3" fill="none" height="20" viewBox="0 0 20 20" width="20"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M9.99 0C4.47 0 0 4.48 0 10C0 15.52 4.47 20 9.99 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 9.99 0ZM10 18C5.58 18 2 14.42 2 10C2 5.58 5.58 2 10 2C14.42 2 18 5.58 18 10C18 14.42 14.42 18 10 18Z"
+                    fill="#495662"/>
+                  <path d="M10.5 5H9V11L14.25 14.15L15 12.92L10.5 10.25V5Z" fill="#495662"/>
+                </svg>
+
+                Boost productivity
+              </div>
+              <div class="d-flex align-items-center mr-5">
+                <svg class="mr-3" fill="none" height="17" viewBox="0 0 22 17" width="22"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M20 5C18.55 5 17.74 6.44 18.07 7.51L14.52 11.07C14.22 10.98 13.78 10.98 13.48 11.07L10.93 8.52C11.27 7.45 10.46 6 9 6C7.55 6 6.73 7.44 7.07 8.52L2.51 13.07C1.44 12.74 0 13.55 0 15C0 16.1 0.9 17 2 17C3.45 17 4.26 15.56 3.93 14.49L8.48 9.93C8.78 10.02 9.22 10.02 9.52 9.93L12.07 12.48C11.73 13.55 12.54 15 14 15C15.45 15 16.27 13.56 15.93 12.48L19.49 8.93C20.56 9.26 22 8.45 22 7C22 5.9 21.1 5 20 5Z"
+                    fill="#495662"/>
+                  <path d="M14 6L14.94 3.93L17 3L14.94 2.07L14 0L13.08 2.07L11 3L13.08 3.93L14 6Z" fill="#495662"/>
+                  <path d="M2.5 8L3 6L5 5.5L3 5L2.5 3L2 5L0 5.5L2 6L2.5 8Z" fill="#495662"/>
+                </svg>
+                Best Solution
+              </div>
+              <div class="d-flex align-items-center mr-5">
+                <svg class="mr-3" fill="none" height="16" viewBox="0 0 20 16" width="20"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M16 7V9H20V7H16ZM14 13.61C14.96 14.32 16.21 15.26 17.2 16C17.6 15.47 18 14.93 18.4 14.4C17.41 13.66 16.16 12.72 15.2 12C14.8 12.54 14.4 13.08 14 13.61ZM18.4 1.6C18 1.07 17.6 0.53 17.2 0C16.21 0.74 14.96 1.68 14 2.4C14.4 2.93 14.8 3.47 15.2 4C16.16 3.28 17.41 2.35 18.4 1.6ZM2 5C0.9 5 0 5.9 0 7V9C0 10.1 0.9 11 2 11H3V15H5V11H6L11 14V2L6 5H2ZM13.5 8C13.5 6.67 12.92 5.47 12 4.65V11.34C12.92 10.53 13.5 9.33 13.5 8Z"
+                    fill="#495662"/>
+                </svg>
+                Share your thoughts
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="input-box">
+            <svg class="sparkles" fill="none" height="16" viewBox="0 0 16 16" width="16"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12.667 5.99999L13.5003 4.16666L15.3337 3.33332L13.5003 2.49999L12.667 0.666656L11.8337 2.49999L10.0003 3.33332L11.8337 4.16666L12.667 5.99999ZM7.66699 6.33332L6.00033 2.66666L4.33366 6.33332L0.666992 7.99999L4.33366 9.66666L6.00033 13.3333L7.66699 9.66666L11.3337 7.99999L7.66699 6.33332ZM12.667 9.99999L11.8337 11.8333L10.0003 12.6667L11.8337 13.5L12.667 15.3333L13.5003 13.5L15.3337 12.6667L13.5003 11.8333L12.667 9.99999Z"
+                fill="#121212"/>
+            </svg>
+            <div (click)="sendMessage(chatTab.chatbotInput, i)" (keydown.enter)="sendMessage(chatTab.chatbotInput, i)"
+                 class="ask-button">
+              <span class="mr-1">{{ chatTab.chatbotInput.length }}/{{ tokenLimit }}</span>
+              <svg fill="none" height="18" viewBox="0 0 21 18" width="21" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.00999999 18L21 9L0.00999999 0L0 7L15 9L0 11L0.00999999 18Z" fill="#284CE0"/>
+              </svg>
+            </div>
+            <input [(ngModel)]="chatTab.chatbotInput" [maxlength]="tokenLimit" placeholder="Ask me anything"
+                   type="text">
+          </div>
+        </div>
+      </div>
+      <div *ngIf="chatTab.chat.length != 0" class="chat-bot w-100 h-100 d-flex flex-column">
+        <div class="staffing-plan-table">
+          <app-staffing-plan [chatExample]="chatTab.chat"></app-staffing-plan>
+        </div>
+        <div class="input-container">
+          <div class="input-box">
+            <svg class="sparkles" fill="none" height="16" viewBox="0 0 16 16" width="16"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12.667 5.99999L13.5003 4.16666L15.3337 3.33332L13.5003 2.49999L12.667 0.666656L11.8337 2.49999L10.0003 3.33332L11.8337 4.16666L12.667 5.99999ZM7.66699 6.33332L6.00033 2.66666L4.33366 6.33332L0.666992 7.99999L4.33366 9.66666L6.00033 13.3333L7.66699 9.66666L11.3337 7.99999L7.66699 6.33332ZM12.667 9.99999L11.8337 11.8333L10.0003 12.6667L11.8337 13.5L12.667 15.3333L13.5003 13.5L15.3337 12.6667L13.5003 11.8333L12.667 9.99999Z"
+                fill="#121212"/>
+            </svg>
+            <div (click)="sendMessage(chatTab.chatbotInput, i)" (keydown.enter)="sendMessage(chatTab.chatbotInput, i)"
+                 class="ask-button">
+              <span class="mr-1">{{ chatTab.chatbotInput.length }}/{{ tokenLimit }}</span>
+              <svg fill="none" height="18" viewBox="0 0 21 18" width="21" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.00999999 18L21 9L0.00999999 0L0 7L15 9L0 11L0.00999999 18Z" fill="#284CE0"/>
+              </svg>
+            </div>
+            <input [(ngModel)]="chatTab.chatbotInput" [maxlength]="tokenLimit" placeholder="Ask me anything"
+                   type="text">
+          </div>
+        </div>
+      </div>
+
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <button (click)="addNewTab()" class="add-new-tab">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+
+</section>

@@ -1,0 +1,50 @@
+.group-staff-wrapper {
+  font-family: "Graphik";
+
+  .staff-name {
+    color: #000;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+    margin: 0px;
+    width: 150px;
+  }
+
+  p {
+    color: #616568;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    margin: 0px;
+
+    &.position {
+      width: 100px;
+    }
+
+    &.level {
+      width: 30px;
+    }
+
+    &.office {
+      width: 40px;
+    }
+
+    &.employee-code {
+      width: 70px;
+    }
+  }
+
+  button {
+    background-color: transparent;
+    border: none;
+    color: #616568;
+    font-size: 14px;
+    padding: 0px;
+  }
+}
+
+.word-wrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

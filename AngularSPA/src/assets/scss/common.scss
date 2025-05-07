@@ -1,0 +1,97 @@
+@use 'sass:math';
+
+@mixin staff-group-item {
+  @extend .rounded;
+  @extend .shadow-sm;
+  @extend .px-2;
+  @extend .py-1;
+  margin-bottom: 3px;
+  font-size: 12px;
+  $color: $grey-darkest;
+
+  &:hover {
+    background-color: $grey-extra-light;
+  }
+
+  .name {
+    padding-left: 36px;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+
+    // &:before{
+    //   content: "\f58e";
+    //   font-family: "Font Awesome 5 Free";
+    //   font-weight: 900;
+    //   font-size: 10px;
+    //   color: $grey-medium-dark;
+    //   position: absolute;
+    //   left:0;
+    //   top:50%;
+    //   transform: translateY(-50%);
+    // }
+
+    .warning{
+      position: absolute;
+      left:14px;
+      top:50%;
+      font-size:12px;
+      transform: translateY(-50%);
+      color: $grey-medium-dark;
+      cursor: pointer;
+      transition: color .3s;
+      &:hover{
+        color: $bain-red;
+      }
+    }
+  }
+
+  .date, .code, .allocation, .office {
+    text-align: center;
+  }
+
+  .date, .code, .allocation, .office {
+    color: $grey-darkest;
+  }
+
+  .code, .alert-details .close-alert{
+    text-align: right;
+    padding-right: math.div($base-padding, 2);
+  }
+
+  .row.alert-details{
+    
+    .col:first-child{
+      padding-left:36px;
+      color: text-regular;
+      strong{
+        color: $text-darker;
+        font-weight: normal;
+      }
+    }  
+
+    .close-alert i.fa-times{
+      cursor: pointer;
+      transition: color .3s;
+      &:hover{
+        color: $text-dark;
+      }
+    }
+  }
+}
+
+.sidebar-filter-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.pointer-cursor {
+  cursor: pointer;
+}

@@ -1,0 +1,83 @@
+<div id="overlapped-team-header" class="modal-header">
+    <h5 class="modal-title">Optional: assign resources from {{allocation.employeeName}}'s most recent case team
+    </h5>
+    <button type="button" class="close" (click)="closeForm()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div id="overlapped-team-body" class="modal-body" [ngClass]="{'fix': overlappedTeams?.length > 0}">
+    <form novalidate>
+        <!--Employee Grid-->
+        <ng-container>
+
+            <span *ngIf="overlappedTeams?.length === 0">No Team Found for {{allocation.employeeName}}</span>
+
+            <ng-container *ngIf="overlappedTeams?.length > 0">
+                <div class="form-row ml-4 mr-4" *ngFor="let project of distinctProjects">
+                    <div class="form-row">
+                        <label for="tblOverlappedTeams">
+                            <b>{{project}}</b>:
+                        </label>
+                    </div>
+                    <table id="tblOverlappedTeams" class="table table-striped">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>
+                                    <input type="checkbox" [checked]="isProjectSelectAllChecked(project)"
+                                        (change)="OnSelectAllChanged(project, $event.target.checked)">
+                                </th>
+                                <th>Name</th>
+                                <th>LG</th>
+                                <th style="max-width: 100px;">Alloc</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let row of gridData; let i = index" id="row.id">
+                                <ng-container *ngIf="checkProject(row.data, project)">
+                                    <td>
+                                        <input type="checkbox" [checked]="row.checked"
+                                            (change)="OnSelectRowChanged(row, project)">
+                                    </td>
+                                    <td class="level-grade-col-width">{{row.data.employeeName}}</td>
+                                    <td class="level-grade-col-width">{{row.data.currentLevelGrade}}</td>
+                                    <td style="max-width: 100px;">
+                                        <input type="text" id="allocationPercent_{{i}}" name="allocationPercent_{{i}}"
+                                            value="{{row.data.allocation}}" class="form-control form-control-sm"
+                                            autocomplete="off" placeholder="Enter Allocation"
+                                            (change)="updateGridData(row.data, $event.target, 'allocation')">
+                                    </td>
+                                    <td>{{row.data.startDate}}</td>
+                                    <td>{{row.data.endDate}}</td>
+                                    <td>
+                                        <select class="form-control form-control-sm" name="caseRoleType_{{i}}"
+                                            [(ngModel)]='row.data.caseRoleName'
+                                            (change)="updateGridData(row.data, $event.target, 'role')">
+                                            <option [value]="null">Select Type</option>
+                                            <option *ngFor="let role of caseRoleDropDownList; first as isFirst"
+                                                [value]="role">
+                                                {{role}}
+                                            </option>
+                                        </select>
+                                    </td>
+                                </ng-container>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </ng-container>
+
+        </ng-container>
+    </form>
+</div>
+<div class="modal-footer">
+    <button id="overlapped-teams-cancel" type="button" class="btn btn-sm btn-secondary"
+        (click)="closeForm()">Cancel</button>
+    <button id="overlapped-teams-add" type="button" class="btn btn-sm btn-primary"
+        (click)="addOverlappedTeams()" [title]="isAddButtonDisabled ? 'Please select atleast one resource' : ''" [disabled]="isAddButtonDisabled">Add</button>
+</div>

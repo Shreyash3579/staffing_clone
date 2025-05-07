@@ -1,0 +1,31 @@
+<!--Create HTML table with data from securityGroups array-->
+@if(filteredGroups?.length){
+  <div class="group-list-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Group Name</th>
+          <th>Roles</th>
+          <th>Notes</th>
+          <th>Modified</th>
+          <th>Modified By</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let group of filteredGroups">
+          <td>{{ group.groupName }}</td>
+          <td>{{ group.roleNames }}</td>
+          <td title="{{group.notes}}">{{ group.notes }}</td>
+          <td>{{ group.lastUpdated | date: 'dd-MMM-yyyy' }}</td>
+          <td>{{ group.lastUpdatedBy }}</td>
+          <td><button class="btn btn-sm btn-outline-danger btn-delete ag-cell-delete-btn" (click)="onDeleteStaffingGroupClick(group)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+}
+@else{
+  <p>No data found</p>
+}

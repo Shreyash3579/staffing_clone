@@ -1,0 +1,73 @@
+<div ngDraggable class="modal-container-height">
+  <div class="modal-header">
+    <h5 class="modal-title">
+      {{modalHeaderText}}
+    </h5>
+    <button type="button" class="close" (click)="closeDialogHandler()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body mb-3 modal-container-body-height" id="main-content">
+    <div >
+      <div class="text-left-align grid-title">
+        <span class="export-title">Include in Export:</span><br />
+        <div class="export-options-container">
+        <ng-container *ngFor="let exportOption of dataToExport">
+          <div class="export-option-wrapper" >
+            <input type="checkbox" [checked]="exportOption.ischecked" value="{{exportOption.value}}" label="{{exportOption.label}}" (change)="onExportCheckboxChange($event)"/>
+            &nbsp;<span class="export-options export-text-larger">{{exportOption.text}}</span>
+            <div *ngIf="exportOption.child && exportOption.ischecked">
+              <ng-container *ngFor="let childOption of exportOption.child">
+                <ng-container [ngSwitch]="childOption.type">
+                  <div *ngSwitchCase="'app-multi-select-dropdown'" class="dropdown mr-3" id="resourcesCommitmentTypeFilter">
+                    <app-multi-select-dropdown
+                      [dropdownList]="childOption.dropdownList"
+                      [title]="childOption.title"
+                      [selectedItems]="childOption.selectedItems"
+                      (refreshView)="onChangeValue(childOption.onChangeMethod, $event)"
+                    ></app-multi-select-dropdown>
+                  </div>
+                  <div *ngSwitchCase="'Increment-decrement-button'" class="modal-body mb-3">
+                    <div class="col-4 duration">
+                        <shared-increment-decrement-buttons [selectedValue]="childOption.selectedValue" [minValue]="childOption.minValue"
+                          [maxValue]="childOption.maxValue" (valueChanged)="onChangeValue(childOption.onChangeMethod, $event)">
+                        </shared-increment-decrement-buttons>      
+                    </div>      
+                   </div>
+                  <div *ngSwitchCase="'checkbox'" id="cdCasesFilter">
+                    <input
+                      type="checkbox"
+                      [checked]="childOption.isChecked"
+                      (change)="onChangeValue(childOption.onChangeMethod, $event)"
+                    />
+                    &nbsp;<span class="export-options">{{ childOption.label }}</span>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      </div>
+      <br />
+      <ng-container *ngIf="!isDataLoading">
+        <app-html-grid [tableData]="combinedResourcesCommitmentsData" #htmlTableGridRef [tableDef]="htmlTableDef"
+        [gridTitle]="'Upcoming Commitments'" (resourceToBeDeleted) = "resourceToBeDeletedHandler($event)"></app-html-grid>
+      </ng-container>
+    </div>
+    <div *ngIf="isDataLoading">
+      <span>Loading...</span>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-secondary" (click)="closeDialogHandler()">
+      Cancel
+    </button>
+    <button type="button" class="btn btn-sm btn-primary" (click)="sendMail()">
+      Copy and Send Mail
+    </button>
+    <button type="button" class="btn btn-sm btn-primary" (click)="emailResources()">
+      Email Resources
+    </button>
+  </div>
+</div>

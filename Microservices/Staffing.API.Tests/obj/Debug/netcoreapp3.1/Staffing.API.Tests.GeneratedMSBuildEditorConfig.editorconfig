@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = Staffing.API.Tests
+build_property.ProjectDir = C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.API.Tests\

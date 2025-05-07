@@ -1,0 +1,36 @@
+@use 'sass:math';
+.tags{
+  .tag{
+    display: inline-block;
+    border: 1px solid $grey-light;
+    border-radius: 4px;
+    padding: math.div($base-padding, 8) math.div($base-padding, 4);
+    background-color: $white;
+    margin-right: math.div($base-padding, 4);
+    color: $grey-darkest;
+    font-size: 14px;
+    &:last-child{
+      margin-right: 0;
+    }   
+
+    i.fa-times{
+      color: $grey-dark;
+      cursor: pointer;
+    }    
+  }
+
+  i.fa-plus{
+    border: 0;
+    background-color: transparent;
+    color: $grey-dark;
+    cursor: pointer;
+    margin-left: math.div($base-padding, 2);
+  }
+
+  input{
+    width: 150px;
+    height: 28px;
+    display: inline-block;
+  }
+ 
+}

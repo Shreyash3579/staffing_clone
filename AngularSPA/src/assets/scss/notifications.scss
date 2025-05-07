@@ -1,0 +1,121 @@
+@use 'sass:math';
+
+.notifications-overlay{
+  position: fixed;
+  top: calc(#{$header-height} + 2px);
+  bottom:0;
+  left:100vw;
+  width: 500px;
+  transition: left .5s;
+  background-color:$white;
+  z-index: 20;
+  box-shadow: -4px 0px 8px rgba(0, 0, 0, 0.2);
+
+  &.active{
+    left:calc(100% - 500px);
+  }
+
+  > header{
+    padding:$base-padding;
+    font-size: 22px;
+    color: $text-dark;
+    border-bottom: 1px solid $grey-light;
+    i{
+      font-size: 14px;
+      cursor: pointer;
+      color: $grey-alt-2;
+    }
+  }
+
+  .notifications-filters{
+    padding: math.div($base-padding, 2) $base-padding;
+    .fa-sort-down{
+      position: relative;
+      top:-2px;
+    }
+    .notifications-actions {
+      .notification-actions-button{
+        border:none;
+        background-color: transparent;
+        color: $text-regular;
+        &:after{
+          transform: translateY(2px);
+        }
+      }
+    }
+  }
+
+  .section-header{
+    background-color: $grey-lighter;
+    padding: math.div($base-padding, 2) $base-padding;
+    color: $grey-darkest;
+  }
+
+  .notification-list{
+    overflow-y:auto;
+    overflow-x: hidden;
+    height: calc(100vh - 160px);
+
+    .notification{
+      padding: $base-padding $base-padding $base-padding $base-padding*3;
+      position: relative;
+      border-bottom: 2px solid $grey-light;
+      background-color: $white;
+      transition: background-color .2s;
+
+      &:hover{
+        background-color: $grey-lighter;
+      }
+
+      header, footer{
+        color: $grey-darker;
+        font-size: 12px;
+        .small{
+          font-size: 10px;
+        }
+      }
+
+      span.unread{
+        font-weight: bold;
+        position: relative;
+        &:before{
+          content: '';
+          position: absolute;
+          left: -20px;
+          top: 50%;
+          transform: translateY(-50%);
+          background-color: $bain-red;
+          width:10px;
+          height:10px;
+          border-radius: 50%;
+        }
+      }
+
+      .content{
+        color: $text-dark;
+        font-size: 15px;
+        line-height: 15px;
+        padding-top: math.div($base-padding, 3);
+        padding-bottom: math.div($base-padding, 3);
+      }
+
+      &.reminder, &.task{
+        &:before{
+          font-family: 'Font Awesome 5 Free';
+          font-size: 30px;
+          color: $grey-alt-1;
+          position: absolute;
+          left: $base-padding;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+
+      &.reminder:before{content:"\f133";}
+      &.task{
+        &:before{content:"\f328";}
+        transform: translateX(4px);
+      }
+    }
+  }
+}

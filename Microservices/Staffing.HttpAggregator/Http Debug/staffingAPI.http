@@ -1,0 +1,26 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@baseUrl = https://localhost:44348/api
+
+###
+#trigger expert emails
+POST {{baseUrl}}/ExpertEmailUtility/sendMonthlyStaffingAllocationsEmailToApacInnovationAndDesign
+Authorization: 
+Content-Type: application/json
+
+""
+
+###
+#trigger expert emails
+POST {{baseUrl}}/StaffingAggregator/resourcesStaffing
+Authorization: 	<add token here>
+Content-Type: application/json
+
+{
+    "supplyFilterCriteria":{
+        "startDate":"2025-1-27","endDate":"2025-3-9","officeCodes":"285,527,525,295,529,528,290,526,531,530,407",
+        "levelGrades":"V1,V3,V6,V7","positionCodes":"","staffingTags":"SL0002,SL0001,SL0003,SL0004","sortBy":"office|asc",
+        "practiceAreaCodes":"24","affiliationRoleCodes":"8","availabilityIncludes":"4,opportunity","staffableAsTypeCodes":"",
+        "employeeStatuses":"active,loa,notYetStarted"
+    },
+    "pageNumber":null,"resourcesPerPage":null,"loggedInUser":"31BDA"
+}

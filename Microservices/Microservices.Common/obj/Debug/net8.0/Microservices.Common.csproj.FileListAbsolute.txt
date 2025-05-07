@@ -1,0 +1,13 @@
+C:\Projects\TSG-Staffing-BOSS\Microservices\Microservices.Common\bin\Debug\net8.0\Microservices.Common.deps.json
+C:\Projects\TSG-Staffing-BOSS\Microservices\Microservices.Common\bin\Debug\net8.0\Microservices.Common.dll
+C:\Projects\TSG-Staffing-BOSS\Microservices\Microservices.Common\bin\Debug\net8.0\Microservices.Common.pdb
+C:\Projects\TSG-Staffing-BOSS\Microservices\Microservices.Common\obj\Debug\net8.0\Microservices.Common.csproj.AssemblyReference.cache
+C:\Projects\TSG-Staffing-BOSS\Microservices\Microservices.Common\obj\Debug\net8.0\Microservices.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\TSG-Staffing-BOSS\Microservices\Microservices.Common\obj\Debug\net8.0\Microservices.Common.AssemblyInfoInputs.cache
+C:\Projects\TSG-Staffing-BOSS\Microservices\Microservices.Common\obj\Debug\net8.0\Microservices.Common.AssemblyInfo.cs
+C:\Projects\TSG-Staffing-BOSS\Microservices\Microservices.Common\obj\Debug\net8.0\Microservices.Common.csproj.CoreCompileInputs.cache
+C:\Projects\TSG-Staffing-BOSS\Microservices\Microservices.Common\obj\Debug\net8.0\Microservices.Common.sourcelink.json
+C:\Projects\TSG-Staffing-BOSS\Microservices\Microservices.Common\obj\Debug\net8.0\Microservices.Common.dll
+C:\Projects\TSG-Staffing-BOSS\Microservices\Microservices.Common\obj\Debug\net8.0\refint\Microservices.Common.dll
+C:\Projects\TSG-Staffing-BOSS\Microservices\Microservices.Common\obj\Debug\net8.0\Microservices.Common.pdb
+C:\Projects\TSG-Staffing-BOSS\Microservices\Microservices.Common\obj\Debug\net8.0\ref\Microservices.Common.dll

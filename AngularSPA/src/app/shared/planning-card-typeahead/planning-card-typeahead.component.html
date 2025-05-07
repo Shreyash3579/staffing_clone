@@ -1,0 +1,35 @@
+<div>
+  <label for="planningCard" [class.text-danger]="isProjectInvalid">Planning Card *</label>
+  <input type="text" name="planningCard" class="form-control form-control-sm"
+    [typeaheadItemTemplate]="customProjectTypeAheadTemplate" typeaheadOptionField="projectName"
+    [typeaheadOptionsLimit]="50" [typeaheadMinLength]="3" [typeaheadScrollable]="true"
+    [typeaheadOptionsInScrollableView]="7" [(ngModel)]="asyncProjectString"
+    placeholder="search available planning card" autocomplete="off" [typeahead]="projects$"
+    (typeaheadOnSelect)="typeaheadOnSelect($event)"
+    (typeaheadNoResults)="typeaheadNoResultsHandler($event)">
+  <!--  -->
+  <div *ngIf="noCaseOppFound"><span>{{noResultsFoundMsg}}</span></div>
+</div>
+
+<ng-template #customProjectTypeAheadTemplate let-model="item" let-index="index">
+  <div id="{{ 'quickAddProjectSearch-option-' + index }}" class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="color-box planningCard"></div>
+        <div class="col-6 padding-left x10 textWrap"
+          title="{{model.name}}">
+          {{model.name}}
+        </div>
+        <div class="col-1 textWrap" title="{{model.sharedOfficeNames}}">
+          {{model.sharedOfficeNames}}
+        </div>
+        <div class="col-1 textWrap" title="{{model.sharedStaffingTagNames}}">
+          {{model.sharedStaffingTagNames}}
+        </div>       
+        <div class="col-3" *ngIf="model.endDate">
+          {{model.startDate | date:'dd-MMM-yyyy'}} - {{model.endDate | date:'dd-MMM-yyyy'}}
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

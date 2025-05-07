@@ -1,0 +1,53 @@
+::ng-deep .calendar-align-left {
+  left: -104px !important;
+}
+
+.col-1-case-card {
+  flex: 0 0 11.333333%;
+  max-width: 11.333333%;
+}
+
+.col-2-case-card {
+  flex: 0 0 13.666667%;
+  max-width: 13.666667%;
+}
+
+.drag__selection {
+  display: flex;
+  font-size: 10px;
+  justify-content: flex-end;
+  align-items: center;
+
+  i {
+    &:hover {
+      color: #cc0000;
+    }
+  }
+}
+
+.placeholder-wrapper {
+  display: grid;
+  grid-template-columns: 25% 70% 5%;
+  padding: .5rem;
+  align-items: center;
+
+  span {
+    justify-content: center;
+    text-align: center;
+  }
+
+  i {
+    font-size: 10px;
+    text-align: right;
+
+    &:hover {
+      color: #cc0000;
+    }
+  }
+}
+
+.placeholder_addguess {
+  text-decoration-line: underline;
+  text-align: left !important;
+  color: #898989;
+}

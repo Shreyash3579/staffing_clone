@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = BvuCD.API.Tests
+build_property.ProjectDir = C:\Projects\TSG-Staffing-BOSS\Microservices\BvuCD.API.Tests\

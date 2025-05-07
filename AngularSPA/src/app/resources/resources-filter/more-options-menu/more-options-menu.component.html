@@ -1,0 +1,15 @@
+<div class="more-options-menu">
+  <div class="btn-group" dropdown>
+    <!-- Toggle -->
+    <button aria-controls="more-options-picker" dropdownToggle id="button-more-options">
+      <i class="fas fa-ellipsis-h"></i>
+    </button>
+
+    <!-- Container -->
+    <ul class="dropdown-menu" *dropdownMenu role="menu" id="more-options-picker" aria-labelledby="button-more-options">
+      <li role="menuitem" *ngFor="let option of moreOptionsList">
+        <button class="dropdown-item" (click)="handleMoreOptionsClick(option.value)">{{ option.label }}</button>
+      </li>
+    </ul>
+  </div>
+</div>

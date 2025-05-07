@@ -1,0 +1,16 @@
+.staff-group {
+  &:not(:first-child) {
+    @extend .mt-2;
+  }
+
+  header {
+    color: $text-dark;
+    font-size: 13px;
+    @extend .mb-1;
+    @extend .ml-3;
+  }
+
+  .list-group-item {
+    @include staff-group-item; //this mixin is inside common.scss
+  }
+}

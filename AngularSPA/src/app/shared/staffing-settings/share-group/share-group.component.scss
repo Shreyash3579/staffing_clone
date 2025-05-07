@@ -1,0 +1,210 @@
+.create-group-form {
+    font-family: "Graphik";
+    padding: 0px 20px;
+  
+    // Header
+    h3 {
+      color: #121212;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 20px;
+      margin: 0px;
+    }
+  
+    .error-message{
+      color: red;
+    }
+    
+    // Name & Description Inputs
+    .create-group-name-desc-wrapper {
+      flex-direction: column;
+      gap: 16px;
+      margin: 22px 0px 32px;
+  
+      input {
+        border: solid #c2c9d1;
+        border-width: 0px 0px 1px;
+        color: #121212;
+        font-size: 14px;
+        height: 30px;
+  
+        &::placeholder {
+          color: #898989;
+        }
+  
+        &:focus {
+          border-color: #c2c9d1;
+          border-style: none none solid;
+          border-width: 0px 0px 1px;
+          outline: none;
+        }
+      }
+    }
+  
+    // Checkbox
+    .default-checkbox-wrapper {
+      color: #121212;
+      font-family: "Graphik";
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 20px;
+  
+      /* The container */
+      .container {
+        display: block;
+        position: relative;
+        padding: 0px 0px 0px 25px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 400;
+        margin: 0px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+  
+      /* Hide the browser's default checkbox */
+      .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+  
+      /* Create a custom checkbox */
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 18px;
+        width: 18px;
+        background-color: #fff;
+        border: 1px solid #121212;
+      }
+  
+      /* Create the checkmark/indicator (hidden when not checked) */
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+  
+      /* Show the checkmark when checked */
+      .container input:checked~.checkmark:after {
+        display: block;
+      }
+  
+      /* Style the checkmark/indicator */
+      .container .checkmark:after {
+        left: 6px;
+        top: 1px;
+        width: 5px;
+        height: 12px;
+        border: solid #284ce0;
+        border-width: 0 2px 2px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+    }
+  
+    // Search Input
+    .member-search-wrapper {
+      p {
+        color: #121212;
+        font-size: 16px;
+        font-weight: 500;
+        margin: 0px 0px 16px;
+      }
+  
+      .search-container {
+        position: relative;
+  
+        .supply-search {
+          border: 1px solid #c2c9d1;
+          border-radius: 4px;
+          height: 40px;
+          padding: 0px 0px 0px 12px;
+  
+          i {
+            color: #000;
+            font-size: 14px;
+          }
+  
+          input {
+            border: none;
+            font-size: 14px;
+            font-weight: 400;
+            height: 100%;
+            outline: none;
+            width: 100%;
+  
+            &::placeholder {
+              color: #898989;
+            }
+  
+            &:focus {
+              border: none;
+              outline: none;
+            }
+          }
+        }
+  
+        // Search Results List
+        .members-search-results {
+          background-color: #fff;
+          border-radius: 4px;
+          box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+          left: 0px;
+          max-height: 134px;
+          overflow: auto;
+          padding: 10px 0px;
+          position: absolute;
+          top: 100%;
+          width: 100%;
+  
+          .member {
+            cursor: default;
+            padding: 0px 16px;
+            height: 32px;
+  
+            p {
+              color: #121212;
+              font-size: 14px;
+              font-weight: 400;
+              margin: 0px;
+            }
+  
+            button {
+              background-color: transparent;
+              border: none;
+              color: #284ce0;
+              font-size: 14px;
+              font-weight: 500;
+              opacity: 0;
+              padding: 0px;
+              visibility: hidden;
+            }
+  
+            &:hover {
+              background-color: #f7f9ff;
+  
+              button {
+                opacity: 1;
+                visibility: visible;
+              }
+            }
+          }
+        }
+      }
+  
+      .added-members-list {
+        flex-direction: column;
+        gap: 16px;
+        padding: 10px 0px;
+      }
+    }
+  }
+  

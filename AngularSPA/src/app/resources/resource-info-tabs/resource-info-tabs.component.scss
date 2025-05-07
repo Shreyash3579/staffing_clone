@@ -1,0 +1,179 @@
+.tabs {
+    width: 100%;
+    background:  #f1f1f1;;
+
+    .tab-buttons {
+      display: flex;
+      cursor: pointer;
+      height: 26px;
+      justify-content: center;
+      align-items: center;
+      padding-right: 4px;
+      padding-left: 4px;
+
+      button {
+        border: none;
+        flex: 1;
+        transition: background 0.3s;
+        align-items: center;
+        color: #616568;
+        display: flex;
+        font-family: "Graphik";
+        font-size: 10px;
+        font-weight: 500;
+        justify-content: center;
+        z-index: 1;
+
+        &.active {
+          background-color: #fff;
+          border-radius: 2px;
+          bottom: 3px;
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+          content: "";
+          height: 20px;
+          transition: all 0.2s ease-in-out;
+          width: 79px;
+        }
+      }
+    }
+
+    .tab-content {
+      border: 1px solid #ccc;;
+      border-top: none;
+      background: white;
+    }
+  }
+
+  span {
+    color: #616568;
+    display: block;
+    text-transform: capitalize;
+  
+    &.header-label {
+      font-weight: 500;
+    }
+  }
+  
+  #alertIcon {
+    color: #cc0000;
+    margin-left: 3px; /* Adjust the margin as needed */
+    transition: color 0.3s ease; /* Add a smooth transition effect */
+  }
+  
+  .hover-text {
+    display: none;
+    position: absolute;
+    background: #616568;
+    color: black;
+    padding: 5px;
+    border: none;
+    color: #fff;
+    font-family: "Graphik";
+    border-radius: 4px;
+    font-size: 11px;
+    text-transform: none;
+    z-index: 999;
+  }
+  
+  .user__icon:hover #alertIcon {
+    color: darkred; /* Change color on hover */
+  }
+  
+  .user__icon:hover .hover-text {
+    display: block; /* Show text on hover */
+  }
+  
+  .notes-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .hovered-section {
+    position: absolute;
+    z-index: 999;
+    background: white;
+    /* border: 1px solid; */
+    width: 305px;
+    border-top: 1px solid #E0E0DE;
+    box-shadow: 0px 4px 4px 0px #00000040;
+  }
+  
+  .hover-resume .icon {
+    display: none;
+  }
+  
+  .hover-resume {
+    position: relative;
+  }
+  
+  .hover-resume:hover {
+    background: #E6E2E2;
+    cursor: pointer;
+  
+    .icon {
+      display: block;
+      position: absolute;
+      right: 1px;
+      top: 1px;
+      background: #E6E2E2;
+      padding: 1px;
+  
+    }
+  }
+  
+  .resume-container {
+    background-color: #F5F5F5;
+    min-height: 20px;
+    .resume-wrapper {
+      padding: 3px;
+    }
+  
+    .resume-wrapper:nth-child(1) {
+      width: 165px;
+      border-right: 1px solid lightgray;
+    }
+  
+    .resume-wrapper:nth-child(2) {
+      width: 165px;
+      border-right: 1px solid #e2e2e2;
+    }
+  
+    .resume-wrapper:nth-child(3) {
+      width: 165px;
+    }
+    .resume-wrapper span {
+      text-transform: none; 
+    }
+  }
+  
+  
+  // Notes Wrapper
+  .notes-wrapper {
+    //border: 1px solid #e0e4e8;
+    box-sizing: border-box;
+    max-height: 999px;
+    transition: all 0.2s ease-in-out;
+    font-size: x-small;
+    $tab-background: #f1f1f1;
+    $tab-active-background: #ccc;
+    $tab-border-color: #ccc;
+    $tab-content-background: white;
+  
+  
+    // When collapsed
+    &.collapsed {
+      max-height: 18px;
+      overflow: hidden;
+    }
+  
+  }
+  
+  //Info icon 
+  .info-icon-pad {
+    margin-left: 3px; /* Adjust space between text and icon */
+    font-size: 11px;  /* Match the size to your design */
+    align-items: center;
+ }
+  
+
+  

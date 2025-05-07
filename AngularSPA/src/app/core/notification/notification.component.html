@@ -1,0 +1,116 @@
+<!-- COMPONENT: NOTIFICATIONS-->
+<div class="notifications-overlay" [ngClass]="{'active': showDialog}" id="notification-popup">
+  <mat-tab-group [disableRipple]="true"  [color]="color" (selectedTabChange)="onTabChanged($event)">
+    <mat-tab label="Notifications">
+      <div class="section-header">Recent</div>
+      <div class="notification-list">
+        <cdk-virtual-scroll-viewport itemSize="40" style="height:100%">
+          <div class="notification reminder" (click)="updateUserNotificationStatus($event, notification)"
+          *cdkVirtualFor="let notification of userNotifications">
+            <header class="d-flex">
+              <span class="small">REMINDER</span>
+              <span
+                [ngClass]="notification.notificationStatus === 'U' ? 'ml-auto unread': 'ml-auto'">{{notification.notificationDate | date:'dd-MMM'}}</span>
+            </header>
+            <div class="content" *ngIf="notification.oldCaseCode; else oppTemplate">
+              <a href="javascript:void(0)" (click)="openCaseOpp(notification.oldCaseCode)">
+                {{notification.description}}
+              </a>
+            </div>
+            <ng-template #oppTemplate>
+              {{notification.description}}
+            </ng-template>
+            <footer>
+              Due on {{notification.notificationDueDate | date:'dd-MMM'}}
+            </footer>
+          </div>
+        </cdk-virtual-scroll-viewport>
+      </div>
+    </mat-tab>
+    <mat-tab label="Case Changes Audit">
+      <div class="section-header">
+        <!--Filters-->
+        <div class="date-picker-wrapper">
+          <div id="caseChangesAuditDateRangePicker" class="input-group w-auto justify-content-end calendar calendar-resources">
+              <div class="input-group-prepend">
+                  <button id="btnDateShiftLeft" class="btn btn-secondary" (click)="shiftDateRange('left')">
+                      <i class="fa fa-chevron-left fa-fw"></i>
+                  </button>
+              </div>
+              <div class="input-group-prepend">
+                  <span class="input-group-text" id="date-picker-icon" (click)="dp.toggle()">
+                      <i class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw" aria-hidden="true"></i>
+                  </span>
+              </div>
+              <input
+                  type="text"
+                  id="date-range-calendar"
+                  name="daterange"
+                  readonly
+                  [ngModel]="selectedDateRange"
+                  (ngModelChange)="onDateRangeChange($event)"
+                  class="form-control"
+                  #dp="bsDaterangepicker"
+                  bsDaterangepicker
+                  [bsConfig]="bsConfig"
+              />
+              <div class="input-group-append">
+                  <button id="btnDateShiftRight" class="btn btn-secondary" (click)="shiftDateRange('right')">
+                      <i class="fa fa-chevron-right fa-fw"></i>
+                  </button>
+              </div>
+          </div>
+      </div>
+
+      </div>
+      <div class="notification-list">
+        <div class="notification reminder content" *ngIf="isCaseChangesAuditDataLoaded && !preponeCaseAllocationsAudit?.length">
+            No Case(s) found
+        </div>
+
+        <cdk-virtual-scroll-viewport itemSize="40" style="height:100%">
+          <div class="notification reminder"
+          *cdkVirtualFor="let preponedCase of preponeCaseAllocationsAudit">
+            
+            <div class="content">
+              <a href="javascript:void(0)" (click)="openCaseOpp(preponedCase.oldCaseCode)">
+                {{preponedCase.oldCaseCode + ' - ' + preponedCase.clientName + ' - ' + preponedCase.caseName}}
+              </a>
+            </div>
+            <header class="d-flex">
+              <span class="small">
+                Impacted Employee(s) <strong class="color-red">{{preponedCase.employeeNames}}</strong>
+              </span>
+            </header>
+            <div class="pt-1">
+              <strong class="small">
+                Changes made by Finance
+              </strong>
+            </div>
+            <footer>
+              <div  class="d-flex">
+                <span class="small">
+                  Prev. end date <strong>{{preponedCase.originalCaseEndDate | date:'dd-MMM-yyyy'}}</strong>
+                </span>
+                <span class="small ml-auto">
+                  Last finance update by <strong>{{preponedCase.caseLastUpdatedByName}}</strong>
+                </span>
+              </div>
+              <div  class="d-flex">
+                <span class="small">
+                  New end date <strong>{{preponedCase.updatedCaseEndDate | date:'dd-MMM-yyyy'}}</strong>
+                </span>
+                <span class="small ml-auto">
+                  Last updated date <strong>{{preponedCase.caseLastUpdated | date:'dd-MMM-yyyy'}}</strong>
+                </span>
+              </div>
+              
+            </footer>
+          </div>
+        </cdk-virtual-scroll-viewport>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  
+</div>
+<!-- END COMPONENT: NOTIFICATIONS-->

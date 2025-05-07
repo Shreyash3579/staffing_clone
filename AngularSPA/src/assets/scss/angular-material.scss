@@ -1,0 +1,55 @@
+@use '@angular/material' as mat;
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';  //This is needed fo rmaterial components styling to work
+
+//-------------Override Material Theme to choose application specific colors------------------------
+$my-primary: mat.define-palette(mat.$indigo-palette, 500);
+$my-accent: mat.define-palette(mat.$green-palette, A200, A100, A400);
+$my-warn: mat.define-palette(mat.$red-palette, 900); // The "warn" palette is optional and defaults to red if not specified.
+
+//updating theme colors for material as per application as "deeppurple-amber.css" theme colors were not working for us
+$theme: mat.define-light-theme((
+ color: (
+   primary: $my-primary,
+   accent: $my-accent,
+   warn: $my-warn,
+ ),
+//  typography: mat.define-typography-config(
+//    $font-family: 'Graphik',
+//   //  bold-weight: 900
+//  ),
+));
+
+@include mat.all-component-themes($theme);
+@include mat.core-theme($theme);
+
+//-------------Override Material slide toggle------------------------
+.mdc-switch__icons {
+  display: none; //Remove minus and check icon from the toggle
+}
+
+//-------------Override Material Tabs------------------------
+.mat-mdc-tab.mdc-tab {
+  border-bottom: 1px solid #c2c9d1 !important;
+  letter-spacing: 0 !important;
+  font-size: 16px;
+  font-family: 'graphik';
+}
+
+.mdc-tab-indicator__content {
+  border-bottom: 2px solid;
+}
+
+// .mat-mdc-dialog-container {
+//   padding: 0;
+//   transition: left 1s !important;position: fixed;
+//   top: calc(#{$header-height});
+//   //top: calc(#{$header-height} + 2px);
+//   bottom: 0;
+//   left: 100vw;
+//   width: 100vw;
+//   padding: $base-padding;
+//   transition: left 1s !important;
+//   background-color: $white;
+//   z-index: 2;
+// }
+

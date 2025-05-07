@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = Polaris.API
+build_property.ProjectDir = C:\Projects\TSG-Staffing-BOSS\Microservices\Polaris.API\

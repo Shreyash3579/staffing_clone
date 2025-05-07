@@ -1,0 +1,65 @@
+@use 'sass:math';
+
+.dropdown-filter{  
+  width: auto;
+  .input-group.search{
+    width:100%;
+  }
+
+  ul{  
+    list-style-type: none;
+    margin: 0;
+    padding: 0;    
+    max-height: 200px;
+    overflow-y: auto;
+    li:not(.separator){
+      padding: math.div($base-padding, 2);
+      padding-right: $base-padding*2.5;
+      font-size: 14px;
+      font-weight: 600;
+      position: relative;
+      white-space: nowrap;
+      cursor: pointer;
+      &:hover{
+        background-color: $grey-lighter;
+      }
+
+      &.all{
+        border-bottom: 1px solid $grey-light;
+      }
+
+      .fa-check{
+        display: none;
+        position: absolute;
+        right:16px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      &.selected{
+        .fa-check{
+          display: block;
+        }
+      }
+    }
+
+    li.separator{
+      height: 1px;
+      background-color: $grey-medium;
+    }
+  }
+
+  button{
+    width:calc(100% - 4px);
+    &.btn-secondary{
+      background-color: $white!important;
+      border-color: $bain-red!important;
+      color: $bain-red!important;
+    }
+    &.btn-primary{
+      background-color: $bain-red;
+      color: $white;
+      border-color: $bain-red!important;
+    }
+  }  
+}

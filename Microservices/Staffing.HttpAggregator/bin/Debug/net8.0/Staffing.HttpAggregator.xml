@@ -1,0 +1,694 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Staffing.HttpAggregator</name>
+    </assembly>
+    <members>
+        <member name="M:Staffing.HttpAggregator.Controllers.AggregationController.GetAllCommitmentsForEmployee(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Get Commitments of Resource
+            </summary>
+            <param name="employeeCode">employee code of resource to get data for</param>
+            <param name="effectiveFromDate">date in which commitment should lie</param>
+            <param name="effectiveToDate">date in which commitment should lie</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.AggregationController.GetEmployeeInfoWithPracticeAffiliations(System.String)">
+            <summary>
+            Get aggregated info of Resource along with its Practice Affiliations
+            </summary>
+            <param name="employeeCode">employee code of resource to get data for</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.CasePlanningMetricsController.GetCasePlanningBoardColumnsData(System.Object)">
+             <summary>
+             Get case planning board data that has been assigned to board columns between date range and by selected demand filters
+             </summary>
+             <remarks>
+             Sample Request:
+             {
+                "demandFilterCriteria": {
+                    "startDate": ""2023-01-01",
+                    "endDate": "2023-01-31",
+                    "officeCodes": "110",
+                    "caseTypeCodes": "1,2,4,5",
+                    "demandTypes": "Opportunity,NewDemand,PlanningCards",
+                    "opportunityStatusTypeCodes": "0,1,2,3,4,5",
+                    "caseAttributeNames": "",
+                    "minOpportunityProbability": 0,
+                    "industryPracticeAreaCodes": "",
+                    "capabilityPracticeAreaCodes": "",
+                    "caseExceptionShowList": "",
+                    "caseExceptionHideList": "",
+                    "opportunityExceptionShowList": "",
+                    "opportunityExceptionHideList": "",
+                    "caseAllocationsSortBy": "",
+                    "planningCardsSortOrder": "",
+                    "caseOppSortOrder": ""
+                },
+                "employeeCode": "39209",
+                "date": "{{startDate}}"
+            }
+             </remarks>
+             <param name="payload"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.CasePlanningMetricsController.GetCasePlanningBoardNewDemandsData(System.Object)">
+             <summary>
+             Get new demands that are not assigned to board between date range and by selected demand filters
+             </summary>
+             <remarks>
+             Sample Request:
+             {
+                "demandFilterCriteria": {
+                    "startDate": ""2023-01-01",
+                    "endDate": "2023-01-31",
+                    "officeCodes": "110",
+                    "caseTypeCodes": "1,2,4,5",
+                    "demandTypes": "Opportunity,NewDemand,PlanningCards",
+                    "opportunityStatusTypeCodes": "0,1,2,3,4,5",
+                    "caseAttributeNames": "",
+                    "minOpportunityProbability": 0,
+                    "industryPracticeAreaCodes": "",
+                    "capabilityPracticeAreaCodes": "",
+                    "caseExceptionShowList": "",
+                    "caseExceptionHideList": "",
+                    "opportunityExceptionShowList": "",
+                    "opportunityExceptionHideList": "",
+                    "caseAllocationsSortBy": "",
+                    "planningCardsSortOrder": "",
+                    "caseOppSortOrder": ""
+                },
+                "employeeCode": "39209",
+                "date": "{{startDate}}"
+            }
+             </remarks>
+             <param name="payload"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.CasePlanningMetricsController.GetCasePlanningBoardStaffableTeams(System.Object)">
+             <summary>
+             Get Staffable teams data for planning board columns
+             </summary>
+             <remarks>
+             Sample Request:
+             {
+                    "startWeek": ""2023-01-01",
+                    "endWeek": "2023-01-31",
+                    "officeCodes": "110",
+            }
+             </remarks>
+             <param name="payload"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.EmployeeStaffingPreferenceController.GetEmployeeStaffingPreferences(System.String)">
+            <summary>
+            Get employee industry and capability preferences for staffing
+            </summary>
+            <param name="employeeCode"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Staffing.HttpAggregator.Controllers.EmployeeStaffingPreferenceController.UpsertEmployeeStaffingPreferences(Staffing.HttpAggregator.ViewModels.EmployeeStaffingPreferencesViewModel)" -->
+        <member name="M:Staffing.HttpAggregator.Controllers.ExpertEmailUtilityController.SendMonthlyStaffingAllocationsEmailToExperts(System.String)">
+            <summary>
+            Send monthly emails to Expert groups on their monthly staffing History 
+            and Retry for failed employees
+            </summary>
+            <param employeeCodes="string">If employeeCodes are passed, email will only be sent to them</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ExpertEmailUtilityController.SendMonthlyStaffingAllocationsEmailToApacInnovationAndDesign(System.String)">
+            <summary>
+            Send monthly emails to Expert groups on their monthly staffing History 
+            and Retry for failed employees
+            </summary>
+            <param employeeCodes="string">If employeeCodes are passed, email will only be sent to them</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.PlanningCardController.MergePlanningCard(System.Object)">
+            <summary>
+            Updates Case Code on the planning card and triggers PEG service bus for PEG planning cards
+            </summary>
+            <param name="payload">Planning Card data that is merged</param>
+            <returns></returns>
+            <remarks>
+            Sample Request:
+               {
+                  "oldCaseCodes":"Q6BK",
+                  "employeeCodes":"39980",
+                  "lastUpdated":"2020-04-09",
+                  "startDate":"2020-04-01",
+                  "endDate":"2020-04-17",
+                  "caseRoleCodes": null
+               }
+            </remarks>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.PreponedCasesAllocationsAuditController.GetPreponedCaseAllocationsAudit(System.Object)">
+            <summary>
+                 Get all preponed cases and impacted allocations on them between date range and for selected staffing tags.
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+            <remarks>
+            Sample Request:
+            
+            {
+                "startDate":"2023-06-01T15:41:18.009Z",
+                "endDate":"2023-06-15T15:41:18.009Z",
+                "serviceLineCodes":"P",
+                "officeCodes":"210,512,215,536"
+            }
+            </remarks>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ProjectAggregatorController.GetOpportunitiesAndCasesWithAllocationsBySelectedValues(System.Object)">
+            <summary>
+                Get opportunity and cases data along with their allocation filtered by selected criteria
+            </summary>
+            <param name="payload">Pass loggedInUser param if casePlanningViewNotes are required</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ProjectAggregatorController.GetOpportunitiesAndNewDemandWithAllocationsBySelectedValues(System.Object)">
+            <summary>
+                Get opportunity and cases data along with their allocation filtered by selected criteria
+            </summary>
+            <param name="payload">Pass loggedInUser param if casePlanningViewNotes are required</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ProjectAggregatorController.GetOpportunityDetailsWithAllocationByPipelineId(System.String,System.String)">
+            <summary>
+            Get Opportunity details along with its allocations by pipeline Id
+            </summary>
+            <param name="pipelineId"></param>
+            <param name="loggedInUser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ProjectAggregatorController.GetCaseDetailsWithAllocationByCaseCode(System.String,System.String)">
+            <summary>
+            Get Case details along with its allocations by Case Code
+            </summary>
+            <param name="oldCaseCode"></param>
+            <param name="loggedInUser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ProjectAggregatorController.GetOnGoingCasesWithAllocationsBySelectedValues(System.Object)">
+            <summary>
+                Get ongoing cases data along with their allocation filtered by selected criteria
+            </summary>
+            <param name="payload">Pass loggedInUser param if casePlanningViewNotes are required</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ProjectAggregatorController.GetProjectsForTypeahead(System.String)">
+            <summary>
+            Get opportunities and cases for typeahead
+            </summary>
+            <param name="searchString">Search opportunities and cases by its name, client Code or Client Name</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ProjectAggregatorController.GetCasesForTypeahead(System.String)">
+            <summary>
+            Get cases for typeahead
+            </summary>
+            <param name="searchString">Search cases by its name, client Code or Client Name</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ProjectAggregatorController.GetPlanningCardAndAllocationsByEmployeeCodeAndFilters(System.String,System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            Get planning card and its allocations
+            </summary>
+            <param name="employeeCode"></param>
+            <param name="officeCodes"></param>
+            <param name="staffingTags"></param>
+            <param name="isStaffedFromSupply"></param>
+            <param name="loggedInUser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ProjectAggregatorController.UpsertCaseViewNote(System.Object)">
+            <summary>
+            Upsert Case View Note
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ProjectAggregatorController.GetCaseViewNote(System.Object)">
+            <summary>
+            Get Notes created by employee or shared with employee for a single case or opp or planning card
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+            <remarks>
+            Sample Request:
+            
+                {
+                   "loggedInUser": "39209",
+                   "oldCaseCode": null,
+                   "pipelineId": null,
+                   "planningCardId": "59a10495-9703-ee11-a9cc-005056accf10"
+               }
+            </remarks>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourceAggregatorController.GetResourcesFilteredBySelectedValues(System.Object)">
+            <summary>
+                Get Resources filtered based on selected values 
+            </summary>
+            <param name="payload"></param>
+            <remarks>
+            Sample Request:
+               {
+                  "startDate":"2020-7-6",
+                  "endDate":"2020-8-3",
+                  "officeCodes":"404",
+                  "levelGrades":"",
+                  "staffingTags":"SL0001"
+               }
+            </remarks>
+            <returns>List of Resources</returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourceAggregatorController.GetResourcesFilteredBySelectedGroupValues(System.Object)">
+            <summary>
+                Get Resources filtered based on selected values 
+            </summary>
+            <param name="payload"></param>
+            <remarks>
+            Sample Request:
+               {
+                  "startDate":"2020-7-6",
+                  "endDate":"2020-8-3",
+                  "officeCodes":"404",
+                  "levelGrades":"",
+                  "staffingTags":"SL0001"
+               }
+            </remarks>
+            <returns>List of Resources</returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourceAggregatorController.GetResourcesAllocationsAndCommitmentsBySearchString(System.String,System.Nullable{System.Boolean})">
+            <summary>
+            Get Active Resources and its commitments by search string
+            </summary>
+            <param searchString="string">searches by firtname, lastname and fullname</param>
+            <param addTransfers="bool">TRUE: adds row if resources has transfer, faslse: does not add transfer row</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourceAggregatorController.GetResourcesIncludingTerminatedAllocationsAndCommitmentsBySearchString(System.String,System.Nullable{System.Boolean})">
+            <summary>
+            Get Resources (active + terminated) and its commitments by search string
+            </summary>
+            <param searchString="string">searches by firtname, lastname and fullname</param>
+            <param addTransfers="bool">TRUE: adds row if resources has transfer, faslse: does not add transfer row</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourceAggregatorController.GetResourcesAllocationsAndCommitmentsWithinDateRange(System.Object)">
+            <summary>
+             Gets all resource commitments within the date range
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+            <remarks>
+            Sample Request:
+            
+            {
+                "startDate":"2023-06-01T15:41:18.009Z",
+                "endDate":"2023-06-15T15:41:18.009Z",
+                "serviceLineCodes":"P",
+                "officeCodes":"210,512,215,536"
+            }
+            </remarks>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourceAggregatorController.GetAdvisorByEmployeeCode(System.String)">
+            <summary>
+            Get HCPD advisor for employee
+            </summary>
+            <param employeeCode="string"></param>
+            <returns>{"fullName": null} when employee does not have any advisor</returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourceAllocationAggregatorController.UpsertResourceAllocations(System.Object)">
+            <summary>
+            Assign/Update resource allocation on case
+            </summary>
+            <remarks>
+            Sample Request:
+            [
+               {
+                  "oldCaseCode":"D6GR",
+                  "caseCode":2,
+                  "caseName":"ADAPT-Unilodgers",
+                  "clientCode":31021,
+                  "clientName":"Unilodgers",
+                  "caseTypeCode": 1,
+                  "caseTypeName": "Billable",
+                  "pipelineId":null,
+                  "opportunityName":null,
+                  "employeeCode":"47910",
+                  "employeeName":"Agarwal, Ayushya",
+                  "fte":1,
+                  "serviceLineName":"Traditional Consulting",
+                  "position":"Associate Consultant",
+                  "currentLevelGrade":"A1",
+                  "operatingOfficeCode":334,
+                  "operatingOfficeName":"Mumbai",
+                  "operatingOfficeAbbreviation":"MUB",
+                  "managingOfficeCode":334,
+                  "managingOfficeName":"Mumbai",
+                  "managingOfficeAbbreviation":"MUB",
+                  "billingOfficeCode":334,
+                  "billingOfficeName":"Mumbai",
+                  "billingOfficeAbbreviation":"MUB",
+                  "allocation":100,
+                  "startDate":"12/5/2019",
+                  "endDate":"22-Jan-2020",
+                  "investmentCode":null,
+                  "investmentName":null,
+                  "caseRoleCode":null,
+                  "caseRoleName":null,
+                  "lastUpdatedBy":"45088"
+               }
+            ]
+            </remarks>
+            <returns>Assigned resource(s) to case</returns>
+            <param name="payload">Json representing one or more Resource Allocation</param>
+            <response code="201">Returns Added and Updated resource(s) to case</response>
+            <response code="400">If Payload is null or wrongly formatted</response>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourceAllocationAggregatorController.UpsertCaseRollsAndAllocations(System.Object)">
+            <summary>
+            Upserts case roll data and rolled allocations when a case is rolled or existing case rolls are updated
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "caseRolls" : [{
+                    "rolledFromOldCaseCode": "K7FC", "rolledFromOldCaseCode": null, "currentCaseEndDate": "10-Jul-2020",
+                    "expectedCaseEndDate": "30-Jul-2020", "lastUpdatedBy": "39209"
+                }], 
+                "resourceAllocations": [{},{}]
+            }
+            </remarks>
+            <param name="payload"></param>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourceAllocationAggregatorController.RevertCaseRollsAndAllocations(System.Object)">
+            <summary>
+            reverts the rolled allocations to their original case date and delete the case roll data
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "caseRoll" : {
+                    "rolledFromOldCaseCode": "K7FC", "rolledFromOldCaseCode": null, "currentCaseEndDate": "10-Jul-2020",
+                    "expectedCaseEndDate": "30-Jul-2020", "lastUpdatedBy": "39209"
+                }, 
+                "resourceAllocations": [{},{}]
+            }
+            </remarks>
+            <param name="payload"></param>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourceAllocationAggregatorController.GetCaseRoleAllocationsByOldCaseCodes(System.Object)">
+            <summary>
+            To fetch which employees are working on a opportunity has a Role specified
+            Mostly used to find partners working on case
+            </summary>
+            /// <remarks>
+            Sample Request:
+            {
+                "oldCaseCodes" : "K3NE,A2FJ"
+            }
+            </remarks>
+            <param name="payload">comma separated list of oldCaseCodes</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourceAllocationAggregatorController.GetCaseRoleAllocationsByPipelineIds(System.Object)">
+            <summary>
+            To fetch which employees are working on a opportunity has a Role specified
+            Mostly used to find partners working on case
+            </summary>
+            /// <remarks>
+            Sample Request:
+            {
+                "pipelineIds" : "eaad4f85-1b87-4691-ace2-77cd81379b31"
+            }
+            </remarks>
+            <param name="payload">comma separated list of pipelineIds</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourceAllocationAggregatorController.GetLastTeamByEmployeeCode(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Get the team that the employee worked on the last case
+            </summary>
+            <remarks>
+            </remarks>
+            <param name="employeeCode"></param>
+            <param name="date">Optional</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourceAllocationAggregatorController.GetAllocationsWithinDateRangeForOfficeClosure(System.Object)">
+            <summary>
+            This API end point is used to fetch allocations for office closure based on filter values
+            </summary>
+            <remarks>
+            Sample Request: {"officeCodes": "110","caseTypeCodes": "4","startDate": "2021-12-25","endDate": "2021-12-31"}
+            </remarks>
+            <param name="payload">comma separated list of officeCodes, caseTypeCodes and start date and end date</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourcePlaceholderAllocationAggregatorController.GetPlaceholderAllocationsByCaseCodes(System.Object)">
+            <summary>
+            Gets Placeholders Allocations on cases
+            </summary>
+            <remarks>
+            Smaple Request:
+            {
+                "oldCaseCodes" : ""
+            }
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourcePlaceholderAllocationAggregatorController.GetPlaceholderAllocationsByPipelineIds(System.Object)">
+            <summary>
+            Gets Placeholders Allocations on opportunites
+            </summary>
+            <remarks>
+            Smaple Request:
+            {
+                "pipelineIds" : ""
+            }
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourcePlaceholderAllocationAggregatorController.GetPlaceholdersAllocationsByPlanningCardIds(System.Object)">
+            <summary>
+            Gets Placeholders Allocations on Planning Cards
+            </summary>
+            <remarks>
+            Smaple Request:
+            {
+                "planningCardIds" : ""
+            }
+            </remarks>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.ResourcePlaceholderAllocationAggregatorController.GetPlaceholderAllocationsByByEmployeeCode(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Gets placeholder allocations for a resource based on date range
+            </summary>
+            <param name="employeeCode"></param>
+            <param name="effectiveFromDate"></param>
+            <param name="effectiveToDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.RingfenceManagementController.GetTotalResourcesByOfficesAndRingfences(System.Object)">
+            <summary>
+            gets count of resources available in specific ringfence and office as of today
+            </summary>
+            <remarks>
+            Sample Request: {"officeCodes": "115,125,128,110,160,539,127,152,153,542,511,165,400,112,504,521,150,151,120,116,508,524,176,395,170,175,535,177,500",    "commitmentTypeCodes": "P"}
+            </remarks>
+            <param name="payload">comma separated list of officeCodes, ringfence codes</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.RingfenceManagementController.GetRingfenceAuditLogByOfficeAndCommitmentCode(System.String,System.String)">
+            <summary>
+            Gets audit log of what changes were made to ringfence management data 
+            </summary>
+            <param name="officeCode">office code for which to get log</param>
+            <param name="commitmentTypeCode">Ringfence Code (P for Peg)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.SearchController.GetResourcesBySearchString(Staffing.HttpAggregator.Models.BossSearchCriteria)">
+            <summary>
+            Get Resources from Azure Search by the search string
+            mustHavesSearchString: search croteria that should mandatorily be in results
+            niceToHaveSearchString: search criteria that is not mandatory but nice to have
+            </summary>
+            <param name="azureSearchQuery">Search Query object</param>
+            <remarks>
+            Sample Request: 
+            {
+              "mustHavesSearchString":"Managers in Boston who are available today",
+              "niceToHaveSearchString":null,
+              "searchTriggeredFrom":"home_searchAll",
+              "loggedInUser":"39209"
+            }
+            </remarks>
+            <returns>List of results satisfying the mandatory criteria. Results that also match nice to have criteria are boosted to the top</returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetOpportunityByPipelineId(System.Guid)">
+            <summary>
+            This method is used to get the opportunity data on the basis of pipelineId.
+            </summary>
+            <param name="pipelineId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetOpportunityAndAllocationsByPipelineId(System.Guid)">
+            <summary>
+                Get opportunity and resources allocated on it
+            </summary>
+            <param name="pipelineId"></param>
+            <returns>Opportunity details and resources allocated on it</returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetOpportunitiesForTypeahead(System.String)">
+            <summary>
+                Get opportunities for typeahead
+            </summary>
+            <param name="searchString">Search opportunities by its name, client Code or Client Name</param>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetCaseDataByCaseCodes(System.String)">
+            <summary>
+            Get details of multiple cases on the basis of oldCaseCodes
+            </summary>
+            <param name="oldCaseCodes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetCaseAndAllocationsByCaseCode(System.String)">
+            <summary>
+                Get case details and resources allocated on it
+            </summary>
+            <param name="oldCaseCode"></param>
+            <returns>Case details for a specific case and resources allocated on it</returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetAuditTrailForCaseOrOpportunity(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Get Audit trail for case or opportunity
+            </summary>
+            <param name="oldCaseCode">Case code to get audit trail for case</param>
+            <param name="pipelineId">Id to get audit trail for opportunity</param>
+            <param name="limit"></param>
+            <param name="offset"></param>
+            <returns>Audit history</returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetAuditTrailForEmployee(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Get Audit trail for an employee
+            </summary>
+            <param name="employeeCode"></param>
+            <param name="limit"></param>
+            <param name="offset"></param>
+            <returns>Audit history</returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetHistoricalStaffingAllocationsForEmployee(System.String)">
+            <summary>
+            Gets all staffing allocations for a resource
+            </summary>
+            <param name="employeeCode"></param>
+            <returns>List of staffing assignments</returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetHistoricalStaffingAllocationsForProject(System.String,System.String)">
+            <summary>
+            Gets all staffing allocations for a project
+            </summary>
+            <param name="oldCaseCode"></param>
+            <param name="pipelineId"></param>
+            <returns>List of staffing assignments</returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetStaffingAllocationsForEmployee(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Gets staffing allocations for a resource based on date range
+            </summary>
+            <param name="employeeCode"></param>
+            <param name="effectiveFromDate"></param>
+            <param name="effectiveToDate"></param>
+            <returns>List of staffing assignments</returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetFilteredResourcesWithAllocations(System.Object)">
+            <summary>
+                Get Resources and their staffing on cases/opportunities
+            </summary>
+            <param name="payload"></param>
+            <returns>List of Resources</returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetFilteredResourcesGroupWithAllocations(System.Object)">
+            <summary>
+                Get Resources and their staffing on cases/opportunities
+            </summary>
+            <param name="payload"></param>
+            <returns>List of Resources</returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetResourcesIncludingTerminatedWithAllocationsBySearchString(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Get Resources and their staffing on cases/opportunities
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetResourceAllocationsByPipelineId(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Get Resource Assignments for specific Opportunity
+            </summary>
+            <param name="pipelineId"></param>
+            <param name="effectiveFromDate"></param>
+            <param name="effectiveToDate"></param>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetResourceAllocationsByCaseCode(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Get Resource Allocations to specific case
+            </summary>
+            <param name="oldCaseCode"></param>
+            <param name="effectiveFromDate"></param>
+            <param name="effectiveToDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.GetAllSecurityUsersDetails">
+            <summary>
+            Get all security users with additional details
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.UpsertResourceViewNote(System.Object)">
+            <summary>
+            Get all security users with additional details
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.StaffingAggregatorController.UpsertPlanningCard(System.Object)">
+            <summary>
+            Get all security users with additional details
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.UserPreferenceGroupAggregatorController.GetUserPreferenceSupplyGroups(System.String)">
+            <summary>
+            Get saved user supply groups set by user as their default settings.
+            </summary>
+            <param name="employeeCode"></param>
+            <returns>Saved user supply groups for employee</returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.UserPreferenceGroupAggregatorController.GetUserPreferenceSavedGroups(System.String)">
+            <summary>
+            Get saved user saved groups set by user as their default settings.
+            </summary>
+            <param name="employeeCode"></param>
+            <returns>Saved user saved groups for employee</returns>
+        </member>
+        <member name="M:Staffing.HttpAggregator.Controllers.UserPreferenceGroupAggregatorController.GetUserPreferenceGroupSharedInfo(System.String)">
+            <summary>
+            Get saved user supply groups shared with users by passing the group ID.
+            </summary>
+            <param name="groupId"></param>
+            <returns>Saved user supply groups for employee</returns>
+        </member>
+        <member name="T:Staffing.HttpAggregator.Models.ProjectData">
+            <summary>
+            Project contains aggregation of case and opportunity data
+            </summary>
+        </member>
+    </members>
+</doc>

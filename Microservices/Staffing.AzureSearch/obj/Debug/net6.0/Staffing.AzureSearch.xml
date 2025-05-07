@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Staffing.AzureSearch</name>
+    </assembly>
+    <members>
+        <member name="T:Staffing.AzureSearch.Controllers.EmbeddingGenerationController">
+            <summary>
+            Vacation Requests Controller
+            </summary>
+        </member>
+        <member name="M:Staffing.AzureSearch.Controllers.EmbeddingGenerationController.GetEmbeddingsVectorFromOpenAI(System.String)">
+            <summary>
+            Creates Embedding
+            </summary>
+            <param name="textToEmbed"></param>
+            <returns>Vector representation of text</returns>
+        </member>
+        <member name="M:Staffing.AzureSearch.Controllers.EmbeddingGenerationController.GetMultipleEmbeddingsVectorFromOpenAI(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Creates Embedding
+            </summary>
+            <param name="keyValuePairs">key is the key of dictionary and vlaue stores the text to be embedded</param>
+            <returns>Dictonary of Vector representation of text itmes with key holding key of dictionary and value the embedded value</returns>
+        </member>
+        <member name="T:Staffing.AzureSearch.Controllers.EmployeeIndexerController">
+            <summary>
+            Employee Indexer Controller
+            </summary>
+        </member>
+        <member name="M:Staffing.AzureSearch.Controllers.EmployeeIndexerController.UploadDataToEmployeeConsolidatedIndex(System.Collections.Generic.IEnumerable{Staffing.AzureSearch.Models.ResourcePartial})">
+            <summary>
+            Index data to the employee consolidated index
+            </summary>
+            <param name="dataToIndex"></param>
+            <returns>summarized text</returns>
+        </member>
+        <member name="T:Staffing.AzureSearch.Controllers.QueryIntentOpenAIController">
+            <summary>
+            Azure Search Query Intent Controller
+            </summary>
+        </member>
+        <member name="M:Staffing.AzureSearch.Controllers.QueryIntentOpenAIController.GetAzureSearchQueryFromSearchText(System.String)">
+            <summary>
+            Creates query intent for text using OpenAI chat completions API
+            </summary>
+            <param name="searchQuery"></param>
+            <returns>summarized text</returns>
+        </member>
+        <member name="T:Staffing.AzureSearch.Controllers.SearchController">
+            <summary>
+            Vacation Requests Controller
+            </summary>
+        </member>
+        <member name="M:Staffing.AzureSearch.Controllers.SearchController.GetResourcesBySearchString(System.String,System.String,System.String,System.String)">
+            <summary>
+            Get results TOP 50 from cognitive search based on search string
+            </summary>
+            <remarks>
+            Sample Request: Managers in Boston who are available today
+            </remarks>
+            <param name="mustHavesSearchString" example="Managers in Boston who are available today">search croteria that should mandatorily be in results</param>
+            <param name="niceToHaveSearchString" example="knows french or spanish">search criteria that is not mandatory but nice to have</param>
+            <param name="searchTriggeredFrom" example="home_SearchAll">source of search i.e. home_searchAll</param>
+            <param name="loggedInUser" example="39209">User who performed search</param>
+            <returns>List of results satisfying the mandatory criteria. Results that also match nice to have criteria are boosted to the top</returns>
+        </member>
+        <member name="M:Staffing.AzureSearch.Controllers.SearchController.GesourcesBySearchStringWithinSupply(System.Object)">
+            <summary>
+            Get results TOP 50 results from cognitive search based on search string within the employee codes list passed in the payload
+            </summary>
+            <remarks>
+            Sample Request:
+               {
+                  "loggedInUser":"39209",
+                  "mustHavesSearchString":"Managers with experience in retail who are available next week",
+                  "niceToHaveSearchString":"bilingual in french",
+                  "searchTriggeredFrom": "home_SearchSupply",
+                  "employeeCodesToSearchIn": "39209,37995,60074",
+                  "pageSize": 50
+               }
+            </remarks>
+            <param name="payload"></param>
+            <returns>Searched Results</returns>
+        </member>
+        <member name="M:Staffing.AzureSearch.Controllers.SearchController.GetResourcesByLuceneSearchQuery(Staffing.AzureSearch.Models.OpenAIGeneratedSearchQuery)">
+            <summary>
+            Get results TOP 30 from cognitive search based on selected params
+            To be used for Debugging purposes only
+            </summary>
+            <remarks>
+            Sample Request:
+            {
+                "searchText": "levelname:'Managers' AND operatingofficeName: 'Boston'",
+                "filterQuery": "availabilityDates/any(a: a/date gt 2023-12-05T00:00:00Z) and languages/any(a: a/name eq 'English')"
+            }
+            </remarks>
+            <param name="searchData"></param>
+            <returns>Searched Results</returns>
+        </member>
+        <member name="M:Staffing.AzureSearch.Controllers.SearchController.GetResourcesBySearchStringUsingVectorSearch(System.String,System.String)">
+            <summary>
+            Get results TOP 30 from cognitive search based on search string
+            </summary>
+            <remarks>
+            Sample Request: Managers in Boston who are available today
+            </remarks>
+            <param name="searchString">Managers in Boston who are available today</param>
+            <param name="loggedInUser">User who performed search</param>
+            <returns>Searched Results</returns>
+        </member>
+    </members>
+</doc>

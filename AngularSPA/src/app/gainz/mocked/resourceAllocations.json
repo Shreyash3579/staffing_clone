@@ -1,0 +1,43 @@
+{
+  "allocations": [
+    {
+      "id": 1,
+      "resourceId": 1,
+      "bookingType": "(Sydney)(Team: 4 | Prio: 1 | Lang: English, French)(Start date: Oct 02, 2025 | End date: Dec 31, 2025)",
+      "startWeek": 1,
+      "length": 12,
+      "colorClass": "booking-purple"
+    },
+    {
+      "id": 2,
+      "resourceId": 6,
+      "bookingType": "System/Team: 4 | Pos: 1 | Lang: Spanish/Start date: Oct 02, 2024 | End date: Dec 31, 2024",
+      "startWeek": 3,
+      "length": 15,
+      "colorClass": "booking-green"
+    },
+    {
+      "id": 3,
+      "resourceId": 11,
+      "bookingType": "Booking/Team: 4 | Pos: 1 | Lang: English/Start date: Oct 02, 2024 | End date: Dec 31, 2024",
+      "startWeek": 1,
+      "length": 12,
+      "colorClass": "booking-orange"
+    }
+  ],
+  "resourceDetails": {
+    "id": 12,
+    "name": "Frank Gavin",
+    "startWeek": "Oct 02, 2024",
+    "endWeek": "Dec 31, 2024",
+    "resource": "Jesse (C)",
+    "location": "Sydney",
+    "experience": "1",
+    "languages": ["French", "English"],
+    "travel": "No travel",
+    "alert": {
+      "type": "Alert",
+      "message": "Overlap from 07-dec-2024 til 11-dec-2024 (5 x days)"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+<div class="ratings__preference">
+  <div *ngIf="hasAccessToSeeReview">
+    <div class="preference__nav">
+      <ul class="preference__list">
+        <li *ngFor="let review of ratings; let i = index" class="preference__item"
+          [style.background]="activeTab =='tab'+i ? '#1D47F8': '#898989'" (click)="toggleNav(i,$event)">
+          PD (as of {{ review.lastUpdated | date:'dd-MMM-yyyy' }})
+        </li>
+      </ul>
+    </div>
+
+    <div *ngFor="let review of ratings; let i = index">
+      <div class="ratings__preference-container" *ngIf="activeTab=='tab'+i">
+        <div class="row no-gutters">
+          <div class="ratings__preference-heading">
+            <div *ngFor="let rating of review.ratings" class="overall-ratings">
+              <label>{{rating.ratingLabel}} : </label>
+              <div class="ratings-input ml-4">
+                <span>{{rating.ratingResult}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row no-gutters mt-3">
+          <p class="rating-message" [innerHTML]="review.document"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="empty-table-message" *ngIf="!hasAccessToSeeReview">
+    You do not have access to see this Person's PD. PD security is managed by the HCPD team, please contact them at
+    <a href="mailto:{{hcpdSupportEmailId}}">{{hcpdSupportEmailId}}</a> for any assistance.
+  </div>

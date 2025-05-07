@@ -1,0 +1,34 @@
+<div class="side-menu">
+  <div class="header py-2">
+    <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12.167 5.99996L13.0003 4.16663L14.8337 3.33329L13.0003 2.49996L12.167 0.666626L11.3337 2.49996L9.50033 3.33329L11.3337 4.16663L12.167 5.99996ZM7.16699 6.33329L5.50033 2.66663L3.83366 6.33329L0.166992 7.99996L3.83366 9.66663L5.50033 13.3333L7.16699 9.66663L10.8337 7.99996L7.16699 6.33329ZM12.167 9.99996L11.3337 11.8333L9.50033 12.6666L11.3337 13.5L12.167 15.3333L13.0003 13.5L14.8337 12.6666L13.0003 11.8333L12.167 9.99996Z" fill="#121212"/>
+    </svg>
+
+    <span class="ml-1">Staffing Assistant</span>
+  </div>
+  <div class="list-container">
+    <div class="search-container px-3 py-2">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search a case">
+      </div>
+    </div>
+    <div class="px-3">
+      <div class="d-flex header-project-list py-2">
+        <span>Name</span><span>Code</span><span>Office</span>
+      </div>
+      <div>
+        <div class="d-flex project-list py-3" *ngFor="let project of projects">
+          <div class="name-project d-flex ">
+            <input class="mr-2" type="checkbox"  [checked]="isProjectChecked(project.pipelineId)" [value]="project.pipelineId" (change)="toggleProjectCheck(project.pipelineId)">
+            <span>{{ project.clientName }}</span><br></div>
+          <div class="code-project">{{ project.billingPartnerCode }}</div>
+          <div class="office-project">{{ project.managingOfficeAbbreviation }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="generate-answer-container d-flex">
+    <button>Generate Staffing Plan ({{checkedProjects.length}})</button>
+  </div>
+</div>

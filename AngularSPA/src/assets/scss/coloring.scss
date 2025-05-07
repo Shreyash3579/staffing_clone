@@ -1,0 +1,96 @@
+@use 'sass:math';
+#conditional-coloring{
+  .modal-dialog{
+    max-width: 900px;
+  }
+
+  .rule-editor{
+    border: 1px solid $grey-light;
+    border-bottom: 0;
+    padding: math.div($base-padding, 2);
+    
+    .fa-trash{
+      position:absolute;
+      right:-(math.div($base-padding, 4));
+      top:math.div($base-padding, 4);
+      visibility: hidden;
+      cursor: pointer;
+    }
+    &:hover{
+      .fa-trash{        
+        visibility: visible;
+      }
+    }
+
+    input{
+      margin:0 8px;
+    }
+
+    .btn-primary{
+      position: absolute;
+      right:$base-padding;
+      background-color: $bain-red;
+      color: $white;
+      border-color: $bain-red!important;
+    }
+  }
+
+  table {
+    tr{
+     border-bottom: 1px solid $grey-light;    
+      td{
+        color: $black;
+
+        .swatch{
+          width:86px;
+          height:28px;
+          display: inline-block;        
+          
+          &.swatch-blue{background-color: #C0EEFC;}
+          &.swatch-yellow{background-color: #FFF8D4;}
+          &.swatch-green{background-color: #C0F2E0;}
+          &.swatch-orange{background-color: #FFC0C5;}
+          &.swatch-purple{background-color: #D3AEE8;}
+        }
+
+        &:first-child{
+          i{
+            color: $grey-medium;
+            margin-right: math.div($base-padding, 2);
+            position: relative;
+            top:-4px;
+          }
+        }
+
+        &:last-child{
+          i.fa-trash{
+            visibility: hidden;
+            position: relative;
+            top:-8px;
+            color: $grey-darker;
+            margin-left: math.div($base-padding, 2);
+            cursor: pointer;
+          }
+        }
+      }
+
+      &:hover{
+        td:last-child{
+          i.fa-trash{
+            visibility: visible;
+          }
+        }
+      }
+
+      .rule{
+        display: inline-flex;
+        align-content: center;
+        line-height: 22px;
+        a{
+          padding-left: math.div($base-padding, 4);
+          padding-right: math.div($base-padding, 4);
+        }
+      }
+    }
+  }
+}

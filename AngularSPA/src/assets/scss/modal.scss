@@ -1,0 +1,38 @@
+.modal{
+  .modal-dialog{
+    &:not(.modal-lg){
+      max-width:630px;
+    }
+
+    &.custom-modal-xlarge{
+      max-width:1360px;
+    }
+    
+    &.custom-modal-large{
+      max-width:1080px;
+    }
+
+    &.custom-modal-meduim{
+      max-width:760px;
+    }
+
+    .modal-header{
+      color: $text-dark;
+      font-size: 20px;
+    }
+
+    .modal-footer{
+      .btn-primary{
+        background-color: $bain-red;
+        color: $white;
+        border-color: $bain-red!important;
+      }
+
+      .btn-secondary{
+        background-color: $white!important;
+        border-color: $bain-red!important;
+        color: $bain-red!important;
+      }
+    }
+  }
+}

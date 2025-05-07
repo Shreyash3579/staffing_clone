@@ -1,0 +1,74 @@
+<!-- COMPONENT: STAGE-->
+<ng-container>
+  <div class="row">
+    <!-- COMPONENT: FILTER-->
+    <div class="filter-ml pr-3">
+      <app-filter [caseTypes]="caseTypes" [demandTypes]="demandTypes" [officeHierarchy]="officeHierarchy"
+        (getProjectsOnBasicFilterChange)="getProjectsOnBasicFilterChangeHandler($event)"
+        (openProjectDetailsDialogFromTypeahead)="openProjectDetailsDialogFromTypeaheadHandler($event)"
+        (toggleAdvancedFilters)="toggleAdvancedFiltersHandler($event)"
+        (showMinOppProbabilityFilter)="showMinOppProbabilityFilterHandler($event)"
+        (addProjectToUserExceptionShowListEmitter)="addProjectToUserExceptionShowListHandler($event)"
+        (addCardPlaceholderEmitter)="addPlanningCardHandler()">
+      </app-filter>
+    </div>
+    <!-- End COMPONENT: FILTER-->
+
+  </div>
+
+  <!-- COMPONENT: ADVANCED FILTER-->
+  <div class="container-fuid advanced-filters" [class.d-none]="!showAdvancedFilters">
+    <app-advanced-filters [staffingTagsHierarchy]="staffingTagsHierarchy" [isStaffedFromSupply] = "isStaffedFromSupply"
+      [isMinOppProbabilityFilterShown]="isMinOppProbabilityFilterShown"
+      (getProjectsOnAdvancedFilterChange)="getProjectsOnAdvancedFilterChangeHandler($event)"
+      (getAllocationsSortedBySelectedValueEmitter)="getAllocationsSortedBySelectedValueHandler($event)">
+    </app-advanced-filters>
+  </div>
+  <!-- End COMPONENT: ADVANCED FILTER-->
+
+  <div class="projectview-wrapper row">
+    <app-planning-card id="{{planningCard.id}}" [draggable]="true" (dragstart)="dragPlanningCardStartHandler($event)"
+      (dragend)="dragEndPlanningCardHandler($event)"
+      (dropPlanningCardEventEmitter)="dropPlanningCardEventEmitterHandler($event)"
+      (dragover)="dragOverPlanningCardHandler($event)" class="col-6 col-xxl-4 app-project-placeholder"
+      *ngFor="let planningCard of planningCards" [planningCard]="planningCard" [planningCards]="planningCards"
+      [highlightedResourcesInPlanningCards]="highlightedResourcesInPlanningCards"
+      [attr.data-planningCard]="planningCard.id" (showQuickPeekDialog)="showQuickPeekDialogHandler($event)"
+      (removePlanningCardEmitter)="removePlanningCardEmitterHandler($event)"
+      (updatePlanningCardEmitter)="updatePlanningCardEmitterHandler($event)"
+      (upsertPlaceholderEmitter)="upsertPlaceholderHandler($event)"
+      (removePlaceHolderEmitter)="removePlaceHolderEmitterHandler($event)"
+      (openResourceDetailsDialog)="openResourceDetailsDialogHandler($event)"
+      (mergePlanningcardToCaseOppEmitter)="mergePlanningcardToCaseOppEmitterHandler($event)"
+      (sharePlanningCardEmitter)="sharePlanningCardEmitterHandler($event)"
+      (openPegRFPopUpEmitter)="openPegRFPopUpHandler($event)">
+    </app-planning-card>
+
+    <!-- COMPONENT: Project-->
+    <app-projectview (dragover)="dragOverProjectHandler($event)"
+      (dropProjectEventEmitter)="dropProjectEventEmitterHandler($event)" (dragstart)="dragProjectStartHandler($event)"
+      (dragend)="dragEndProjectHandler($event)" [draggable]="project.isProjectPinned"
+      (selectstart)="selectStartHandler($event)" id="{{project.oldCaseCode ? project.oldCaseCode : project.pipelineId}}"
+      *ngFor="let project of projects; index as index" [project]="project" class="col-6 col-xxl-4"
+      [projectIndex]="index" #projectviewComponent (tabbingFromAllocation)="tabbingFromAllocationHandler($event)"
+      (tabbingFromEndDate)="tabbingFromEndDateHandler($event)"
+      (upsertResourceAllocationsToProject)="upsertResourceAllocationsToProjectHandler($event)"
+      (openResourceDetailsDialog)="openResourceDetailsDialogHandler($event)"
+      (openProjectDetailsDialog)="openProjectDetailsDialogHandler($event)"
+      (showQuickPeekDialog)="showQuickPeekDialogHandler($event)"
+      (addProjectToUserExceptionHideListEmitter)="addProjectToUserExceptionHideListHandler($event)"
+      (addProjectToUserExceptionShowListEmitter)="addProjectToUserExceptionShowListHandler($event)"
+      (removeProjectFromUserExceptionShowListEmitter)="removeProjectFromUserExceptionShowListHandler($event)"
+      (openBackFillPopUp)="openBackFillPopUpHandler($event)"
+      (openOverlappedTeamsPopup)="openOverlappedTeamsPopupHandler($event)"
+      (openCaseRollForm)="openCaseRollPopUpHandler($event)" (openQuickAddForm)="openQuickAddFormHandler($event)"
+      (openPlaceholderForm)="openPlaceholderFormHandler($event)"
+      (removePlaceHolderEmitter)="removePlaceHolderEmitterHandler($event)"
+      (updateProjectChanges)="updateProjectChangesHandler($event)"
+      (deleteNotesOnProject)="deleteNotesOnProjectHandler($event)"
+      (upsertPlaceholderEmitter)="upsertPlaceholderHandler($event)">
+    </app-projectview>
+    <!-- End COMPONENT: Project-->
+  </div>
+</ng-container>
+<!-- END COMPONENT: STAGE -->

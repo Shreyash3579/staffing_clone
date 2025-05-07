@@ -1,0 +1,85 @@
+.overlay {
+  position: fixed;
+  top: calc(#{$header-height});
+  //top: calc(#{$header-height} + 2px);
+  bottom: 0;
+  left: 100vw;
+  width: 100vw;
+  padding: $base-padding;
+  transition: left 1s !important;
+  background-color: $white;
+  z-index: 2;
+
+  &.active {
+    left: 0;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    color: $grey-darkest;
+
+    h2 {
+      font-size: 28px;
+
+      span:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+
+      i.fa {
+        font-size: 20px;
+      }
+    }
+
+    i.fa {
+      font-size: 28px;
+
+      &.fa-times {
+        cursor: pointer;
+      }
+    }
+  }
+
+  main {
+    height: calc(100% - #{$base-padding});
+    overflow-y: auto;
+    padding: $base-padding*1.5;
+    display: flex;
+
+    @media screen and (max-width: 430px) {
+      height: unset;
+    }
+
+    .sidebar {
+      flex: 0 0 $overlay-sidebar-width;
+
+      @include media-breakpoint-up(xxl) {
+        flex: 0 0 $overlay-sidebar-xxl-width;
+      }
+    }
+
+    .stage {
+      flex-grow: 1;
+      color: $text-dark;
+
+      h1.title {
+        color: $sky;
+        font-size: 36px;
+      }
+
+      .emphasize {
+        font-size: 18px;
+        color: $grey-darkest;
+      }
+    }
+  }
+
+  .empty-table-message {
+    text-align: center;
+    font-size: 13px;
+    padding-top: 80px;
+    height: 200px;
+    border: 1px solid #c3c3c3;
+  }
+}

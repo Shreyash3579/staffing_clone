@@ -1,0 +1,19 @@
+<div style="padding: 10px; height: 100%;">
+    <div *ngIf="savedResourceFilters?.length">
+        <!-- <label><strong>Resources Filters:</strong></label> -->
+        <input type="text" placeholder="Search Saved Resource Filters" [(ngModel)]="searchTerm"
+            (input)="filterItem($event.target.value)" class="form-control form-control-sm bottom-margin">
+        <div class="list-group" *ngFor="let savedFilter of filteredItems">
+            <app-saved-resource-filter-detail [officeFlatList]="officeFlatList" [staffingTags]="staffingTags"
+                [commitmentTypes]="commitmentTypes" [practiceAreas]="practiceAreas" [affiliationRoles]="affiliationRoles" [employeeStatus]="employeeStatus"
+                [sortsBy]="sortsBy" [staffableAsTypes]="staffableAsTypes" [positionsHierarchy]="positionsHierarchy"
+                [filterConfig]="filterConfig" [savedFilter]="savedFilter" (refreshView)="refreshViewHandler($event)"
+                (setAsDefaultFilter)="setAsDefaultFilterHandler($event)"
+                (deleteSavedFilter)="deleteSavedFilterHandler($event)">
+            </app-saved-resource-filter-detail>
+        </div>
+    </div>
+    <div class="empty-table-message" *ngIf="!savedResourceFilters?.length">
+        {{emptyLogMessage}}
+    </div>
+</div>

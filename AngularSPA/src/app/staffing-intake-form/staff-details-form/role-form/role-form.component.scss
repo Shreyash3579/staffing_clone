@@ -1,0 +1,204 @@
+@import "./../../../staffing-intake-form/staffing-intake-form.component";
+@import "./../../staff-details-form/staff-details-form.component";
+
+mat-expansion-panel-header{
+  position: relative;
+}
+.remove-btn{
+  &__from-workstream{
+    color: $bain-red;
+    z-index: 10;
+  }
+  &__ellipsis{
+    color: $grey-darkest;
+    border-radius: 5px;
+  }
+
+}
+
+.name-role-default{
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  width: 100%; /* Ensure it takes up available space */
+  background: transparent;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adds ellipsis if the text overflows */
+  white-space: nowrap; /* Prevents text from wrapping */
+}
+
+.active{
+  background-color:#BFC9F6;
+}
+
+.toggle{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 100px;
+  background-color: #C2C9D1;
+  font-size: $small-font-size;
+  color: #fff;
+  padding: 1px 5px;
+}
+
+
+
+
+
+.toggle-text-lead{
+  padding: 0 6px;
+}
+
+
+
+.glow-comp{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.toggle-on {
+  background-color: #739961;
+  flex-direction: row-reverse;
+}
+.w-98{
+  width: 98%;
+}
+.editable{
+  display: none;
+}
+::ng-deep .ng-select-container {
+  position: relative !important;
+  overflow: unset !important;
+}
+
+.selection-container.must-have{
+  background: #DAF2ED;
+  .ellipsis-btn{
+    background: #07C29F;
+  }
+}
+.selection-container{
+  position: relative;
+  flex-direction: row;
+  width: fit-content;
+  background-color: #ECF0FF;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  height: 24px;
+  padding: 4px 8px 4px 8px;
+  display: flex;
+  border-radius: 39px;
+  justify-content: space-around;
+  align-items: center;
+  text-align: left;
+  .ellipsis-btn{
+    border: none;
+    background-color: #A2BEFA;
+    color: #fff;
+    border-radius: 55px;
+    vertical-align: middle;
+    height: 17px;
+    text-align: center;
+    width: 20px;
+    margin-left: 5px;
+  }
+  .tooltip-selection{
+    position: fixed;
+    top: 22px;
+    z-index: 20;
+    left: 100px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    width: 200px;
+    height: 100px;
+    font-weight: 500;
+    background-color: #fff;
+    .opt{
+      font-family: Graphik;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: left;
+      gap: 6px;
+      border-radius: 39px;
+      color: #616568;
+      width: 8px;
+      height: 8px;
+      &-must-have{
+        background: #07C29F;
+      }
+      &-nice-to-have{
+        background: #BFC9F6;
+      }
+    }
+  }
+  &:hover{
+    .editable{
+      display: inline-block;
+    }
+  }
+}
+.header-container{
+  background-color: #ECF0FF;
+  width: 410px;
+  height: 36px;
+}
+.color-hint-container{
+  color: #4C63B2;
+  //font-width: 400;
+  gap: 10px;
+  .must-color{
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: #07C29F;
+  }
+  .nice-to-have-color{
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: #BFC9F6;
+  }
+}
+
+.input-control-pleaseDescribe{
+  width: 100%;
+  label{
+    width: 100%;
+  }
+}
+
+
+.hidden-overlay{
+  width: 10000px;
+  position: fixed;
+  height: 10000px;
+  top: -100%;
+  left: -100%;
+  z-index: -5;
+}
+.language-selection-container{
+  height: 84px;
+  border-radius: 4px;
+  border: 1px solid #E0E4E8;
+  background: #F8F8F6;
+  .header-label{
+    font-size: 11px;
+  }
+  .selections{
+    padding-left: 10px;
+    padding-right: 10px;
+    max-height: 66px;
+    overflow: scroll;
+  }
+}
+::ng-deep .languages-selector.ng-select-multiple .ng-select-container .ng-value-container .ng-value:has(.languages-label){
+  background-color: #fff !important;
+  font-size: 12px;
+  color: #999;
+}
+::ng-deep .languages-selector.ng-select-multiple .ng-select-container .ng-value-container .ng-value:has(.languages-label) + .ng-value:has(.languages-label){
+  display: none;
+}

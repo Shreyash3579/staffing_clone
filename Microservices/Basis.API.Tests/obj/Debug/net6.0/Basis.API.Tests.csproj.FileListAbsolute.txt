@@ -1,0 +1,6 @@
+C:\Projects\TSG-Staffing-BOSS\Microservices\Basis.API.Tests\bin\Debug\net6.0\CoverletSourceRootsMapping
+C:\Projects\TSG-Staffing-BOSS\Microservices\Basis.API.Tests\obj\Debug\net6.0\Basis.API.Tests.csproj.AssemblyReference.cache
+C:\Projects\TSG-Staffing-BOSS\Microservices\Basis.API.Tests\obj\Debug\net6.0\Basis.API.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\TSG-Staffing-BOSS\Microservices\Basis.API.Tests\obj\Debug\net6.0\Basis.API.Tests.AssemblyInfoInputs.cache
+C:\Projects\TSG-Staffing-BOSS\Microservices\Basis.API.Tests\obj\Debug\net6.0\Basis.API.Tests.AssemblyInfo.cs
+C:\Projects\TSG-Staffing-BOSS\Microservices\Basis.API.Tests\obj\Debug\net6.0\Basis.API.Tests.csproj.CoreCompileInputs.cache

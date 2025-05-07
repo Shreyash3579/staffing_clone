@@ -1,0 +1,21 @@
+@import "variables.scss";
+
+#groupBy {
+  select {
+    color: $grey-darkest;
+    border-color: $grey-medium-dark;
+    background-color: $grey-light;
+    font-size: 0.975rem;
+    height: calc(2.2125rem + 2px);
+    &:hover {
+      background-color: $grey-medium-dark;
+      border-color: $grey-medium-dark;
+    }
+  }
+}
+
+::ng-deep .calendar-supply{
+  &.calendar-align-left{
+    left: 116px !important;
+  }
+}

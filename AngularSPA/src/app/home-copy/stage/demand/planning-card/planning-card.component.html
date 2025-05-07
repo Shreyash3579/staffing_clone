@@ -1,0 +1,234 @@
+<div class="card-placeholder">
+  <div class="card-placeholder__wrapper" [style.border-color]="planningCard.includeInCapacityReporting ? '#ff0000' : '#07c29f'">
+
+    <!-- header -->
+    <div class="card-placeholder__title">
+      <textarea
+        placeholder="Planning Card"
+        (input)="onInputChange($event)"
+        (change)="updatePlanningCardName($event)"
+        [disabled]="isPegPlanningCard"
+        >{{ planningCard?.name }}</textarea
+      >
+      
+      <!-- action panel -->
+      <div class="card-placeholder__icons">
+        <app-project-action-panel
+          [showMergeIcon]="true"
+          [showCardDeleteIcon]="true"
+          [showplaceholder]="true"
+          [showShareIcon]="true"
+          [allowPin]="false"
+          [allowHide]="false"
+          [showCaseRoll]="false"
+          [isSTACommitmentCreated] = "planningCard.isSTACommitmentCreated"
+          [emailTo]="activeResourcesEmailAddresses"
+          [showQuickPeek]="true"
+          [allowSTACommitment] = "planningCard.includeInCapacityReporting"
+          [isPegPlanningCard]="isPegPlanningCard"
+          (toggleMergeDialogEmitter)="toggleMergeDialogHandler()"
+          (openQuickPeekIntoReosurcesCommitments)="quickPeekIntoResourcesCommitments()"
+          (addPlaceHolderEmitter)="onAddPlaceHolderHandler()"
+          (deleteCardEmitter)="deletePlanningCardHandler()"
+          (sharePlanningCardEmitter)="sharePlanningCardHandler()"
+          (shortTermAvailableCaseOppCommitmentEmitter) = "shortTermAvailableCaseOppCommitmentEmitterHandler()"
+        >
+        </app-project-action-panel>
+      </div>
+    </div>
+
+    <!--  -->
+
+    <!-- datePicker, notes, share, PEG icon -->
+    <div class="card-placeholder__calendar-peg-share-wrapper">
+      <!-- peg | fence icon -->
+      <a
+        *ngIf="showRingFenceIcon"
+        class="rf-overlay-icon-container"
+        ngbPopover="PEG Opportunity Details"
+        triggers="mouseenter:mouseleave"
+        container="body"
+        popoverClass="staffing-page-popover"
+        (click)="openPegRFPopUpHandler()"
+      >
+        <img
+          src="assets/img/fence-icon.png"
+          alt="PEG Opportunity Details"
+          class="fence-icon"
+        />
+      </a>
+
+      <!-- Add/Edit Note Modal Trigger -->
+      <button (click)="toggleNoteModal()" [style.color]="planningCard.casePlanningViewNotes?.length ? '#cc0000' : '#616568'"
+        [ngbPopover]="planningCard.casePlanningViewNotes?.length ? popoverContent : noContentPopover" popoverClass="note-popover-wrapper"
+        triggers="mouseenter:mouseleave" placement="bottom-left bottom-right top-left top-right" container="body">
+        <i class="fas fa-file-alt"></i>
+      </button>
+
+       <div class="probability-percent-field">
+        <input type="text" class="probability-input" 
+        [disabled]="isPegPlanningCard"
+        [value]="planningCard?.probabilityPercent" 
+        (input)="onInputProbabilityChange($event)" 
+        (change)="updateProbabilityPercent($event)" >
+        <span> %</span>
+      </div> 
+
+      <!-- Popover content -->
+      <ng-template #popoverContent>
+        <div class="notes">
+          <div class="note-wrapper">
+            <!-- Author, Date.. -->
+            <div class="note-wrapper__header">
+              <i class="fas fa-user"></i>
+              <p class="header">{{ planningCard.casePlanningViewNotes[0]?.createdByName }}</p>
+                <p >{{ planningCard.casePlanningViewNotes[0]?.lastUpdated | date : "M/d/yy h:mm a" }}</p>
+            </div>
+
+            <!-- Content -->
+            <div class="note-wrapper__content">
+              <p>{{ planningCard.casePlanningViewNotes[0]?.note}}</p>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+      <!-- No Notes popover -->
+      <ng-template #noContentPopover>
+        <div class="notes">
+          <div class="note-wrapper">
+            <p class="header">There a 0 notes</p>
+          </div>
+
+          <div class="note-wrapper">
+            <p>To add a new note, click the note icon.</p>
+          </div>
+        </div>
+      </ng-template>
+
+      <!-- share icon -->
+      <i
+        *ngIf="this.planningCard.isShared"
+        class="fa fa-share-alt share-icon"
+        ngbPopover="Planning Card has been shared"
+        triggers="mouseenter:mouseleave"
+        container="body"
+        popoverClass="staffing-page-popover"
+        (click)="sharePlanningCardHandler()"
+      >
+      </i>
+
+      <i
+        class="fa fa-expand expand-icon"
+        ngbPopover="Open Planning Card Details Page"
+        triggers="mouseenter:mouseleave"
+        container="body"
+        popoverClass="staffing-page-popover"
+        (click)="openPlanningCardOverlay()"
+      >
+      </i>
+
+      <!-- sta commitment -->
+      <span>
+        <i *ngIf="planningCard.isSTACommitmentCreated" class="fa-regular fa-clipboard"></i>
+      </span>
+
+
+      <!-- datePicker -->
+      <div class="input-group">
+        <div class="input-group-prepend" appFeatureDisabled [isDisabled]="isPegPlanningCard">
+          <span
+            class="input-group-text"
+            id="date-picker-icon"
+            (click)="dp.toggle()"
+            [attr.aria-expanded]="dp.isOpen"
+          >
+            <i
+              class="fa fa-calendar-day ngx-daterangepicker-action fa-fw"
+              aria-hidden="true"
+            ></i>
+          </span>
+        </div>
+        <input placeholder="Date range" type="text" name="daterange" readonly 
+          [ngModel]="planningCardDateRange"
+          [disabled]="isPegPlanningCard"
+          (ngModelChange)="updatePlanningCardDateRange($event)" class="form-control" #dp="bsDaterangepicker"
+          bsDaterangepicker [bsConfig]="bsConfig">
+        <!-- <span>
+          {{ planningCard.startDate | date : "dd-MMM-yyyy" }} - {{ planningCard.endDate | date : "dd-MMM-yyyy" }}
+        </span> -->
+        <!-- <input
+            placeholder="Select a date range"
+            type="text"
+            name="daterange"
+            readonly
+            [ngModel]="planningCardDateRange"
+            class="form-control"          
+            #dp="bsDaterangepicker"
+            bsDaterangepicker
+            [bsConfig]="bsConfig"
+          /> -->
+      </div>
+    </div>
+
+    <div
+      class="card-placeholder__content drop-zone"
+      *ngIf="!planningCard.regularAllocations?.length || collapseAll"
+      cdkDropList
+      [cdkDropListData]="planningCard.regularAllocations"
+      (cdkDropListDropped)="onPlaceholderDrop($event)"
+    ></div>
+
+    <!-- content -->
+    <div
+      class="card-placeholder__content content pdfExportScrollableContainer"
+      *ngIf="(planningCard.regularAllocations.length || planningCard.placeholderAllocations.length)"
+      [ngClass]="{ 'collapse-allocations': collapseAll }"
+    >
+      <div
+        class="placeholder__list"
+        id="placeholderid"
+      >
+        @for (allocation of planningCard.placeholderAllocations; track allocation.id) {
+          <div 
+            style="display: flex; width: 100%"
+            [ngClass]="{ 'highlight-allocation': isHighlightAllocation(allocation) }"
+            [planningCard]="planningCard"
+            [projectResourceComponentIndex]="index"
+            [placeholderAllocation]="allocation"
+            (upsertPlaceholderAllocationEmitter)="upsertPlaceholderAllocationHandler($event)"
+            (removePlaceHolder)="removePlaceHolderEmitterHandler($event)"
+            (confirmPlaceholderAllocationEmitter)="confirmPlaceholderAllocationHandler($event)"
+            #projectResourceComponent app-project-resource 
+          ></div>
+        }
+       
+      </div>
+
+      <div
+        *ngIf="planningCard.regularAllocations?.length"
+        cdkDropList
+        [cdkDropListData]="planningCard.regularAllocations"
+        (cdkDropListDropped)="onPlaceholderDrop($event)"
+        class="row no-gutters card-content-area allocation__list"
+      >
+        @for (allocation of planningCard.regularAllocations; track allocation.id) {
+          <div
+            style="display: flex; width: 100%"
+            class="project-resource-preview-wrapper"
+            [ngClass]="{ 'highlight-allocation': isHighlightAllocation(allocation) }"
+            [planningCard]="planningCard"
+            #projectResourceComponent
+            app-project-resource
+            [projectResourceComponentIndex]="index"
+            [userAllocation]="allocation"
+            cdkDrag
+            [cdkDragDisabled]="!allocation.id"
+            (upsertPlaceholderAllocationEmitter)="upsertPlaceholderAllocationHandler($event)"
+          ></div>
+        }
+      
+      </div>
+    </div>
+  </div>
+</div>

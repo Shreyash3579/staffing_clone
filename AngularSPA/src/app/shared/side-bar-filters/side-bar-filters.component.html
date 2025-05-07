@@ -1,0 +1,190 @@
+<div class="sidebar-filter-backdrop" (click)="closeFilters()"></div>
+<section class="sidebar-area separator filters">
+    <button type="button" class="close btn-close" (click)="closeFilters()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <tabset #staticTabs>
+        <tab heading="Resources Filters" active="true">
+            <div class="filters-wrapper">
+                <div style="margin-top: 5px;"></div>
+                <!-- Offices -->
+                <app-expansion-panel *appFeaturesAccess="filter.offices"
+                    [dropdownTitle]="'Offices'">
+                    <div class="dropdown mr-3" id="resourcesOfficeFilter">
+                        <app-office-dropdown class="ddl-panel" [officeHierarchy]="officeHierarchy"
+                            [selectedOfficeList]="selectedOfficeList" [title]="'Offices'"
+                            (refreshView)=getResourcesBySelectedOfficeHandler($event)>
+                        </app-office-dropdown>
+                    </div>
+                </app-expansion-panel>
+
+                <!-- Staffing Tags -->
+                <app-expansion-panel *appFeaturesAccess="filter.staffingTags"
+                    [dropdownTitle]="'Staffing Tags'">
+                    <div class="dropdown mr-3" id="resourcesStaffingTagFilter">
+                        <app-multi-select-dropdown [dropdownList]="staffingTagDropdownList" [title]="'Staffing Tags'"
+                            [selectedItems]="selectedStaffingTagList"
+                            (refreshView)="getResourcesBySelectedStaffingTags($event)">
+                        </app-multi-select-dropdown>
+                    </div>
+                </app-expansion-panel>
+
+                <!-- Level Grades -->
+                <app-expansion-panel *appFeaturesAccess="filter.levelGrades"
+                    [dropdownTitle]="'Level Grades'">
+                    <div class="dropdown mr-3" id="resourcesLevelGradeFilter">
+                        <app-multi-select-dropdown [dropdownList]="levelGradeDropdownList" [title]="'Level Grades'"
+                            [selectedItems]="selectedLevelGradeList"
+                            (refreshView)="getResourcesBySelectedLevelGrades($event)">
+                        </app-multi-select-dropdown>
+                    </div>
+                </app-expansion-panel>
+
+                <!-- Position -->
+                <app-expansion-panel *appFeaturesAccess="filter.positions"
+                    [dropdownTitle]="'Position'">
+                    <div class="dropdown mr-3" id="resourcesPositionFilter">
+                      <app-multi-select-dropdown
+                        [dropdownList]="positionDropdownList"
+                        [title] ="'Positions'"
+                        [selectedItems]="selectedPositionList"
+                        (refreshView)="getResourcesBySelectedPositionList($event)"
+                      >
+                      </app-multi-select-dropdown>
+                    </div>
+                </app-expansion-panel>
+
+                <!-- Staffable As -->
+                <app-expansion-panel *appFeaturesAccess="filter.staffableAs"
+                    [dropdownTitle]="'Staffable As'">
+                    <div class="dropdown mr-3" id="resourcesStaffableAsFilter">
+                        <app-multi-select-dropdown [dropdownList]="staffableAsDropdownList" [title]="'Staffable As'"
+                            [selectedItems]="selectedStaffableAsList"
+                            (refreshView)="getResourcesBySelectedStaffableAs($event)">
+                        </app-multi-select-dropdown>
+                    </div>
+                </app-expansion-panel>
+
+                <!-- Employee Status -->
+                <app-expansion-panel *appFeaturesAccess="filter.employeeStatus"
+                    [dropdownTitle]="'Employee Status'">
+                    <div class="dropdown mr-3" id="resourcesEmployeeStatusFilter">
+                        <app-multi-select-dropdown [dropdownList]="employeeStatusDropDownList" title="Employee Status"
+                            [selectedItems]="selectedEmployeeStatusList"
+                            (refreshView)="getResourcesEmployeeStatusBySelectedValue($event)">
+                        </app-multi-select-dropdown>
+                    </div>
+                </app-expansion-panel>
+
+                <!-- Commitment Type -->
+                <app-expansion-panel *appFeaturesAccess="filter.CommitmentType"
+                    [dropdownTitle]="'Commitment Type'">
+                    <div class="dropdown mr-3" id="resourcesCommitmentTypeFilter">
+                        <app-multi-select-dropdown [dropdownList]="commitmentTypesDropDownList"
+                            [title]="'Commitment Type'" [selectedItems]="selectedCommitmentTypeList"
+                            (refreshView)="showResourcesCommitmentsBySelectedValue($event)">
+                        </app-multi-select-dropdown>
+                    </div>
+                </app-expansion-panel>
+
+                <!-- Ceritificates Dropdown -->
+                <app-expansion-panel *appFeaturesAccess="filter.certificates"
+                    [dropdownTitle]="'Certificates'">
+                    <div class="dropdown mr-3" id="resourcesCertificateFilter">
+                        <app-multi-select-dropdown [dropdownList]="certificatesDropDownList" [title]="'Certificates'"
+                            [selectedItems]="selectedCertificatesList"
+                            (refreshView)="showResourcesCertificatesBySelectedValue($event)">
+                        </app-multi-select-dropdown>
+                    </div>
+                </app-expansion-panel>
+
+                <!-- Languages Dropdown -->
+                <app-expansion-panel *appFeaturesAccess="filter.languages"
+                    [dropdownTitle]="'Languages'">
+                    <div class="dropdown mr-3" id="resourcesLanguagesFilter">
+                        <app-multi-select-dropdown [dropdownList]="languagesDropDownList" [title]="'Languages'"
+                            [selectedItems]="selectedLanguagesList"
+                            (refreshView)="showResourcesLanguagesBySelectedValue($event)">
+                        </app-multi-select-dropdown>
+                    </div>
+                </app-expansion-panel>
+
+                <!-- Practice Area Dropdown -->
+                <app-expansion-panel *appFeaturesAccess="filter.affiliation"
+                    [dropdownTitle]="'Affiliation'">
+                    <div class="dropdown mr-3" id="resourcesPracticeAreaFilter">
+                        <app-multi-select-dropdown [dropdownList]="practiceAreaDropDownList" [title]="'Affiliation'"
+                            [selectedItems]="selectedPracticeAreaList"
+                            (refreshView)="showResourcesPracticeAreaBySelectedValue($event)">
+                        </app-multi-select-dropdown>
+                    </div>
+                </app-expansion-panel>
+          
+                <!-- Affiliation Role Dropdown -->
+                <ng-container *ngIf="isAffiliationRoleShown">
+                    
+                <app-expansion-panel *appFeaturesAccess="filter.affiliationRoles"
+                    [dropdownTitle]="'Affiliation Role'">
+                    <div class="dropdown mr-3" id="resourcesRoleNameFilter">
+                        <app-multi-select-dropdown [dropdownList]="roleNameDropdownList" [title]="'Affiliation Role'"
+                            [selectedItems]="selectedRoleNameList"
+                            (refreshView)="showResourcesRoleNameBySelectedValue($event)">
+                        </app-multi-select-dropdown>
+                    </div>
+                </app-expansion-panel>
+                </ng-container>
+                
+                 
+                <!-- Sort By -->
+                <app-expansion-panel *appFeaturesAccess="filter.sortBy"
+                    [dropdownTitle]="'Sort By'">
+                    <div class="dropdown mr-3" id="resourcesSortByFilter">
+                        <app-multi-select-dropdown [dropdownList]="sortByDropdownList" [title]="'Sort By'"
+                            [selectedItems]="selectedSortByList"
+                            (refreshView)="getResourcesSortBySelectedValue($event)">
+                        </app-multi-select-dropdown>
+                    </div>
+                </app-expansion-panel>
+
+                <!-- Filter Name Textbox -->
+                <app-expansion-panel>
+                    <input type="text" [(ngModel)]="selectedFiltersTitle" autocomplete="off" name="title"
+                        class="form-control form-control-sm" placeholder="Enter Title">
+                    <label *ngIf="showErrorMessage" class="text-danger" style="font-size: small;">
+                        <b>{{errorMessage}}</b>
+                    </label>
+                </app-expansion-panel>
+                <app-expansion-panel>
+                    <div style="margin-left: inherit;">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="isDefault" id="markAsDefault">
+                        <label class="form-check-label" for="markAsDefault">
+                            Set this as default filter
+                        </label>
+                    </div>
+                </app-expansion-panel>
+                <app-expansion-panel [dropdownTitle]="" style="text-align: right;">
+                    <button class="btn_filter1_Save" (click)="upsertFiltersForLoggedInEmployee()">
+                        Save New
+                    </button>
+                    <button *ngIf="updateFilters" class="btn_filter1_Save"
+                        (click)="upsertFiltersForLoggedInEmployee(false)">
+                        Update
+                    </button>
+                </app-expansion-panel>
+            </div>
+        </tab>
+        <tab heading="Saved Filters" (selectTab)="onSavedFiltersTabClick()">
+            <div class="filters-wrapper">
+                <app-saved-resource-filters [officeFlatList]="officeFlatList" [staffingTags]="staffingTags"
+                    [commitmentTypes]="commitmentTypes" [practiceAreas]="practiceAreas" [affiliationRoles]="affiliationRoles"
+                    [employeeStatus]="employeeStatus" [sortsBy]="sortsBy" [staffableAsTypes]="staffableAsTypes"
+                    [positionsHierarchy]="positionsHierarchy" [savedResourceFilters]="savedResourceFilters"
+                    [filterConfig]="filterConfig" (refreshView)="setSelectedSavedResourceFilters($event)"
+                    (setAsDefaultFilter)="setAsDefaultFilterHandler($event)"
+                    (deleteSavedFilter)="deleteSavedFilterHandler($event)">
+                </app-saved-resource-filters>
+            </div>
+        </tab>
+    </tabset>
+
+</section>

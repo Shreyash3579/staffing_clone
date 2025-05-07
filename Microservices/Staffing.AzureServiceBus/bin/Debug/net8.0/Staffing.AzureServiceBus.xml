@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Staffing.AzureServiceBus</name>
+    </assembly>
+    <members>
+        <member name="M:Staffing.AzureServiceBus.Controllers.PegQueueController.SubscribeToPegQueue">
+            <summary>
+            START the subsciption on the Azure Service Bus PEG Queue
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.AzureServiceBus.Controllers.PegQueueController.SendToPegQueue(System.Collections.Generic.IEnumerable{Staffing.AzureServiceBus.Models.PegOpportunityMap})">
+            <summary>
+            Sned the case code on which Planning Cards are merged to PEG Queue
+            </summary>
+            <returns>true or false if addition to queue fails or succeeds</returns>
+        </member>
+        <member name="M:Staffing.AzureServiceBus.Controllers.PegQueueController.StopPegQueue">
+            <summary>
+            Stop the subsciption on the Azure Service Bus PEG Queue
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.AzureServiceBus.Controllers.PricingConfiguratorQueueController.SubscribeToPricingConfiguratorQueue">
+            <summary>
+            START the subsciption on the Azure Service Bus Pricing Configurator Queue
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Staffing.AzureServiceBus.Controllers.PricingConfiguratorQueueController.StopPegQueue">
+            <summary>
+            Stop the subsciption on the Azure Service Bus Pricing Configurator Queue
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

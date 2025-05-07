@@ -1,0 +1,56 @@
+.list-group-item-text {
+    font-size: small;
+    margin-bottom: 0rem;
+}
+
+.list-group-item-action {
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.list-group-item-icons {
+    float: right;
+    margin-left: 10%;
+    align-self: center;
+    margin-right: 3%;
+
+    .icon-delete {
+        color: #cc0000;
+        display: none;
+    }
+}
+
+.list-group-item-action:hover .icon-delete,
+.list-group-item-action:hover .btn-secondary {
+    display: block;
+}
+
+.list-group-item-heading {
+    display: flex;
+    cursor: pointer;
+
+    .title {
+        width: 90%;
+    }
+}
+
+.default-tag {
+    border-radius: 25px;
+    background: #8b0000;
+    padding: 5px;
+    color: white;
+}
+
+.btn-secondary {
+    width: max-content;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    font-size: small;
+    display: none;
+}

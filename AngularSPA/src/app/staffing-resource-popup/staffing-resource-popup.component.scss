@@ -1,0 +1,42 @@
+::ng-deep .navbar {
+  display: none !important;
+}
+
+// loading spinner
+.loading-spinner-wrapper {
+  align-items: center;
+  background: #fff;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  position: fixed;
+  top: 0px;
+  width: 100vw;
+  z-index: 9999999;
+}
+
+section {
+  background-color: #fff;
+  height: 100vh;
+  overflow: auto;
+  width: 100%;
+
+  .resource-staffing-popup {
+    border: solid #c2c9d1;
+    border-width: 1px 0px 0px 1px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0px auto;
+    width: fit-content;
+
+    .resource-staffing-popup-wrapper {
+      display: flex;
+      font-family: "Graphik";
+
+      #commitments-body {
+        width: 100%;
+      }
+    }
+  }
+}

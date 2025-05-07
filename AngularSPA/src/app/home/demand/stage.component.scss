@@ -1,0 +1,204 @@
+.logo-mw {
+  min-width: 10%
+}
+
+.filter-ml {
+  margin-left: 1.5%;
+}
+
+.card-placeholder {
+  margin-bottom: 24px;
+  position: relative;
+
+  &__wrapper {
+      border: 2px dashed #07c29f;
+      height: 100%;
+      border-radius: 10px;
+      padding: 5px;
+      position: relative;
+  }
+
+  &__icons {
+      position: absolute;
+      top: 0;
+      right: 0;
+      // width: 0;
+      overflow: hidden;
+      // height: 0;
+      background: #f5f5f5;
+      // padding: 0.5rem;
+      // border-radius: 0px 9px 0 0;
+      z-index: 3;
+      display: none;
+  }
+
+  &__dialog {
+      background: #fff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 6;
+      padding: 1rem;
+  }
+
+  &__backdrop {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: #c4c4c4;
+      opacity: .5;
+      z-index: 4;
+  }
+
+  &__button {
+      padding: 0 1rem;
+      outline: none;
+      border: 1px solid #cc0000;
+      border-radius: 3px;
+      background: #cc0000;
+      color: #fff;
+
+      &--secondary {
+          background: #fff;
+          color: #cc0000;
+      }
+  }
+
+  &__input {
+      display: flex;
+      align-items: center;
+      margin-bottom: 3rem;
+
+      label {
+          white-space: nowrap;
+          margin-bottom: 0;
+          margin-right: 0.5rem;
+          color: #000;
+      }
+
+      input {
+          width: 9.375rem;
+          border: 1px solid #dadada;
+      }
+  }
+
+  &__title {
+      height: 3.29rem;
+      border: 1px solid #c4c4c4;
+      margin-bottom: 0.5rem;
+      position: relative;
+
+      textarea {
+          width: 100%;
+          height: 100%;
+          resize: none;
+          outline: none;
+          border: 1px solid #c4c4c4;
+      }
+  }
+
+  &__title:hover .card-placeholder__icons {
+      // width: 150px !important;
+      padding: 0.5rem;
+      display: block;
+      height: unset;
+  }
+
+  &__content {
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+      font-size: 12px;
+  }
+}
+
+.placeholder-icon {
+  &:hover &--circle {
+    fill: #bc0dff;
+  }
+
+  &:hover &--line {
+    fill: #fff;
+    stroke: #fff;
+  }
+}
+
+.email-icon {
+  &:hover &--circle {
+      fill: #cc0000;
+  }
+}
+
+.thumbtack-icon {
+  &:hover &--circle {
+      fill: #007bff;
+  }
+
+  &:hover &--line {
+      fill: #fff;
+  }
+}
+
+.case-icon {
+  &:hover &--circle {
+    fill: #20b66b;
+  }
+
+  &:hover &--line {
+    stroke: #fff;
+  }
+}
+
+.close-icon {
+  &:hover &--line {
+    stroke: #cc0000;
+  }
+}
+
+.placeholder {
+
+  &__list {
+    width: 100%;
+    transform: none !important;
+    display: flex;
+    border: 1px dashed #06AF8F;
+    border-bottom: 0px;
+
+    .name a {
+        font-size: 15px;
+        color: #000;
+        line-height: 17px;
+        max-width: 100%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: block;
+    }
+  }
+}
+
+.placeholder__list:last-child {
+  border-bottom: 1px dashed #06AF8F;
+}
+
+::ng-deep {
+
+  // .app-project-placeholder app-resourceview {
+  //     display: none;
+  // }
+
+  .app-project-placeholder app-resourceview + .card-placeholder__wrapper {
+      transform: none !important;
+  }
+}
+
+.ghost {
+  color: red;
+}
+
+#scrollBottomDetect { position: fixed; bottom: 0; height: 40px; width: 100%; border: 1px solid red; }
+#scrollTopDetect { position: fixed; top: 0; height: 40px; width: 100%; border: 1px solid red; }

@@ -1,0 +1,40 @@
+<div ngDraggable>
+  <!--Modal Header-->
+  <div class="modal-header">
+    <h5 class="modal-title">
+      {{modalHeaderText}}
+    </h5>
+    <button type="button" class="close" (click)="closeDialogHandler()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  
+  <!--Modal Body-->
+  <div class="modal-body mb-3">
+    <div class="form-row col-8">
+      <app-cases-typeahead
+        [searchOpps]="searchOpps"
+        [clearSearchOnSelect]="false"
+        (onSearchItemSelect)="onSearchItemSelectHandler($event)" >
+      </app-cases-typeahead>
+      <span *ngIf="errorMessage" class="text-danger">
+        {{errorMessage}}
+      </span>
+    </div>
+    <!-- <span *ngIf="noCaseOppFound">{{noResultsFoundMsg}}</span> -->
+  </div> 
+  
+  <!--Modal Footer-->
+  <div class="modal-footer">
+    <button id="search-case-opp-cancel" type="button" class="btn btn-sm btn-secondary" (click)="closeDialogHandler()">
+      Cancel
+    </button>
+    <button id="search-case-opp-update" type="button" class="btn btn-sm btn-primary" (click)="onAddCaseOppClick(planningCardActions.Merge)">
+      Merge
+    </button>
+    <button *ngIf="showMergeAndCopy" id="search-case-opp-update" type="button" class="btn btn-sm btn-primary" (click)="onAddCaseOppClick(planningCardActions.CopyAndMerge)">
+      Copy & Merge
+    </button>
+  </div>
+
+  </div>

@@ -1,0 +1,10 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@baseUrl = https://localhost:44378/api
+
+###
+#get Notes for Profile Page
+POST {{baseUrl}}/analytics/analyticsReport
+#Authorization: <Add Bearer Toekn Here>
+Content-Type: application/json
+
+"789eecad-145c-4506-881b-be28eb77c05a"

@@ -1,0 +1,21 @@
+@import "./../staffing-intake-form.component";
+
+
+input, textarea, ng-select {
+  margin-top: 0.45rem;
+}
+textarea{
+  border: 1px solid #ced4da;
+}
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option .ng-tag-label{
+  font-size: 12px;
+}
+.w-40{
+  width: 40% !important;
+}
+.title-section {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  justify-content: flex-start;
+  width: 100% !important;
+}

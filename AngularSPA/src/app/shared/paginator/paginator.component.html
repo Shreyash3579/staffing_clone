@@ -1,0 +1,30 @@
+<div class="page-navigation-container">
+  <!-- Show the left arrow if required -->
+  <div class="page-number-container" *ngIf="pageRange.length > 0" (click)="getPageResults(selectedPageNumber - 1)">
+    <img [ngClass]="selectedPageNumber === 1 ? 'page-navigation-arrow-disabled' : 'page-navigation-arrow-enabled'"
+         [src]="selectedPageNumber === 1 ? 'assets/img/page-nav-disabled-arrow-left.png' : 'assets/img/page-nav-arrow-left.png'" />
+  </div>
+
+  <div *ngFor="let page of pageRange">
+    <!-- Show the page if it is visible and not an ellipsis -->
+    <div *ngIf="page.isVisible && !page.isEllipsis" class="page-number-container">
+      <div class="page-number-div" [ngClass]="{'current-page' : (page.number === selectedPageNumber)}" (click)="getPageResults(page.number)">
+        <p><span>{{page.text}}</span></p>
+      </div>
+      <div [ngClass]="{'current-page-bar' : (page.number === selectedPageNumber)}"></div>
+    </div>
+
+    <!-- Show the ellipsis -->
+    <div *ngIf="page.isVisible && page.isEllipsis" class="page-number-container">
+      <div class="page-number-div page-number-ellipsis">
+        <p><span>{{page.text}}</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Show the right arrow if required -->
+  <div class="page-number-container" *ngIf="pageRange.length > 0" (click)="getPageResults(selectedPageNumber + 1)">
+    <img [ngClass]="selectedPageNumber === lastPageNumber ? 'page-navigation-arrow-disabled' : 'page-navigation-arrow-enabled'"
+         [src]="selectedPageNumber === lastPageNumber ? 'assets/img/page-nav-disabled-arrow-right.png' : 'assets/img/page-nav-arrow-right.png'" />
+  </div>
+</div>

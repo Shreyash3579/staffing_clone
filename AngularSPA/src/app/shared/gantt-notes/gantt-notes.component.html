@@ -1,0 +1,130 @@
+<div class="notes-wrapper mt-2" [class.collapsed]="noteWrapperCollapsed">
+  <!-- Notes Header - Label & CTAs -->
+  <div class="notes-header-wrapper">
+    <span class="header-label" [class.blue-color]="notes.length > 0">
+        <span class="notes-container">
+            Notes
+            <!-- alert icon -->
+            <span class="user__icon" triggers="mouseenter:mouseleave" popoverClass="notes-popover">
+                <i class="fas fa-exclamation-triangle" id="alertIcon"></i>
+                <div class="hover-text" container="body" >{{notesAlertText}}</div>
+            </span>
+        </span>
+    </span>
+
+    <div class="d-flex align-items-center ml-2">
+        <!-- Add New Note CTA -->
+        <button *ngIf="!isNotesReadonly" class="d-flex align-items-center justify-content-center" (click)="toggleAddNewNote()">
+            <i class="fa fa-plus"></i>
+        </button>
+
+        <!-- Expand | Collapse Notes Container -->
+        <button (click)="noteWrapperCollapsed = !noteWrapperCollapsed"
+            class="expand-collapse-notes d-flex align-items-center justify-content-center ml-auto" [class.collapsed]="noteWrapperCollapsed" *ngIf="notes.length > 0">
+            <i class="fa fa-chevron-up"></i>
+        </button>
+
+        <button (click)="closeNotesWrapper()"
+        class="close-notes d-flex align-items-center justify-content-center ml-2" *ngIf="!isHideCloseIcon">
+        <i class="fa fa-times"></i>
+    </button>
+    </div>
+</div>
+
+
+
+  <!-- New Note Wrapper -->
+  <div class="new-note-wrapper" id="new-note-wrapper-{{ rowIndex }}" [class.hidden]="hideAddNewNote">
+    <div class="new-note-content">
+      <textarea placeholder="Type your note here..." [(ngModel)]="userNote"></textarea>
+
+      <!-- Specific Users -->
+      <div class="user-pills">
+        <div class="user d-flex align-items-center" *ngFor="let user of sharingOption.users; let userIndex = index">
+          <p>{{ user.fullName || user }}</p>
+
+          <button class="d-flex align-items-center justify-content-center" (click)="deleteUser(user, userIndex)">
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="new-note-ctas">
+      <!-- Visibility | Share With... -->
+      <!-- If Only Me | All Users -->
+      <button *ngIf="sharingOption.label.toLowerCase() !== 'specific users'" class="secondary"
+        (click)="shareOptionsCollapsed = !shareOptionsCollapsed">
+        <i class="fa fa-{{ sharingOption.icon }}"></i>
+        <span>{{ sharingOption.label }}</span>
+        <i class="fa fa-chevron-right"></i>
+      </button>
+
+      <!-- If "Specific Users" -->
+      <button *ngIf="sharingOption.label.toLowerCase() === 'specific users'" class="secondary"
+        (click)="shareOptionsCollapsed = !shareOptionsCollapsed">
+        <i class="fa fa-{{ sharingOption.icon }}"></i>
+        <span *ngIf="!sharingOption.users.length">{{ sharingOption.label }}</span>
+        <span *ngIf="sharingOption.users.length">
+          {{ sharingOption.label }} ({{ sharingOption.users.length }})
+        </span>
+        <i class="fa fa-chevron-right"></i>
+      </button>
+
+      <!-- Cancel changes -->
+      <button class="primary" (click)="cancelNoteHandler()">Cancel</button>
+
+      <!-- Add / Save Note -->
+      <!-- If edit mode is false -->
+      <button *ngIf="!editNoteMode" class="primary" (click)="addNoteHandler()" [disabled]="!userNote.length">
+        Add Note
+      </button>
+
+      <!-- If edit more is true -->
+      <button *ngIf="editNoteMode" class="primary" (click)="saveNoteEditHandler()" [disabled]="!userNote.length">
+        Save
+      </button>
+    </div>
+
+    <!-- Share With Menu -->
+    <div class="share-with-wrapper" *ngIf="!shareOptionsCollapsed">
+      <app-shared-resources-share-popup (sharedOptionEmitter)="handleSharingOptionClick($event)"
+        (closeMenuEmitter)="shareOptionsCollapsed = !shareOptionsCollapsed"
+        [selectedOption]="sharingOption" [mostRecentSharedWithEmployeeGroupsForNotesByEmployeeCode] ="mostRecentSharedWithEmployeeGroupsForNotesByEmployeeCode"></app-shared-resources-share-popup>
+    </div>
+  </div>
+
+  <!-- Notes Content -->
+  <div class="notes-content-wrapper" *ngIf="notes.length">
+    <div *ngFor="let note of notes | slice:0:10; let noteIndex = index">
+      <div class="last-edited d-flex align-items-center">
+        <div class="d-flex align-items-center mr-1">
+          <i class="fa fa-user mr-1"></i>
+
+          <!-- Note Author -->
+          <span title="{{ note.createdByName }}" class="header-label d-flex align-items-center">
+            {{ note.createdByName }}
+          </span>
+        </div>
+
+        <!-- Note Created & Last Edited Date -->
+        <span title="{{ note.lastUpdated | date: 'MM/dd/yy h:mma' }}">
+          {{ note.lastUpdated | date: "MM/dd/yy h:mma" }}
+        </span>
+        <!-- Edit and delete button -->
+          <span *ngIf="loggedInUser === note.createdBy" class = "edit">
+            <a href="javascript:void(0);" *ngIf="!isNotesReadonly" (click)="onEditNote(note)">Edit</a>
+          </span>
+          <span *ngIf="loggedInUser === note.createdBy" class = "delete">
+            <a href="javascript:void(0);" *ngIf="!isNotesReadonly" (click)="onDeleteNote(note, noteIndex)">Delete</a>
+          </span>
+        <!-- End Edit and delete button -->
+      </div>
+
+      <!-- Note Content -->
+      <div class="notes-content">
+        <p>{{ note.note }}</p>
+      </div>
+    </div>
+  </div>
+</div>

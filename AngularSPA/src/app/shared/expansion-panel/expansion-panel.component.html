@@ -1,0 +1,16 @@
+<mat-expansion-panel class="custom-header my-4" [disabled]="true" [expanded]="true" hideToggle="true" #office>
+    <mat-expansion-panel-header>
+        <mat-panel-title>{{dropdownTitle}}</mat-panel-title>
+        <!-- <mat-panel-description>
+            <svg width="15" height="15" viewBox="0 0 13 22" fill="none" *ngIf="!office.expanded">
+                <path d="M1.34961 21L11.1736 10.827L1.00056 1.00305" stroke="#333333" stroke-width="2" />
+            </svg>
+            <svg width="15" height="15" viewBox="0 0 22 13" fill="none" *ngIf="office.expanded">
+                <path d="M1 1.34863L11.173 11.1726L20.997 0.999585" stroke="#333333" stroke-width="2" />
+            </svg>
+        </mat-panel-description> -->
+    </mat-expansion-panel-header>
+    <div class="col-10 mx-3">
+        <ng-content></ng-content>
+    </div>
+</mat-expansion-panel>

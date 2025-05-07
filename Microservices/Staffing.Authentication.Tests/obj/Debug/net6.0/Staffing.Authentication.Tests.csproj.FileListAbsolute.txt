@@ -1,0 +1,6 @@
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.Authentication.Tests\bin\Debug\net6.0\CoverletSourceRootsMapping
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.Authentication.Tests\obj\Debug\net6.0\Staffing.Authentication.Tests.csproj.AssemblyReference.cache
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.Authentication.Tests\obj\Debug\net6.0\Staffing.Authentication.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.Authentication.Tests\obj\Debug\net6.0\Staffing.Authentication.Tests.AssemblyInfoInputs.cache
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.Authentication.Tests\obj\Debug\net6.0\Staffing.Authentication.Tests.AssemblyInfo.cs
+C:\Projects\TSG-Staffing-BOSS\Microservices\Staffing.Authentication.Tests\obj\Debug\net6.0\Staffing.Authentication.Tests.csproj.CoreCompileInputs.cache

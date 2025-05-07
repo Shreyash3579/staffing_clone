@@ -1,0 +1,41 @@
+<ng-container *ngIf="planningCards">
+  <div class="utilization-area">
+      <div class="utilization-row">
+        <app-gantt-project-details
+          [dateRange]="dateRange"
+          [planningCard]="planningCards"
+          (openAddTeamSkuForm)="openAddTeamSkuFormHandler($event)"
+          (openPlaceholderForm)="openPlaceholderFormhandler($event)">
+        </app-gantt-project-details>
+      </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="casesGanttData">
+  <div class="utilization-area">
+    <div class="utilization-row" #bounds>
+      <app-gantt-project-details
+        [casesGanttData]="casesGanttData"
+        [dateRange]="dateRange"
+        [bounds]="bounds"
+        [caseIndex]="indexNumber"
+        (openPlaceholderForm)="openPlaceholderFormhandler($event)"
+        (openAddTeamSkuForm)="openAddTeamSkuFormHandler($event)"
+        (skuTermClickForProject)="skuTermClickForProjectHandler($event)">
+      </app-gantt-project-details>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="project">
+  <div class="utilization-area">
+    <div class="utilization-row">
+      <app-gantt-project-details
+        [dateRange]="dateRange"
+        [project]="project"
+        (openAddTeamSkuForm)="openAddTeamSkuFormHandler($event)"
+        (openPlaceholderForm)="openPlaceholderFormhandler($event)"
+        (skuTermClickForProject)="skuTermClickForProjectHandler($event)">   
+      </app-gantt-project-details>
+    </div>
+  </div>

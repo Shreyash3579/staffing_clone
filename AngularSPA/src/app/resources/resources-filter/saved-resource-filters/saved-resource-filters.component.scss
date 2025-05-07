@@ -1,0 +1,19 @@
+.saved-resource-filters-wrapper {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+
+  .saved-filter-row {
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto 300px;
+    justify-content: space-between;
+
+    label {
+      color: #616568;
+      font-family: "Graphik";
+      font-size: 16px;
+      margin: 0px;
+    }
+  }
+}
