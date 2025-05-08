@@ -1,0 +1,33 @@
+<div class="row no-gutters">
+    <div id="ganttContainerDiv"
+        class="col-12 resources case-planning-view" 
+        infiniteScroll 
+        [infiniteScrollDistance]="scrollDistance"
+        [scrollWindow]="false" 
+        (scrolled)="loadMoreCases()"
+        #ganttContainer>
+
+        <!-- Header -->
+        <app-projects-gantt-header 
+            [dateRange]="dateRange"
+            (expandCollapseSidebarEmitter)="expandCollapseSidebarEmitterHandler($event)"
+        ></app-projects-gantt-header>
+
+        <!-- Body -->
+        <ng-container *ngIf="ganttCasesData.length || planningCards.length">
+            <app-projects-gantt-body
+                [casesGanttData]="ganttCasesData" 
+                [planningCards]="planningCards"
+                [dateRange]="dateRange"
+                [isLeftSideCollapsed]="isLeftSideCollapsed"
+                (openPlaceholderForm)="openPlaceholderFormhandler($event)"
+                (openAddTeamSkuForm)="openAddTeamSkuFormHandler($event)"
+                (openCaseRollForm)="openCaseRollFormHandler($event)"
+                (showQuickPeekDialog)="showQuickPeekDialogHandler($event)"
+                (openCaseDetailsDialog)="openCaseDetailsDialogHandler($event)"
+                (upsertCasePlanningNote)="upsertCasePlanningNoteHandler($event)"
+                (deleteCasePlanningNotes)="deleteCasePlanningNotesHandler($event)" >
+            </app-projects-gantt-body>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="add-new-role-section">
+    <div class="effective-dt-picker" [ngClass]="isEffectiveDateInvalid ? 'invalid-effective-date' : ''">
+        <input type="text" name="staffableAsEffectiveDate" placeholder="dd-mmm-yyyy" id="staffableAsEffectiveDate"
+            class="form-control form-control-sm border-right-0" autocomplete="off" [bsConfig]="bsConfig" bsDatepicker
+            #dpStaffableAsEffectiveDate="bsDatepicker" (ngModelChange)="onEffectiveDateChange($event)"
+            [(ngModel)]="staffableAsRole.effectiveDate" />
+        <div id="staffable-as-effective-date-icon" class="input-group-append">
+            <span class="input-group-text" (click)="dpStaffableAsEffectiveDate.toggle()">
+                <i class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw"></i>
+            </span>
+        </div>
+    </div>
+
+    <select class="form-control form-control-sm add-new-role-ddl" name="staffableRole"
+        placeholder="Select Staff-able Role" [(ngModel)]="staffableAsRole.staffableAsTypeCode"
+        (change)="onStaffableAsRoleTypeChange()">
+        <option *ngFor="let staffableAsType of staffableAsTypes" [ngValue]="staffableAsType.staffableAsTypeCode">
+            {{staffableAsType.staffableAsTypeName}}
+        </option>
+    </select>
+
+    <div class="flag-trash" *ngIf="staffableAsRole.isActive" (click)="removeStaffableRoleHandler()">
+        <i class="fas flagRole fa-flag active-role-icon"></i>
+        <i class="fas flagRole fa-trash-alt active-role-icon"></i>
+    </div>
+    <i *ngIf="!staffableAsRole.isActive" (click)="removeStaffableRoleHandler()" class="fas flagRole fa-trash-alt new-role-trash-icon"></i>
+</div>

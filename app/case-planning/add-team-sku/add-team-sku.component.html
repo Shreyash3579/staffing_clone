@@ -1,0 +1,273 @@
+<div id="sku-block" cdkDrag>
+  <div class="modal-header">
+    <button type="button" class="close" (click)="closeForm()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h3 class="case-header">{{ projectTitle }}</h3>
+  </div>
+
+  <div class="effective-date-form-wrapper d-flex align-items-start">
+    <!-- Effective Date(s) -->
+    <!-- <div class="effective-date-section"> -->
+    <!-- Date -->
+    <!-- <div
+          class="effective-date d-flex align-items-center justify-content-between"
+          *ngFor="let item of effectiveDates; let i = index"
+          [ngClass]="item.selected ? 'selected' : ''"
+          (click)="selectEffectiveDate(item)">
+          <p>{{ item.date | date: "dd-MMM-yyyy" }}</p>
+          <button (click)="deleteEffectiveDate(item, i)">
+            <i class="fa fa-trash"></i>
+          </button>
+
+          <div *ngIf="item.selected" class="arrow-icon"></div>
+        </div> -->
+
+    <!-- Add Effective Date CTA -->
+    <!-- <button
+          class="effective-date-cta d-flex align-items-center"
+          [bsConfig]="bsConfig"
+          [minDate]="minDate"
+          (bsValueChange)="onDateChange($event)"
+          bsDatepicker>
+          <i class="fa fa-plus"></i>
+          <p>Add Effective Date</p>
+        </button>
+      </div> -->
+
+    <!-- SKU Form -->
+    <div class="sku-form-section">
+      <!-- Mock Salesforce data -->
+      <div *ngIf="!isCopyCortexHidden" class="salesforce-wrapper">
+        <button [disabled]="isCopyCortexOriginalyDisabled"
+          class="salesforce-sku d-flex align-items-center justify-content-center"
+          *ngIf="selectedCase.estimatedTeamSize"
+          (click)="copyCortexSKU(selectedCase.estimatedTeamSize)">
+          <i class="fa fa-copy"></i>
+          <p>Cortex: {{ selectedCase.estimatedTeamSize }}</p>
+        </button>
+        <div *ngIf="isCopyCortexOriginalyDisabled" class="isDisabled">
+          <label>Placeholders already created by Automated Copy process! The button is disabled.</label>
+        </div>
+      </div>
+      <div *ngIf="isCopyCortexHidden" class="salesforce-wrapper-hidden">
+        <button [disabled]="isCopyCortexOriginalyDisabled"
+          class="salesforce-sku d-flex align-items-center justify-content-center"
+          *ngIf="selectedCase.estimatedTeamSize">
+          Cortex: {{ selectedCase.estimatedTeamSize }}
+        </button>
+      </div>
+
+      <!-- <div
+          class="selected-skus-wrapper d-flex align-items-start"
+          *ngIf="selectedCase.combinedSkuTerm">
+          <p class="boss">BOSS:</p> -->
+
+      <!-- SKUs -->
+      <!-- <div class="selected-skus d-flex align-items-center">
+            <ng-container *ngFor="let sku of mockSkus">
+              <p *ngIf="sku.selected" class="sku" (click)="toggleSkuDropdown()">
+                {{ sku.label }}
+              </p>
+            </ng-container>
+          </div>
+
+          <i class="edit-icon fa fa-pen"></i>
+
+          <div class="sku-dropdown-wrapper" *ngIf="showSkuDropdown">
+            <button
+              *ngFor="let sku of mockSkus"
+              (click)="selectSku(sku)"
+              [ngClass]="sku.selected ? 'selected' : ''">
+              {{ sku.label }}
+            </button>
+          </div> -->
+
+      <!-- Mock Author and Time Edited -->
+      <!-- <div
+            class="history-wrapper"
+            [ngClass]="!isHistoryShown ? 'collapsed' : ''">
+            <div
+              class="last-edited d-flex align-items-center"
+              *ngFor="let item of mockHistory">
+              <p class="author">{{ item.label }}</p>
+              <p class="date">{{ item.date | date: "MM/dd/yy h:mma" }}</p>
+            </div>
+          </div>
+
+          <div class="view-history-wrapper">
+            <button
+              class="sku-option d-flex align-items-center"
+              (click)="showHistory()"
+              [ngClass]="isHistoryShown ? 'collapsed' : ''">
+              <p>View History</p>
+              <i class="fa fa-chevron-down"></i>
+            </button>
+          </div>
+        </div> -->
+
+      <div class="modal-body">
+        <div>
+          <div class="row no-gutters" *ngIf="!autoCalculate">
+            <ng-select
+              class="case-sku-term"
+              [items]="skuTerms"
+              [multiple]="true"
+              [hideSelected]="true"
+              bindLabel="name"
+              (add)="onSkuAdd($event)"
+              (remove)="onSkuRemove($event)"
+              placeholder="Add Sku"
+              [(ngModel)]="selectedSkuTerms">
+            </ng-select>
+          </div>
+
+          <hr *ngIf="selectedSkuTerms.length && !autoCalculate">
+          <form [formGroup]="form">
+            <div class="text-danger" *ngIf="!isValid">
+              <ul>
+                <li *ngFor="let error of errorMessages">{{error}}</li>
+              </ul>
+            </div>
+
+            <div class="teamDetailsBlock">
+              <ng-container
+                *ngFor="
+                    let placeholderControlArray of form.get(
+                      'existingPlaceholders'
+                    )?.controls;
+                    let i = index
+                  ">
+                <div class="form-row-wrapper">
+                  <app-placeholder-form
+                    class="placeholder-width"
+                    [serviceLines]="serviceLines"
+                    [offices]="offices"
+                    [pdGrades]="pdGrades"
+                    [commitmentTypes]="ringfences"
+                    [positionGroups]="positionGroups"
+                    [childFormGroupName]="placeholderControlArray"
+                    (removePlaceholderAllocationFromProject)="
+                        removeExistingPlaceholderAllocationFromProjectHandler(
+                          $event
+                        )
+                      ">
+                  </app-placeholder-form>
+                </div>
+              </ng-container>
+
+              <ng-container
+                *ngFor="
+                    let placeholderControlArray of form.get('newPlaceholders')
+                      ?.controls;
+                    let i = index
+                  ">
+                <div class="form-row-wrapper">
+                  <app-placeholder-form
+                    class="placeholder-width"
+                    [serviceLines]="serviceLines"
+                    [offices]="offices"
+                    [pdGrades]="pdGrades"
+                    [commitmentTypes]="ringfences"
+                    [positionGroups]="positionGroups"
+                    [childFormGroupName]="placeholderControlArray"
+                    (removePlaceholderAllocationFromProject)="
+                        removeNewPlaceholderAllocationFromProjectHandler(
+                          $event,
+                          i
+                        )
+                      ">
+                  </app-placeholder-form>
+                </div>
+              </ng-container>
+            </div>
+
+            <!-- <hr /> -->
+
+            <div class="add-input-container" *ngIf="autoCalculate">
+              <button
+                type="button"
+                class="custom-button secondary-btn add-commitment"
+                (click)="onSkuAdd({ size: 1 })">
+                <i class="fa fa-plus mr-2"></i>
+                Add
+              </button>
+              <span class="or-label">or</span>
+              <div class="input-template-wrapper">
+                <input
+                  type="text"
+                  class="add-members-placeholder"
+                  autocomplete="off"
+                  formcontrolName="add"
+                  placeholder="Search for named placeholders"
+                  [typeahead]="resourcesData"
+                  [typeaheadMinLength]="3"
+                  [typeaheadScrollable]="true"
+                  [typeaheadItemTemplate]="usersSearchResult"
+                  [(ngModel)]="asyncResourcesSearchString"
+                  [ngModelOptions]="{ standalone: true }"
+                  (typeaheadOnSelect)="onAddNewResourcePlaceholder($event)" />
+                <ng-template #usersSearchResult let-model="item">
+                  <span>{{ model.fullName }}</span> |
+                  <span>{{ model.levelGrade }}</span> |
+                  <span>{{ model.department.departmentName }}</span>
+                </ng-template>
+              </div>
+            </div>
+
+            <div
+              class="row no-gutters mt-3"
+              *ngIf="!autoCalculate && selectedSkuTerms.length">
+              <div class="col-12">
+                <input
+                  type="text"
+                  class="add-members-placeholder"
+                  autocomplete="off"
+                  formcontrolName="add"
+                  placeholder="Search for named placeholders"
+                  [typeahead]="resourcesData"
+                  [typeaheadMinLength]="3"
+                  [typeaheadScrollable]="true"
+                  [typeaheadItemTemplate]="usersSearchResult"
+                  [(ngModel)]="asyncResourcesSearchString"
+                  [ngModelOptions]="{ standalone: true }"
+                  (typeaheadOnSelect)="onAddNewResourcePlaceholder($event)" />
+                <ng-template #usersSearchResult let-model="item">
+                  <span>{{ model.fullName }}</span> |
+                  <span>{{ model.levelGrade }}</span> |
+                  <span>{{ model.department.departmentName }}</span>
+                </ng-template>
+              </div>
+            </div>
+
+            <!-- Note -->
+            <div *ngIf="selectedSkuTerms" class="note-label-wrapper">
+              Note: All changes will be effective on Saving only.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- Cancel & Save Buttons Wrapper -->
+  <div class="cancel-save-buttons-wrapper">
+    <!-- Cancel Button -->
+    <button
+      type="button"
+      class="custom-button secondary-btn mr-2"
+      (click)="modalRef.hide()">
+      Discard & Close
+    </button>
+
+    <!-- Save Button -->
+    <button
+      type="submit"
+      class="custom-button primary-btn"
+      (click)="onSubmit()">
+      Save
+    </button>
+  </div>
+</div>

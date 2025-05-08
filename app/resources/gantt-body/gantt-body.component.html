@@ -1,0 +1,75 @@
+<!-- <cdk-virtual-scroll-viewport itemSize="100" style="height:100%" > -->
+  <tr
+  (wheel)="divScroll($event)"
+  class="resource-gantt-row"
+  id="gantt-row-{{ rowIndex }}"
+  (mouseenter)="toggleHighlightPercentRow($event)"
+  (mouseleave)="toggleHighlightPercentRow($event)"
+  [class.collapsed]="isRowCollapsed"
+>
+<!-- Left Side Bar - Resources -->
+<td class="left-side-bar" [ngClass]="{'expanded': !isLeftSideBarCollapsed, 
+'collapsed': isLeftSideBarCollapsed,
+'staffingView': !isSelectedPracticeView,
+'practiceStaffingView': isSelectedPracticeView
+}" *ngIf="resourceStaffing.commitments">
+  <resources-resource
+    [commitments]="resourceStaffing.commitments"
+    [resourceViewNotes]="resourceStaffing.resourceViewNotes"
+    [resourceViewCD] = "resourceStaffing.resourceCD"
+    [resourceViewCommercialModel] = "resourceStaffing.resourceCommercialModel"
+    [affiliations]="resourceStaffing.affiliations"
+    [rowIndex]="rowIndex"
+    [resource]="resourceStaffing.resource"
+    [objGanttCollapsedRows]="objGanttCollapsedRows"
+    [isLeftSideBarCollapsed] = "isLeftSideBarCollapsed"
+    [isSelectedPracticeView] ="isSelectedPracticeView"
+    [selectedEmployeeCaseGroupingOption]="selectedEmployeeCaseGroupingOption"
+    (openResourceDetailsDialog)="openResourceDetailsDialogHandler($event)"
+    (upsertResourceViewNote)="upsertResourceViewNoteHandler($event)"
+    (deleteResourceViewNotes)="deleteResourceViewNotesHandler($event)"
+    (upsertResourceRecentCD)="upsertResourceRecentCDHandler($event)"
+    (deleteResourceRecentCD)="deleteResourceRecentCDHandler($event)"
+    (upsertResourceCommercialModel)="upsertResourceCommercialModelHandler($event)"
+    (deleteResourceCommercialModel)="deleteResourceCommercialModelHandler($event)"
+    (expandCollapseGanttRow)="expandCollapseGanttRowHandler($event)"
+    (selectedResourceViewTab) = "selectedResourceViewTabHandler($event)"
+    #ganttResource
+  ></resources-resource>
+</td>
+
+<!-- Right Side - Gantt Tasks -->
+<td class="right-side-gantt">
+  <tr class="grid-lines">
+    <td
+      *ngFor="let day of perDayClass; let i = index"
+      [ngClass] = "getClass(i)"
+    ></td>
+  </tr>
+  <!-- [isCollapsed]="isCollapsed" -->
+  <resources-gantt-task
+    [rowIndex]="rowIndex"
+    [dateRange]="dateRange"
+    [staffing]="resourceStaffing"
+    [case]="case"
+    [thresholdRangeValue]="thresholdRangeValue"
+    [resource]="resourceStaffing.resource"
+    [selectedCommitmentTypes]="selectedCommitmentTypes"
+    [objGanttCollapsedRows]="objGanttCollapsedRows"
+    [isTopbarCollapsed]="isTopbarCollapsed"
+    [selectedEmployeeCaseGroupingOption]="selectedEmployeeCaseGroupingOption"
+    [selectedWeeklyMonthlyGroupingOption]="selectedWeeklyMonthlyGroupingOption"
+    (openQuickAddForm)="openQuickAddFormHandler($event)"
+    (updateResourceAssignmentToProject)="updateResourceAssignmentToProjectHandler($event)"
+    (upsertPlaceholderAllocationsToProject)="upsertPlaceholderAllocationsToProjectHandler($event)"
+    (upsertResourceAllocationsToProject)="upsertResourceAllocationsToProjectHandler($event)"
+    (updateResourceCommitment)="updateResourceCommitmentHandler($event)"
+    (openSplitAllocationPopup)="openSplitAllocationPopupHandler($event)"
+    (openCaseDetailsDialog)="openCaseDetailsDialogHandler($event)"
+    (openPopUpDialog)="openPopUpDialogHandler($event)"
+    #ganttTask
+  >
+  </resources-gantt-task>
+</td>
+</tr>
+

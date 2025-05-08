@@ -1,0 +1,181 @@
+// Threshold CSS
+
+.slider {
+  position: relative;
+  z-index: 1;
+  height: 5px;
+  margin: 0px 15px 0px 7px;
+  // top: 56px;
+}
+
+.slider>.track {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background-color: #497be8;
+}
+
+.slider>.range {
+  position: absolute;
+  left: 0%;
+  z-index: 2;
+  right: 0%;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background-color: #dae5fd;
+}
+
+.slider>.thumb {
+  position: absolute;
+  z-index: 3;
+  width: 23px;
+  height: 23px;
+  border: 2px solid #284ce0;
+  background-color: #dae5fd;
+  border-radius: 50%;
+  top: -3px;
+  cursor: grab;
+}
+
+.slider>.thumb.left {
+  left: 0%;
+  transform: translate(-8px, -6px);
+}
+
+.slider>.thumb.right {
+  right: 0%;
+  transform: translate(16px, -6px);
+}
+
+input[type=range] {
+  position: absolute;
+  pointer-events: none;
+  -webkit-appearance: none;
+  z-index: 2;
+  height: 5px;
+  width: 90%;
+  opacity: 0;
+  cursor: grab;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  pointer-events: all;
+  width: 20px;
+  height: 20px;
+  border-radius: 0;
+  border: 0 none;
+  background-color: red;
+  -webkit-appearance: none;
+}
+
+.threshold {
+
+  &-wrapper {
+    position: relative;
+    max-width: 328px;
+
+    .threshold-btn {
+      background-color: #fff;
+      border: 1px solid #e0e4e8;
+      color: #121212;
+      font-family: "Graphik";
+      font-size: 12px;
+      height: 32px;
+      line-height: 14px;
+      padding-left: 10px;
+      text-align: left;
+
+      &.expanded {
+        border: 1px solid #284ce0;
+        box-shadow: 0px 0px 4px 0px rgba($color: #7597ff, $alpha: 1.0);
+      }
+    }
+  }
+
+  &-box {
+    position: absolute;
+    // border: 1px solid #d7d7d7;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 1px 2px rgba($color: #000, $alpha: 0.3), 0px 2px 6px 2px rgba($color: #000, $alpha: 0.15);
+    color: #121212;
+    z-index: 1000;
+    left: 0;
+    width: 100%;
+    // max-width: 210px;
+    padding: 24px 10px 10px;
+    margin-top: 2px;
+  }
+
+  &-cta {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      height: 32px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      font-family: "Graphik";
+
+      &.threshold-btn {
+        background-color: #284ce0;
+        color: #fff;
+      }
+
+      &.threshold-btn-secondary {
+        background-color: #fff;
+        border: 1px solid #284ce0;
+        color: #284ce0;
+      }
+    }
+  }
+
+  &-btn {
+    background-color: #497beb;
+    color: #fff;
+    border-radius: 3px;
+    border: 1px solid #497be8;
+
+    &-secondary {
+      background-color: #fff;
+      color: #497be8;
+      border: 1px solid #497be8;
+      border-radius: 3px;
+    }
+  }
+}
+
+.input-wrapper {
+  display: flex;
+  padding-top: 24px;
+  justify-content: center;
+
+  input {
+    font-family: "Graphik";
+    font-size: 16px;
+    width: 100%;
+    max-width: 70px;
+    border: 1px solid #c2c9d1;
+    background-color: #fff;
+    color: #121212;
+    height: 32px;
+    border-radius: 4px;
+
+    &:focus,
+    &:active {
+      outline: none;
+      border: 1px solid #c2c9d1;
+    }
+  }
+}
+
+.ddl-arrow-ralign {
+  float: right;
+}

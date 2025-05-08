@@ -1,0 +1,132 @@
+<div class="resource-filter-wrapper d-flex align-items-center mb-4" id="percentages-row">
+  <!-- Search Input -->
+  <div class="search-input-wrapper d-flex align-items-center">
+    <i *ngIf="!employeeSearchInput.value" class="fa fa-search"></i>
+    <i *ngIf="employeeSearchInput.value" class="fa fa-times" (click)="clearSearchBox()"></i>
+    <input type="text" class="form-control border-right-0" id="employeeSearchInput" #employeeSearchInput
+      autocomplete="off" placeholder="Search resources" />
+  </div>
+
+  <!-- Viewing Dropdown Menu -->
+  <app-viewing-dropdown-menu *ngIf="displayGroups.length > 0" [viewingOptions]="displayGroups"
+    (selectViewEmitter)="setSelectedViewingFilter($event)" (createNewEmitter)="handleCreateMoreSelection($event)"
+    (editGroupEmitter)="handleEditGroupSelection($event)">
+  </app-viewing-dropdown-menu>
+ 
+    <!-- Group -->
+    <button *ngIf="(tempActiveGroup.group && tempActiveGroup.type && tempActiveGroup.type !== STAFFING_SETTINGS_FILTER_ENUM) && !employeeSearchInput.value"
+      class="btn edit-group-cta" 
+      (click)="handleEditGroupSelection(tempActiveGroup.group, true)">
+      Edit Group
+    </button>
+
+  <ng-container *ngIf="!employeeSearchInput.value">
+    <!-- Filter | Sort Edits -->
+    <app-filter-sort-edit [type]="'sort'" [sortRows]="selectedSortItem" [resourcesRecentCDList] = "resourcesRecentCDList"
+      [resourcesCommercialModelList] = "resourcesCommercialModelList"
+      (applyChangesEmitter)="applyFilterSortEdits($event)"
+      (cancelChangesEmmitter)="cancelChanges($event)"
+      >
+    </app-filter-sort-edit>
+
+    <!-- Filter | Sort Edits -->
+    <app-filter-sort-edit [type]="'filter'" [filterBy]="appliedFilters" [resourcesRecentCDList] = "resourcesRecentCDList"
+      [resourcesCommercialModelList] = "resourcesCommercialModelList"
+      (applyChangesEmitter)="applyFilterSortEdits($event)"
+      (cancelChangesEmmitter)="cancelChanges($event)">
+    </app-filter-sort-edit>
+  </ng-container>
+
+  <ng-container *ngIf="(tempActiveGroup.group && tempActiveGroup.type && tempActiveGroup.type !== STAFFING_SETTINGS_FILTER_ENUM) && !employeeSearchInput.value">
+
+    <!-- More Options Menu -->
+    <app-more-options-menu (renameEmitter)="handleEditGroupSelection(tempActiveGroup.group)"
+      (editEmitter)="handleEditGroupSelection(tempActiveGroup.group)" (deleteEmitter)="deleteGroup()"
+      (defaultEmitter)="setSelectedAsDefault()"></app-more-options-menu>
+
+    <!-- Reset -->
+    <div class="reset-wrapper" *ngIf="areChangesMade">
+      <button class="btn" (click)="resetChanges()">Reset</button>
+    </div>
+  </ng-container>
+
+  <!-- Save | Save as New -->
+  <div class="save-as-new-wrapper" *ngIf="areChangesMade && (tempActiveGroup.group && tempActiveGroup.type && tempActiveGroup.type !== STAFFING_SETTINGS_FILTER_ENUM) && !employeeSearchInput.value">
+    <div class="btn-group" dropdown>
+      <button class="btn" (click)="saveFilterSortChanges()">Save</button>
+      <button class="btn" dropdownToggle id="button-save-as-new" aria-controls="save-as-new-picker">
+        <i class="fas fa-chevron-down"></i>
+      </button>
+
+      <div class="dropdown-menu" *dropdownMenu role="menu" aria-labelledby="button-save-as-new" id="save-as-new-picker">
+        <button class="dropdown-item" (click)="saveAsNewGroup()">Save As New</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info CTA -->
+  <button *appFeaturesAccess="accessibleFeatures.clickInteractionsInfoIcon"
+    class="filter-wrapper d-flex align-items-center justify-content-center" (click)="showInformation($event)">
+    <i class="fa fa-info"></i>
+  </button>
+
+  <!-- Threshold -->
+  <div class="threshold">
+    <app-range-slider [placeholder]="'Select Availability Threshold'" [filterType]="'notBetween'"
+      (updateThresholdRange)="updateThresholdRangeHandler($event)"> 
+    </app-range-slider>
+  </div>
+
+  <!-- Date Picker -->
+  <div class="date-picker-wrapper">
+    <div id="resourcesDateRangePicker" class="input-group w-auto justify-content-end calendar calendar-resources">
+      <div class="input-group-prepend">
+        <button id="btnDateShiftLeft" class="btn btn-secondary" (click)="shiftDateRange('left')">
+          <i class="fa fa-chevron-left fa-fw"></i>
+        </button>
+      </div>
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="date-picker-icon" (click)="dp.toggle()">
+          <i class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw" aria-hidden="true"></i>
+        </span>
+      </div>
+      <input type="text" id="date-range-calendar" name="daterange" readonly [ngModel]="selectedDateRange"
+        (ngModelChange)="onDateRangeChange($event)" class="form-control" #dp="bsDaterangepicker" bsDaterangepicker
+        [bsConfig]="bsConfig" />
+      <div class="input-group-append">
+        <button id="btnDateShiftRight" class="btn btn-secondary" (click)="shiftDateRange('right')">
+          <i class="fa fa-chevron-right fa-fw"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supply Grouping -->
+  <!-- <ng-container *appFeaturesAccess="accessibleFeatures.supplyGroupsDropdown">
+    <div class="supply-grouping-wrapper ml-auto" *ngIf="displayGroups.length > 0"><app-custom-dropdown
+        dropdownLabel="Displaying:" [menuOptions]="displayGroups"
+        (toggleDropdownEmitter)="selectOption($event)"></app-custom-dropdown></div>
+  </ng-container> -->
+
+  <!-- Case Code Grouping -->
+  <div class="resource-grouping-wrapper">
+    <resources-grouping #groupingComponent
+      (onToggleEmployeeCaseGroup)="toggleEmployeeCaseGroupHandler($event)"
+      (onToggleWeeklyMonthlyGroup)="toggleWeeklyMonthlyViewHandler($event)"
+      (onTogglePracticeView) = "togglePracticeViewHandler($event)"></resources-grouping>
+  </div>
+
+  <div class="ml-auto d-flex">
+    <!-- Add Commitment CTA -->
+    <button class="add-commitment-cta d-flex align-items-center" (click)="addResourceCommitment($event)">
+      <i class="fa fa-plus mr-2"></i>
+      <span>Add Commitment</span>
+    </button>
+    <!-- Add Commitment CTA -->
+    <button id="btnResourcesExport" class="add-commitment-cta ml-auto d-flex align-items-center"
+      *ngIf="selectedEmployeeCaseGroupingOption === employeeCaseGroupingEnum.RESOURCES" (click)="printPdfHandler()">
+      <i class="fa fa-plus mr-2"></i>
+      <span>Export</span>
+    </button>
+  </div>
+</div>

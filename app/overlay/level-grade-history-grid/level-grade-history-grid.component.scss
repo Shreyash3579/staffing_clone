@@ -1,0 +1,35 @@
+.level-grade-history-table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .level-grade-history-table th {
+    vertical-align: middle;
+    text-align:center;
+    text-decoration: underline;
+  }
+
+  .level-grade-history-table {
+    font-size: 14px;
+    width: 50%;
+    min-height: 50px;
+    color: black;
+  }
+
+  .level-grade-history-table th, .level-grade-history-table td { 
+    padding:3px  
+  }
+
+  .level-grade-history-table .thead-grey {
+    background-color: #ececec;
+  }
+
+  .level-grade-history-table-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+  }
+
+  .empty-grid-message {
+    text-align:center;
+  }

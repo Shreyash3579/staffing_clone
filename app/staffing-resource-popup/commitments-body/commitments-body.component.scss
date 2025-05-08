@@ -1,0 +1,49 @@
+section {
+  height: 100%;
+
+  .commitments-body-wrapper {
+    height: 100%;
+    position: relative;
+
+    // grid-lines
+    .grid-lines {
+      display: inline-flex;
+      height: 100%;
+      left: 0px;
+      position: absolute;
+      top: 0px;
+      width: 100%;
+
+      div {
+        border-right: 1px solid #c2c9d1;
+        height: 100%;
+        width: 32px;
+
+        &.weekend {
+          background-color: #f7f9ff;
+        }
+      }
+    }
+
+    // commitments
+    .commitments-wrapper {
+      display: inline-flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      width: 100%;
+
+      .commitment-row {
+        border-top: 1px solid #c2c9d1;
+        margin-bottom: 4px;
+        min-height: 25px;
+        position: relative;
+        z-index: 2;
+
+        &:first-of-type {
+          border-top: none;
+        }
+      }
+    }
+  }
+}

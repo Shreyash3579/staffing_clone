@@ -1,0 +1,379 @@
+<div class="table-wrapper">
+  <table>
+    <tbody>
+      <!-- Metrics Row -->
+      <tr *ngIf="planningBoardColumnMetrics.length > 0">
+        <td class="row-cell header">
+          <div class="data-row-0" style="border-right: 1px solid #c2c9d1;">
+            <!-- Metrics Row -->
+            <div class="row-header">
+              <div class="d-flex align-items-center">
+                <p>Metrics</p>
+                <!-- <button
+                  class="metric-body-cta ml-1"
+                  style="font-size: 8px; font-weight: 500; width: auto"
+                  (click)="toggleAllRows()">
+                  [Expand All]
+                </button> -->
+              </div>
+
+              <button class="expand-collapse-row-cta" (click)="toggleCasePlanningBoardRows($event, 0)">
+                <i class="fa fa-chevron-up"></i>
+              </button>
+            </div>
+
+            <!-- Metrics Rows -->
+            <!-- Supply, Demand, Balance -->
+            <!-- <ng-container *ngFor="let planningBoardColumn of planningBoardColumnMetrics; let i = index"> -->
+            <ng-container *ngFor="let firstLevel of planningBoardColumnMetrics[0]?.metrics; let i = index">
+              <div class="metrics-body-row"
+                [class.collapsed]="!metricsBodyExpandedRowsIds.includes(firstLevel.id + '-body-row-' + i)"
+                id="{{ firstLevel.id }}-body-row-{{ i }}">
+                <div class="metrics-body d-flex align-items-center justify-content-between"
+                  [class.staffable-teams]="firstLevel.id == 'staffableTeams'">
+                  <ng-container *ngIf="firstLevel.id !== 'staffableTeams'; else staffableTeamsContainer">
+                    <p>{{ firstLevel.name }}</p>
+                    <button class="expand-collapse-row-cta collapsed"
+                      (click)="toggleMetricsUpperLevelBody(firstLevel.id, $event, i)">
+                      <i class="fa fa-chevron-up"
+                        *ngIf="!metricsBodyExpandedRowsIds.includes(firstLevel.id + '-body-row-' + i)"></i>
+                      <i class="fa fa-chevron-down"
+                        *ngIf="metricsBodyExpandedRowsIds.includes(firstLevel.id + '-body-row-' + i)"></i>
+                    </button>
+                  </ng-container>
+                  <ng-template #staffableTeamsContainer>
+                    <!-- Staffable Teams -->
+                    <div class="d-flex align-items-center">
+                      <img class="mr-1 mb-1" src="assets/img/staffable-teams.svg" alt="person with check icon" />
+                      <p>{{ firstLevel.name }}</p>
+                    </div>
+                  </ng-template>
+                </div>
+
+                <!-- <div class="toggle-bg-color" *ngIf="firstLevel.id === 'supply'">
+                  <div class="toggle-button-wrapper">
+                    <span class="mr-2">Indiv. count</span>
+                    <label class="switch-cta">
+                      <input type="checkbox" [checked]="isCountOfIndividualResourcesToggle"
+                        (change)="toggleIndividualCountForSupplyMetrics()" />
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                  <div class="toggle-button-wrapper">
+                    <span class="mr-2">Highlight newly Available</span>
+                    <label class="switch-cta">
+                      <input type="checkbox" [checked]="enableNewlyAvailableHighlighting"
+                        (change)="toggleHighlightNewlyAvailable()" />
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                  <div class="toggle-button-wrapper">
+                    <span class="mr-2">Group by date available</span>
+                    <label class="switch-cta">
+                      <input type="checkbox" [checked]="enableMemberGrouping" (change)="toggleGroupByDateAvailable()" />
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                </div> -->
+
+                <!-- Team, Smap, Partner, Add. Exp. -->
+                <div *ngFor="let secondLevel of firstLevel.data" class="metrics-body-row"
+                  [class.collapsed]="!metricsBodyExpandedRowsIds.includes(secondLevel.id + '-body-row-' + i)"
+                  id="{{ secondLevel.id }}-body-row-{{ i }}">
+                  <ng-container *ngIf="secondLevel.visible">
+                    <div class="metrics-body d-flex align-items-center justify-content-between">
+                      <p class="ml-2">{{ secondLevel.name }}</p>
+                      <button class="expand-collapse-row-cta metric-body-cta collapsed"
+                        (click)="toggleMetricsUpperLevelBody(secondLevel.id, $event, i)">
+                        <i class="fa fa-chevron-up"
+                          *ngIf="!metricsBodyExpandedRowsIds.includes(secondLevel.id + '-body-row-' + i)"></i>
+                        <i class="fa fa-chevron-down"
+                          *ngIf="metricsBodyExpandedRowsIds.includes(secondLevel.id + '-body-row-' + i)"></i>
+                      </button>
+                    </div>
+
+                    <!-- Available -->
+                    <ng-container *ngIf="firstLevel.id !== 'demand' && firstLevel.id !== 'balance'">
+                      <div *ngFor="let thirdLevel of secondLevel.available" class="metrics-body-row">
+                        <div class="metrics-body d-flex align-items-center">
+                          <p class="ml-4 mr-2">{{ thirdLevel.name }}</p>
+                        </div>
+
+                        <!-- A-Level, G-Level, etc -->
+                        <div *ngFor="let fourthLevel of thirdLevel.levels" class="metrics-body-row level-wrapper"
+                          [class.collapsed]="
+                            !metricsBodyExpandedRowsIds.includes(
+                              firstLevel.id +
+                                '-' +
+                                secondLevel.id +
+                                '-' +
+                                thirdLevel.name.toLowerCase() +
+                                '-' +
+                                fourthLevel.name.toLowerCase() +
+                                '-body-row-' +
+                                i
+                            )
+                          " id="{{ firstLevel.id }}-{{ secondLevel.id }}-{{ thirdLevel.name.toLowerCase() }}-{{
+                            fourthLevel.name.toLowerCase()
+                          }}-body-row-{{ i }}" [ngStyle]="{
+                            height:
+                              metricsLowerLevelExpandedRowsIdWithHeight[
+                                firstLevel.id +
+                                  '-' +
+                                  secondLevel.id +
+                                  '-' +
+                                  thirdLevel.name.toLowerCase() +
+                                  '-' +
+                                  fourthLevel.name.toLowerCase() +
+                                  '-body-row-' +
+                                  i
+                              ] ?? '24px'
+                          }">
+                          <div class="metrics-body metric-level d-flex align-items-center justify-content-between">
+                            <p class="ml-6">{{ fourthLevel.name }}-Level</p>
+                            <button class="expand-collapse-row-cta metric-body-cta" [class.collapsed]="
+                                !metricsBodyExpandedRowsIds.includes(
+                                  firstLevel.id +
+                                    '-' +
+                                    secondLevel.id +
+                                    '-' +
+                                    thirdLevel.name.toLowerCase() +
+                                    '-' +
+                                    fourthLevel.name.toLowerCase() +
+                                    '-body-row-' +
+                                    i
+                                )
+                              " (click)="
+                                toggleMetricsLowerLevelBody(
+                                  firstLevel.id +
+                                    '-' +
+                                    secondLevel.id +
+                                    '-' +
+                                    thirdLevel.name.toLowerCase() +
+                                    '-' +
+                                    fourthLevel.name.toLowerCase(),
+                                  $event,
+                                  i
+                                )
+                              ">
+                              <i class="fa fa-chevron-up" *ngIf="
+                                  !metricsBodyExpandedRowsIds.includes(
+                                    firstLevel.id +
+                                      '-' +
+                                      secondLevel.id +
+                                      '-' +
+                                      thirdLevel.name.toLowerCase() +
+                                      '-' +
+                                      fourthLevel.name.toLowerCase() +
+                                      '-body-row-' +
+                                      i
+                                  )
+                                "></i>
+                              <i class="fa fa-chevron-down" *ngIf="
+                                  metricsBodyExpandedRowsIds.includes(
+                                    firstLevel.id +
+                                      '-' +
+                                      secondLevel.id +
+                                      '-' +
+                                      thirdLevel.name.toLowerCase() +
+                                      '-' +
+                                      fourthLevel.name.toLowerCase() +
+                                      '-body-row-' +
+                                      i
+                                  )
+                                "></i>
+                            </button>
+                          </div>
+
+                          <!-- Level Row -->
+                          <div class="metrics-body d-flex align-items-center" id="level-row">
+                            <!-- Level Row -->
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+
+                    <!-- Prospective -->
+                    <ng-container *ngIf="firstLevel.id !== 'demand' && firstLevel.id !== 'balance'">
+                      <div *ngFor="let thirdLevel of secondLevel.prospective" class="metrics-body-row level-wrapper">
+                        <div class="metrics-body d-flex align-items-center">
+                          <p class="ml-4 mr-2">{{ thirdLevel.name }}</p>
+                        </div>
+
+                        <!-- A-Level, G-Level, etc -->
+                        <div *ngFor="let fourthLevel of thirdLevel.levels" class="metrics-body-row" [class.collapsed]="
+                            !metricsBodyExpandedRowsIds.includes(
+                              firstLevel.id +
+                                '-' +
+                                secondLevel.id +
+                                '-' +
+                                thirdLevel.name.toLowerCase() +
+                                '-' +
+                                fourthLevel.name.toLowerCase() +
+                                '-body-row-' +
+                                i
+                            )
+                          " id="{{ firstLevel.id }}-{{ secondLevel.id }}-{{ thirdLevel.name.toLowerCase() }}-{{
+                            fourthLevel.name.toLowerCase()
+                          }}-body-row-{{ i }}" [ngStyle]="{
+                            height:
+                              metricsLowerLevelExpandedRowsIdWithHeight[
+                                firstLevel.id +
+                                  '-' +
+                                  secondLevel.id +
+                                  '-' +
+                                  thirdLevel.name.toLowerCase() +
+                                  '-' +
+                                  fourthLevel.name.toLowerCase() +
+                                  '-body-row-' +
+                                  i
+                              ] ?? '24px'
+                          }">
+                          <div class="metrics-body metric-level d-flex align-items-center justify-content-between">
+                            <p class="ml-6">{{ fourthLevel.name }}-Level</p>
+                            <button class="expand-collapse-row-cta metric-body-cta" [class.collapsed]="
+                                !metricsBodyExpandedRowsIds.includes(
+                                  firstLevel.id +
+                                    '-' +
+                                    secondLevel.id +
+                                    '-' +
+                                    thirdLevel.name.toLowerCase() +
+                                    '-' +
+                                    fourthLevel.name.toLowerCase() +
+                                    '-body-row-' +
+                                    i
+                                )
+                              " (click)="
+                                toggleMetricsLowerLevelBody(
+                                  firstLevel.id +
+                                    '-' +
+                                    secondLevel.id +
+                                    '-' +
+                                    thirdLevel.name.toLowerCase() +
+                                    '-' +
+                                    fourthLevel.name.toLowerCase(),
+                                  $event,
+                                  i
+                                )
+                              ">
+                              <i class="fa fa-chevron-up" *ngIf="
+                                  !metricsBodyExpandedRowsIds.includes(
+                                    firstLevel.id +
+                                      '-' +
+                                      secondLevel.id +
+                                      '-' +
+                                      thirdLevel.name.toLowerCase() +
+                                      '-' +
+                                      fourthLevel.name.toLowerCase() +
+                                      '-body-row-' +
+                                      i
+                                  )
+                                "></i>
+                              <i class="fa fa-chevron-down" *ngIf="
+                                  metricsBodyExpandedRowsIds.includes(
+                                    firstLevel.id +
+                                      '-' +
+                                      secondLevel.id +
+                                      '-' +
+                                      thirdLevel.name.toLowerCase() +
+                                      '-' +
+                                      fourthLevel.name.toLowerCase() +
+                                      '-body-row-' +
+                                      i
+                                  )
+                                "></i>
+                            </button>
+                          </div>
+
+                          <!-- Level Row -->
+                          <div class="metrics-body d-flex align-items-center" id="level-row">
+                            <!-- Level Row -->
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="firstLevel.id === 'demand' || firstLevel.id === 'balance'">
+                      <div *ngFor="let thirdLevel of secondLevel.levels" class="metrics-body-row" [class.collapsed]="
+                          !metricsBodyExpandedRowsIds.includes(
+                            firstLevel.id +
+                              '-' +
+                              secondLevel.id +
+                              '-' +
+                              thirdLevel.name.toLowerCase() +
+                              '-body-row-' +
+                              i
+                          )
+                        " id="{{ firstLevel.id }}-{{ secondLevel.id }}-{{ thirdLevel.name.toLowerCase() }}-body-row-{{
+                          i
+                        }}" [ngStyle]="{
+                          height:
+                            metricsLowerLevelExpandedRowsIdWithHeight[
+                              firstLevel.id +
+                                '-' +
+                                secondLevel.id +
+                                '-' +
+                                thirdLevel.name.toLowerCase() +
+                                '-' +
+                                '-body-row-' +
+                                i
+                            ] ?? '24px'
+                        }">
+                        <div class="metrics-body metric-level d-flex align-items-center justify-content-between">
+                          <p class="ml-6">{{ thirdLevel.name }}-Level</p>
+                        </div>
+
+                        <!-- Level Row -->
+                        <div class="metrics-body d-flex align-items-center" id="level-row">
+                          <!-- Level Row -->
+                        </div>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+            </ng-container>
+            <!-- </ng-container> -->
+          </div>
+        </td>
+
+        <!-- Loop through array to get metrics -->
+        <ng-container *ngFor="let planningBoardColumn of planningBoardColumnMetrics; let i = index">
+          <td style="vertical-align: top" class="metrics-row" id="column-{{ i + 1 }}">
+            <div class="data-row-0">
+              <div class="metrics-body-row">
+                <!-- Expand Button -->
+                <div class="metrics-body d-flex"
+                  style="border: none; border-right: 1px solid #c2c9d1; box-sizing: content-box">
+                  <!-- <button
+                    class="expand-table-cta ml-auto d-flex align-items-center"
+                    (click)="
+                      openMetricsCommitment(
+                        planningBoardColumn.metrics,
+                        planningBoardColumn.title,
+                        true,
+                        true
+                      )
+                    ">
+                    <span class="d-flex">
+                      <i class="fas fa-arrow-up up-arrow"></i>
+                      <i class="fas fa-arrow-down down-arrow"></i>
+                    </span>
+                  </button> -->
+                </div>
+              </div>
+
+              <!-- Metric Table Row -->
+              <app-case-planning-metrics [metrics]="planningBoardColumn.metrics" [weekOf]="planningBoardColumn.title"
+                [metricsBodyExpandedRowsIds]="metricsBodyExpandedRowsIds"
+                [metricsLowerLevelExpandedRowsIdWithHeight]="metricsLowerLevelExpandedRowsIdWithHeight"
+                [playgroundId]="userPlaygroundSessionInfo?.playgroundId" [groupByDatesAvailable]="enableMemberGrouping"
+                [highlightNewlyAvailable]="enableNewlyAvailableHighlighting">
+              </app-case-planning-metrics>
+            </div>
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>

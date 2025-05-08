@@ -1,0 +1,186 @@
+<section class="sidebar-area">
+  <form>
+    <div id="supplyResourcesSearch" class="input-group">
+      <div class="sidebar-area__input">
+        <span class="sidebar-area__input--group">
+        <input
+          type="text"
+          class="form-control sidebar-area__search"
+          id="employeeSearchInput"
+          #employeeSearchInput
+          autocomplete="off"
+          (focus)="employeeSearchInputFocus = true"
+          (blur)="employeeSearchInputFocus = false; (null)"
+          placeholder="Search resources"
+        />
+        <i
+          *ngIf="employeeSearchInput.value.length < 3"
+          class="fa fa-search fa-fw"
+        ></i>
+        <i
+          *ngIf="employeeSearchInput.value.length > 2"
+          class="fa fa-times"
+          (click)="clearSearchBox(false)"
+        ></i>
+        </span>
+        <div class="sidebar-area__filter-icon">
+          <a
+            class="filter"
+            id="resourceFilterIcon"
+            (click)="toggleFiltersSection()"
+            [class.active]="showFilters"
+          >
+          <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.1663 3.67773H1.83301L9.16634 12.24V18.1593L12.833 19.9695V12.24L20.1663 3.67773Z" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>            
+          </a>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+
+<section class="sidebar-area separator filters" [class.d-none]="!showFilters">
+  <!-- Date Picker -->
+  <div id="supplyDateRangePicker" class="input-group mt-3 w-100 calendar">
+    <div class="input-group-prepend">
+      <button
+        id="btnDateShiftLeft"
+        class="btn btn-secondary"
+        (click)="shiftDateRange('left')"
+      >
+        <i class="fa fa-chevron-left fa-fw"></i>
+      </button>
+    </div>
+
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="date-picker-icon" (click)="dp.toggle()"  [attr.aria-expanded]="dp.isOpen" >
+        <i class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw" aria-hidden="true" ></i>
+      </span>
+    </div>
+
+    <input type="text" id="date-range-calendar" name="daterange" readonly 
+      [ngModel]="selectedDateRange" (ngModelChange)="getResourcesforSelectedDateRange($event)"
+      class="form-control" #dp="bsDaterangepicker" 
+      bsDaterangepicker
+      [bsConfig]="bsConfig">
+
+    <div class="input-group-append">
+      <button
+        id="btnDateShiftRight"
+        class="btn btn-secondary"
+        (click)="shiftDateRange('right')"
+      >
+        <i class="fa fa-chevron-right fa-fw"></i>
+      </button>
+    </div>
+  </div>
+  <br />
+
+  <!-- Office Multiselect Dropdown -->
+  <div class="selectpicker mr-3 show-tick" id="supplyOfficeFilter">
+    <label>Offices</label>
+    <app-office-dropdown
+      [officeHierarchy]="officeHierarchy"
+      [selectedOfficeList]="selectedOfficeList"
+      [title]="'Offices'"
+      (refreshView)="getResourcesBySelectedOffices($event)"
+    >
+    </app-office-dropdown>
+  </div>
+  <br />
+  <!-- Level Grade Multiselect Dropdown -->
+  <div class="selectpicker mr-3 show-tick" id="supplyLevelGradeFilter">
+  <label>Level Grades</label>
+    <app-multi-select-dropdown
+      [dropdownList]="levelGradeDropdownList"
+      [title]="'Level Grades'"
+      [selectedItems]="selectedLevelGradeList"
+      (refreshView)="getResourcesBySelectedLevelGrades($event)"
+    >
+    </app-multi-select-dropdown>
+  </div>
+  <br />
+  <!-- Staffing Tags Multiselect Dropdown -->
+  <div class="selectpicker mr-3 show-tick" id="supplyStaffingTagsFilter">
+    <label>Staffing Tags</label>
+    <app-multi-select-dropdown
+      [dropdownList]="staffingTagDropdownList"
+      [title]="'Staffing Tags'"
+      [selectedItems]="selectedStaffingTagList"
+      (refreshView)="getResourcesBySelectedStaffingTags($event)"
+    >
+    </app-multi-select-dropdown>
+  </div>
+  <br />
+  <!-- Positions Multiselect Dropdown -->
+  <div class="selectpicker mr-3 show-tick" id="supplyPositionsFilter">
+    <label>Positions</label>
+    <app-multi-select-dropdown
+      [dropdownList]="positionDropdownList"
+      [title]="'Positions'"
+      [selectedItems]="selectedPositionList"
+      (refreshView)="getResourcesBySelectedPositions($event)"
+    >
+    </app-multi-select-dropdown>
+  </div>
+  <br />
+   <!-- Practice Area Multiselect Dropdown -->
+   <div class="selectpicker mr-3 show-tick" id="supplyPracticeAreaFilter">
+    <label>Affiliation</label>
+    <app-multi-select-dropdown
+      [dropdownList]="practiceAreaDropDownList"
+      [title]="'Affiliation'"
+      [selectedItems]="selectedPracticeAreaCodes"
+      (refreshView)="getResourcesBySelectedPracticeAreaCodes($event)"
+    >
+    </app-multi-select-dropdown>
+  </div>
+  <br />
+    <!--------------------Affiliation Roles Dropdown---------------------->
+    <div class="selectpicker mr-3 show-tick" id="supplyAffiliationRoleFilter" *ngIf="isAffiliationRoleShown" >
+        <label for="field-resource">Affiliation Roles</label>
+        <app-multi-select-dropdown
+        [dropdownList]="affiliationRoleDropdownList"
+        [title] ="'Affiliation Roles'"
+        [selectedItems]="selectedAffiliationRoles"
+        (refreshView)="getResourcesBySelectedAffilitionRoles($event)">
+      </app-multi-select-dropdown>
+    </div>  
+  <br *ngIf="isAffiliationRoleShown"/> 
+  <!-- Availability Includes Multiselect Dropdown -->
+  <div class="selectpicker mr-3 show-tick" id="supplyAvailabilityIncludesFilter">
+    <label>Availability Includes</label>
+    <app-multi-select-dropdown
+      [dropdownList]="availabilityIncludesDropdownList"
+      [title]="'Availability Includes'"
+      [selectedItems]="selectedAvailabilityIncludesList"
+      (refreshView)="getResourcesBySelectedAvailabilityIncludes($event)"
+    >
+    </app-multi-select-dropdown>
+  </div>
+  <br />
+  <!-- GroupBy MultiSelect Dropdown -->
+  <div class="selectpicker mr-3 show-tick" id="supplyGroupByFilter">
+  <label>Group By</label>
+      <app-multi-select-dropdown
+      [dropdownList]="groupByDropdownList"
+      [title]="'Group By'"
+      [selectedItems]="selectedGroupByList"
+      (refreshView)="getResourcesGroupBySelectedValue($event)"
+    >
+    </app-multi-select-dropdown>
+  </div>
+  <br />
+  <!-- SortBy MultiSelect Dropdown -->
+  <div class="selectpicker mr-3 show-tick" id="supplySortByFilter">
+  <label>Sort By</label>
+    <app-multi-select-dropdown
+      [dropdownList]="sortByDropdownList"
+      [title]="'Sort By'"
+      [selectedItems]="selectedSortByList"
+      (refreshView)="getResourcesSortBySelectedValue($event)"
+    >
+    </app-multi-select-dropdown>
+  </div>
+</section>

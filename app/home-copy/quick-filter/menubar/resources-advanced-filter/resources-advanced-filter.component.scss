@@ -1,0 +1,63 @@
+@import "variables.scss";
+
+#groupBy {
+  select {
+    color: $grey-darkest;
+    border-color: $grey-medium-dark;
+    background-color: $grey-light;
+    font-size: 0.975rem;
+    height: calc(2.2125rem + 2px);
+
+    &:hover {
+      background-color: $grey-medium-dark;
+      border-color: $grey-medium-dark;
+    }
+  }
+}
+
+.sidebar-area {
+  display: flex;
+  flex-direction: column;
+  font-family: "Graphik";
+  gap: 20px;
+
+  .selectpicker {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    label {
+      color: #616568;
+      font-size: 14px;
+      line-height: 18px;
+      margin: 0px;
+    }
+  }
+}
+
+// Date Picker Wrapper
+.date-picker-wrapper {
+
+  button,
+  input {
+    background-color: #fff !important;
+    border: 1px solid #e0e4e8 !important;
+    font-family: "Graphik";
+    font-size: 12px !important;
+    height: 32px;
+  }
+
+  button {
+    padding: 0px;
+    width: 32px;
+  }
+
+  input {
+    border-left: none !important;
+    min-width: 100px !important;
+  }
+
+  .input-group-text {
+    background-color: #fff !important;
+  }
+}

@@ -1,0 +1,32 @@
+<section>
+  <div class="resource-body-wrapper">
+    <!-- name & profile pic -->
+    <div class="profile-pic-wrapper">
+      <p class="resource-name">{{ employee.fullName }}</p>
+      <app-profile-image [height]="80" [width]="80" [imageUrl]="employee.profileImageUrl"></app-profile-image>
+    </div>
+
+    <!-- details -->
+    <div class="details-wrapper">
+      <!-- position, lvl grade, etc -->
+      <div class="row-one">
+        <!-- position -->
+        <p>{{ employee.position.positionName }}</p>
+
+        <!-- level grade -->
+        <p>{{ employee.levelGrade }}</p>
+
+        <!-- office -->
+        <p>{{ employee.office.officeAbbreviation }}</p>
+      </div>
+
+      <!-- hire date & last staffed -->
+      <div class="row-two">
+        <div class="d-flex flex-column">
+          <label class="column-label">Hire Date</label>
+          <p>{{ employee.startDate | date : "dd-MMM-yyyy" }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+.resource-basic-menu {
+  font-family: "Graphik";
+
+  .btn-group {
+    width: 100%;
+
+    // Toggle
+    .resource-menu-toggle {
+      align-items: center;
+      background: #fff;
+      border: 1px solid #e0e4e8;
+      border-radius: 4px;
+      color: #121212;
+      display: flex;
+      gap: 5px;
+      justify-content: space-between;
+      outline: none;
+      width: 100%;
+
+      span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        &#placeholder-text {
+          color: #c4c4c4;
+        }
+      }
+
+      // Sizes
+      &.small {
+        font-size: 12px;
+        height: 32px;
+        line-height: 16px;
+        padding: 8px 10px;
+      }
+
+      &.medium {
+        font-size: 14px;
+        height: 38px;
+        line-height: 18px;
+        padding: 10px;
+      }
+    }
+
+    // Dropdown Menu
+    .dropdown-menu {
+      min-width: 100%;
+      width: fit-content;
+    }
+  }
+
+  .btn-group.open.show,
+  .btn-group #button-resource-basic-menu:hover {
+    border-color: #284ce0;
+  }
+}

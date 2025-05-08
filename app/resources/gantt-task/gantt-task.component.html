@@ -1,0 +1,81 @@
+<div class="utilization-area" (click)="openQuickAddFormPopup($event)">
+  <!-- Allocation Percentage Area -->
+  <div class="percent-area d-flex align-items-center" id="percent-area-index-{{ rowIndex }}">
+    <ng-container>
+      <div *ngFor="let allocationPercentage of perDayAllocation; let i = index"
+        class="d-flex align-items-center justify-content-center" [ngClass] = "getClass(i)">
+        <span>{{ allocationPercentage }}%</span>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="threshold-area">
+    <app-gantt-threshold 
+    [thresholdRangeValue]="thresholdRangeValue"
+    [selectedWeeklyMonthlyGroupingOption]="selectedWeeklyMonthlyGroupingOption"
+    [perDayAllocation]="perDayAllocation">
+    </app-gantt-threshold>
+  </div>
+
+  <div *ngIf="isRowCollapsed && this.selectedEmployeeCaseGroupingOption === 'cases'" class="utilization-rows" id="utilization-index-{{ rowIndex }}" [class.collapsed]="isRowCollapsed">
+    <div *ngFor="let commitments of collapsedCasesCommitmentMatrix" class="utilization-row"
+      #bounds>
+      <!-- Start Component Commitment -->
+      <ng-container *ngFor="let commitment of commitments; trackBy: trackByCommitmentId">
+        <app-gantt-commitment 
+          [commitment]="commitment" 
+          [dateRange]="dateRange" 
+          [bounds]="bounds" 
+          [resource]="resource"
+          [isRowCollapsed]="isRowCollapsed"
+          [isTopbarCollapsed]="isTopbarCollapsed"
+          [selectedWeeklyMonthlyGroupingOption]="selectedWeeklyMonthlyGroupingOption"
+          (openQuickAddForm)="openQuickAddFormHandler($event)" 
+          (updateResourceAssignmentToProject)="updateResourceAssignmentToProjectHandler($event)"
+          (upsertPlaceholderAllocationsToProject) = "upsertPlaceholderAllocationsToProjectHandler($event)"
+          (upsertResourceAllocationsToProject)="upsertResourceAllocationsToProjectHandler($event)"
+          (updateResourceCommitment)="updateResourceCommitmentHandler($event)"
+          (openSplitAllocationPopup)="openSplitAllocationPopupHandler($event)"
+          (openCaseDetailsDialog)="openCaseDetailsDialogHandler($event)"
+          (openPopUpDialog)="openPopUpDialogHandler($event)">
+        </app-gantt-commitment>
+      </ng-container>
+      <!-- End Component Commitment -->
+    </div>
+
+    <div class="utilization-background" [ngClass]="{ terminated: !!staffing.resource.terminationDate }"></div>
+  </div>
+
+  <div *ngIf="!isRowCollapsed || this.selectedEmployeeCaseGroupingOption != 'cases'" class="utilization-rows" id="utilization-index-{{ rowIndex }}" [class.collapsed]="isRowCollapsed">
+    <div *ngFor="let commitments of commitmentMatrix" class="utilization-row"
+      #bounds>
+      <!-- Start Component Commitment -->
+      <ng-container *ngFor="let commitment of commitments; trackBy: trackByCommitmentId">
+        <app-gantt-commitment 
+          [commitment]="commitment" 
+          [dateRange]="dateRange" 
+          [bounds]="bounds" 
+          [resource]="resource"
+          [isRowCollapsed]="isRowCollapsed"
+          [isTopbarCollapsed]="isTopbarCollapsed"
+          [selectedWeeklyMonthlyGroupingOption]="selectedWeeklyMonthlyGroupingOption"
+          (openQuickAddForm)="openQuickAddFormHandler($event)" 
+          (updateResourceAssignmentToProject)="updateResourceAssignmentToProjectHandler($event)"
+          (upsertPlaceholderAllocationsToProject) = "upsertPlaceholderAllocationsToProjectHandler($event)"
+          (upsertResourceAllocationsToProject)="upsertResourceAllocationsToProjectHandler($event)"
+          (updateResourceCommitment)="updateResourceCommitmentHandler($event)"
+          (openSplitAllocationPopup)="openSplitAllocationPopupHandler($event)"
+          (openCaseDetailsDialog)="openCaseDetailsDialogHandler($event)"
+          (openPopUpDialog)="openPopUpDialogHandler($event)">
+        </app-gantt-commitment>
+      </ng-container>
+      <!-- End Component Commitment -->
+    </div>
+
+    <div class="utilization-background" [ngClass]="{ terminated: !!staffing.resource.terminationDate }"></div>
+  </div>
+  <!-- <div *ngIf="commitmentMatrix?.length == 0" class="utilization-rows">
+    <div class="utilization-row"></div>
+    <div class="utilization-background" [ngClass]="{ terminated: !!staffing.resource.terminationDate }"></div>
+  </div> -->
+</div>

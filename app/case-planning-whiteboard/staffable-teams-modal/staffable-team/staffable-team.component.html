@@ -1,0 +1,37 @@
+<ng-container >
+    <ng-container *ngIf="officeHierarchy.staffableTeamChildren.length > 0">
+        <div class="office-cell-wrapper" [ngClass]="officeHierarchy.officeCode === 35 ? 'group-header': 'country-header'" [style.padding-left.px]= "padding">
+            <p class="header">{{ officeHierarchy.officeName }}</p>
+
+            <p *ngIf="isGcTeamCountVisible" class="ml-1">{{ officeHierarchy.gcTeamCount }}</p>
+            <p *ngIf="isPegTeamCountVisible" class="ml-1">{{ officeHierarchy.pegTeamCount }}</p>
+
+            <div class="total-wrapper">
+            <p *ngIf="isGcTeamCountVisible && isPegTeamCountVisible" class="header">{{ officeHierarchy.gcTeamCount + officeHierarchy.pegTeamCount }}</p>
+            </div>
+        </div>
+
+        <app-staffable-team *ngFor="let office of officeHierarchy.staffableTeamChildren; let officeIndex = index"
+                [officeHierarchy]="office"
+                [isGcTeamCountVisible]="isGcTeamCountVisible"
+                [isPegTeamCountVisible]="isPegTeamCountVisible"
+                [padding]="padding + 20"
+                (countChange)="onCountChange($event.value, $event.office, $event.type)">
+        </app-staffable-team>
+
+    </ng-container>
+    <ng-container *ngIf="officeHierarchy.staffableTeamChildren.length === 0">
+    <div class="city office-cell-wrapper" [style.padding-left.px]= "padding">
+        <p class="header">{{ officeHierarchy.officeName }}</p>
+        <ng-container *ngIf="isGcTeamCountVisible">
+        <input type="number" [(ngModel)]="officeHierarchy.gcTeamCount" (change)="onCountChange($event.target.value, officeHierarchy, 'gc')"
+            min="0" />
+        </ng-container>
+        <ng-container *ngIf="isPegTeamCountVisible">
+        <input type="number" [(ngModel)]="officeHierarchy.pegTeamCount" (change)="onCountChange($event.target.value, officeHierarchy, 'peg')"
+            min="0" />
+        </ng-container>
+        <div class="total-wrapper"></div>
+    </div>
+    </ng-container>
+</ng-container>

@@ -1,0 +1,153 @@
+// Modal header
+.staffing-modal-header {
+    justify-content: space-between;
+    padding: 40px 20px 10px;
+  
+    // Title
+    .staffing-modal-title {
+      color: #121212;
+      font-family: "Graphik";
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 20px;
+    }
+  
+    // Close button
+    button {
+      background-color: transparent;
+      border: none;
+      color: #000;
+      font-size: 20px;
+      padding: 0px;
+    }
+  }
+  
+  // Body
+  .staffing-modal-body {
+    flex: 1 1 auto;
+    padding: 0px;
+    position: relative;
+  }
+  
+  .modal-scroll {
+    max-height: 590px;
+    min-height: 589px;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 31.5px 0 0 20px;
+  }
+  
+  .default-checkbox-wrapper {
+    color: #121212;
+    font-family: "Graphik";
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+  
+    /* The container */
+    .container {
+      display: block;
+      position: relative;
+      padding: 0px 0px 0px 25px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 400;
+      margin: 0px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  
+    /* Hide the browser's default checkbox */
+    .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+  
+    /* Create a custom checkbox */
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 18px;
+      width: 18px;
+      background-color: #fff;
+      border: 1px solid #121212;
+    }
+  
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+  
+    /* Show the checkmark when checked */
+    .container input:checked~.checkmark:after {
+      display: block;
+    }
+  
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+      left: 6px;
+      top: 1px;
+      width: 5px;
+      height: 12px;
+      border: solid #284ce0;
+      border-width: 0 2px 2px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
+  
+  // Footer
+  .staffing-modal-footer {
+    border-top: 1px solid #c2c9d1;
+    gap: 10px;
+    height: 80px;
+    justify-content: flex-end;
+    padding: 0px 20px;
+    width: 100%;
+  
+    button {
+      align-items: center;
+      border-radius: 4px;
+      display: flex;
+      font-family: "Graphik";
+      font-size: 16px;
+      font-weight: 500;
+      height: 40px;
+      justify-content: center;
+  
+      &.primary-button {
+        background-color: #284ce0;
+        border: 1px solid #284ce0;
+        color: #fff;
+        padding: 0px 24px;
+      }
+  
+      &.secondary-button {
+        background-color: #fff;
+        border: 1px solid #284ce0;
+        color: #284ce0;
+        padding: 0px 24px;
+      }
+  
+      &.back-button {
+        background-color: #fff;
+        border: none;
+        color: #121212;
+        font-size: 12px;
+        padding: 0px;
+      }
+    }
+  }
+  
+  .error-message{
+    color: red;
+  }

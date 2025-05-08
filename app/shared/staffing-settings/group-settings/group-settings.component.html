@@ -1,0 +1,174 @@
+<div class="supply-group-settings">
+    <!-- Header -->
+    <div class="my-groups-header d-flex align-items-center">
+        <h3 class="category-header">My Groups</h3>
+
+        <div class="header-ctas d-flex align-items-center">
+            <!-- Import -->
+            <!-- <button class="import-button">
+                <svg
+                    width="13"
+                    height="16"
+                    viewBox="0 0 13 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M8 0.5H2C1.175 0.5 0.5075 1.175 0.5075 2L0.5 14C0.5 14.825 1.1675 15.5 1.9925 15.5H11C11.825 15.5 12.5 14.825 12.5 14V5L8 0.5ZM11 14H2V2H7.25V5.75H11V14ZM3.5 10.2575L4.5575 11.315L5.75 10.13V13.25H7.25V10.13L8.4425 11.3225L9.5 10.2575L6.5075 7.25L3.5 10.2575Z"
+                        fill="#616568"
+                    />
+                </svg>
+
+                Import Group
+            </button> -->
+
+            <!-- Create new group -->
+            <button class="secondary-button" (click)="openCreateGroupForm()">
+                <i class="fas fa-plus"></i>
+                Create New Group
+            </button>
+        </div>
+    </div>
+
+    <!-- Search input -->
+    <div class="supply-search d-flex align-items-center">
+        <!-- <i class="fa fa-search mr-2"></i> -->
+        <i *ngIf="!groupSearchTerm" class="fa fa-search mr-2"></i>
+        <i *ngIf="groupSearchTerm" class="fa fa-times mr-2" (click)="clearSearchBox()"></i>
+
+        <input type="text" [(ngModel)]="groupSearchTerm" placeholder="Search by Group Name"
+            (keyup)="searchGroupsFilterHandler($event)"/>
+    </div>
+
+    <!-- Default groups -->
+    <div class="default-groups"
+         *ngIf="defaultGroupArray.length && !groupSearchTerm.length">
+        <h3 class="category-header">Default</h3>
+        <div class="group-container collapsed" id="default-container"
+            *ngFor="let group of defaultGroupArray; let i = index">
+            <!-- Group info content -->
+            <div class="group-info-wrapper d-flex">
+                <div class="d-flex align-items-center">
+                    <!-- Collapse or Expand -->
+                    <button class="collapse-expand collapsed mr-2"
+                        (click)="collapseExpandContainer(i, $event, true)"
+                    >
+                        <i class="fa fa-chevron-up"></i>
+                    </button>
+
+                    <ng-container>
+                        <!-- Group Name -->
+                        <h4 class="group-name word-wrap" title="{{ group.name }}">
+                            {{ group.name }}
+                        </h4>
+                    </ng-container>
+                </div>
+
+                <ng-container>
+                    <!-- Description -->
+                    <p class="group-description word-wrap" title="{{ group.description }}">
+                        {{ group.description }}
+                    </p>
+                </ng-container>
+
+                <!-- Group Action icons -->
+                <app-group-action-panel
+                    [showEditIcon]="true" [showDeleteIcon]="true" 
+                    [defaultType]= 2
+                    [isDefault]="group.isDefault"
+                    [isShared]="group.isShared"
+                    [showDefault]="true"
+                    (onEditClickEmitter)="onEditClickHandler(group)" 
+                    (onShareClickEmitter)="onShareClickHandler(group)"
+                    (onDeleteClickEmitter)="onDeleteGroupHandler(group)"
+                    (onRemoveDefaultClickEmitter)="onRemoveDefaultClickHandler(group)">
+                </app-group-action-panel>
+
+            </div>
+
+            <!-- Staff List -->
+            <div class="staff-list-wrapper">
+                <ng-container *ngFor="let groupMember of group.groupMembers; let index = i">
+                    <app-group-member 
+                        [groupMember]="groupMember"
+                        (deleteMemberFromGroupEmitter)="deleteMemberFromGroupHandler(group, groupMember)">
+                    </app-group-member>
+                </ng-container>
+
+                <ng-container *ngIf="!group.groupMembers.length">
+                    <p>No Member(s) in this group</p>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+    <!-- Group Details -->
+    <div class="all-groups" *ngIf="filteredGroupsArray.length">
+        <h3 class="category-header" *ngIf="!groupSearchTerm.length">All Groups</h3>
+        <h3 class="category-header" *ngIf="groupSearchTerm.length">Found {{ filteredGroupsArray.length }} {{ filteredGroupsArray.length > 1 ? "groups" : "group" }}</h3>
+        <div id="group-container-{{ i }}"
+            class="group-container collapsed"
+            *ngFor="let group of filteredGroupsArray; let i = index"
+        >
+            <!-- Group info content -->
+            <div class="group-info-wrapper d-flex">
+                <div class="d-flex align-items-center">
+                    <!-- Collapse or Expand -->
+                    <button class="collapse-expand collapsed mr-2"
+                        (click)="collapseExpandContainer(i, $event, false)"
+                    >
+                        <i class="fa fa-chevron-up"></i>
+                    </button>
+
+                    <ng-container>
+                        <!-- Group Name -->
+                        <h4 class="group-name word-wrap" title="{{ group.name }}">
+                            {{ group.name }}
+                        </h4>
+                    </ng-container>
+                </div>
+
+                <ng-container>
+                    <!-- Description -->
+                    <p class="group-description word-wrap" title="{{ group.description }}">
+                        {{ group.description }}
+                    </p>
+                </ng-container>
+
+                <!-- Group Action icons -->
+                <app-group-action-panel 
+                    [showEditIcon]="true" 
+                    [showDeleteIcon]="true" 
+                    [showDefault]="true"
+                    [isDefault]="group.isDefault"
+                    [isShared]="group.isShared"
+                    [defaultType]= 1
+                    (onEditClickEmitter)="onEditClickHandler(group)" 
+                    (onShareClickEmitter)="onShareClickHandler(group)"
+                    (onDeleteClickEmitter)="onDeleteGroupHandler(group)"
+                    (onMakeDefaultClickEmitter)="onMakeDefaultClickHandler(group)">
+                </app-group-action-panel>
+
+            </div>
+
+            <!-- Staff List -->
+            <div class="staff-list-wrapper">
+                <ng-container *ngFor="let groupMember of group.groupMembers; let index = i">
+                    <app-group-member 
+                        [groupMember]="groupMember"
+                        (deleteMemberFromGroupEmitter)="deleteMemberFromGroupHandler(group, groupMember)">
+                    </app-group-member>
+                </ng-container>
+
+                <ng-container *ngIf="!group.groupMembers.length">
+                    <p>No Member(s) in this group</p>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+    <!-- No Groups Found -->
+    <div class="all-groups" *ngIf="!filteredGroupsArray.length">
+        <h3 class="category-header">No groups found</h3>
+    </div>
+</div>

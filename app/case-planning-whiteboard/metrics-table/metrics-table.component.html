@@ -1,0 +1,310 @@
+<div class="metrics-table">
+  <div class="metrics-table-wrapper">
+    <!-- Metrics Rows -->
+    <!-- Supply, Demand, Balance -->
+    <ng-container *ngFor="let firstLevel of metrics; let i = index">
+      <div class="metrics-body-row" [class.collapsed]="!metricsBodyExpandedRowsIds.includes(firstLevel.id + '-body-row-' + i)"
+        id="{{ firstLevel.id }}-body-row-{{ i }}">
+        <div
+          class="metrics-header d-flex align-items-center"
+          [ngClass]="
+          firstLevel.id === 'supply' && metricsBodyExpandedRowsIds.includes(firstLevel.id + '-body-row-' + i)
+          ? 'height'
+          : firstLevel.id === 'balance' && firstLevel.sum > 0
+            ? 'positive'
+            : firstLevel.id === 'balance' && firstLevel.sum < 0
+            ? 'negative'
+            : firstLevel.id === 'staffableTeams'
+            ? 'staffable-teams'
+            : ''
+        "
+        >
+          <ng-container *ngIf="firstLevel.id !== 'staffableTeams'; else staffableTeamsContainer">
+            <p>{{ firstLevel.sum }}</p>
+          </ng-container>
+          <ng-template #staffableTeamsContainer>
+            <!-- Staffable Teams -->
+              <button (click)="openStaffableTeamsHandlerForWeek()">
+                  {{ firstLevel.sum }}
+              </button>
+          </ng-template>
+        </div>
+        <!-- Team, Smap, Partner, Add. Exp -->
+        <ng-container *ngIf="firstLevel.id !== 'staffableTeams'">
+          <div
+            *ngFor="let secondLevel of firstLevel.data"
+            class="metrics-body-row" [class.collapsed]="!metricsBodyExpandedRowsIds.includes(secondLevel.id + '-body-row-' + i)"
+            id="{{ secondLevel.id }}-body-row-{{ i }}">
+            <ng-container *ngIf="secondLevel.visible">
+              <div class="metrics-header d-flex align-items-center">
+                <p>{{ secondLevel.sum }}</p>
+              </div>
+
+              <!-- Available -->
+              <ng-container
+                *ngIf="firstLevel.id !== 'demand' && firstLevel.id !== 'balance'"
+              >
+                <div
+                  *ngFor="let thirdLevel of secondLevel.available"
+                  class="metrics-body-row"
+                >
+                  <div class="metrics-header d-flex align-items-center">
+                    <p>{{ thirdLevel.sum }}</p>
+                  </div>
+
+                  <!-- A-Level, G-Level, etc -->
+                  <div
+                    *ngFor="let fourthLevel of thirdLevel.levels"
+                    class="metrics-body-row levelGrades"
+                    [class.collapsed]="!metricsBodyExpandedRowsIds.includes(firstLevel.id + '-' + secondLevel.id
+                      + '-' + thirdLevel.name.toLowerCase() + '-' + fourthLevel.name.toLowerCase()
+                      + '-body-row-' + i)"
+                    id="{{ firstLevel.id }}-{{ secondLevel.id }}-{{
+                      thirdLevel.name.toLowerCase()
+                    }}-{{ fourthLevel.name.toLowerCase() }}-body-row-{{ i }}"
+                    [ngStyle]="{'height': metricsLowerLevelExpandedRowsIdWithHeight[firstLevel.id + '-' + secondLevel.id
+                      + '-' + thirdLevel.name.toLowerCase() + '-' + fourthLevel.name.toLowerCase()
+                      + '-body-row-' + i]}">
+                    <div
+                      class="metrics-body metric-level d-flex align-items-center justify-content-between"
+                    >
+                      <p class="ml-6">{{ fourthLevel.sum }}</p>
+                    </div>
+
+                    <div id="level-row-levels" *ngIf="!groupByDatesAvailable">
+                      <ng-container
+                        *ngFor="
+                          let fifthLevel of fourthLevel.levelGrades | slice: 1
+                        "
+                      >
+                        <!-- <div class="metrics-header d-flex align-items-center">
+                          <p>{{ fifthLevel.supply }}</p>
+                        </div> -->
+
+                        <!-- Level Row -->
+                        <!-- If members don't exist -->
+                        <ng-container *ngIf="fifthLevel.members === null">
+                          <div class="metrics-body" id="level-row"></div>
+                        </ng-container>
+
+                        <!-- If members exist -->
+                        <ng-container *ngIf="fifthLevel.members !== null">
+                          <div
+                            *ngFor="let member of fifthLevel.members"
+                            class="metrics-body d-flex align-items-center"
+                            id = "nonGrouping"
+                            data-member="{{ member | json }}"
+                            [ngClass]="highlightNewlyAvailableData(member) ? 'highlighted' : ''"
+                          >
+                            <i *ngIf="playgroundId" class="fa fa-plus pointer-cursor" title="Click to add allocation"
+                            (click)="openQuickAddFormHandler($event, member)"></i>
+                            <span
+                              class="open-add-commitment word-wrap"
+                              title="{{ member.employeeName }}"
+                              >{{ member.employeeName }}</span
+                            >
+                            <span
+                              class="ml-auto mr-auto word-wrap"
+                              style="font-weight: 500"
+                            >
+                              {{ member.currentLevelGrade }}
+                            </span>
+                            <span class="ml-auto mr-auto word-wrap"
+                              >{{ member.allocation }}%</span
+                            >
+                            <span class="ml-auto word-wrap">{{
+                              member.availabilityDate | date: "MMM-dd"
+                            }}</span>
+                          </div>
+                        </ng-container>
+
+                      </ng-container>
+                    </div>
+                    <div id="level-row-levels" *ngIf="groupByDatesAvailable">
+                    <!-- If members don't exist -->
+                    <ng-container *ngIf="fourthLevel.groupedMembers === null">
+                      <div class="metrics-body" id="level-row"></div>
+                    </ng-container>
+                    
+                    <!-- Group by Date Available -->
+                    <ng-container *ngIf="fourthLevel.groupedMembers !== null">
+                      <ng-container *ngFor="let group of fourthLevel.groupedMembers">
+                        <!-- Date Grouping -->
+                        <div
+                          class="metrics-grouping align-items-center"
+                          id="availableGrouping"
+                          style="background-color: #f7f9ff"
+                        >
+                          {{ group.date | date : "EE" }} ({{ group.members.length }})
+                        </div>
+                    
+                        <!-- Members in date grouping -->
+                        <div
+                          class="metrics-body align-items-center grouped"
+                          id="availableGrouping"
+                          *ngFor="let member of group.members"
+                          data-member="{{ member | json }}"
+                          [ngClass]="highlightNewlyAvailableData(member) ? 'highlighted' : ''"
+                        >
+                          <i
+                            *ngIf="playgroundId"
+                            class="fa fa-plus pointer-cursor"
+                            title="Click to add allocation"
+                            (click)="openQuickAddFormHandler($event, member)"
+                          ></i>
+                          <span class="open-add-commitment word-wrap" title="{{ member.employeeName }}">{{
+                            member.employeeName
+                          }}</span>
+                          <span class="ml-auto mr-auto word-wrap" style="font-weight: 500">
+                            {{ member.currentLevelGrade }}
+                          </span>
+                          <span class="ml-auto mr-auto word-wrap">{{ member.allocation }}%</span>
+                          <span class="ml-auto word-wrap">{{ member.availabilityDate | date : "MMM-dd" }}</span>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            <ng-container *ngIf="firstLevel.id === 'demand' || firstLevel.id === 'balance'">
+              <div
+                  *ngFor="let thirdLevel of secondLevel.levels"
+                  class="metrics-body-row"
+                >
+                <div class="metrics-header d-flex align-items-center">
+                  <p>{{ thirdLevel.sum }}</p>
+                </div>
+              </div>
+            </ng-container>
+
+              <!-- Prospective -->
+              <ng-container
+                *ngIf="firstLevel.id !== 'demand' && firstLevel.id !== 'balance'"
+              >
+                <div
+                  *ngFor="let thirdLevel of secondLevel.prospective"
+                  class="metrics-body-row"
+                >
+                  <div class="metrics-header d-flex align-items-center">
+                    <p>{{ thirdLevel.sum }}</p>
+                  </div>
+
+                  <!-- A-Level, G-Level, etc -->
+                  <div
+                    *ngFor="let fourthLevel of thirdLevel.levels"
+                    class="metrics-body-row levelGrades"
+                    [class.collapsed]="!metricsBodyExpandedRowsIds.includes(firstLevel.id + '-' + secondLevel.id
+                      + '-' + thirdLevel.name.toLowerCase() + '-' + fourthLevel.name.toLowerCase()
+                      + '-body-row-' + i)"
+                    id="{{ firstLevel.id }}-{{ secondLevel.id }}-{{
+                      thirdLevel.name.toLowerCase()
+                    }}-{{ fourthLevel.name.toLowerCase() }}-body-row-{{ i }}"
+                    [ngStyle]="{'height': metricsLowerLevelExpandedRowsIdWithHeight[firstLevel.id + '-' + secondLevel.id
+                      + '-' + thirdLevel.name.toLowerCase() + '-' + fourthLevel.name.toLowerCase()
+                      + '-body-row-' + i]}"
+                    >
+                    <div
+                      class="metrics-body metric-level d-flex align-items-center justify-content-between"
+                    >
+                      <p class="ml-6">{{ fourthLevel.sum }}</p>
+                    </div>
+
+                    <div id="level-row-levels" *ngIf="!groupByDatesAvailable">
+                      <ng-container
+                        *ngFor="
+                          let fifthLevel of fourthLevel.levelGrades | slice: 1
+                        "
+                      >
+                        <!-- Level Rows -->
+                        <!-- If members don't exist -->
+                        <ng-container *ngIf="fifthLevel.members === null">
+                          <div class="metrics-body" id="level-row"></div>
+                        </ng-container>
+
+                        <!-- If members exist -->
+                        <ng-container *ngIf="fifthLevel.members !== null">
+                          <div
+                            *ngFor="let member of fifthLevel.members"
+                            class="metrics-body d-flex align-items-center"
+                            id = "nonGrouping"
+                            data-member="{{ member | json }}"
+                            [ngClass]="highlightNewlyAvailableData(member) ? 'highlighted' : ''"
+                          >
+                          <i *ngIf="playgroundId" class="fa fa-plus pointer-cursor" title="Click to add allocation"
+                          (click)="openQuickAddFormHandler($event, member)"></i>
+                            <span
+                              class="open-add-commitment word-wrap"
+                              title="{{ member.employeeName }}"
+                              >{{ member.employeeName }}</span
+                            >
+                            <span
+                              class="ml-auto mr-auto word-wrap"
+                              style="font-weight: 500"
+                            >
+                              {{ member.currentLevelGrade }}
+                            </span>
+                            <span class="ml-auto mr-auto word-wrap"
+                              >{{ member.allocation }}%</span
+                            >
+                            <span class="ml-auto word-wrap">{{
+                              member.availabilityDate | date: "MMM-dd"
+                            }}</span>
+                          </div>
+                        </ng-container>
+                      </ng-container>
+                    </div>
+                    <div id="level-row-levels" *ngIf="groupByDatesAvailable">
+                      <!-- If members don't exist -->
+                      <ng-container *ngIf="fourthLevel.groupedMembers === null">
+                        <div class="metrics-body" id="level-row"></div>
+                      </ng-container>
+                      
+                      <!-- Group by Date Available -->
+                      <ng-container *ngIf="fourthLevel.groupedMembers !== null">
+                        <ng-container *ngFor="let group of fourthLevel.groupedMembers">
+                          <!-- Date Grouping -->
+                          <div
+                            class="metrics-grouping align-items-center"
+                            id="availableGrouping"
+                            style="background-color: #f7f9ff"
+                          >
+                            {{ group.date | date : "EE" }} ({{ group.members.length }})
+                          </div>
+                      
+                          <!-- Members in date grouping -->
+                          <div
+                            class="metrics-body align-items-center grouped"
+                            id="availableGrouping"
+                            *ngFor="let member of group.members"
+                            data-member="{{ member | json }}"
+                            [ngClass]="highlightNewlyAvailableData(member) ? 'highlighted' : ''"
+                          >
+                            <i
+                              *ngIf="playgroundId"
+                              class="fa fa-plus pointer-cursor"
+                              title="Click to add allocation"
+                              (click)="openQuickAddFormHandler($event, member)"
+                            ></i>
+                            <span class="open-add-commitment word-wrap" title="{{ member.employeeName }}">{{
+                              member.employeeName
+                            }}</span>
+                            <span class="ml-auto mr-auto word-wrap" style="font-weight: 500">
+                              {{ member.currentLevelGrade }}
+                            </span>
+                            <span class="ml-auto mr-auto word-wrap">{{ member.allocation }}%</span>
+                            <span class="ml-auto word-wrap">{{ member.availabilityDate | date : "MMM-dd" }}</span>
+                          </div>
+                        </ng-container>
+                      </ng-container>
+                      </div>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+      </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</div>

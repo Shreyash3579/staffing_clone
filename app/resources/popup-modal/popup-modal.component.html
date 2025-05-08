@@ -1,0 +1,48 @@
+<!-- Popup Modal Component -->
+<div class="popup-modal" *ngFor="let commitment of commitmentsData">
+  <!-- Header -->
+  <div class="popup-header d-flex align-items-center" [ngClass]="getCommitmentColorClass(commitment)">
+    <span *ngIf="commitment.commitmentTypeName !== 'Resource'">
+      {{commitment.title}}
+    </span>
+    <span *ngIf="commitment.commitmentTypeName === 'Resource'">
+      {{commitment.employeeName}}
+    </span>
+  </div>
+
+  <!-- Popup Details -->
+  <div class="popup-details-wrapper">
+    <div class="popup-details-row" *ngIf="commitment.commitmentTypeName === 'Allocation' || commitment.commitmentTypeName === 'Named Placeholder'">
+      <span class="label">Client</span>
+      <span class="value">{{ commitment.clientName }}</span>
+    </div>
+
+    <div class="popup-details-row" *ngIf="commitment.commitmentTypeName === 'Allocation' || commitment.commitmentTypeName === 'Planning Card' || commitment.commitmentType === 'Named Placeholder'">
+      <span class="label">Project Name</span>
+      <span class="value">{{ commitment.projectName }}</span>
+    </div>
+
+    <div class="popup-details-row">
+      <span class="label">Start</span>
+      <span class="value" style="font-weight: 500">{{
+        commitment.startDate
+        | date: "dd-MMM-yyyy"
+        }}</span>
+    </div>
+
+    <div class="popup-details-row">
+      <span class="label">End</span>
+      <span class="value" style="font-weight: 500">{{
+        commitment.endDate
+        | date: "dd-MMM-yyyy"
+        }}</span>
+    </div>
+
+    <div class="popup-details-row">
+      <span class="label">Allocation</span>
+      <span class="value">{{
+        commitment.allocation
+        }}%</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+@import "variables.scss";
+
+#groupBy {
+  select {
+    color: $grey-darkest;
+    border-color: $grey-medium-dark;
+    background-color: $grey-light;
+    font-size: 0.975rem;
+    height: calc(2.2125rem + 2px);
+    &:hover {
+      background-color: $grey-medium-dark;
+      border-color: $grey-medium-dark;
+    }
+  }
+}
+
+::ng-deep .calendar-supply {
+  &.calendar-align-left {
+    left: 116px !important;
+  }
+}
+
+.filters {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  // overflow-y: auto;
+  right: 0;
+  width: 450px;
+  z-index: 1001;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 2%;
+
+  &__buttons {
+    display: flex;
+    margin: 1.5rem 1rem;
+  }
+
+  &__cta {
+    background: #cc0000;
+    color: #fff;
+    border-color: #cc0000;
+    border-radius: 0;
+    width: 100%;
+
+    &--secondary {
+      background: #fff;
+      color: #000;
+      border-radius: 0;
+      border-color: #000;
+      margin-right: 0.5rem;
+      width: 100%;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 1rem;
+
+    p {
+      margin-bottom: 0;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #000;
+    }
+  }
+}
+
+.filter-ml {
+  margin-left: 20px;
+}
+
+.filter-mt {
+  margin-top: 10px;
+}
+
+.mat-expansion-panel {
+  box-sizing: content-box;
+  display: unset;
+  margin: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: margin 225ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.btn-close {
+  position: absolute;
+  top: 2%;
+  right: 5%;
+}
+
+.btn_filter1_Save {
+  margin-left: 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 40%;
+  color: #6495ed;
+}
+
+.filters__bottom {
+  padding-top: 10px;
+  border-top: 3px solid #dee2e6;
+}
+
+::ng-deep .mat-expansion-panel-content {
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  margin-bottom: 5px;
+}
+
+::ng-deep .calendar-dropdown {
+  &.calendar-align-right {
+    right: 160px !important;
+  }
+}
+
+::ng-deep .case-planning {
+  .filters-wrapper {
+    // margin-top: 10px;
+    height: 87vh;
+    overflow: auto;
+  }
+}

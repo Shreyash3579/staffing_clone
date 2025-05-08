@@ -1,0 +1,118 @@
+@import "dhtmlx-gantt/codebase/dhtmlxgantt.css";
+@import 'variables';
+
+.gantt-chart {
+  position: relative;
+  width: 100%;
+  height: 600px;
+}
+
+.gantt_task_content {
+  overflow: visible;
+}
+
+.gantt_split_parent {
+  opacity: 0;
+}
+
+.orange {
+  border: 2px solid $resources-commitment-orange;
+  color: $resources-commitment-orange;
+  background: $resources-commitment-orange;
+}
+
+.grey {
+  border: 2px solid #c4c4c4;
+  color: $resources-commitment-grey;
+  background: #b1b1b1;
+}
+
+.yellow {
+  border: 2px solid $resources-commitment-yellow;
+  color: $resources-commitment-yellow;
+  background:$resources-commitment-yellow;
+}
+
+.red {
+  border: 2px solid red;
+  color: red;
+  background: red;
+}
+
+.line-task-purple {
+  height: 11px !important;
+  background: $resources-commitment-purple;
+  position: absolute;
+  margin-top: 10px;
+}
+
+.line-task-green {
+  height: 11px !important;
+  background: $resources-commitment-green;
+  position: absolute;
+  margin-top: 10px;
+}
+
+.gantt-green{
+  position: absolute;
+  background-color: #65c16f;
+  border: 1px solid #3c9445;
+  height: 7px!important;
+  margin-top: 10px;
+}
+
+
+.placeholder-task-blue {
+  background: 2px solid $placeholder-commitment-blue;
+  color: $placeholder-commitment-blue;
+  position: absolute;
+}
+
+.gainsboro {
+  background-color: #e2e2e2 !important;
+}
+
+.grouping-padding-left{
+  padding-left: 15px;
+}
+
+.group-task {
+  height: 7px !important;  
+  margin-top: 10px;
+}
+
+input[type="radio"] {
+  margin-right: 5px;
+}
+
+input[type="date"] {
+  width: 100px;
+  //background: #fff url("../../../../assets/img/calendar.png") 97% 50% no-repeat;
+
+  &::-webkit-calendar-picker-indicator {
+    //opacity: 0;
+    margin-left: 0px;
+  }
+}
+
+.gantt-empty-grid {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 130px;
+}
+
+.gantt_tooltip {
+  z-index: 1000;
+}
+
+.gantt_grid_head_checked {
+  width: 0px!important;
+}
+
+.gantt_grid_head_selectAll {
+  margin-left: 30px;
+}
+
+.hidden-task{
+  display: none;
+}

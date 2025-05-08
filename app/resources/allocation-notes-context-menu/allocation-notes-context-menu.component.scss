@@ -1,0 +1,47 @@
+::ng-deep .allocation-notes-context-menu-popup {
+  margin: 0px;
+  max-width: max-content !important;
+  position: absolute;
+
+  @for $i from 1 through 10000 {
+    &.left-#{$i} {
+      left: #{$i}px;
+    }
+
+    &.right-#{$i} {
+      right: #{$i}px;
+    }
+
+    &.top-#{$i} {
+      top: #{$i}px;
+    }
+  }
+}
+
+.note-context-menu {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+  display: none;
+  position: absolute;
+  width: 86px;
+
+  &.show {
+    display: inline-block;
+  }
+
+  button {
+    align-items: center;
+    display: flex;
+    height: 24px;
+    padding: 0px 16px;
+    text-align: left;
+    width: 100%;
+    background-color: white;
+    border: none;
+
+    &:hover {
+      background-color: #f7f9ff;
+    }
+  }
+}

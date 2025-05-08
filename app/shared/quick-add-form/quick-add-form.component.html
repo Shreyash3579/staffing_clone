@@ -1,0 +1,255 @@
+<!-- COMPONENT: MODAL FORM-->
+<div class="modal-header">
+  <h5 class="modal-title">{{modalTitle}}</h5>
+  <button type="button" class="close" (click)="closeForm()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form class="needs-validation data-collection" novalidate (change)="onFormChange()">
+    <div class="form-row mb-2" *ngIf="errorList.length">
+      <div class="col-12 text-danger">
+        <ul>
+          <li *ngFor="let error of errorList">{{error}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="form-row mb-3">
+      <div id="quick-add-commitment-type" class="col-6">
+        <label for="commitmentType" [class.text-danger]="formModel.type.isInvalid">Type *</label>
+        <ng-container *ngIf="!commitmentTypesToShow; else CommitmentScreenCommitmentTypes">
+          <select class="form-control form-control-sm" name="commitmentType" placeholder="select type"
+            [disabled]="commitmentTypeCode == 'C' || commitmentTypeCode == 'PC' " [(ngModel)]='formModel.type.value'
+            (change)="onCommitmentTypeChange()">
+            <optgroup *ngFor="let grp of commitmentTypeGroup" label="{{grp.group}}">
+              <option *ngFor="let commitmentType of grp.items"
+                [hidden]="!commitmentType.commitmentTypeCode || (commitmentTypeCode && commitmentTypeCode !== 'C' && commitmentType.commitmentTypeCode === 'C') ||
+                (commitmentTypeCode && commitmentTypeCode !== 'PC' && commitmentType.commitmentTypeCode === 'PC')"
+                [ngValue]="commitmentType">
+                {{commitmentType.commitmentTypeName}}
+              </option>
+            </optgroup>
+          </select>
+        </ng-container>
+      </div>
+      <div id="quick-add-resource-typeahead" class="col-6">
+
+        <label for="resource" [class.text-danger]="formModel.resource.isInvalid">Resource *</label>
+        <input type="text" *ngIf="asyncResourceString" name="resource" class="form-control form-control-sm"
+          [(ngModel)]="asyncResourceString" [disabled]="resourceAllocationData?.employeeName">
+
+        <ng-select *ngIf="!asyncResourceString" name="resources" placeholder="Search resources..."
+          [items]="resourcesData$ | async" [multiple]="true" [hideSelected]="true" [minTermLength]="3"
+          (search)="onResourceSearchChange($event)" (change)="selectedResourcesChange($event)"
+          bindLabel="employeeSearchData" bindValue="employeeCode" [isOpen]="isResourceSearchOpen">
+          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+            <div class="ng-value" *ngFor="let item of items">
+              <span class="ng-value-icon left" (click)="clear(item)" aria-hidden="true">x</span>
+              <span class="ng-value-label">
+                {{item.fullName}}
+              </span>
+            </div>
+          </ng-template>
+          <ng-template ng-option-tmp let-item="item">
+            {{item.fullName + ' (' + item.levelGrade+ ' - '+ item.schedulingOffice.officeName + ')'}}
+          </ng-template>
+        </ng-select>
+
+      </div>
+    </div>
+    <div class="form-row mb-3">
+      <div id="quick-add-project-typeahead" class="col-6" *ngIf="showCaseAndAllocation">
+        <label for="case" [class.text-danger]="formModel.project.isInvalid">Case/Opp *</label>
+        <input type="text" name="case" class="form-control form-control-sm"
+          [typeaheadItemTemplate]="customProjectTypeAheadTemplate" typeaheadOptionField="projectName"
+          [typeaheadOptionsLimit]="50" [typeaheadMinLength]="3" [typeaheadScrollable]="true"
+          [typeaheadOptionsInScrollableView]="7" [(ngModel)]="asyncProjectString"
+          placeholder="search available cases/opp" autocomplete="off" [typeahead]="projects"
+          (typeaheadOnSelect)="typeaheadOnSelect($event,'project')"
+          (typeaheadNoResults)="typeaheadNoResultsHandler($event)" typeaheadGroupField="projectStatus">
+        <!--  -->
+        <div *ngIf="noCaseOppFound"><span>{{noResultsFoundMsg}}</span></div>
+      </div>
+      <div id="quick-add-project-typeahead" class="col-6" *ngIf="showPlanningCardAndAllocation">
+        <planning-card-typeahead 
+        class="planning-card-project-typeahead"
+        [isProjectInvalid] ="formModel.project.isInvalid"
+        [asyncProjectString]="asyncProjectString"
+        (onPlanningCardSearchItemSelect)="onPlanningCardSearchItemSelectHandler($event)"
+        #planningCardTypeahead
+        >
+        </planning-card-typeahead>
+      </div>
+
+      <div id="quick-add-allocation" class="col-6" *ngIf="showNonBillableReason && hasAccessToNonBillableReason">
+        <label>Reason </label>
+        <select class="form-control form-control-sm" name="commitmentTypeReasons"
+          [(ngModel)]='formModel.commitmentTypeReason.value'>
+          <option *ngFor="let reason of commitmentTypeReasons" [ngValue]="reason">
+            {{ reason.commitmentTypeReasonName }}
+          </option>
+        </select>
+      </div>
+
+      <div id="quick-add-allocation" class="col-6">
+        <label for="commitmentAllocation" [class.text-danger]="formModel.allocation.isInvalid">Allocation *</label>
+        <input type="text" name="commitmentAllocation" class="form-control form-control-sm" autocomplete="off"
+          [(ngModel)]='formModel.allocation.value' placeholder="enter allocation">
+      </div>
+    </div>
+
+    <div class="form-row mb-3">
+      <div id="quick-add-start-date" class="col-6">
+        <label for="commitmentStartDate" [class.text-danger]="formModel.startDate.isInvalid">Start Date *</label>
+        <label class="user-message" *ngIf="(!formModel.project.isInvalid) && startDateLabel && showCaseAndAllocation"
+          title="Case/Opp Start Date">
+          ({{startDateLabel}})
+        </label>
+
+        <div class="input-group">
+          <input type="text" name="commitmentStartDate" placeholder="dd-mmm-yyyy" id="commitmentStartDate"
+            class="form-control form-control-sm border-right-0" autocomplete="off" [bsConfig]="bsConfig"
+            [(ngModel)]="formModel.startDate.value" bsDatepicker #dpStart="bsDatepicker"
+            (ngModelChange)="onFormChange()" [disabled]="formModel.startDate.readonly" />
+
+          <div id="quick-add-start-date-icon" class="input-group-append">
+            <span class="input-group-text" (click)="formModel.startDate.readonly ? false: dpStart.toggle()">
+              <i class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div id="quick-add-end-date" class="col-6">
+        <label for="commitmentEndDate" [class.text-danger]="formModel.endDate.isInvalid">End Date *</label>
+        <label *ngIf="(!formModel.project.isInvalid) && endDateLabel && showCaseAndAllocation" class="user-message"
+          title="Case/Opp End Date">
+          ({{endDateLabel}})
+        </label>
+        <div class="input-group">
+
+          <input type="text" name="commitmentEndDate" placeholder="dd-mmm-yyyy" id="commitmentEndDate"
+            class="form-control form-control-sm border-right-0" autocomplete="off" [bsConfig]="bsConfig"
+            [disabled]="formModel.endDate.readonly" [(ngModel)]="formModel.endDate.value" bsDatepicker #dpEnd="bsDatepicker"
+            (ngModelChange)="onFormChange()" />
+
+          <div id="quick-add-end-date-icon" class="input-group-append">
+            <span class="input-group-text" (click)="formModel.endDate.readonly ? false: dpEnd.toggle()">
+              <i class="fa fa-calendar-alt fa-fw ngx-daterangepicker-action"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row mb-3" *ngIf="showInvestmentAndCaseRole">
+      <div id="quick-add-investment-category" class="col-6">
+        <label for="commitmentStartDate">Investment Category </label>
+        <select class="form-control form-control-sm" name="investmentCategory" placeholder="Select Investment Category"
+          [(ngModel)]='formModel.investmentCategory.value'>
+          <option *ngFor="let investmentCategory of investmentCategoriesToShow; first as isFirst"
+            [ngValue]="investmentCategory">
+            {{investmentCategory.investmentName}}
+          </option>
+        </select>
+      </div>
+      <div id="quick-add-case-role" class="col-6">
+        <label for="commitmentEndDate">Role </label>
+        <select class="form-control form-control-sm" name="caseRoleType" placeholder="Select Case Role"
+          [(ngModel)]='formModel.role.value'>
+          <option *ngFor="let role of caseRoleTypes; first as isFirst" [ngValue]="role">
+            {{role.caseRoleName}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row mb-3">
+      <div id="quick-add-notes" class="col-12">
+        <label for="commitmentNotes">Notes</label>
+        <label class="user-message">(Max 140 characters)</label>
+        <!-- alert icon -->
+        <span class="user__icon" triggers="mouseenter:mouseleave" container="body" popoverClass="notes-popover">
+          <i class="fas fa-exclamation-triangle" id="alertIcon"></i>
+          <div class="hover-text">{{notesAlertText}}</div>
+        </span>
+        <textarea name="commitmentNotes" class="form-control form-control-sm" id="field-notes"
+          [(ngModel)]="formModel.notes.value" placeholder="Enter note" maxlength="140">
+        </textarea>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button id="quick-add-cancel-button" type="button" class="btn btn-sm btn-secondary" (click)="closeForm()">
+    Cancel
+  </button>
+  <button id="quick-add-delete-button" type="button" *ngIf="isUpdateModal" class="btn btn-sm btn-secondary"
+    (click)="deleteCommitment()">
+    Delete
+  </button>
+  <button id="quick-add-add-button" type="button" *ngIf="!isUpdateModal" class="btn btn-sm btn-primary"
+    (click)="addCommitment()">
+    Add
+  </button>
+  <button id="quick-add-update-button" type="button" *ngIf="isUpdateModal" class="btn btn-sm btn-primary"
+    (click)="updateCommitment()">
+    Update
+  </button>
+</div>
+
+
+<ng-template #CommitmentScreenCommitmentTypes>
+  <select class="form-control form-control-sm" name="commitmentType" placeholder="select type"
+    [disabled]="commitmentTypeCode == 'C'" [(ngModel)]='formModel.type.value' (change)="onCommitmentTypeChange()">
+    <option *ngFor="let commitmentType of commitmentTypes"
+      [hidden]="!commitmentType.commitmentTypeCode || (commitmentTypeCode && commitmentTypeCode !== 'C' && commitmentType.commitmentTypeCode === 'C') ||
+      (commitmentTypeCode && commitmentTypeCode !== 'PC' && commitmentType.commitmentTypeCode === 'PC')"
+      [ngValue]="commitmentType">
+      {{commitmentType.commitmentTypeName}}
+    </option>
+  </select>
+</ng-template>
+
+<ng-template #customProjectTypeAheadTemplate let-model="item" let-index="index">
+  <div *ngIf="model.oldCaseCode" id="{{ 'quickAddProjectSearch-option-' + index }}" class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="color-box case"></div>
+        <div class="col-7 padding-left x10 textWrap"
+          title="{{model.oldCaseCode + ' - ' + model.clientName + ' - ' + model.caseName}}">
+          {{model.oldCaseCode + ' - ' + model.clientName + ' - ' + model.caseName}}
+        </div>
+        <div class="col-1">
+          {{model.managingOfficeAbbreviation}}
+        </div>
+        <div class="col-3">
+          {{model.startDate | date:'dd-MMM-yyyy'}} - {{model.endDate | date:'dd-MMM-yyyy'}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="model.pipelineId" id="{{ 'quickAddProjectSearch-option-' + index }}" class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="color-box opportunity"></div>
+        <div *ngIf="model.probabilityPercent" class="col-7 padding-left x10 textWrap"
+          title="{{model.probabilityPercent + ' - ' + model.clientName + ' - ' + model.opportunityName}}">
+          {{model.probabilityPercent + '% - ' + model.clientName + ' - ' + model.opportunityName}}
+        </div>
+        <div *ngIf="!model.probabilityPercent" class="col-7 padding-left x10 textWrap"
+          title="{{model.clientName + ' - ' + model.opportunityName}}">
+          {{model.clientName + ' - ' + model.opportunityName}}
+        </div>
+        <div class="col-1">
+          {{model.managingOfficeAbbreviation}}
+        </div>
+        <div class="col-3" *ngIf="model.endDate">
+          {{model.startDate | date:'dd-MMM-yyyy'}} - {{model.endDate | date:'dd-MMM-yyyy'}}
+        </div>
+        <div class="col-3" *ngIf="!model.endDate">
+          {{model.startDate | date:'dd-MMM-yyyy'}}
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- END COMPONENT: MODAL FORM-->

@@ -1,0 +1,92 @@
+<nav class="row navbar navbar-expand-lg navbar-light bg-light">
+  <div class="navbar-brand">
+    <a [routerLink]="['/home']">
+      <img src="assets/img/logo.png" alt="">
+      <span id="lblProjectName">BOSS
+        <sup *ngIf="environmentName !='production'">{{environmentName}} (v{{version}})</sup>
+      </span>
+    </a>
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item" routerLinkActive="active" *appFeaturesAccess="appScreens.page.casePlanning">
+        <a [routerLink]="['/casePlanning']" class="nav-link">Case Planning</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *appFeaturesAccess="appScreens.page.casePlanningCopy">
+        <a [routerLink]="['/casePlanningCopy']" class="nav-link">Case Planning 2.0 (new)</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *appFeaturesAccess="appScreens.page.home">
+        <a [routerLink]="['/home']" class="nav-link">Staffing<span class="sr-only">(current)</span></a>
+      </li>
+      <ng-container *appFeaturesAccess="appScreens.page.home">
+        <li class="nav-item" routerLinkActive="active" *ngIf="isShowRetiredStaffingTab">
+          <a [routerLink]="['/homeCopy']" class="nav-link">Staffing (to be retired) <span class="sr-only"></span></a>
+        </li>
+      </ng-container>
+      <li class="nav-item" routerLinkActive="active" *appFeaturesAccess="appScreens.page.resources">
+        <a [routerLink]="['/resources']" class="nav-link">Resources</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *appFeaturesAccess="appScreens.page.analytics">
+        <a [routerLink]="['/analytics']" class="nav-link">Analytics</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *appFeaturesAccess="appScreens.page.admin">
+        <a [routerLink]="['/admin']" class="nav-link">Admin</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto profile-nav">
+      <!--Universal Search Bar-->
+      <li class="nav-item mr-3" *appFeaturesAccess="appScreens.feature.universalSearch"
+        style="display: flex;align-items: center;">
+        <app-searchbar>
+        </app-searchbar>
+      </li>
+      <!--Ring Fence Overlay Icon-->
+      <li class="nav-item" *appFeaturesAccess="appScreens.feature.ringfenceOverlay">
+        <a class="nav-link" id="lnkRFOverlay" title="RF Overlay" (click)="openRingFenceOverlay()">
+          <span class="rf-overlay-icon-container">
+            <img src="assets/img/fence-icon.png" alt="RF Overlay" class="fence-icon" />
+          </span>
+        </a>
+      </li>
+      <!--Notification Icon-->
+      <li class="nav-item" *appFeaturesAccess="appScreens.feature.notification">
+        <a class="nav-link h-100 align-items-center" [class.disabled]="disableNotification" title="Notifications"
+          (click)="toggleNotificationPopup()">
+          <span class="notifications-badge-container">
+            <i class="far fa-bell"></i>
+            <span *ngIf="unreadNotificationsCount > 0" class="badge">{{unreadNotificationsCount}}</span>
+          </span>
+        </a>
+      </li>
+      <!--Chat Icon for Support-->
+      <li class="nav-item">
+        <a class="nav-link" title="Write To Us"
+          href="mailto:staffingsystemsupport.global@bain.com?subject=Staffing Feedback">
+          <span class="feedback-comments-container">
+            <i class="far fa-comments"></i>
+          </span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="employee">
+        <!-- Employee Profile Component -->
+        <app-employee-profile [employee]="employee" [roles]="roles"
+          (openSupplySettingsPopover)="openSupplySettingsPopoverHandler($event)"
+          (openOfficeClosurePopover)="openOfficeClosureHandler($event)">
+        </app-employee-profile>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+<div id="banner" *ngIf="!!playgroundId && playgroundId.length > 0">
+  <div id="banner-content">
+    Planning Whiteboard Session is still active!
+    Any changes made will be reflected in the case planning board page.
+    <!-- <a style="display: inline-block; cursor:pointer;" href="javascript:void(0)" (click)="exitPlayground()">Click Here</a> if you want to leave/exit the Whiteboard! -->
+  </div>
+</div>

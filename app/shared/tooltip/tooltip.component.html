@@ -1,0 +1,10 @@
+<div class="tooltip-component">
+  <i class="fa fa-info" aria-label="Tooltip">
+    <div class="tooltip-wrapper" *ngIf="header || message">
+      <div class="tooltip {{ position }}">
+        <h4 *ngIf="header">{{ header }}</h4>
+        <p *ngIf="message">{{ message }}</p>
+      </div>
+    </div>
+  </i>
+</div>

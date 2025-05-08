@@ -1,0 +1,86 @@
+<!-- bottom section -->
+<div
+  class="bottom-section-wrapper"
+  style="height: 100%"
+>
+  <!-- cases & opportunites -->
+  <div
+    class="weekly-resource-wrapper"
+    style="height: 100%"
+  >
+    <div
+      *ngFor="let projectGroup of projectGroups; let weekIndex = index; trackBy: trackByFn;"
+      class="week-wrapper column-{{ weekIndex + 1 }}"
+    >
+      <div class="new-planning-card-wrapper">
+        <!-- add new planning card cta -->
+        <button
+          id="new-planning-card-cta"
+          ngbPopover="Add a new Planning Card"
+          container="body"
+          triggers="mouseenter:mouseleave"
+          popoverClass="staffing-page-popover"
+          (click)="addPlanningCard(weekIndex)"
+        >
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+
+      <div
+        class="week-wrapper resource-view"
+        infiniteScroll
+        [infiniteScrollDistance]="0"
+        [scrollWindow]="false"
+      >
+        <!-- planning-cards -->
+        <div
+          class="cards-wrapper"
+          *ngIf="projectGroup.planningCards && projectGroup.planningCards.length"
+        >
+          <app-planning-card
+            *ngFor="let planningCard of projectGroup.planningCards; let j = index;"
+            id="{{ planningCard.id }}"
+            [planningCard]="planningCard"
+            [planningCards]="planningCards"
+            [collapseAll]="collapseNewDemandAll"
+            [highlightedResourcesInPlanningCards]="highlightedResourcesInPlanningCards"
+            (mergePlanningcardToCaseOppEmitter)="mergePlanningcardToCaseOppEmitterHandler($event)"
+            (openPegRFPopUpEmitter)="openPegRFPopUpHandler($event)"
+            (upsertPlaceholderEmitter)="upsertPlaceholderHandler($event)"
+            (removePlaceHolderEmitter)="removePlaceHolderHandler($event)"
+            (updatePlanningCardEmitter)="updatePlanningCardEmitterHandler($event)"
+            (showQuickPeekDialog)="showQuickPeekDialogHandler($event)"
+            (removePlanningCardEmitter)="removePlanningCardEmitterHandler($event)"
+            (sharePlanningCardEmitter)="sharePlanningCardEmitterHandler($event)"
+          ></app-planning-card>
+        </div>
+
+        <!-- projects -->
+        <div
+          class="cards-wrapper"
+          *ngIf="projectGroup.projects && projectGroup.projects.length"
+        >
+          <app-projectview
+            *ngFor="let project of projectGroup.projects; index as index; trackBy: trackByFnForProject;"
+            [project]="project"
+            [projectIndex]="index"
+            [collapseAll]="collapseNewDemandAll"
+            (showQuickPeekDialog)="showQuickPeekDialogHandler($event)"
+            (openPegRFPopUpEmitter)="openPegRFPopUpHandler($event)"
+            (openCaseRollForm)="openCaseRollPopUpHandler($event)"
+            (openPlaceholderForm)="openPlaceholderFormHandler($event)"
+            (upsertPlaceholderEmitter)="upsertPlaceholderHandler($event)"
+            (removePlaceHolderEmitter)="removePlaceHolderHandler($event)"
+            (tabbingFromAllocation)="tabbingFromAllocationHandler($event)"
+            (tabbingFromEndDate)="tabbingFromEndDateHandler($event)"
+            (addProjectToUserExceptionHideListEmitter)="addProjectToUserExceptionHideListHandler($event)"
+            (addProjectToUserExceptionShowListEmitter)="addProjectToUserExceptionShowListHandler($event)"
+            (removeProjectFromUserExceptionShowListEmitter)="removeProjectFromUserExceptionShowListHandler($event)"
+            (upsertResourceAllocationsToProjectEmitter)="upsertResourceAllocationsToProjectHandler($event)"
+            (openOverlappedTeamsPopup)="openOverlappedTeamsPopupHandler($event)"
+          ></app-projectview>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

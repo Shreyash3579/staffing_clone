@@ -1,0 +1,393 @@
+<div
+    class="people-wrapper practiceStaffingView"
+    [class.collapsed]="isRowCollapsed"
+  [class.extended-distribution]="!isRowCollapsed"
+   *ngIf = "isSelectedPracticeView">
+    <!-- Name & Profile Image Wrapper -->
+    <div class="name-img-wrapper">
+        <!-- Employee Name - if grouped by employee -->
+        <div class="d-flex align-items-center" *ngIf="!isLeftSideBarCollapsed">
+          <!-- Employee Image -->
+          <div class="profile-picture m-0 mr-2">
+            <app-profile-image [height]="38" [width]="38" [imageUrl]="resource.profileImageUrl"></app-profile-image>
+          </div>
+          <a
+            class="word-wrap pr-1"
+            href="javascript:void(0);"
+            (click)="openResourceDetailsDialogHandler(resource.employeeCode)"
+            title="{{ resource.fullName }}">
+            {{ resource.fullName }}
+          </a>
+          <span class="word-wrap" title="{{ resource.position.positionGroupName }}">
+                    {{ resource.position.positionGroupName }}
+                </span>
+                <span class="word-wrap" title="{{ resource.levelGrade }}" *ngIf="!isRowCollapsed && affiliations && affiliations.length > 0">
+                  , {{ resource.levelGrade }}
+              </span>
+        </div>
+
+        <div *ngIf="isRowCollapsed && !isLeftSideBarCollapsed" class="l-type-collapsed pt-1">
+          <span class="word-wrap l-type-span truncated-text" 
+          [title]="getFormattedAffiliation" >  {{ getFormattedAffiliation }} </span>
+        </div>
+
+        <div class="name-img-wrapper" *ngIf="isLeftSideBarCollapsed"> 
+          <!-- Employee Name - if grouped by employee -->
+          <a
+            class="word-wrap"
+            href="javascript:void(0);"
+            (click)="openResourceDetailsDialogHandler(resource.employeeCode)"
+            title="{{ resource.fullName }}">
+            {{ resource.fullName }}
+          </a>
+      
+          <!-- Employee Image -->
+          <div class="profile-picture" >
+            <app-profile-image [height]="38" [width]="38" [imageUrl]="resource.profileImageUrl"></app-profile-image>
+          </div>
+        </div>
+
+        <ng-container *ngIf="!isRowCollapsed && !isLeftSideBarCollapsed">
+          <div class="info-wrapper">
+            <div class="d-flex gap-3 mt-2">
+              <span *ngIf="!affiliations || affiliations.length === 0" class="word-wrap" title="{{ resource.levelGrade }}">
+                Level: {{ resource.levelGrade }}
+            </span>
+              <span class="word-wrap" title="{{ resource.schedulingOffice.officeAbbreviation }}">
+                    Office: {{ resource.schedulingOffice.officeAbbreviation }}
+                </span>
+              <span *ngIf="!resource.isTerminated && !resource.onTransitionOrTerminationAndNotAvailable && resource.percentAvailable > 0 && resource.dateFirstAvailable; else notAvailable"
+                    class="word-wrap">
+              Availability: {{
+                  resource.percentAvailable | number: "1.0-1"
+                }}</span>
+              <span *ngIf="!resource.isTerminated && !resource.onTransitionOrTerminationAndNotAvailable && resource.percentAvailable > 0 && resource.dateFirstAvailable; else notAvailable"
+                    class="word-wrap"
+                    title="{{ resource.dateFirstAvailable | date: 'dd-MMM-yyyy'}}">
+              Date: {{
+                  resource.dateFirstAvailable | date: "dd-MMM"
+                }}</span>
+
+                <div class="l-type">
+                  <ng-template #tipContent>
+                    <span *ngFor="let practice of l1Affiliations; let i = index" class="tooltip_">
+                      ● L1: {{ practice.practiceAreaName }}
+                    </span>
+                    <span *ngFor="let practice of l2Affiliations; let i = index" class="tooltip_">
+                      ● L2: {{ practice.practiceAreaName }}
+                    </span>
+
+                  </ng-template>
+                  <span class="word-wrap" [ngbTooltip]="tipContent">
+                    {{ getFormattedAffiliation }}
+                  </span>
+  
+                </div>
+            </div>
+            <div class="row-2-wrapper d-flex mt-2">
+              <!-- Languages -->
+              <!-- <div class="position">
+                  <span class="header-label mb-1">languages</span>
+                  <span class="word-wrap">en, fr</span>
+              </div> -->
+
+              <div class="hireDate">
+                <span class="header-label">Hire Date</span>
+                <span class="word-wrap" title="{{ resource.startDate | date: 'dd-MMM-yyyy' }}">{{
+                    resource.startDate | date: 'dd-MMM-yyyy'
+                  }}</span>
+              </div>
+
+              <!-- Last Billable Date -->
+              <div class="last-billable-date">
+                <span class="header-label">Last Staffed on Billable</span>
+                <span class="word-wrap" title="{{ lastBillableDate }}">{{
+                    lastBillableDate
+                  }}</span>
+              </div>
+
+              <!-- Ipsum -->
+              <!-- <div>
+                  <span class="header-label mb-1">Ipsum</span>
+                  <span class="word-wrap">dolor sit</span>
+              </div> -->
+
+              <!-- Peg -->
+              <ng-container>
+                <div class="peg-and-flag-wrapper">
+                  <button
+                    style="border: none; background: none; padding: 0px"
+                    class="d-flex align-items-center"
+                    *ngIf="showPegIcon(commitments)"
+                    (click)="openCommitmentsDetailPopup($event, commitments)"
+                  >
+                    <img src="assets/img/peg-icon.svg" alt="peg icon" />
+                    <span class="header-label ml-1">PEG</span>
+                  </button>
+                  <div *ngIf="resource.staffableAsTypeName" class="staffableAs-flag-position">
+                    <i title="{{'Staffable as: ' + resource.staffableAsTypeName}}" class="fas fa-flag"></i>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+
+        </ng-container>
+
+    </div>
+
+    <!-- Employee Info Wrapper -->
+    <div class="info-wrapper">
+        <!-- Row One -->
+        <div class="row-1-wrapper d-flex" *ngIf="isRowCollapsed">
+
+            <!-- Level Grade -->
+            <div class="level">
+                <span class="word-wrap" title="{{ resource.levelGrade }}">
+                    {{ resource.levelGrade }}
+                </span>
+            </div>
+
+            <!-- Office -->
+            <div class="office">
+                <span class="word-wrap" title="{{ resource.schedulingOffice.officeAbbreviation }}">
+                    {{ resource.schedulingOffice.officeAbbreviation }}
+                </span>
+            </div>
+
+            <!-- Percentage -->
+            <div class="percentage">
+                <span *ngIf="!resource.isTerminated && !resource.onTransitionOrTerminationAndNotAvailable && resource.percentAvailable > 0 && resource.dateFirstAvailable; else notAvailable"
+                    class="word-wrap">{{
+                      resource.percentAvailable | number: "1.0-1"
+                }}</span>
+
+            </div>
+
+            <!-- Date -->
+            <div class="date">
+                <span *ngIf="!resource.isTerminated && !resource.onTransitionOrTerminationAndNotAvailable && resource.percentAvailable > 0 && resource.dateFirstAvailable; else notAvailable"
+                    class="word-wrap"
+                    title="{{ resource.dateFirstAvailable | date: 'dd-MMM-yyyy'}}">{{
+                        resource.dateFirstAvailable | date: "dd-MMM"
+                }}</span>
+            </div>
+
+
+ <!-- Notes, Recent CD and Skills Tab -->
+        <!-- commenting out as it is yet to be implemeneted in collapsed form -->
+          <resources-resource-info-tabs
+            [resourceViewNotes]="resourceViewNotes"
+            [resourceViewCD]="resourceViewCD"
+            [resourceViewCommercialModel] = "resourceViewCommercialModel"
+            [rowIndex]="rowIndex"
+            [isNotesReadonly]="isNotesReadonly"
+            [isCollapsed] = true
+            (upsertNote)="upsertResourceViewNoteHandler($event)"
+            (deleteNotes)="deleteResourceViewNotesHandler($event)"
+            (upsertRecentCD)="upsertResourceRecentCDHandler($event)"
+            (deleteRecentCD)="deleteResourceRecentCDHandler($event)"
+            (upsertCommercialModel) ="upsertResourceCommercialModelHandler($event)"
+            (deleteCommercialModel) = "deleteResourceCommercialModelHandler($event)">
+          </resources-resource-info-tabs>
+        </div>
+
+        <!-- Row Two -->
+        <div class="row-2-wrapper d-flex mt-2" *ngIf="isRowCollapsed">
+            <!-- Languages -->
+          <!-- <div class="position">
+              <span class="header-label mb-1">languages</span>
+              <span class="word-wrap">en, fr</span>
+          </div> -->
+
+          <div class="hireDate">
+            <span class="header-label mb-2">Hire Date</span>
+            <span class="word-wrap" title="{{ resource.startDate | date: 'dd-MMM-yyyy' }}">{{
+                resource.startDate | date: 'dd-MMM-yyyy'
+            }}</span>
+          </div>
+
+          <!-- Last Billable Date -->
+          <div class="last-billable-date">
+              <span class="header-label mb-2">Last Staffed on Billable</span>
+              <span class="word-wrap" title="{{ lastBillableDate }}">{{
+                lastBillableDate
+              }}</span>
+          </div>
+
+          <!-- Ipsum -->
+          <!-- <div>
+              <span class="header-label mb-1">Ipsum</span>
+              <span class="word-wrap">dolor sit</span>
+          </div> -->
+
+          <!-- Peg -->
+          <ng-container>
+            <div class="peg-and-flag-wrapper">
+                <button
+                    style="border: none; background: none; padding: 0px"
+                    class="d-flex align-items-center"
+                    *ngIf="showPegIcon(commitments)"
+                    (click)="openCommitmentsDetailPopup($event, commitments)"
+                >
+                    <img src="assets/img/peg-icon.svg" alt="peg icon" />
+                    <span class="header-label ml-1">PEG</span>
+                </button>
+                <div *ngIf="resource.staffableAsTypeName" class="staffableAs-flag-position">
+                    <i title="{{'Staffable as: ' + resource.staffableAsTypeName}}" class="fas fa-flag"></i>
+                </div>
+            </div>
+          </ng-container>
+        </div>
+
+        <!-- Notes, Recent CD and Skills Tab -->
+        <div class="notes-wrapper mt-2">
+            <resources-resource-info-tabs
+            [resourceViewNotes]="resourceViewNotes"
+            [resourceViewCD]="resourceViewCD"
+            [resourceViewCommercialModel] = "resourceViewCommercialModel"
+            [rowIndex]="rowIndex"
+            [employeeCode] = "resource.employeeCode"
+            [isNotesReadonly]="isNotesReadonly"
+            [isCollapsed] = false
+            (upsertNote)="upsertResourceViewNoteHandler($event)"
+            (deleteNotes)="deleteResourceViewNotesHandler($event)"
+            (upsertRecentCD)="upsertResourceRecentCDHandler($event)"
+            (deleteRecentCD)="deleteResourceRecentCDHandler($event)"
+            (selectedResourceViewTab) = "selectedResourceViewTabHandler($event)"
+            (upsertCommercialModel) ="upsertResourceCommercialModelHandler($event)"
+            (deleteCommercialModel) = "deleteResourceCommercialModelHandler($event)">
+            </resources-resource-info-tabs>
+        </div>
+
+    </div>
+</div>
+
+<div
+  class="people-wrapper staffingView"
+  [class.collapsed]="isRowCollapsed"
+  *ngIf="!isSelectedPracticeView"
+>
+  <!-- Name & Profile Image Wrapper -->
+  <div class="name-img-wrapper">
+    <!-- Employee Name - if grouped by employee -->
+    <a
+      class="word-wrap"
+      href="javascript:void(0);"
+      (click)="openResourceDetailsDialogHandler(resource.employeeCode)"
+      title="{{ resource.fullName }}">
+      {{ resource.fullName }}
+    </a>
+
+    <!-- Employee Image -->
+    <div class="profile-picture">
+      <app-profile-image [height]="38" [width]="38" [imageUrl]="resource.profileImageUrl"></app-profile-image>
+    </div>
+  </div>
+
+  <!-- Employee Info Wrapper -->
+  <div class="info-wrapper">
+    <!-- Row One -->
+    <div class="row-1-wrapper d-flex">
+      <div class="position">
+        <span class="word-wrap" title="{{ resource.position.positionGroupName }}">
+          {{ resource.position.positionGroupName }}
+        </span>
+      </div>
+
+      <!-- Level Grade -->
+      <div class="level">
+        <span class="word-wrap" title="{{ resource.levelGrade }}">
+          {{ resource.levelGrade }}
+        </span>
+      </div>
+
+      <!-- Office -->
+      <div class="office">
+        <span class="word-wrap" title="{{ resource.schedulingOffice.officeAbbreviation }}">
+          {{ resource.schedulingOffice.officeAbbreviation }}
+        </span>
+      </div>
+
+      <!-- Percentage -->
+      <div class="percentage">
+        <span *ngIf="!resource.isTerminated && !resource.onTransitionOrTerminationAndNotAvailable && resource.percentAvailable > 0 && resource.dateFirstAvailable; else notAvailable"
+          class="word-wrap">{{
+            resource.percentAvailable | number: "1.0-1"
+        }}</span>
+
+      </div>
+<!-- 
+      Date -->
+      <div class="date">
+        <span *ngIf="!resource.isTerminated && !resource.onTransitionOrTerminationAndNotAvailable && resource.percentAvailable > 0 && resource.dateFirstAvailable; else notAvailable"
+          class="word-wrap"
+          title="{{ resource.dateFirstAvailable | date: 'dd-MMM-yyyy'}}">{{
+            resource.dateFirstAvailable | date: "dd-MMM"
+        }}</span>
+      </div>
+
+
+    </div>
+
+    <!-- Row Two -->
+    <div class="row-2-wrapper d-flex mt-2">
+
+      <div class="hireDate">
+      <span class="header-label mb-2">Hire Date</span>
+      <span class="word-wrap" title="{{ resource.startDate | date: 'dd-MMM-yyyy' }}">{{
+        resource.startDate | date: 'dd-MMM-yyyy'
+      }}</span>
+      </div>
+
+      <!-- Last Billable Date -->
+      <div class="last-billable-date">
+        <span class="header-label mb-2">Last Staffed on Billable</span>
+        <span class="word-wrap" title="{{ lastBillableDate }}">{{
+        lastBillableDate
+        }}</span>
+      </div>
+
+      <!-- Peg -->
+      <ng-container>
+      <div class="peg-and-flag-wrapper">
+        <button
+          style="border: none; background: none; padding: 0px" 
+          class="d-flex align-items-center"
+          *ngIf="showPegIcon(commitments)"
+          (click)="openCommitmentsDetailPopup($event, commitments)"
+        >
+          <img src="assets/img/peg-icon.svg" alt="peg icon" />
+          <span class="header-label ml-1">PEG</span>
+        </button>
+        <div *ngIf="resource.staffableAsTypeName" class="staffableAs-flag-position">
+          <i title="{{'Staffable as: ' + resource.staffableAsTypeName}}" class="fas fa-flag"></i>
+        </div>
+      </div>
+      </ng-container>
+    </div>
+
+    <div class="notes-wrapper mt-2">
+      <app-shared-gantt-notes
+      [notes]="resourceViewNotes"
+      [rowIndex]="rowIndex"
+      [isNotesReadonly]="isNotesReadonly"
+      (upsertNote)="upsertResourceViewNoteHandler($event)"
+      (deleteNotes)="deleteResourceViewNotesHandler($event)">
+      </app-shared-gantt-notes>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #notAvailable>
+  <span class="word-wrap"> N/A</span>
+</ng-template>
+
+<!-- Collapse | Expand Row CTA -->
+<div class="collapse-expand-bar-wrapper">
+    <button class="d-flex justify-content-center" (click)="toggleExpandCollapse($event, rowIndex)">
+        <span></span>
+    </button>
+</div>
+

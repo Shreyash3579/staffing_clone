@@ -1,0 +1,22 @@
+<div class="resource-basic-menu">
+  <div class="btn-group {{ menuPosition }}" dropdown>
+    <!-- Toggle -->
+    <button class="resource-menu-toggle" [ngClass]="size" aria-controls="resource-basic-menu-picker" dropdownToggle
+      id="button-resource-basic-menu" (click)="onResourceMenuToggle()">
+      <span *ngIf="selectedOption && selectedOption.label">{{ selectedOption.label }}</span>
+      <span id="placeholder-text" *ngIf="!(selectedOption && selectedOption.label)">{{ placeholder }}</span>
+      <i class="fas fa-caret-down"></i>
+    </button>
+
+    <!-- Container -->
+    <ul class="dropdown-menu" *dropdownMenu role="menu" id="resource-basic-menu-picker"
+      aria-labelledby="button-resource-basic-menu">
+      <li role="menuitem" *ngFor="let option of menuOptions">
+        <button *ngIf="!option.isHidden" class="dropdown-item"
+          [class.active]="(selectedOption && selectedOption.value) && (option.value == selectedOption.value)"
+          (click)="handleMenuOptionsClick(option)">{{
+          option.label }}</button>
+      </li>
+    </ul>
+  </div>
+</div>

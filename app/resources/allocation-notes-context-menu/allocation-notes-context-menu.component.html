@@ -1,0 +1,11 @@
+<div class="note-context-menu" id="note-context-{{ rowIndex }}-{{ noteIndex }}">
+  <!-- Edit -->
+  <button id="edit" (click)="noteContextMenuClick($event, note, noteIndex)">
+    Edit
+  </button>
+
+  <!-- Delete -->
+  <button id="delete" (click)="noteContextMenuClick($event, note, noteIndex)">
+    Delete
+  </button>
+</div>

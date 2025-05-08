@@ -1,0 +1,120 @@
+// Adjusted Styling
+.top-section {
+    display: flex;
+    flex-direction: column;
+    font-family: "Graphik";
+    gap: 15px;
+    min-height: 100px;
+    overflow: auto;
+    padding-bottom: 30px;
+    position: relative;
+
+    // Header..
+    // Breadcrumbs
+    header {
+        color: #121212;
+
+        .header-wrapper {
+            gap: 10px;
+        }
+
+        button,
+        h2 {
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 30px;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        button {
+            background: none;
+            border: none;
+            outline: none;
+        }
+
+        i {
+            font-size: 17px;
+        }
+    }
+}
+
+// Grab Handle
+.grab-handle-wrapper {
+    position: relative;
+    height: 13px;
+    width: 100%;
+
+    .grab-handle {
+        align-items: center;
+        background: #f0f2f3;
+        color: #c2c9d1;
+        cursor: row-resize;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        left: 0px;
+        margin-left: -24px;
+        position: absolute;
+        width: calc(100% + 48px);
+    }
+}
+
+// Bottom
+.bottom-section {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-top: 20px;
+}
+
+//
+//
+
+::ng-deep .nav-tabs {
+    background-color: #fff;
+    border: none !important;
+    min-height: auto;
+    padding-left: 12px;
+
+    .nav-link {
+        color: #666666;
+
+        &.active {
+            color: #cc0000 !important;
+            border-left: none;
+            border-right: none;
+            border-bottom: 1px solid #cc0000 !important;
+            border-color: #fff;
+        }
+    }
+}
+
+.stage {
+    .right-align {
+        text-align: right;
+    }
+
+    #detailtabs {
+        border: 1px solid #efeef0;
+        max-height: 500px;
+    }
+
+    .audit-log {
+        height: 450px;
+        overflow-y: auto;
+    }
+
+    @media screen and (max-width: 430px) {
+        margin: 0;
+        padding: 0;
+    }
+
+    .row {
+        background-color: #fff;
+        margin: 0px;
+
+        .col-12 {
+            padding-inline: 0px;
+        }
+    }
+}

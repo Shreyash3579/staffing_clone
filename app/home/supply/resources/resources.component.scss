@@ -1,0 +1,13 @@
+::ng-deep mat-expansion-panel-header {
+    // margin-bottom: 1rem;
+
+    .mat-content {
+        flex: none;
+        margin-right: 0.5rem;
+        color: #000;
+    }
+}
+
+.info-icon-pad {
+    padding-top: 4px;
+}

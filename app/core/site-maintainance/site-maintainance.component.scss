@@ -1,0 +1,26 @@
+$color_1: #333;
+$color_2: #dc8100;
+
+body {
+  text-align: center;
+  padding: 150px;
+  font: 20px Helvetica, sans-serif;
+  color: $color_1;
+}
+h1 {
+  font-size: 50px;
+}
+article {
+  display: block;
+  text-align: left;
+  width: 650px;
+  margin: 0 auto;
+}
+a {
+  color: $color_2;
+  text-decoration: none;
+  &:hover {
+    color: $color_1;
+    text-decoration: none;
+  }
+}

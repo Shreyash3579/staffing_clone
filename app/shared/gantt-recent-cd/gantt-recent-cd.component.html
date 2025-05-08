@@ -1,0 +1,89 @@
+<div class="recent-cd-wrapper mt-2" [class.collapsed]="recentCDWrapperCollapsed">
+    <!-- Recent CD Header - Label & CTAs -->
+    <div class="recent-cd-header-wrapper">
+      <span class="header-label" [class.blue-color]="recentCDs.length > 0">
+          <span class="recent-cd-container">
+              Recent CD
+          </span>
+      </span>
+  
+      <div class="d-flex align-items-center ml-2">
+          <!-- Add New Recent CD CTA -->
+          <button *ngIf="!isRecentCdReadonly" class="d-flex align-items-center justify-content-center" (click)="toggleAddNewRecentCD()">
+              <i class="fa fa-plus"></i>
+          </button>
+  
+          <!-- Expand | Collapse Recent CD Container -->
+          <button (click)="recentCDWrapperCollapsed = !recentCDWrapperCollapsed"
+              class="expand-collapse-recent-cd d-flex align-items-center justify-content-center ml-auto" [class.collapsed]="recentCDWrapperCollapsed" *ngIf="recentCDs.length > 0">
+              <i class="fa fa-chevron-up"></i>
+          </button>
+
+          <button (click)="closeRecentCDWrapper()"
+          class="close-notes d-flex align-items-center justify-content-center ml-2" *ngIf="!isHideCloseIcon">
+          <i class="fa fa-times"></i>
+      </button>
+      </div>
+  </div>
+  
+  
+  
+    <!-- New Recent CD Wrapper -->
+    <div class="new-recent-cd-wrapper" id="new-recent-cd-wrapper-{{ rowIndex }}" [class.hidden]="hideAddNewRecentCD">
+      <div class="new-recent-cd-content">
+        <textarea placeholder="Type here..." [(ngModel)]="userCD"></textarea>
+      </div>
+  
+      <div class="new-recent-cd-ctas">
+        <!-- Cancel changes -->
+        <button class="primary" (click)="cancelRecentCDHandler()">Cancel</button>
+  
+        <!-- Add / Save Recent CD -->
+        <!-- If edit mode is false -->
+        <button *ngIf="!editCDMode" class="primary" (click)="addRecentCDHandler()" [disabled]="!userCD.length">
+          Add 
+        </button>
+  
+        <!-- If edit more is true -->
+        <button *ngIf="editCDMode" class="primary" (click)="saveRecentCdEditHandler()" [disabled]="!userCD.length">
+          Save
+        </button>
+      </div>
+  
+    </div>
+  
+    <!-- Recent CD Content -->
+    <div class="recent-cd-content-wrapper" *ngIf="recentCDs.length">
+      <div *ngFor="let recentCD of recentCDs | slice:0:10; let CdIndex = index">
+        <div class="last-edited d-flex align-items-center">
+          <div class="d-flex align-items-center mr-1">
+            <i class="fa fa-user mr-1"></i>
+  
+            <!-- Recent CD Author -->
+            <span title="{{ recentCD.createdByName }}" class="header-label d-flex align-items-center">
+              {{ recentCD.createdByName }}
+            </span>
+          </div>
+  
+          <!-- Recent CD Created & Last Edited Date -->
+          <span title="{{ recentCD.lastUpdated | date: 'MM/dd/yy h:mma' }}">
+            {{ recentCD.lastUpdated | date: "MM/dd/yy h:mma" }}
+          </span>
+          <!-- Edit and delete button -->
+            <span *ngIf="loggedInUser === recentCD.createdBy" class = "edit">
+              <a href="javascript:void(0);" *ngIf="!isRecentCdReadonly" (click)="onEditRecentCD(recentCD)">Edit</a>
+            </span>
+            <span *ngIf="loggedInUser === recentCD.createdBy" class = "delete">
+              <a href="javascript:void(0);" *ngIf="!isRecentCdReadonly" (click)="onDeleteCD(recentCD, CdIndex)">Delete</a>
+            </span>
+          <!-- End Edit and delete button -->
+        </div>
+  
+        <!-- Recent CD Content -->
+        <div class="recent-cd-content">
+          <p>{{ recentCD.recentCD }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

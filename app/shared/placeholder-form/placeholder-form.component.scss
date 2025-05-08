@@ -1,0 +1,63 @@
+:host ::ng-deep {
+  .modal-flex-height {
+    overflow-y: scroll;
+    min-height: 40vh;
+    max-height: 60vh;
+    overflow: auto;
+  }
+}
+
+:host ::ng-deep {
+  .typeahead-input {
+    margin-left: 18px;
+    border: aliceblue;
+    outline-width: 0;
+
+    &:focus {
+      border: aliceblue;
+      outline-width: 0;
+    }
+  }
+}
+
+.modal-body {
+  overflow-y: scroll;
+  max-height: 550px;
+}
+
+:host ::ng-deep .ng-select .ng-dropdown-panel {
+  background-color: white;
+  position: absolute;
+}
+
+:host ::ng-deep .ng-dropdown-panel .scroll-host {
+  background-color: #fff;
+  display: block;
+  max-height: 100px;
+  overflow: hidden;
+  overflow-y: scroll;
+  position: absolute !important;
+  width: 100%;
+}
+
+:host ::ng-deep .ng-select.ng-select-single .ng-select-container {
+  max-height: 36px !important;
+  overflow-y: hidden !important;
+}
+
+:host ::ng-deep .ng-select .ng-arrow-wrapper {
+  display: block;
+}
+
+:host ::ng-deep .typeahead-input {
+  height: auto !important;
+  display: none;
+  border: none !important;
+}
+
+:host ::ng-deep .ng-select.ng-select-single .ng-select-container .ng-value-container,
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

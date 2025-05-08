@@ -1,0 +1,258 @@
+::ng-deep .rf-screen-modal {
+    top: 100px !important;
+    
+    .modal-content {
+        background-color: transparent;
+        border: none;
+        width: 120%;
+    }
+
+    .modal-header {
+        padding: 5px !important;
+        background: #476EDD;
+        border-radius: 3px;
+        height: 50px;
+
+        .main-header {
+            padding-left: 10px;
+            padding-top: 10px;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 24px;
+
+            color: #FFFFFF;
+        }
+        .close {
+            // font-size: 1em;
+            cursor: pointer;
+            padding-top: 10px;
+        }
+    }
+
+    .modal-body {
+        padding: 10px !important;
+    }
+}
+
+#main-block {
+    width: 120%;
+    background-color: #FFFFFF;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+}
+
+#rf-modal {
+    max-height: 500px;
+    padding-bottom: 15px !important;
+}
+
+// .date-group .input-group {
+//     border: 3px solid #CECECE;
+//     border-radius: 4px;
+
+//     input {
+//         height: 36px;
+//         border: none !important;
+//     }
+
+//     .input-group-append > .input-group-text {
+//         border: none !important;
+//     }
+// }
+
+// ::ng-deep .bs-datepicker-head {
+//     background-color: #9C50CF !important;
+// }
+
+.table-bordered {
+    border: 2px solid #CECECE;
+}
+
+.table-container {
+    display: flex;
+    max-height: 410px;
+    overflow-y: scroll;
+    border: 1px solid #c4c4c4;
+}
+
+.table-container {
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+     
+    &::-webkit-scrollbar-thumb {
+        background: #FFFFFF;
+        border: 1px solid rgba(0, 0, 0, 0.35);
+        border-radius: 2px;
+     
+        &:hover {
+            background: #555;
+        }
+    }
+}
+
+#ringfenceTable table {
+    margin-bottom: 0px;
+    /*width: 100%*/
+    thead th {
+        background-color: #AB98E6 !important;
+        position: sticky;
+        top: 0;
+        z-index: 6;
+
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    th, td {
+        border: 2px solid #CECECE;
+        font-size: 11px;
+        line-height: 13px;
+        color: #000000;
+    }
+
+    td {
+        max-width: 150px;
+        min-width: 111px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .input_rf {
+        max-width: 130px;
+        input {
+            border: none;
+            width: 80%;
+            border-bottom: 2px solid #CFCFCF;
+            height: inherit;
+            padding: 0px 5px;
+            outline: none;
+        }
+    }
+    
+    .table-date {
+        height: 15px;
+        padding-top: 5px;
+        .input-group {
+            height: inherit;
+            border: none !important;
+
+            input {
+                border: none !important;
+                font-size: 12px;
+                color: #000000;
+                width: 75%;
+                padding: 0px;
+            }
+
+            .input-group-append > .input-group-text {
+                border: none !important;
+                width: 25%;
+                padding: 0px !important;
+            }
+        }
+    }
+}
+
+.data-width{
+    display: block;
+    white-space: nowrap; 
+    max-width: 150px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.col-sm-2 {
+    flex: 0 0 16.6666666667%;
+    max-width: 16.6666666667%;
+    margin-left: -27px;
+}
+
+.showHistory div {
+    display: none;
+    z-index: 1100;
+    position: fixed;
+}
+
+.showHistory:hover div {
+    display: block !important;
+    // position: absolute;
+    // right: 20px !important;
+    // z-index: 20;
+    // margin-top: 5px;
+    
+}
+
+.history-block {
+    display: block;
+    width: 350px;
+    max-height: 130px;
+    background: #FBF4F4;
+    border: 1px solid rgba(146, 144, 144, 0.5);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+    padding: 8px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    z-index: 1100;
+    position: absolute;
+
+    .history-heading {
+        font-weight: 600;
+        font-size: 11px;
+        line-height: 13px;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+        color: #000;
+    }
+
+    #history-table {
+        thead th {
+            background-color: transparent !important;
+            border: none !important;
+            font-weight: 550;
+            font-size: 10px;
+            line-height: 12px;
+            letter-spacing: 0.5px;
+            padding: 0 5px;
+            max-width: 80px;
+        }
+    
+        td {
+            border: none !important;
+            font-size: 10px;
+            line-height: 12px;
+            letter-spacing: 0.5px;
+            max-width: 120px;
+            height: 20px;
+            padding: 5px 5px;
+        }
+    }
+}
+
+.history-block {
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+     
+    &::-webkit-scrollbar-thumb {
+        background: #FFFFFF;
+        border: 1px solid rgba(0, 0, 0, 0.35);
+        border-radius: 2px;
+     
+        &:hover {
+            background: #555;
+        }
+    }
+}

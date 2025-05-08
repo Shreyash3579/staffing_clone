@@ -1,0 +1,52 @@
+.resource-gantt-row {
+    .left-side-bar {
+      border-bottom: 1px solid #c2c9d1;
+      border-right: 1px solid #c2c9d1;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
+      box-sizing: border-box;
+      left: 0px;
+      max-width: 100%;
+      position: relative;
+  
+      &.collapsed {
+        max-width: 144px;
+        overflow: hidden;
+      }
+    }
+  
+    .right-side-gantt {
+      position: relative;
+      width: 100%;
+  
+      .grid-lines {
+        display: inline-flex;
+        height: 100%;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+  
+        // Grid Lines for each Day
+        .day {
+          border-bottom: 1px solid #c2c9d1;
+          border-right: 1px solid #c2c9d1;
+          box-sizing: border-box;
+          min-width: 32px;
+          overflow: visible;
+          white-space: nowrap;
+          width: 32px;
+          z-index: -1;
+  
+          &.weekend {
+            background-color: #f7f9ff;
+          }
+        }
+      }
+  
+      .task-wrapper {
+        height: 100%;
+        left: 0px;
+        position: absolute;
+        width: 100%;
+      }
+    }
+  }

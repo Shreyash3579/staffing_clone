@@ -1,0 +1,72 @@
+<div class="threshold-wrapper">
+    <button
+        class="threshold-btn"
+        style="width: 100%"
+        [ngClass]="isThresholdDropdownActive ? 'expanded' : ''"
+        (click)="toggleThresholdDropdown()"
+    >
+        <!-- Placeholder -->
+        <span *ngIf="!isFilterApplied" style="color: #616568 !important"> {{placeholder}}</span>
+
+        <!-- Selected Range -->
+        <span *ngIf="isFilterApplied && filterType === 'notBetween'"> &le; {{ selectedLeftValue }}%; &gt; {{ selectedRightValue }}% </span>
+        <span *ngIf="isFilterApplied && filterType === 'between'"> &ge; {{ selectedLeftValue }}%; &le; {{ selectedRightValue }}% </span>
+
+        <i class="fas fa-sort-down ddl-arrow-ralign"></i>
+    </button>
+
+    <div class="threshold-box" *ngIf="isThresholdDropdownActive">
+        <div class="multi-range-filter">
+            <input type="range" id="input-left" [min]="minValue" [max]="maxValue" [(ngModel)]="selectedLeftValue" />
+            <input type="range" id="input-right" [min]="minValue" [max]="maxValue" [(ngModel)]="selectedRightValue" />
+
+            <div class="slider">
+                <div class="track"></div>
+                <div
+                    class="range"
+                    [style.left.%]="getInRangeValue(selectedLeftValue)"
+                    [style.right.%]="getInRangeValue(getRightValue())"
+                ></div>
+                <div class="thumb left" [style.left.%]="getInRangeValue(selectedLeftValue)"></div>
+                <div class="thumb right" [style.right.%]="getInRangeValue(getRightValue())"></div>
+            </div>
+        </div>
+
+        <div class="input-wrapper">
+            <input
+                class="pl-3"
+                type="number"
+                [min]="minValue"
+                [max]="maxValue"
+                [(ngModel)]="selectedLeftValue"
+                (change)="
+                    selectedLeftValue < 0 ? (selectedLeftValue = 0) : selectedLeftValue;
+                    selectedLeftValue > 100 ? (selectedLeftValue = 100) : selectedLeftValue
+                "
+                name="selectedLeftValue"
+                required
+            />
+
+            <span class="mx-2" style="color: #497be8">-</span>
+
+            <input
+                class="pl-3"
+                type="number"
+                [min]="minValue"
+                [max]="maxValue"
+                [(ngModel)]="selectedRightValue"
+                (change)="
+                    selectedRightValue < 0 ? (selectedRightValue = 0) : selectedRightValue;
+                    selectedRightValue > 100 ? (selectedRightValue = 100) : selectedRightValue
+                "
+                name="selectedRightValue"
+                required
+            />
+        </div>
+
+        <div class="threshold-cta">
+            <button class="btn threshold-btn-secondary mr-3" (click)="clearThreshold()">Clear</button>
+            <button class="btn threshold-btn" (click)="applyThreshold()">Apply</button>
+        </div>
+    </div>
+</div>

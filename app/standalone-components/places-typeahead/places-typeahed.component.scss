@@ -1,0 +1,86 @@
+.custom-dd ::ng-deep .ng-select-container {
+    //font-size: 14px;
+  
+    .ng-placeholder {
+      top: 7px !important;
+    }
+  
+    .ng-value {
+      background-color: #ECF0FF !important;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 16px;
+      height: 24px;
+      padding: 4px 8px 4px 8px;
+      display: flex;
+      flex-direction: row-reverse;
+      border-radius: 39px;
+      justify-content: space-around;
+      align-items: center;
+      text-align: left;
+      min-width: none;
+  
+      .checked {
+        display: none;
+      }
+  
+      .ng-value-icon.left {
+        border: none;
+        background-color: #A2BEFA;
+        color: #fff;
+        border-radius: 55px;
+        vertical-align: middle;
+        height: 17px;
+        text-align: center;
+        min-width: none;
+      }
+    }
+  
+  
+  }
+
+  %common-select-input {
+    height: 38px;
+    display: block;
+    padding: .375rem 2.25rem .375rem .75rem;
+    color: #6f6f6f;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  }
+
+  input, textarea, ng-select{
+    font-family: Graphik;
+    font-size: 12px;
+    font-weight: 400;
+    min-height: 36px;
+  }
+
+  .dropdown, .input-control {
+    width: 100%;
+    gap: 10px;
+
+    label {
+      width: 100%;
+    }
+
+    &.dropdown select, &.input-control input {
+      @extend %common-select-input;
+    }
+
+    .large-select {
+      width: 97%;
+    }
+
+    .small-select {
+      width: 90%;
+    }
+
+    .medium-select {
+      width: 95%;
+    }
+  }

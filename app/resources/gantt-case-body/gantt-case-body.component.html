@@ -1,0 +1,48 @@
+<!-- grouping by Case Code row-->
+<tr
+    [class.collapsed]="isCaseGroupCollapsed"
+    class="resource-gantt-row"
+    id="gantt-row-{{ rowIndex }}"
+    style="height: 32px !important"
+>
+    <!-- Group Header -->
+    <td class="left-side-bar"
+     [ngClass]="{
+    'expanded': !isLeftSideBarCollapsed, 
+    'collapsed': isLeftSideBarCollapsed,   
+    'staffingView': !isSelectedPracticeView,
+     'practiceStaffingView': isSelectedPracticeView
+  }" 
+  style="background-color: #f7f9ff">
+      <resources-case 
+        [case]="resourceStaffing.caseDetails"
+        [project]="resourceStaffing"
+        [resourcesCountOnCaseOpp]="resourcesCountOnCaseOpp"
+        [projectmembers]="resourceStaffing.members"
+        [isCaseGroupCollapsed]="isCaseGroupCollapsed"
+        [rowIndex]="rowIndex"
+        (collapseExpandCaseGroupEmitter)="collapseExpandCaseGroupHandler($event)"
+        (openOverlappedTeamsPopup)="openOverlappedTeamsPopupHandler($event)"
+      ></resources-case>
+        
+    </td>
+
+    <!-- Group Name & Size -->
+    <td
+        class="right-side-gantt"
+        [ngClass]="className ? className : 'start-1 duration-1'"
+        [ngStyle]="{ 'left.px': offsetLeft }"
+        [style.background-color]="isCaseGroupCollapsed ? '#fff' : '#f7f9ff'"
+        style="border-left: 1px solid #c2c9d1; padding: 4px 0px; width: 100%"
+    >
+        <div
+            class="group-members-wrapper d-flex align-items-center"
+            id="members-wrapper-0"
+            (click)="openMembersPopup($event, resourceStaffing.caseDetails,  resourceStaffing.members)"
+        >
+            <p class="group-label">{{ resourceStaffing.caseDetails.caseName ||  resourceStaffing.caseDetails.opportunityName || resourceStaffing.caseDetails.planningCardTitle}}</p>
+            <p class="group-members-length">{{ resourceStaffing.members?.length }}</p>
+        </div>
+    </td>
+</tr>
+

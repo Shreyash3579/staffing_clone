@@ -1,0 +1,86 @@
+:host ::ng-deep .modal-flex-height {
+    overflow-y: scroll;
+    min-height: 40vh;
+    max-height: 60vh;
+    overflow: auto;
+  }
+  
+ :host ::ng-deep .typeahead-input {
+    margin-left: 18px;
+    border: aliceblue;
+    outline-width: 0;
+  
+    &:focus {
+      border: aliceblue;
+      outline-width: 0;
+    }
+  }
+
+.search-resource-form-body {
+  display:flex;
+}
+
+.text-danger{
+  padding: 0.25rem 0.85rem;
+}
+
+select{
+  color: lightgray;
+  border: 1px solid #c4c4c4;
+  border-radius: 3px;
+}
+
+option{
+padding: 0.25rem 0.85rem;
+background-color: #fff;
+color: #707070;
+border: 1px solid #c4c3c3;
+outline: none;
+box-shadow: none;
+}
+
+
+.admin-add-columns {
+  display:flex;
+  //display: inline-block;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+
+
+.invalid-end-date {
+    border: 1px solid red;
+}
+
+.end-date-dt-picker {
+  display:flex;
+}
+
+::ng-deep{
+  &.calendar-align-right {
+      left: 19%;
+  }
+}
+  
+.align-left {
+  text-align: left;
+}
+
+.mb-20 {
+  margin-top: 20px
+}
+
+.ml-40 {
+  margin-left: 40px;
+}
+
+.invalid-msg {
+  color: red;
+  font-size: 13px;
+}
+
+.mt-ml-10 {
+  margin-left: 10px;
+  margin-top: 10px;
+}

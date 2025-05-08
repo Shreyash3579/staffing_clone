@@ -1,0 +1,169 @@
+.case-planning-filter {
+    align-items: flex-start;
+    color: #616568;
+    display: flex;
+    font-family: "Graphik", sans-serif;
+    justify-content: space-between;
+    padding: 10px 0px 15px;
+    gap: 30px;
+    white-space: nowrap;
+  
+    &>* {
+      font-size: 12px;
+      line-height: 12px;
+    }
+  
+    .left-side,
+    .right-side {
+      align-items: center;
+      column-gap: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 10px;
+    }
+  
+    // default btn styling
+    .filter-btn {
+      align-items: center;
+      background-color: #fff;
+      border: 1px solid #e0e4e8;
+      border-radius: 4px;
+      color: #121212;
+      display: flex;
+      font-size: 12px;
+      height: 32px;
+      justify-content: center;
+      line-height: 12px;
+      padding: 0px;
+  
+      &:hover {
+        background-color: #f8f8f8;
+      }
+    }
+  
+    // search input
+    .searchbar__input {
+      max-width: 400px;
+      min-width: 200px;
+      width: 100%;
+      background-color: #fff;
+      outline: none;
+      display: flex;
+      border: 1px solid #e0e4e8;
+      box-sizing: border-box;
+      border-radius: 4px;
+      padding: 1px;
+      height: 32px;
+  
+      &>* {
+        border: none;
+        font-size: 12px;
+        height: 100%;
+        padding: 0px;
+        outline: none;
+      }
+  
+      .input-group-append {
+        span {
+          align-items: center;
+          border: none;
+          color: #121212;
+          display: flex;
+          font-size: 12px;
+          justify-content: center;
+          padding: 0px;
+          width: 30px;
+        }
+      }
+  
+      input {
+        padding: 0px;
+  
+        &::placeholder {
+          color: #616568;
+        }
+      }
+    }
+  
+    // filter btn
+    .filter-cta {
+      width: 32px;
+    }
+  
+    // planning board btn
+    .custom-btn {
+      font-weight: 500;
+      gap: 5px;
+      padding: 0px 15px;
+  
+      .fas {
+        transform: rotate(45deg);
+      }
+    }
+  
+    &::ng-deep {
+      .treeview-header .form-control {
+        align-items: center;
+        border: 1px solid #284ce0;
+        border-radius: 2px;
+        color: #121212;
+        display: flex;
+        font-size: 12px;
+        height: 32px;
+        padding: 0px 10px;
+  
+        &::placeholder {
+          color: #616568;
+        }
+      }
+  
+      .treeview-container {
+        color: #121212;
+        font-size: 12px;
+        line-height: 16px;
+        padding-right: 0px;
+        width: 100% !important;
+  
+        .row-item {
+          margin-bottom: 10px;
+  
+          input[type=checkbox] {
+            visibility: hidden;
+          }
+  
+          input[type=checkbox]+label::before {
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid #e0e4e8;
+            content: "";
+            cursor: pointer;
+            display: flex;
+            height: 16px;
+            justify-content: center;
+            left: 0px;
+            margin: 0px 4px 0px 0px;
+            padding: 0px;
+            position: absolute;
+            width: 16px;
+          }
+  
+          input[type=checkbox]:checked+label::before {
+            color: #284ce0;
+            content: "\2713";
+            font-size: 12px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+  
+  // demand filter types
+  .demand-filter ::ng-deep .dropdown-toggle {
+    background-color: #fff;
+    border: 1px solid #e0e4e8;
+    height: 32px;
+    margin: 0px !important;
+    min-width: 150px;
+    padding: 0px 15px;
+  }

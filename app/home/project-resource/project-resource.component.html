@@ -1,0 +1,122 @@
+<div class="row no-gutters w-100" *ngIf="userAllocation">
+  <div class="col-4 name">
+    <a id="lnkResourceName" tabindex="-1" href="javascript:void(0);" title="{{getResourceNameTooltip()}}"
+      (click)="openResourceDetailsDialogHandler(userAllocation.employeeCode)">
+      {{userAllocation.employeeName}}</a>
+  </div>
+  <div id="project-resource-level-grade" class="col-1-case-card">{{userAllocation.currentLevelGrade}}</div>
+  <div id="project-resource-operating-office" class="col-2-case-card">{{userAllocation.operatingOfficeAbbreviation}}
+  </div>
+  <div id="project-resource-allocation" class="inline-editable inline-editable-text col-2"
+    [class.active]="editableCol == 'allocation'" [class.error]="validationObj.isAllocationInvalid"
+    (click)="editAllocation()" (keydown.Tab)="onTabbingFromAllocation()">
+    <div>
+      <label>{{userAllocation.allocation >= 0 ? userAllocation.allocation + '%' : userAllocation.allocation}}</label>
+      <input #allocation type="text" [(ngModel)]="userAllocation.allocation" (change)="updateResource()"
+        (blur)="disableEdit($event)" maxlength="3">
+      <i class="fa fa-pencil-alt edit-icon"></i>
+
+      <div class="error-message" *ngIf="validationObj.isAllocationInvalid">
+        {{validationObj.allocationInvalidMessage}}<br>
+        <i class="fa fa-times clickable hide-error" (click)="hideValidationMessage('allocation', $event)"></i>
+      </div>
+    </div>
+  </div>
+  <div id="project-resource-end-date" class="inline-editable inline-editable-text col-3 text-nowrap"
+    [class.active]="editableCol == 'enddate'" [class.error]="validationObj.isEndDateInvalid" (click)="editEndate()"
+    (keydown.Tab)="onTabbingFromEndDate($event)">
+    <div>
+      <label class="no-wrap">{{userAllocation.endDate}}</label>
+
+      <input type="text" #enddate *ngIf="editableCol == 'enddate'" placeholder="dd-mmm-yyyy" [(ngModel)]="endDate"
+        [bsConfig]="bsConfig" (blur)="disableEndDateEdit($event)" bsDatepicker
+        (ngModelChange)="onEndDateChange($event)">
+      <i class="fa fa-calendar-alt edit-icon"></i>
+
+      <div class="error-message" *ngIf="validationObj.isEndDateInvalid">
+        {{validationObj.endDateInvalidMessage}}
+        <i class="fa fa-times clickable hide-error" (click)="hideValidationMessage('endDate',$event)"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row no-gutters w-100" *ngIf="placeholderAllocation && placeholderAllocation.employeeCode"
+  style="padding-top: 6px; padding-bottom: 6px;">
+  <div class="col-3 name">
+    <a id="lnkResourceName" tabindex="-1" href="javascript:void(0);"
+      title="{{placeholderAllocation.investmentName != null ? placeholderAllocation.employeeName + ' - ' + placeholderAllocation.investmentName : placeholderAllocation.employeeName}}"
+      (click)="openResourceDetailsDialogHandler(placeholderAllocation.employeeCode)">
+      {{placeholderAllocation.employeeName}}</a>
+  </div>
+  <div class="col-1-case-card">{{placeholderAllocation.currentLevelGrade}}</div>
+  <div class="col-1-case-card">{{placeholderAllocation.operatingOfficeAbbreviation}}</div>
+  <div class="inline-editable inline-editable-text col-2" [class.active]="editableCol == 'allocation'"
+    [class.error]="validationObj.isAllocationInvalid" (click)="editAllocation()"
+    (keydown.Tab)="onTabbingFromAllocation()">
+    <div>
+      <label>{{placeholderAllocation.allocation >= 0 ? placeholderAllocation.allocation + '%' :
+        placeholderAllocation.allocation}}</label>
+      <input #allocation type="text" [(ngModel)]="placeholderAllocation.allocation" (change)="updateResource()"
+        (blur)="disableEdit($event)" maxlength="3">
+      <i class="fa fa-pencil-alt edit-icon"></i>
+
+      <div class="error-message" *ngIf="validationObj.isAllocationInvalid">
+        {{validationObj.allocationInvalidMessage}}<br>
+        <i class="fa fa-times clickable hide-error" (click)="hideValidationMessage('allocation', $event)"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="inline-editable inline-editable-text col-3 text-nowrap" [class.active]="editableCol == 'enddate'"
+    [class.error]="validationObj.isEndDateInvalid" (click)="editEndate()" (keydown.Tab)="onTabbingFromEndDate($event)">
+    <div>
+      <label class="no-wrap">{{placeholderAllocation.endDate}}</label>
+
+      <input type="text" #enddate *ngIf="editableCol == 'enddate'" placeholder="dd-mmm-yyyy" [(ngModel)]="endDate"
+        [bsConfig]="bsConfig" (blur)="disableEndDateEdit($event)" bsDatepicker
+        (ngModelChange)="onPlaceholderEndDateChange($event)">
+      <i class="fa fa-calendar-alt edit-icon"></i>
+
+      <div class="error-message" *ngIf="validationObj.isEndDateInvalid">
+        {{validationObj.endDateInvalidMessage}}
+        <i class="fa fa-times clickable hide-error" (click)="hideValidationMessage('endDate',$event)"></i>
+      </div>
+    </div>
+  </div>
+  <!-- placeholder icon container -->
+  <div class="col-1 drag__selection" *ngIf="placeholderAllocation">
+    <i class="fas fa-times mr-2" (click)="removeResourceFromPlaceholderEmiiter()"
+      [attr.data-resourceid]="placeholderAllocation.employeeCode"></i>
+    <i class="fas fa-check" (click)="confirmPlaceholderAllocation()"
+      [attr.data-resourceid]="placeholderAllocation?.employeeCode"></i>
+  </div>
+</div>
+<div class="col-12 placeholder-wrapper"
+  *ngIf="!showGuessedPlaceholder && placeholderAllocation && !placeholderAllocation.employeeCode && !placeholderAllocation.operatingOfficeCode"
+  (cdkDropListDropped)="onDrop($event)" [cdkDropListData]="placeholderAllocation" cdkDropList>
+  <a class="placeholder_addguess" (click)="toggleGuessedPlaceholder()">+ Forecast</a>
+  <span>Placeholder</span>
+  <i class="fas fa-times" (click)="removePlaceHolderEmitter($event)"></i>
+</div>
+
+<div style="width: 100%;"
+  *ngIf="showGuessedPlaceholder || (placeholderAllocation && !placeholderAllocation.employeeCode && placeholderAllocation.operatingOfficeCode)"
+  (cdkDropListDropped)="onDrop($event)" [cdkDropListData]="placeholderAllocation" cdkDropList>
+  <app-project-guessed-allocation (confirmGuessedPlaceholderEmitter)="confirmPlaceholderAllocation()"
+    (removeGuessedPlaceholderEmitter)="removeResourceFromPlaceholderEmiiter()"
+    (upsertPlaceholderAllocation)="upsertGuessedPlaceholderAllocationHandler($event)"
+    [placeholderAllocation]="placeholderAllocation"></app-project-guessed-allocation>
+</div>
+<!-- Placeholder div container -->
+<ng-template #placeholderdiv>
+  <ng-container *ngIf="placeholderAllocation">
+    <ng-container [ngSwitch]="placeholderAllocation">
+      <ng-container *ngSwitchCase="'placeholderAllocation'">
+        <div class="col-12 placeholder-wrapper">
+          <span>Placeholder</span> <i class="fas fa-times" (click)="removePlaceHolderEmitter($event)"></i>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ng-template>

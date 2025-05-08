@@ -1,0 +1,13 @@
+<div class="input-group calendar-single1">
+  <!-- <input matInput type="text" name="customDatepicker" class="form-control form-control-sm border-right-0"
+    ngxDaterangepickerMd [(ngModel)]="date" [showDropdowns]="true" [singleDatePicker]="true" [autoApply]="true"
+    [alwaysShowCalendars]="true" [locale]="{format: 'DD-MMM-YYYY', firstDay: 1}" autocomplete="off"
+    placeholder="dd-mmm-yyyy" (keydown.esc)="closeDatepicker($event)" /> -->
+  <!-- <div class="input-group-append">
+    <span class="input-group-text" (click)="toggleStartDatePicker($event)">
+      <i class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw"></i></span>
+  </div> -->
+  <input #datePicker type="text" name="cardStartDate" class="form-control form-control-sm border-right-0"
+    placeholder="dd-mmm-yyyy" autocomplete="off" [ngModel]="date" [bsConfig]="bsConfig"
+    (ngModelChange)="onDateSelect($event)" placement="top" bsDatepicker />
+</div>

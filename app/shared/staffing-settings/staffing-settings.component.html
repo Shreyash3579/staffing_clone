@@ -1,0 +1,129 @@
+<!-- Modal Header -->
+<div class="staffing-modal-header d-flex align-items-center">
+    <h5 class="staffing-modal-title">{{ title }}</h5>
+    <button (click)="closeForm()">
+        <i class="fa fa-times"></i>
+    </button>
+</div>
+
+<!-- Modal Body -->
+<div class="staffing-modal-body">
+    <!-- Tab Group -->
+
+    <mat-tab-group [disableRipple]="true" [color]="color">
+        <div *ngIf="!showDemandSettings">
+            <!-- Supply Group Default Settings View -->
+            <mat-tab label="Filters {{ supplyIsDefault ? '(default)' : '' }}">
+                <div class="modal-scroll">
+                    <!-- Make Default checkbox -->
+                    <div class="default-checkbox-wrapper mb-5 mt-2">
+                        <p class="mb-4">Staffing Settings Filters</p>
+
+                        <label class="container">
+                            Make these filters my default Staffing Setting
+                            <input type="checkbox" [(ngModel)]="userPreferences.isDefault" (change)="setSupplyAsDefault()"/>
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+                    <app-supply-settings
+                        #supplySettings
+                        *ngIf="!showDemandSettings"
+                        [loggedInUserHomeOffice]="loggedInUserHomeOffice"
+                        [userPreferences]="userPreferences"
+                    ></app-supply-settings>
+
+                </div>
+            </mat-tab>
+
+            <!-- Supply Groups Tab -->
+            <mat-tab label="Groups {{ groupIsDefault ? '(default)' : '' }}">
+                <div class="modal-scroll">
+                    <app-group-settings
+                        #groupSettings
+                        *ngIf="!showCreateGroup && !showShareGroup"
+                        (createGroupEmitter)="showCreateGroupForm()"
+                        (editGroupEmitter)="editGroup($event)"
+                        (shareGroupEmitter)="shareGroup($event)"
+                        (defaultGroupEmitter)="defaultGroupHandler($event)"
+                        [allGroupsArray]="allGroupsArray"
+                    ></app-group-settings>
+
+                    <app-create-group
+                        #createGroup
+                        [groupToEdit]="groupToEdit"
+                        [groupToShare]="groupToShare"
+                        *ngIf="showCreateGroup && !showShareGroup"
+                    ></app-create-group>
+
+                    <app-share-group
+                        #shareGroup
+                        [groupToShare]="groupToShare"
+                        [sharedWithMembers]="sharedWithMembers"
+                        [showHeader] = "true"
+                        *ngIf="showShareGroup">
+                    </app-share-group>
+                </div>
+            </mat-tab>
+        </div>
+
+        <!-- Demand Settings View -->
+        <div *ngIf="showDemandSettings">
+            <!-- Filters Tab -->
+            <mat-tab label="Filters">
+                <div class="modal-scroll">
+                    <div class="error-message" *ngIf="errorMessage.length">
+                        <span *ngFor="let error of errorMessage">
+                            {{error}}
+                        </span>
+                        <br>
+                    </div>
+
+                    <app-demand-settings
+                        #demandSettings *ngIf="showDemandSettings"
+                        [loggedInUserHomeOffice]="loggedInUserHomeOffice" [userPreferences]="userPreferences">
+                    </app-demand-settings>
+                </div>
+            </mat-tab>
+        </div>
+    </mat-tab-group>
+
+</div>
+
+<div class="staffing-modal-footer d-flex align-items-center">
+
+    <!-- Next button To Demand Settings-->
+    <!-- <button type="button" *ngIf="!showDemandSettings && !showCreateGroup" class="back-button mr-auto" (click)="showDemandSettingsForm()" title="Click to go to Demand Setting">
+        <i class="fas fa-arrow-right mr-2"></i> Next to My Demand Settings
+    </button> -->
+
+    <!-- Back button To Groups-->
+    <button type="button" *ngIf="(showCreateGroup && !showDemandSettings) || showShareGroup" class="back-button mr-auto" (click)="showGroupSettings()" title="Click to go back to Group Setting">
+        <i class="fas fa-arrow-left mr-2"></i> Back to My Groups
+    </button>
+
+     <!-- Back button To Supply Settings-->
+     <button type="button" *ngIf="showDemandSettings" class="back-button mr-auto" (click)="showSupplySettingsForm()" title="Click to go back to Group Setting">
+        <i class="fas fa-arrow-left mr-2"></i> Back to My Supply Settings
+    </button>
+
+    <!-- Discard or Cancel button -->
+    <button class="secondary-button" type="button" (click)="closeForm()">
+        Discard & Close
+    </button>
+
+    <!-- Save New Group or Changes button -->
+    <button *ngIf="(!showDemandSettings && showCreateGroup) || showShareGroup" class="primary-button" type="button" (click)="saveSettings()">
+        {{saveLabel}}
+    </button>
+
+    <!-- Save New Group or Changes button -->
+    <button *ngIf="!showDemandSettings && !showCreateGroup && !showShareGroup" class="primary-button" type="button" (click)="saveSupplyAndGroups(); showDemandSettingsForm();">
+      Next
+    </button>
+
+    <button *ngIf="showDemandSettings" class="primary-button" type="button" (click)="saveSettings()">
+      Save Changes
+    </button>
+</div>
+

@@ -1,0 +1,69 @@
+<section class="details-staff">
+  <hr>
+  <div class="title-section">
+    <span class="sect-number">Sect 3 of 3</span>
+    <h2>Ready for staffing - role will default to case level information from above and can be overridden</h2>
+  </div>
+  <div class="form-container">
+    <div class="w-100">
+      <label class="w-100">
+        <div class="text-black-12">Note to staffing <span
+          class="text-gray-12">(e.g., relative criticality of roles)</span></div>
+          <input class="text-area-takein" [(ngModel)]="selectedReadyToStaffNotes" name="readyToStaffNotes" placeholder="Enter Notes" type="text"
+          (change)="onReadyToStaffNotesModelChange($event)">
+      </label>
+    </div>
+  </div>
+<div class="d-flex align-items-end">
+  <h3 class="header-title-flow mb-0 pr-4">Workstreams</h3>
+  <!-- <div class="d-flex flex-column"> -->
+    <ng-container *ngIf="!workstreamCreated; else showSelectedSku">
+      <label for="teamSizeDropdown" class="mb-0 pr-4 mr-2 text-muted small"> Select Team Size : </label>
+      <select
+        id="teamSizeDropdown"
+        class="form-control"
+        [(ngModel)]="selectedCortexSkuMapping"
+      >
+      @for (size of cortexSkuMapping; track size) {
+        <option [ngValue]="size">{{ size.cortexSKU }}</option>
+      }
+      </select>
+    </ng-container>
+
+    <ng-template #showSelectedSku>
+      <label for="teamSizeDropdown" class="mb-0 pr-4 mr-2 text-muted small"> Selected Team Size : </label>
+      <span class="ml-1 font-weight-medium text-dark" style="min-width: 120px;">
+        {{ workstreamTeamsize }}
+      </span>
+    </ng-template>
+  <!-- </div> -->
+  <button class="btn btn-primary btn-sm" (click)="createCortexTeamWorkstream()" *ngIf="!workstreamCreated && selectedCortexSkuMapping">
+    + Create Workstream
+  </button>
+</div>
+  <div class="form-container">
+    <div class="w-100 d-flex">
+      <div class="w-100">
+      <app-workstream
+        [opportunityId]="opportunityId"
+        [oldCaseCode]="oldCaseCode"
+        [planningCardId]="planningCardId"
+        [renderInWorkstream]="true"
+        [workstreamDetails]="workstreamDetails"
+        [combinedExpertiseList]="combinedExpertiseList"
+        [caseIntakeDetails]="caseIntakeDetails"
+        [languages] = languages
+        [positionGroups] = positionGroups
+        [serviceLine]=" serviceLine"
+        (updateRoleEmitter)="updateRoleHandler($event)"
+        (roleDetailsChangeEmitter)="roleDetailsChangeHandler($event)"
+        (deleteWorkstreamEmitter)="deleteWorkstreamHandler($event)"
+        (updateWorkstreamEmitter)="updateWorkstreamHandler($event)"
+        (changeLeadEmitter)="changeLeadHandler($event)"
+        (deleteRoleEmitter)="deleteRoleFromWorkstream($event)">
+      </app-workstream>
+      </div>
+    </div>
+  </div>
+</section>
+<button class="add-role" (click)="addWorkstream()"> Add Workstreams</button>

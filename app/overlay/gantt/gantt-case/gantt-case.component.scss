@@ -1,0 +1,109 @@
+@import "dhtmlx-gantt/codebase/dhtmlxgantt.css";
+@import 'variables';
+// Important: css class should be same in gantt of resource and case overlay
+// Css get override by stacking gantt on top of one another.
+.gantt-chart {
+  position: relative;
+  width: 100%;
+  height: 600px;
+}
+
+.gantt_task_content {
+  overflow: visible;
+}
+
+input[type="date"] {
+  width: 100px;
+  //background: #fff url("../../../../assets/img/calendar.png") 97% 50% no-repeat;
+
+  &::-webkit-calendar-picker-indicator {
+    //opacity: 0;
+    margin-left: 0px;
+  }
+}
+
+.gantt_split_parent {
+  opacity: 0;
+}
+
+.orange {
+  border: 2px solid $resources-commitment-orange;
+  color: $resources-commitment-orange;
+  background: $resources-commitment-orange;
+}
+
+.grey {
+  border: 2px solid #c4c4c4;
+  color: $resources-commitment-grey;
+  background: #b1b1b1;
+}
+
+.yellow {
+  border: 2px solid $resources-commitment-yellow;
+  color: $resources-commitment-yellow;
+  background:$resources-commitment-yellow;
+}
+
+.red {
+  border: 2px solid red;
+  color: red;
+  background: red;
+}
+
+.line-task-purple {
+  height: 11px !important;
+  background: $resources-commitment-purple;
+  position: absolute;
+  margin-top: 10px;
+}
+
+.line-task-green {
+  height: 11px !important;
+  background: $resources-commitment-green;
+  position: absolute;
+  margin-top: 10px;
+}
+
+.placeholder-task-blue {
+  background: 2px solid $placeholder-commitment-blue;
+  color: $placeholder-commitment-blue;
+  position: absolute;
+}
+
+.group-task {
+  height: 7px !important;  
+  margin-top: 10px;
+}
+
+.gainsboro {
+  background-color: #e2e2e2 !important;
+}
+
+.add-padding-top {
+  padding-top: 7px;
+  min-width: 180px;
+}
+
+input[type="checkbox"] {
+  vertical-align: middle;
+}
+
+.gantt-empty-grid {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 130px;
+}
+
+.gantt_tooltip {
+  z-index: 1000;
+}
+
+.gantt_grid_head_checked {
+  width: 0px!important;
+}
+
+.gantt_grid_head_selectAll {
+  margin-left: 30px;
+}
+
+

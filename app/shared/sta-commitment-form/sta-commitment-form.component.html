@@ -1,0 +1,92 @@
+<div id="case-roll-header" class="modal-header">
+    <h5 class="modal-title">{{STACommitmentDialogTitle}}</h5>
+    <button type="button" class="close" (click)="closeForm()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  
+  <div id="case-roll-body" class="modal-body">
+    <form class="needs-validation data-collection mt-2 mb-4" novalidate>
+      <!--Region Error-->
+      <div class="form-row mb-2" *ngIf="errorList.length">
+        <div class="col-12 text-danger">
+          <ul>
+            <li *ngFor="let error of errorList">{{error}}</li>
+          </ul>
+        </div>
+      </div>
+      <!--End Region Error-->
+  
+      <div class="form-row mb-3">
+        <div class="col-12 d-flex align-content-start">
+  
+          <div id="case-roll-type" class="col-6">
+            <label for="caseRollType">STA Commitment Type *</label>
+            <select class="form-control form-control-sm" name="caseRollType" placeholder="select type"
+            [disabled]="isSTACommitmentCreated " [(ngModel)]='selectedSTACommitmentOption'>
+              <option [ngValue]="shortTermAvailableCaseOppCommitmentEnum.AddShortTermAvailableCommitment">Add STA for resources</option>
+              <option [ngValue]="shortTermAvailableCaseOppCommitmentEnum.RevertShortTermAvailableCommitment"
+                *ngIf="isSTACommitmentCreated">Revert STA for resources </option>
+            </select>
+          </div>
+          
+        </div>
+      </div>
+  
+      <!--Employee Grid-->
+      <ng-container *ngIf="gridData?.length">
+  
+        <div class="form-row ml-4">
+          <label for="tblCaseRollEmployees" [class.text-danger]="isAllocationNotSelected">
+            Select Resources to Add Commitment: *
+          </label>
+        </div>
+        <div class="form-row ml-4 mr-4" style="max-height: 375px; overflow-y: auto;">
+  
+          <table id="tblCaseRollEmployees" class="table table-striped">
+            <thead class="thead-light">
+              <tr>
+                <th>
+                  <input type="checkbox" [checked]="isSelectAll" [disabled]="isAllocationGridDisabled"
+                    (change)="OnSelectAllChanged($event)">
+                </th>
+                <th>Employee Name</th>
+                <th>Allocation Start Date</th>
+                <th>Allocation End Date</th>
+                <th>Commitment Start Date</th>
+                <th>Commitment End Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of gridData" id="row.id">
+                <td>
+                  <input type="checkbox" [checked]="row.checked" [disabled]="isAllocationGridDisabled"
+                    (change)="OnSelectRowChanged(row)">
+                </td>
+                <td>{{row.data.employeeName}}</td>
+                <td>{{row.data.startDate | date: 'dd-MMM-yyyy'}}</td>
+                <td>{{row.data.endDate | date: 'dd-MMM-yyyy'}}</td>
+                <td>{{ row.data.commitmentStartDate | date: 'dd-MMM-yyyy' }}</td>
+                <td>{{ row.data.commitmentEndDate | date: 'dd-MMM-yyyy' }}</td>
+              </tr>
+            </tbody>
+          </table>
+  
+        </div>
+  
+      </ng-container>
+    </form>
+  </div>
+  
+  <div id="case-roll-footer" *ngIf="!isSTACommitmentCreated" class="modal-footer">
+    <button type="button" id="closeModal" class="btn btn-sm btn-secondary" (click)="closeForm()">Cancel</button>
+    <button type="button" id="btnAddCaseRoll" class="btn btn-sm btn-primary" (click)="addShortTermAvailableCommitment()">Add</button>
+  </div>
+  
+  <div id="case-roll-footer" *ngIf="isSTACommitmentCreated" class="modal-footer">
+    <button type="button" id="closeModal" class="btn btn-sm btn-secondary" (click)="closeForm()">Close</button>
+    <button type="button" id="btnSaveCaseRoll"  class="btn btn-sm btn-primary"
+      (click)="addShortTermAvailableCommitment()">Save</button>
+  </div>
+  
+  

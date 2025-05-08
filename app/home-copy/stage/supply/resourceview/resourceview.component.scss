@@ -1,0 +1,144 @@
+.user {
+  display: flex;
+  border: 1px solid #e0e4e8;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background: #fff;
+  width: 100%;
+  gap: 7px;
+  padding: 5px 7px;
+  font-family: "Graphik";
+
+  &__image {
+    width: 25px;
+    height: 25px;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 2px;
+  }
+
+  &__name {
+    display: flex;
+    font-size: 10px;
+    justify-content: space-between;
+    line-height: 12px;
+
+    button {
+      background: none;
+      border: none;
+      color: #121212;
+      font-weight: 500;
+      outline: none;
+      padding: 0px;
+      margin: 0px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__info {
+    color: #616568;
+    display: grid;
+    font-size: 10px;
+    font-weight: 400;
+    gap: 4px;
+    grid-template-columns: minmax(20px, 1fr) repeat(2, minmax(30px, 1fr)) minmax(40px, 1fr) 20px auto;
+    line-height: 12px;
+    width: 100%;
+  }
+}
+
+.notifications-container {
+  display: flex;
+  justify-content: space-between; /* Adjust as needed, can also use `flex-start` or `center` based on your design */
+  align-items: left; /* Adjust as needed */
+  width: 100%; /* Adjust width as needed */
+  gap: 8px;
+}
+
+.resource-selected {
+  background-color: rgb(183, 228, 255) !important;
+}
+
+.alerts-width {
+  width: 100%;
+}
+
+.alert-details {
+  border: 1px solid;
+  border-radius: 2px;
+  color: #121212;
+  display: flex;
+  font-size: 10px;
+  gap: 4px;
+  justify-content: space-between;;
+  line-height: 12px;
+  margin-top: 5px;
+  padding: 5px;
+
+  .alert-text {
+    white-space: normal;
+  }
+  
+  strong {
+    font-weight: 500;
+  }
+
+  .fa-times {
+    color: #616568;
+    cursor: pointer;
+  }
+}
+.new-note-wrapper {
+  margin-left: -10px; /* Added to move it to left */
+  button {
+    border: none;
+    display: flex;
+    outline: none;
+    padding: 0px;
+    align-items: center;
+    i {
+      font-size: 10px;
+      transform: rotate(180deg);
+    }
+  }
+}
+.allocation-alert{
+  color: #cc0000;
+  justify-self: center;
+  cursor: pointer;
+  font-weight:500
+}
+
+.commitment-alert{
+  color: #f8e256;
+  justify-self: center;
+  cursor: pointer;
+  font-weight:500
+}
+
+.commitment-alert-section {
+  border-color: #f8e256;
+}
+
+.allocation-alert-section {
+  border-color: #cc0000;
+}
+
+
+.close-icon {
+  font-size: 12px;
+  color: #616568; 
+  cursor: pointer; 
+  justify-self: center;
+}
+
+.close-icon:hover {
+  color: #cc0000; 
+}

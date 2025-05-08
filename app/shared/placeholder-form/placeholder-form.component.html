@@ -1,0 +1,229 @@
+<!-- COMPONENT: MODAL FORM-->
+<div class="modal-header">
+  <h5 class="modal-title">{{modalTitle}}</h5>
+  <button type="button" class="close" (click)="closeForm()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <form class="needs-validation data-collection" novalidate (change)="onFormChange()">
+    <div class="form-row mb-2" *ngIf="errorList.length">
+      <div class="col-12 text-danger">
+        <ul>
+          <li *ngFor="let error of errorList">{{error}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="form-row mb-3">
+      <div id="placeholder-resource-typeahead" class="col-6">
+
+        <label for="resource" [class.text-danger]="formModel.resource.isInvalid">Resource</label>
+        <label class="user-message">
+          (optional for Placeholder)
+        </label>
+        <input type="text" *ngIf="asyncResourceString" name="resource" class="form-control form-control-sm"
+          [(ngModel)]="asyncResourceString" [placeholder]="optional"
+          [disabled]="placeholderAllocationData?.employeeName">
+
+        <ng-select *ngIf="!asyncResourceString" name="resources" placeholder="Search resources..."
+          [items]="resourcesData$ | async" [multiple]="false" [hideSelected]="true" [minTermLength]="3"
+          (search)="onResourceSearchChange($event)" (change)="selectedResourcesChange($event)"
+          bindLabel="employeeSearchData" bindValue="employeeCode" [isOpen]="isResourceSearchOpen">
+          <!-- <ng-template ng-label-tmp let-item="item" let-clear="clear">
+            <div class="ng-value" *ngFor="let item of items">
+              <span class="ng-value-icon left" (click)="clear(item)" aria-hidden="true">x</span>
+              <span class="ng-value-label">
+                {{item.fullName}}
+              </span>
+            </div>
+
+          </ng-template> -->
+          <ng-template ng-label-tmp let-item="item" let-clear="clear">
+            <span class="ng-value-label">{{item.fullName}}</span>
+            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+          </ng-template>
+          <ng-template ng-option-tmp let-item="item">
+            {{item.fullName + ' (' + item.levelGrade+ ' - '+ item.schedulingOffice.officeName + ')'}}
+          </ng-template>
+        </ng-select>
+
+      </div>
+      <div id="placeholder-case" class="col-6" *ngIf="projectData">
+        <label for="case" [class.text-danger]="formModel.project.isInvalid">Case/Opp *</label>
+        <input type="text" name="case" class="form-control form-control-sm" [(ngModel)]='asyncProjectString'
+          disabled="true">
+      </div>
+      <div id="placeholder-planning" class="col-6" *ngIf="planningCardData">
+        <label for="case" [class.text-danger]="formModel.project.isInvalid">Planning Card *</label>
+        <input type="text" name="case" class="form-control form-control-sm" [(ngModel)]='asyncProjectString'
+          disabled="true">
+      </div>
+    </div>
+
+    <div class="form-row mb-3" *ngIf="!placeholderAllocationData?.employeeName && !selectedResource">
+      <div id="placeholder-office" class="col-6">
+        <label for="office">Office* </label>
+        <select class="form-control form-control-sm" name="office" placeholder="Select Office"
+          [(ngModel)]='formModel.office.value'>
+          <option *ngFor="let office of offices" [ngValue]="office">
+            {{office.officeName}}
+          </option>
+        </select>
+      </div>
+      <div id="placeholder-serviceLine" class="col-6">
+        <label for="serviceLine">Service Line* </label>
+        <select class="form-control form-control-sm" name="serviceLine" placeholder="Select Service Line"
+          [(ngModel)]='formModel.serviceLine.value'>
+          <option *ngFor="let serviceLine of serviceLines" [ngValue]="serviceLine">
+            {{serviceLine.serviceLineName}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row mb-3" *ngIf="!placeholderAllocationData?.employeeName && !selectedResource">
+      <div id="placeholder-pdGrade" class="col-6">
+        <label for="PDGrade">PD Grade* </label>
+        <select class="form-control form-control-sm" name="PDGrade" placeholder="Select PD Grade"
+          [(ngModel)]='formModel.pdGrade.value'>
+          <option *ngFor="let pdGrade of pdGrades" [ngValue]="pdGrade">
+            {{pdGrade.pdGradeName}}
+          </option>
+        </select>
+      </div>
+      <div id="placeholder-ringfence" class="col-6">
+        <label for="ringfence">Ringfence </label>
+        <select class="form-control form-control-sm" name="ringfence" placeholder="Select Ringfence"
+          [(ngModel)]='formModel.ringfence.value'>
+          <option *ngFor="let ringfence of ringfences" [ngValue]="ringfence">
+            {{ringfence.commitmentTypeName}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row mb-3">
+      <div id="placeholder-allocation" class="col-6">
+        <label for="commitmentAllocation" [class.text-danger]="formModel.allocation.isInvalid">Allocation *</label>
+        <input type="text" name="commitmentAllocation" class="form-control form-control-sm" autocomplete="off"
+          [(ngModel)]='formModel.allocation.value' placeholder="enter allocation">
+      </div>
+
+      <div id="position-group" class="col-6" *ngIf="!placeholderAllocationData?.employeeName && !selectedResource">
+        <label for="positionGroup" [class.text-danger]="formModel.positionGroup.isInvalid">Position Group</label>
+
+        <select *ngIf="positionGroups.length" class="form-control form-control-sm" name="positionGroup" placeholder="Position Group"
+        [(ngModel)]='formModel.positionGroup.value'>
+        <option *ngFor="let positionName of positionGroups" [ngValue]="positionName.positionGroupCode">
+          {{positionName.positionGroupName}}
+        </option>
+      </select>
+      </div>
+    </div>
+
+    <div class="form-row mb-3">
+      <div id="placeholder-start-date" class="col-6">
+        <label for="commitmentStartDate" [class.text-danger]="formModel.startDate.isInvalid">Start Date *</label>
+        <label class="user-message" *ngIf="(!formModel.project.isInvalid) && startDateLabel"
+          title="Case/Opp Start Date">
+          ({{startDateLabel}})
+        </label>
+
+        <div class="input-group">
+          <input type="text" name="commitmentStartDate" placeholder="dd-mmm-yyyy" id="commitmentStartDate"
+            class="form-control form-control-sm border-right-0" autocomplete="off" [bsConfig]="bsConfig"
+            [(ngModel)]="formModel.startDate.value" bsDatepicker #dpStart="bsDatepicker"
+            (ngModelChange)="onFormChange()" />
+
+          <div id="placeholder-start-date-icon" class="input-group-append">
+            <span class="input-group-text" (click)="dpStart.toggle()">
+              <i class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div id="placeholder-end-date" class="col-6">
+        <label for="commitmentEndDate" [class.text-danger]="formModel.endDate.isInvalid">End Date *</label>
+        <label *ngIf="(!formModel.project.isInvalid) && endDateLabel" class="user-message" title="Case/Opp End Date">
+          ({{endDateLabel}})
+        </label>
+        <div class="input-group">
+
+          <input type="text" name="commitmentEndDate" placeholder="dd-mmm-yyyy" id="commitmentEndDate"
+            class="form-control form-control-sm border-right-0" autocomplete="off" [bsConfig]="bsConfig"
+            [(ngModel)]="formModel.endDate.value" bsDatepicker #dpEnd="bsDatepicker" (ngModelChange)="onFormChange()" />
+
+          <div id="placeholder-end-date-icon" class="input-group-append">
+            <span class="input-group-text" (click)="dpEnd.toggle()">
+              <i class="fa fa-calendar-alt fa-fw ngx-daterangepicker-action"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row mb-3" *ngIf="!!isUpdateModal">
+      <div id="placeholder-investment-category" class="col-6">
+        <label for="investmentCategory">Investment Category </label>
+        <select class="form-control form-control-sm" name="investmentCategory" placeholder="Select Investment Category"
+          [(ngModel)]='formModel.investmentCategory.value'>
+          <option *ngFor="let investmentCategory of investmentCategoriesToShow" [ngValue]="investmentCategory">
+            {{investmentCategory.investmentName}}
+          </option>
+        </select>
+      </div>
+      <div id="placeholder-case-role" class="col-6">
+        <label for="caseRoleType">Role </label>
+        <select class="form-control form-control-sm" name="caseRoleType" placeholder="Select Case Role"
+          [(ngModel)]='formModel.role.value'>
+          <option *ngFor="let role of caseRoleTypes" [ngValue]="role">
+            {{role.caseRoleName}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row mb-3">
+      <div id="placeholder-notes" class="col-12">
+        <label for="commitmentNotes">Notes</label>
+        <label class="user-message">(Max 140 characters)</label>
+        <!-- alert icon -->
+        <span class="user__icon" triggers="mouseenter:mouseleave" container="body" popoverClass="notes-popover">
+          <i class="fas fa-exclamation-triangle" id="alertIcon"></i>
+          <div class="hover-text">{{notesAlertText}}</div>
+        </span>
+        <textarea name="commitmentNotes" class="form-control form-control-sm" id="field-notes"
+          [(ngModel)]="formModel.notes.value" placeholder="Enter note" maxlength="140">
+          </textarea>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button id="placeholder-update-button" type="button" *ngIf="isUpdateModal" class="btn btn-sm btn-primary"
+    (click)="updatePlaceholderAllocation()">
+    Update
+  </button>
+
+  <button id="placeholder-cancel-button" type="button" class="btn btn-sm btn-secondary" (click)="closeForm()">
+    Cancel
+  </button>
+
+  <button id="placeholder-delete-button" *ngIf="isUpdateModal" type="button" class="btn btn-sm btn-secondary"
+    (click)="deletePlaceholderAllocation()">
+    Delete
+  </button>
+
+  <button id="placeholder-confirm-placeholder-button" *ngIf="isUpdateModal" type="button" class="btn btn-primary"
+    (click)="confirmPlaceholderAllocation()">
+    Confirm
+  </button>
+
+  <button id="placeholder-update-button" type="button" *ngIf="!isUpdateModal" class="btn btn-primary"
+    (click)="addPlaceholderAllocations()">
+    Add
+  </button>
+</div>
+<!-- END COMPONENT: MODAL FORM-->

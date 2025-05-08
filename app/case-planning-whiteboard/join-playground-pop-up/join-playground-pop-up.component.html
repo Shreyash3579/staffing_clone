@@ -1,0 +1,32 @@
+<div>
+    <div class="modal-header">
+        <h5 class="modal-title">
+            Join Whiteboard
+        </h5>
+        <button type="button" class="close" (click)="closeDialogHandler()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body mb-3">
+        <div class="col-9">
+            <label *ngIf="playgroundValidationObj.errorMessage" class="text-danger">
+                {{playgroundValidationObj.errorMessage}}
+            </label>
+        </div>
+        <div class="col-9">
+            <input type="text" id="txtPlaygroundIdToJoin" class="form-control form-control-sm" autocomplete="off"
+                [(ngModel)]= "playgroundIdToJoin" placeholder="Enter Whiteboard ID">
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button id="btnCancelJoinPlayground" type="button" class="btn btn-sm btn-secondary"
+            (click)="closeDialogHandler()">
+            Cancel
+        </button>
+        <button id="btnJoinPlayground" type="button" class="btn btn-sm btn-primary"
+         (click)="onJoinPlaygroundClick()"  [disabled]="!playgroundIdToJoin">
+            Join
+        </button>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="tab-content tab-content-project-team">
+  <div class="tabs">
+    <tabset class="tab-bar">
+      <div>
+        <span class="teamSize" *ngIf="estimatedTeamSize">
+          <label class="teamSizeLabel">Cortex SKU:</label>
+          <span>{{estimatedTeamSize}}</span>
+        </span>
+        <span class="teamSize" *ngIf="pricingTeamSize">
+          <label class="teamSizeLabel">PC SKU:</label>
+          <span>{{pricingTeamSize}}</span>
+        </span>
+      </div>
+
+      <tab *ngFor="let skuTab of skuTabList; let last = last;" [active]="last" id="{{skuTab.id}}">
+        
+        <app-sku-tab [skuTab]="skuTab" [skuTermList]="skuTermList"
+          (updateSkuCaseTerms)="updateSkuCaseTermsHandler($event)" (deleteSkuTab)="deleteSkuTab($event)">
+        </app-sku-tab>
+
+        <!--Seperate Tab for adding new tabs-->
+        <tab id="addTab" customClass="add" *ngIf="last">
+          <ng-template tabHeading>
+            <ng-container *ngTemplateOutlet="tabAdd"></ng-container>
+          </ng-template>
+        </tab>
+      </tab>
+
+      <tab id="addTab" customClass="add" *ngIf="skuTabList.length === 0">
+        <ng-template tabHeading>
+          <ng-container *ngTemplateOutlet="tabAdd"></ng-container>
+        </ng-template>
+      </tab>
+    </tabset>
+
+  </div>
+</div>
+
+
+<ng-template #tabAdd>
+  <div class="tab-name" [class.disabled]="isAddNewButtonDisabled"
+    [title]="isAddNewButtonDisabled? 'Please add SKU to previous tab before adding a new SKU' : ''"
+    (click)="!isAddNewButtonDisabled ? addSkuTab() : ''">
+    <i class="fa fa-plus add"></i>
+  </div>
+</ng-template>

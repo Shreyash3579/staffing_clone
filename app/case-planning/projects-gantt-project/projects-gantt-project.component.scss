@@ -1,0 +1,209 @@
+@use "sass:math";
+@import "../../../assets/scss/variables.scss";
+
+.project-wrapper {
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    // width: 2560px;
+    width: 100%;
+}
+
+.commitment-wrapper {
+    padding: 0px 5px;
+    position: relative;
+    top: 4px;
+
+    // Setting commitment start & end positions
+    @for $i from 1 through $resources-max-days {
+        &.start-#{$i} {
+            left: calc((#{$i} - 1) * #{$resources-day-width});
+        }
+
+        &.duration-#{$i} {
+            width: calc((#{$i}) * #{$resources-day-width} + 0px);
+            max-width: calc((#{$i}) * #{$resources-day-width} + 0px);
+        }
+    }
+    .case-row {
+        background-color: inherit;
+    }
+}
+
+.case-row {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 24px;
+    overflow: hidden;
+}
+
+.project-header {
+    background: none;
+    border: none;
+    font-size: 10px;
+    color: #616568;
+    font-weight: 600;
+    padding: 0px;
+    outline: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.action-icons {
+    display: flex;
+    align-items: center;
+}
+
+.date-place-container {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    // margin-top: -2px;
+    padding-bottom: 2px;
+}
+
+.date-container {
+    // display: inline-block;
+    // background-color: white;
+    // height: 16px;
+    // line-height: 1;
+    // color: #898989;
+    // font-size: 9px;
+    // font-weight: 550;
+    // border-radius: 4px;
+    // padding: 3px 2px 2px 2px;
+    // border: 1px solid gray;
+    // margin-right: 25px;
+    display: inline-block;
+    height: 16px;
+    color: #616568;
+    font-size: 10px;
+    font-weight: 400;
+    border-radius: 4px;
+    padding: 0px 4px;
+    margin-right: 10px;
+}
+
+#cases-actions {
+    display: none;
+}
+
+.case-row:hover {
+    #cases-actions {
+        display: contents;
+    }
+}
+.commitment-blue {
+    background-color: #7597ff !important;
+
+    .project-header,
+    .date-container {
+        color: #fff !important;
+    }
+}
+
+.commitment-green {
+    background-color: #cfffe8 !important;
+}
+
+.commitment-yellow {
+    background-color: #f8e256 !important;
+}
+
+.commitment-orange {
+    background-color: #ff8d5f !important;
+
+    .project-header,
+    .date-container {
+        color: #fff !important;
+    }
+}
+
+.commitment-green {
+    background-color: #8ee8b4 !important;
+}
+
+.resources-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.resources-icon {
+    #resources {
+        border-radius: 50%;
+    }
+}
+
+.placeholderTitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: calc(100% - 8px);
+    font-size: 11px;
+    padding-bottom: 2px;
+}
+
+.case-placeholder {
+    display: block;
+    width: 100%;
+    // height: 40px;
+    background-color: #8ee8b4 !important;
+    border-radius: inherit !important;
+    border-style: dotted;
+
+    .date-place-container {
+        margin-top: -2px;
+    }
+}
+
+.case-placeholder:hover {
+    #cases-actions {
+        display: inline-block;
+    }
+}
+
+.placeholder_removeicon {
+    cursor: pointer;
+}
+
+.placeholder_confirmicon {
+    cursor: pointer;
+}
+
+i.not-case-roll {
+    width: 12px;
+    height: 12px;
+    display: none;
+    margin-right: math.div($base-padding, 4);
+    top: 2px;
+    position: relative;
+    background-image: url("../../../assets/img/case-roll.png");
+    background-size: contain;
+    cursor: pointer;
+
+    &:hover {
+        background-image: url("../../../assets/img/case-roll-hover.png");
+    }
+}
+
+i.case-roll {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    margin-right: math.div($base-padding, 4);
+    top: 2px;
+    position: relative;
+    background-image: url("../../../assets/img/case-roll.png");
+    background-size: contain;
+    cursor: pointer;
+
+    &:hover {
+        background-image: url("../../../assets/img/case-roll-hover.png");
+    }
+}

@@ -1,0 +1,58 @@
+<div
+  class="commitment"
+  [ngClass]="className ? className : 'start-1 duration-1'"
+  [ngStyle]="{ 'left.px': offsetLeft }"
+>
+  <!-- if accessible -->
+  <div
+    *ngIf="isCommitmentAccessible(commitment)"
+    class="word-wrap"
+  >
+    <!-- allocations -->
+    <div *ngIf="commitment.commitmentTypeName === 'Allocation'">
+      <div class="title">
+        <a
+          title="{{ commitmentDescription }} | {{ commitment.clientName }}"
+          href="javascript:void(0);"
+          class="allocation-title"
+        >
+          {{ commitmentDescription }} | {{ commitment.clientName }}
+        </a>
+      </div>
+    </div>
+
+    <!-- non allocations -->
+    <div
+      *ngIf="commitment.commitmentTypeName !== 'Allocation'"
+      class="subheader no-allocation word-wrap"
+      title="{{ commitmentDescription }}"
+    >
+      {{ commitmentDescription }}
+    </div>
+  </div>
+
+  <!-- if not accessible -->
+  <div *ngIf="!isCommitmentAccessible(commitment)">
+    <!-- allocations -->
+    <div *ngIf="commitment.commitmentTypeName === 'Allocation'">
+      <div class="title">
+        <a
+          title="{{ commitmentDescription }} | {{ commitment.clientName }}"
+          href="javascript:void(0);"
+          class="allocation-title"
+        >
+          {{ commitmentDescription }} | {{ commitment.clientName }}
+        </a>
+      </div>
+    </div>
+
+    <!-- non allocations -->
+    <div
+      *ngIf="commitment.commitmentTypeName !== 'Allocation'"
+      class="subheader no-allocation word-wrap"
+      title="{{ commitmentDescription }}"
+    >
+      {{ commitmentDescription }}
+    </div>
+  </div>
+</div>

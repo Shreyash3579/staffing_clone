@@ -1,0 +1,137 @@
+<section class="sidebar-area separator filters">
+    <!-- Office Multiselect Dropdown -->
+    <div
+      class="selectpicker show-tick"
+      id="supplyOfficeFilter"
+    >
+      <label>Offices</label>
+      <app-office-dropdown
+        [officeHierarchy]="officeHierarchy"
+        [selectedOfficeList]="selectedOfficeList"
+        [title]="'Offices'"
+        (refreshView)="getResourcesBySelectedOffices($event)"
+      >
+      </app-office-dropdown>
+    </div>
+  
+    <!-- Level Grade Multiselect Dropdown -->
+    <div
+      class="selectpicker show-tick"
+      id="supplyLevelGradeFilter"
+    >
+      <label>Level Grades</label>
+      <app-multi-select-dropdown
+        [dropdownList]="levelGradeDropdownList"
+        [title]="'Level Grades'"
+        [selectedItems]="selectedLevelGradeList"
+        (refreshView)="getResourcesBySelectedLevelGrades($event)"
+      >
+      </app-multi-select-dropdown>
+    </div>
+  
+    <!-- Staffing Tags Multiselect Dropdown -->
+    <div
+      class="selectpicker show-tick"
+      id="supplyStaffingTagsFilter"
+    >
+      <label>Staffing Tags</label>
+      <app-multi-select-dropdown
+        [dropdownList]="staffingTagDropdownList"
+        [title]="'Staffing Tags'"
+        [selectedItems]="selectedStaffingTagList"
+        (refreshView)="getResourcesBySelectedStaffingTags($event)"
+      >
+      </app-multi-select-dropdown>
+    </div>
+  
+    <!-- Positions Multiselect Dropdown -->
+    <div
+      class="selectpicker show-tick"
+      id="supplyPositionsFilter"
+    >
+      <label>Positions</label>
+      <app-multi-select-dropdown
+        [dropdownList]="positionDropdownList"
+        [title]="'Positions'"
+        [selectedItems]="selectedPositionList"
+        (refreshView)="getResourcesBySelectedPositions($event)"
+      >
+      </app-multi-select-dropdown>
+    </div>
+  
+    <!-- Practice Area Multiselect Dropdown -->
+    <div
+      class="selectpicker show-tick"
+      id="supplyPracticeAreaFilter"
+    >
+      <label>Affiliation</label>
+      <app-multi-select-dropdown
+        [dropdownList]="practiceAreaDropDownList"
+        [title]="'Affiliation'"
+        [selectedItems]="selectedPracticeAreaCodes"
+        (refreshView)="getResourcesBySelectedPracticeAreaCodes($event)"
+      >
+      </app-multi-select-dropdown>
+    </div>
+
+    <!-- Affiliation Roles Dropdown -->
+    <div
+      class="selectpicker show-tick"
+      id="supplyAffiliationRoleFilter"
+      *ngIf="isAffiliationRoleShown"
+    >
+      <label>Affiliation Roles</label>
+      <app-multi-select-dropdown
+        [dropdownList]="affiliationRoleDropdownList"
+        [title]="'Affiliation Roles'"
+        [selectedItems]="selectedAffiliationRoles"
+        (refreshView)="getResourcesBySelectedAffilitionRoles($event)"
+      >
+      </app-multi-select-dropdown>
+    </div>
+  
+    <!-- Availability Includes Multiselect Dropdown -->
+    <div
+      class="selectpicker show-tick"
+      id="supplyAvailabilityIncludesFilter"
+    >
+      <label>Availability Includes</label>
+      <app-multi-select-dropdown
+        [dropdownList]="availabilityIncludesDropdownList"
+        [title]="'Availability Includes'"
+        [selectedItems]="selectedAvailabilityIncludesList"
+        (refreshView)="getResourcesBySelectedAvailabilityIncludes($event)"
+      >
+      </app-multi-select-dropdown>
+    </div>
+  
+    <!-- GroupBy MultiSelect Dropdown -->
+    <div
+      class="selectpicker show-tick"
+      id="supplyGroupByFilter"
+    >
+      <label>Group By</label>
+      <app-multi-select-dropdown
+        [dropdownList]="groupByDropdownList"
+        [title]="'Group By'"
+        [selectedItems]="selectedGroupByList"
+        (refreshView)="getResourcesGroupBySelectedValue($event)"
+      >
+      </app-multi-select-dropdown>
+    </div>
+  
+    <!-- SortBy MultiSelect Dropdown -->
+    <div
+      class="selectpicker show-tick"
+      id="supplySortByFilter"
+    >
+      <label>Sort By</label>
+      <app-multi-select-dropdown
+        [dropdownList]="sortByDropdownList"
+        [title]="'Sort By'"
+        [selectedItems]="selectedSortByList"
+        (refreshView)="getResourcesSortBySelectedValue($event)"
+      >
+      </app-multi-select-dropdown>
+    </div>
+  </section>

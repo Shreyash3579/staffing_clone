@@ -1,0 +1,31 @@
+<div class="searchbar__cases-item" (click)="openProjectDetailsDialogHandler()">
+  <div class="searchbar__cases-status" style="height: 100%;" data-type="activecase" [attr.data-id]="searchedCase.id">
+    <div class="bar "
+      [ngClass]="{'opportunity':searchedCase.type === 'Opportunity', 'demand':searchedCase.type === 'NewDemand', 'case':searchedCase.type === 'ActiveCase' }"
+      data-type="activecase" [attr.data-id]="searchedCase.id"></div>
+  </div>
+  <div data-type="activecase" [attr.data-id]="searchedCase.id"></div>
+  <div *ngIf="searchedCase.type =='Opportunity' && searchedCase.probabilityPercent" class="searchbar__cases-code"
+    data-type="activecase" [attr.data-id]="searchedCase.id"
+    title="{{searchedCase.probabilityPercent}}% - {{searchedCase.clientName}} - {{searchedCase.opportunityName}}">
+    {{searchedCase.probabilityPercent}}% - {{searchedCase.clientName}} - {{searchedCase.opportunityName}}
+  </div>
+  <div *ngIf="searchedCase.type =='Opportunity' && !searchedCase.probabilityPercent" class="searchbar__cases-code"
+    data-type="activecase" [attr.data-id]="searchedCase.id"
+    title="{{searchedCase.clientName}} - {{searchedCase.opportunityName}}">
+    {{searchedCase.clientName}} - {{searchedCase.opportunityName}}
+  </div>
+  <div *ngIf="searchedCase.type !='Opportunity'"
+    title="{{searchedCase.oldCaseCode}} - {{searchedCase.clientName}} - {{searchedCase.caseName}}"
+    class="searchbar__cases-code" data-type="activecase" [attr.data-id]="searchedCase.id">
+    {{searchedCase.oldCaseCode}} - {{searchedCase.clientName}} - {{searchedCase.caseName}}
+  </div>
+  <div class="searchbar__cases-location" title="{{searchedCase.managingOfficeAbbreviation}}" data-type="activecase"
+    [attr.data-id]="searchedCase.id">
+    {{searchedCase.managingOfficeAbbreviation}}
+  </div>
+  <div *ngIf="searchedCase.startDate || searchedCase.endDate" class="searchbar__cases-date" data-type="activecase"
+    [attr.data-id]="searchedCase.id">
+    {{searchedCase.startDate | date:'dd-MMM-yyyy'}} - {{searchedCase.endDate | date:'dd-MMM-yyyy'}}
+  </div>
+</div>

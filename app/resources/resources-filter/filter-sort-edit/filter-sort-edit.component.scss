@@ -1,0 +1,63 @@
+.filter-sort-edit {
+  font-family: "Graphik";
+
+  .btn-group {
+    .btn {
+      align-items: center;
+      background: none;
+      border: none;
+      border-radius: 4px;
+      color: #616568;
+      display: flex;
+      font-size: 12px;
+      font-weight: 500;
+      gap: 5px;
+      line-height: 14px;
+      outline: none;
+      padding: 0px;
+    }
+
+    #button-filter-sort-edit {
+      border: 1px solid #e0e4e8;
+      padding: 5px 10px;
+
+      &:hover {
+        background: #dae5fd;
+        border-color: #dae5fd;
+      }
+    }
+
+    .dropdown-menu {
+      display: none;
+      gap: 10px;
+      padding: 20px;
+
+      &.show {
+        display: grid;
+      }
+
+      // Cancel | Apply
+      .edit-controls-wrapper {
+        align-items: center;
+        display: flex;
+        gap: 10px;
+        justify-content: end;
+
+        .btn {
+          padding: 10px 20px;
+
+          &.primary {
+            background: #284ce0;
+            color: #fff;
+          }
+
+          &.secondary {
+            background: transparent;
+            border: 1px solid #284ce0;
+            color: #284ce0;
+          }
+        }
+      }
+    }
+  }
+}

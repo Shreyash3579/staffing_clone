@@ -1,0 +1,23 @@
+<!-- <div class="threshold-wrapper">
+    <ng-container *ngFor="let item of mergedArray">
+        <div class="threshold-range" [ngClass]="item.className ? item.className : 'start-1 duration-0'">{{item.allocation}}%</div>
+    </ng-container>
+</div>  -->
+
+<div class="threshold-wrapper d-flex align-items-center">
+    <ng-container *ngFor="let item of mergedArray | slice: 0:1">
+      <div
+        *ngFor="let threshold of perDayAllocation; let i = index"
+        class="d-flex align-items-center justify-content-center"
+        style="background-color: transparent; border: none"
+        [ngClass]="getClass(item)">
+        <div
+          class="d-flex align-items-center justify-content-center"
+          [ngClass]="selectedWeeklyMonthlyGroupingOption === 'weekly' ? 'threshold-range' : 'threshold-monthly-range'"
+          *ngIf="threshold <= thresholdRangeValue.min || threshold > thresholdRangeValue.max">
+          {{ threshold }}%
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  

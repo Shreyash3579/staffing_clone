@@ -1,0 +1,20 @@
+<section class="leadership">
+  <div>
+    <div class="title-section">
+      <span class="sect-number weighed">Sect 1 of 3</span>
+      <h2>Leadership</h2>
+    </div>
+  </div>
+  <div class="bottom-section" *ngIf="leadershipGroups.length">
+    <!-- Repeatable Advisors Cards -->
+    @for (leadershipGroup of leadershipGroups; track leadershipGroup.caseRoleCode; let index = $index) {
+      <div class="card-leadership">
+        <app-leadership-role
+          [leadershipGroup]="leadershipGroup"
+          (upsertLeadershipEventEmitter)="upsertLeadershipEventHandler($event)"
+          (deleteLeadershipEventEmitter)="deleteLeadershipEventHandler($event)">
+        </app-leadership-role>
+      </div>
+    }
+  </div>
+</section>

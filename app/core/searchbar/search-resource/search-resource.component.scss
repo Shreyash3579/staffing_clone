@@ -1,0 +1,88 @@
+//.profile-container{
+//    display: flex;
+//    flex-direction: row;
+//    min-width: 200px;
+//    max-width: 250px;
+//}
+
+.searchbar {
+  &__user {
+    &-item {
+      display: grid;
+      grid-template-columns: 4fr 1fr 1fr 1fr 1fr;
+      border-bottom: 1px solid #ccc; 
+      border-radius: 4px;
+      font-size: 12px;
+      justify-content: center;
+      align-items: center;
+      padding: .5rem 1rem;
+      color: #000;
+      cursor: pointer;
+      position: relative;
+      transition: ease-in-out 0.2s;
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
+
+      &:hover {
+        background-color: #eee; 
+      }
+    }
+
+    &-profile-container {
+      display: flex;
+      flex-direction: row;
+      min-width: 200px;
+      max-width: 250px;
+    }
+
+    &-checkbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 0;
+      overflow: hidden;
+      transition: width 0.2s ease-in-out;
+    }
+
+    &-item:hover &-checkbox {
+      width: 30px;
+    }
+
+    &-image {
+      margin-right: 20px;
+    }
+
+    &-name {
+      font-size: 14px;
+      margin-left: 1px;
+    }
+
+    &-level {
+      font-size: 14px;
+      margin-left: 14px;
+    }
+
+    &-location {
+      font-size: 14px;
+    }
+
+    &-allocation, &-date {
+      font-size: 12px;
+    }
+  }
+}
+
+.terminated {
+    background-color: antiquewhite !important;
+}
+
+.terminated:hover {
+  background-color: #eee!important;
+}
+
+.selected {
+    background-color: lightblue !important;
+}

@@ -1,0 +1,7 @@
+<div class="w-75">
+  <input type="range" class="custom-range" [step]="stepValue" [min]="minValue" [max]="maxValue"
+    [(ngModel)]="selectedValue" (change)="onSelectedValueChange()">
+  <div class="center">
+    <span><b>{{selectedValue}}%</b></span>
+  </div>
+</div>

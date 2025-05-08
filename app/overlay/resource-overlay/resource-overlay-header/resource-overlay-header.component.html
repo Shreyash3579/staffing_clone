@@ -1,0 +1,300 @@
+<div class="detail-container">
+    <div class="resource-details">
+        <div class="resource-wrapper" *ngIf="resourceDetails?.resource">
+            <!-- Profile Picture -->
+            <div class="profile-pic-cont">
+                <app-profile-image [height]="150" [width]="150" [imageUrl]="resourceDetails.resource.profileImageUrl"></app-profile-image>
+            </div>
+  
+            <!-- Right Side -->
+            <div class="resource-affiliation-wrapper">
+                <!-- Resource Detail -->
+                <div class="resource-detail-wrapper">
+                    <!-- Resource Name & Mail / Share CTAs -->
+                    <div class="header-wrapper" *ngIf="resourceDetails?.resource">
+                        <h3>
+                            {{ resourceDetails.resource.firstName + " " + resourceDetails.resource.lastName }} ({{
+                                resourceDetails.resource.employeeCode
+                            }})
+                        </h3>
+  
+                        <a
+                            class="ml-3"
+                            id="lnkMail"
+                            href="mailto:{{ resourceDetails.resource.internetAddress }}?subject=Staffing:"
+                            tabindex="-1"
+                            ><img src="assets/img/Email-icon.svg" alt="email icon" />
+                        </a>
+  
+                        <!-- <a id="lnkMail" tabindex="-1"
+                        ><img src="assets/img/zoom-icon.svg" style="width: 30px; margin-left: 8px"
+                    /></a> -->
+  
+                        <a
+                            href="mailto:?subject=Staffing:&body={{ this.shareUrl }}/overlay?employee={{
+                                resourceDetails.resource.employeeCode
+                            }}"
+                            tabindex="-1"
+                        >
+                            <img src="assets/img/share-url.png" alt="share icon" />
+                        </a>
+                    </div>
+  
+                    <!-- Position | Level | Office -->
+                    <div class="subheader-wrapper" *ngIf="resourceDetails?.resource">
+                        <h5>{{ resourceDetails.resource.levelName }}</h5>
+  
+                        <ng-container *ngIf="resourceDetails.resource.levelGrade">
+                            <i class="fa fa-circle"></i>
+                            <h5>{{ resourceDetails.resource.levelGrade }}</h5>
+                        </ng-container>
+  
+                        <ng-container *ngIf="resourceDetails.resource.schedulingOffice.officeName">
+                            <i class="fa fa-circle"></i>
+                            <h5>{{ resourceDetails.resource.schedulingOffice.officeName }}</h5>
+                        </ng-container>
+                        <ng-container *ngIf="resourceDetails.resource.employeeCode">
+                            <i class="fa fa-circle"></i>
+                            <h5>
+                            <a [href]="irisBaseUrl + '/' + this.resourceDetails.resource.employeeCode" target="_blank">
+                                (Link to Iris Profile)
+                            </a>
+                            </h5>
+                        </ng-container>
+                    </div>
+  
+                    <!-- Body -->
+                    <div class="body-wrapper">
+                        <!-- Row #1 -->
+                        <div
+                            class="body-row"
+                            [ngClass]="resourceDetails.practiceAreaAffiliations.length > 0 ? 'grid-equal' : 'grid-auto'"
+                        >
+                            <div class="body-column">
+                                <p class="header">Service Line</p>
+                                <p>{{ resourceDetails.resource.serviceLine?.serviceLineName }}</p>
+                            </div>
+                            <ng-container *ngIf="resourceDetails?.timeInLevelData">
+                              <div class="body-column" *appFeaturesAccess="accessibleFeatures.timeInLevel">
+                                <p class="header">Time In Level (not Bain Tenure)</p>
+                                <p>
+                                    {{ resourceDetails.timeInLevelData.timeInLevel | number : "1.2-2" }} months
+                                    <i class="fas fa-info-circle info-icon-pad" title="{{ timeInLevelInfo }}"></i>
+                                </p>
+                            </div>
+                            </ng-container>
+  
+                            <div class="body-column">
+                                <p class="header">Hire Date:</p>
+                                <p>
+                                    {{ resourceDetails.resource.startDate | date : "dd-MMM-yyyy" }}
+                                </p>
+                            </div>
+  
+                            <div class="body-column">
+                                <p class="header">FTE %</p>
+                                <p>{{ resourceDetails.resource.fte * 100 | decimalRounding : 2 }}</p>
+                            </div>
+                        </div>
+  
+                        <!-- Row #2 -->
+                        <div
+                            class="body-row"
+                            [ngClass]="resourceDetails.practiceAreaAffiliations.length > 0 ? 'grid-equal' : 'grid-auto'"
+                        >
+                            <div class="body-column">
+                              <p class="header">Staffing Responsible
+                                <i class="fas fa-info-circle info-icon-pad" title="{{ staffingResponsibleInfo }}"></i>
+                              </p>
+                              
+                              <div *ngIf="!showTypeaheadSR" class="inline-editable inline-editable-text staffing-responsible-container"
+                              [class.active]="editableCol == 'staffingResponsibleName'"
+                              [class.empty]="formattedStaffingResponsibleResourcesToShow === ''"
+                              (click)="editStaffingResponsible($event)">
+                                <p>{{ formattedStaffingResponsibleResourcesToShow }}</p>
+                                <i class="fa fa-pencil-alt edit-icon"></i>
+                              </div>
+                            
+                              <!-- Search input -->
+                                <div class="typeahead-container"> 
+                                    <div *ngIf="showTypeaheadSR" class="search-wrapper" (focusout)="saveStaffingInfoHandler($event)">
+                                        <div class="d-flex align-items-center">
+                                
+                                        <ng-select #searchBoxSR name="resources" placeholder="Search resources..."
+                                            [items]="resourcesDataStaffingResponsible$ | async" [(ngModel)]="staffingResponsibleEmployees" [multiple]="true" [hideSelected]="true"
+                                            [minTermLength]="3" (search)="onResourceSearchChangeStaffingResponsible($event)" (add)="onStaffingResponsibleAdd($event)"
+                                            (remove)="onStaffingResponsibleRemove($event)" (clear)="onClearAllSelectedStaffingResponsible()"
+                                            bindLabel="employeeSearchData" [isOpen]="isResourceSearchOpenStaffingResponsible">
+                                            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                                <div class="ng-value" *ngFor="let item of items">
+                                                  <span class="ng-value-icon left" (click)="clear(item)" aria-hidden="true">x</span>
+                                                  <span class="ng-value-label">
+                                                    {{item.fullName}}
+                                                  </span>
+                                                </div>
+                                              </ng-template>
+                                            <ng-template ng-option-tmp let-item="item">
+                                            {{item.fullName + ' (' + item.levelGrade+ ' - '+ item.schedulingOffice.officeName + ')'}}
+                                            </ng-template>
+                                        </ng-select>
+                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="body-column">
+                                <p class="header">PD Lead  
+                                <i class="fas fa-info-circle info-icon-pad" title="{{ pdLeadInfo }}"></i>
+                                </p>
+                                
+                                <div *ngIf="!showTypeaheadPD" class="inline-editable inline-editable-text pd-lead-container" 
+                                [class.active]="editableCol == 'pdLeadName'"
+                                [class.empty]="formattedpdLeadResourcesToShow === ''"
+                                (click)="editPdLead($event)">
+                                  <p>{{ formattedpdLeadResourcesToShow }}</p>
+                                  <i class="fa fa-pencil-alt edit-icon"></i>
+                                </div>
+                              
+                                <!-- Search input -->
+                                  <div class="typeahead-container"> 
+                                      <div *ngIf="showTypeaheadPD" class="search-wrapper" (focusout)="saveStaffingInfoHandler($event)">
+                                          <div class="d-flex align-items-center">
+                                  
+                                          <ng-select #searchBoxPD name="resources2" placeholder="Search resources..."
+                                              [items]="resourcesDataPdLead$ | async" [(ngModel)]="pdLeadEmployees" [multiple]="true" [hideSelected]="true"
+                                              [minTermLength]="3" (search)="onResourceSearchChangePdLead($event)" (add)="onPdLeadAdd($event)"
+                                              (remove)="onPdLeadRemove($event)" (clear)="onClearAllSelectedPdLeads()"
+                                              bindLabel="employeeSearchData" [isOpen]="isResourceSearchOpenPdLead">
+                                              <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                                <div class="ng-value" *ngFor="let item of items">
+                                                  <span class="ng-value-icon left" (click)="clear(item)" aria-hidden="true">x</span>
+                                                  <span class="ng-value-label">
+                                                    {{item.fullName}}
+                                                  </span>
+                                                </div>
+                                              </ng-template>
+                                              <ng-template ng-option-tmp let-item="item">
+                                              {{item.fullName + ' (' + item.levelGrade+ ' - '+ item.schedulingOffice.officeName + ')'}}
+                                              </ng-template>
+                                          </ng-select>
+                                  
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                            <!-- Advisor -->
+                            <div class="body-column" *ngIf="resourceDetails.advisor?.fullName">
+                                <p class="header">Advisor
+                                <i class="fas fa-info-circle info-icon-pad" title="{{ advisorInfo }}"></i>
+                                </p>
+                                <p>{{ resourceDetails.advisor.fullName }}</p>
+                            </div>
+
+                            <!-- Mentee -->
+                            <div class="body-column" *ngIf="resourceDetails.mentees?.length">
+                                <p class="header">
+                                    Mentee
+                                    <i class="fas fa-info-circle info-icon-pad" title="{{ menteesInfo }}"></i>
+                                </p>
+                                <p>{{ menteesString }}</p>
+                            </div>
+
+                            <!-- Mentor -->
+                            <div class="body-column" *ngIf="resourceDetails.resource.mentorName">
+                                <p class="header">Mentor
+                                <i class="fas fa-info-circle info-icon-pad" title="{{ mentorInfo }}"></i>
+                                </p>
+                                <p>{{ resourceDetails.resource.mentorName }}</p>
+                            </div>
+
+                            <div class="body-column">
+                                <p class="header">Notify upon Staffing 
+                                <i class="fas fa-info-circle info-icon-pad" title="{{ notifyUponStaffingInfo }}"></i>
+                                </p>
+                                
+                                <div *ngIf="!showTypeaheadNS" class="inline-editable inline-editable-text ns-container" 
+                                [class.active]="editableCol == 'notifyUponStaffingName'"
+                                [class.empty]="formattedNotifyUponStaffingResourcesToShow === ''"
+                                (click)="editNotifyUponStaffing($event)">
+                                  <p>{{ formattedNotifyUponStaffingResourcesToShow }}</p>
+                                  <i class="fa fa-pencil-alt edit-icon"></i>
+                                </div>
+                                <div class="typeahead-container"> 
+                                    <div *ngIf="showTypeaheadNS" class="search-wrapper" (focusout)="saveStaffingInfoHandler($event)">
+                                        <div class="d-flex align-items-center">
+                                
+                                        <ng-select #searchBoxNS name="resources3" placeholder="Search resources..."
+                                            [items]="resourcesDataNotifyUponStaffing$ | async" [(ngModel)]="notifyUponStaffingEmployees" [multiple]="true" [hideSelected]="true"
+                                            [minTermLength]="3" (search)="onResourceSearchChangeNotifyUponStaffing($event)" (add)="onNotifyUponStaffingAdd($event)"
+                                            (remove)="onNotifyUponStaffingRemove($event)" (clear)="onClearAllSelectedNotifyUponStaffing()"
+                                            bindLabel="employeeSearchData" [isOpen]="isResourceSearchOpenNotifyUponStaffing">
+                                            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                              <div class="ng-value" *ngFor="let item of items">
+                                                <span class="ng-value-icon left" (click)="clear(item)" aria-hidden="true">x</span>
+                                                <span class="ng-value-label">
+                                                  {{item.fullName}}
+                                                </span>
+                                              </div>
+                                            </ng-template>
+                                            <ng-template ng-option-tmp let-item="item">
+                                            {{item.fullName + ' (' + item.levelGrade+ ' - '+ item.schedulingOffice.officeName + ')'}}
+                                            </ng-template>
+                                        </ng-select>
+                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+  
+                            <div class="body-column" *ngIf="activeStaffableAsRoleName">
+                                <p class="header">Staff-able as</p>
+                                <p>
+                                    {{ activeStaffableAsRoleName
+                                    }}<i class="fas flagRole fa-flag active-role-icon ml-1"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+  
+                <!-- Affiliations -->
+                <div class="affiliation-wrapper" *ngIf="resourceDetails.practiceAreaAffiliations.length > 0">
+                    <h3>Affiliations</h3>
+  
+                    <div class="affiliation-row no-gutters">
+                        <div
+                            class="affiliation-column"
+                            *ngFor="let practiceAffiliation of resourceDetails.practiceAreaAffiliations"
+                        >
+                            <div class="card">
+                                <img
+                                    [src]="getAffiliationImage(practiceAffiliation.roleName)"
+                                    src="assets/img/Affiliations_4.svg"
+                                    class="vertical-bars"
+                                    *ngIf="practiceAffiliation.roleName"
+                                />
+  
+                                <div class="max-width">
+                                    <div
+                                        data-toggle="tooltip"
+                                        data-placement="right"
+                                        [title]="practiceAffiliation.practiceAreaName"
+                                        class="tooltip-icon name p-0"
+                                    >
+                                        {{ practiceAffiliation.practiceAreaName }}
+                                    </div>
+  
+                                    <div [title]="swapAffiliation(practiceAffiliation.roleName)" class="name p-0">
+                                        {{ swapAffiliation(practiceAffiliation.roleName) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

@@ -1,0 +1,48 @@
+<app-notification-banner [sharedNotes] = "sharedNotes" [caseIntakeAlerts] = "caseIntakeAlerts"></app-notification-banner>
+<!-- Progress Bar Section-->
+<div class="row">
+  <mat-progress-bar mode="indeterminate" color="warn" *ngIf="showProgressBar">
+  </mat-progress-bar>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+      <div id="stage" class="col-xl-12 col-12 custom-bg case-planning">
+
+        <!-- TOP Filter Section-->
+        <app-case-planning-filter [searchedProjects]="searchedProjects" [clearSearch]="clearProjectSearch"
+          (toggleFiltersSectionEmitter)="toggleFiltersSection()"
+          (getProjectsBySearchString)="getProjectsBySearchStringHandler($event)"
+          (openProjectDetailsDialogFromTypeahead)="openProjectDetailsDialogFromTypeaheadHandler($event)"
+          (openCasePlanningWhiteboardEmmitter)="openCasePlanningWhiteboardPopupHandler()">
+        </app-case-planning-filter>
+        <!-- END TOP Filter Section-->
+
+        <!-- COMPONENT: SIDEBAR FILTER-->
+        <shared-demand-filters [class.d-none]="!showFilters" [userPreferences]="userPreferences" 
+          [dateRange]="dateRange" [officeHierarchy]="officeHierarchy"
+          [caseTypes]="caseTypes" [demandTypes]="demandTypes" [opportunityStatusTypes]="opportunityStatusTypes"
+          [staffingTagsHierarchy]="staffingTagsHierarchy" [industryPracticeAreas]="industryPracticeAreas"
+          [capabilityPracticeAreas]="capabilityPracticeAreas" (getProjectsOnFilterChange)="getProjectsOnFilterChangeHandler($event)"
+          (closeFilterEmitter)="toggleFiltersSection()">
+        </shared-demand-filters>
+        <!-- End COMPONENT: SIDEBAR FILTER-->
+
+        <div class="row justify-content-between">
+          <div class="col-xl-12 col-12 right-part custom-dimension-right justify-content-start align-items-center">
+                <!-- COMPONENT: Projects Gantt-->
+                <app-projects-gantt [dateRange]="dateRange" [ganttCasesData]="projects" [planningCards]="planningCards"
+                  [scrollDistance]="scrollDistance" (loadMoreCasesEmitter)="loadMoreCases()"
+                  (openCaseRollForm)="openCaseRollFormHandler($event)" (showQuickPeekDialog)="showQuickPeekDialogHandler($event)"
+                  (openPlaceholderForm)="openPlaceholderForm($event)"
+                  (openAddTeamSkuForm)="openAddTeamSkuFormHandler($event)"
+                  (upsertCasePlanningNote)="upsertCasePlanningNoteHandler($event)"
+                  (deleteCasePlanningNotes)="deleteCasePlanningNotesHandler($event)"
+                  (openCaseDetailsDialog)="openCaseDetailsDialogHandler($event)" #projectsGantt>
+                </app-projects-gantt>
+                <!--End COMPONENT: Projects Gantt-->
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

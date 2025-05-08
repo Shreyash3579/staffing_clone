@@ -1,0 +1,87 @@
+//material progress bar override
+.mat-mdc-progress-bar {
+    display: block;
+    height: 2px;
+    overflow: hidden;
+    position: relative;
+    transition: opacity 250ms linear;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+}
+
+
+ag-grid-angular {
+    width: 100%;
+    // min-height: 200px;
+    // height: 100%;
+    border: none;
+}
+
+
+.btn-delete {
+    padding: 0 0.25rem;
+    font-size: 12px;
+    border-color: #c4c3c3;
+    color: #cc0000;
+    margin-top: 5px !important;
+
+    &:hover {
+        background-color: #fff;
+        border-color: #cc0000;
+    }
+
+    &:active {
+        background-color: #fff !important;
+        border-color: #cc0000;
+        color: #cc0000 !important;
+    }
+
+
+}
+
+.btn-delete-outline {
+    background-color: #cc0000;
+    color: #fff;
+}
+
+.table-grid {
+    max-height: 560px;
+    overflow-y: scroll;
+    font-size: 13px;
+    border-bottom: 1px solid #c4c4c4;
+}
+
+table {
+    margin-bottom: -5px;
+}
+
+th {
+    background: rgb(235, 235, 235);
+    position: sticky;
+    z-index: 1000;
+    top: -1px;
+}
+
+.alumni-text {
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+.inline-editable-endDate {
+      width: 100px;
+  }
+
+  .level-grade-col-width {
+    width: 20%;
+  }
+  .new-cases-table-wrapper {
+    margin: 0px auto;
+    width: 100%;
+  }
+
+  .admin-grid{
+    width: 100%;
+    height: calc(90vh - 60px);
+  }

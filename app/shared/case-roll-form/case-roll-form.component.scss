@@ -1,0 +1,38 @@
+.input-group-text {
+    display: inline-block;
+    padding: 0.25rem 0.5rem; /* Adjust padding for size reduction */
+    font-size: 0.875rem; /* Smaller font size */
+    background: none; /* Remove background */
+  }
+  
+  .pointer-cursor {
+    cursor: pointer;
+  }
+  
+  .add-new-icon-text {
+    color: #007bff; /* Blue color */
+    border: 1px solid #007bff; /* Outline color */
+    padding: 2px 5px; /* Padding for the text */
+    border-radius: 3px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-left: 5px; /* Space between the icon and the text */
+  }
+  
+  .add-new-icon-text:hover {
+    background-color: #e7f3ff; /* Light blue background on hover */
+  }
+
+  .planning-card-project-typeahead {
+    flex-grow: 1;
+  }
+  
+  .btn-outline-primary {
+    white-space: nowrap; /* Ensure button text does not wrap */
+    font-size: 12px;
+  }
+
+
+  .col-6 {
+    max-width: 100%;
+}
+  

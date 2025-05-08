@@ -1,0 +1,100 @@
+:host ::ng-deep .ng-select .ng-dropdown-panel  {
+  background-color: white;
+  position: absolute;
+}
+:host ::ng-deep .ng-dropdown-panel .scroll-host {
+  display: block;
+  max-height: 100px;
+  overflow: hidden;
+  overflow-y: scroll;
+  position: absolute !important;
+}
+:host ::ng-deep .ng-select.ng-select-single .ng-select-container {
+  max-height: 36px !important;
+  overflow-y: hidden !important;
+}
+:host ::ng-deep .ng-select .ng-arrow-wrapper {
+  display: block;
+}
+:host ::ng-deep .typeahead-input{
+  height: auto !important;
+  display: none;
+  border: none !important;
+}
+:host ::ng-deep .ng-select.ng-select-single .ng-select-container .ng-value-container, .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+  overflow: visible !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.place_holder_user {
+  display: flex;
+
+}
+
+.placeholder_alloc {
+  margin: auto;
+  font-size: 15px;
+
+}
+
+.placeholder_addguess {
+  text-decoration-line: underline;
+  text-align: left !important;
+  color: #898989;
+}
+
+.fa-user-circle {
+  font-size: 20px;
+  text-align: left;
+}
+
+.placeholder-wrapper2 {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  padding: .5rem;
+  align-items: center;
+ .userIcon{
+   width:12%
+ }
+  i {
+    font-size: 20px;
+    margin: auto;
+  }
+
+  .placeholder_confirmicon {
+    font-size: 14px;
+
+    &:hover {
+      color: #23ad45;
+    }
+  }
+
+  .placeholder_removeicon {
+    font-size: 14px;
+    &:hover {
+      color: #cc0000;
+    }
+  }
+
+  .placeholder_userIcon {
+    text-align: left !important;
+    color: #5f5f5f;
+    display: inline-flex;
+  }
+
+  .placeholder_details {
+    border: 1px solid #dcd4d4;
+    margin-left: 3%;
+    margin-right: 5px;
+    font-size: 13px;
+    width: 55%;
+  }
+}
+
+.placeholder_userInfo {
+  border: 1px solid #dcd4d4;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 13px;
+  width: 55% !important;
+}

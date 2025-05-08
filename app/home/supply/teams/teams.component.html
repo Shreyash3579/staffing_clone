@@ -1,0 +1,51 @@
+<!-- COMPONENT: Team-->
+<section class="sidebar-area">
+  <form>
+    <div class="input-group">
+      <input type="text" class="form-control border-right-0" id="employeeSearchInput" autocomplete="off"
+        [(ngModel)]="teamPersonSearchString" [ngModelOptions]="{standalone:true}" placeholder="Search Team or Person">
+      <div class="input-group-append">
+        <span class="input-group-text">
+          <i class="fa fa-search fa-fw"></i>
+        </span>
+      </div>
+
+    </div>
+    <div class="row no-gutters mt-3 align-items-end">
+      <div class="col-2">
+        <a class="filter" id="resourceFilterIcon"></a>
+      </div>
+      <div class="col-5 pb-1">
+        <span class="teams">0 Teams</span>
+      </div>
+      <div class="col-5 text-right">
+        <a class="btn btn-default btn-lg"  (click)= "openAddTeamsHandler();">Add Team</a>
+      </div>
+    </div>
+  </form>
+</section>
+
+<!-- <section class="sidebar-area" style="border-top:1px solid #D7D7D7">
+  <header>Teams</header>
+  <mat-accordion>
+    <mat-expansion-panel #panel class="fix" [expanded]="false" *ngFor="let i of panels">
+      <mat-expansion-panel-header [ngClass]="{'first-div': panel.expanded,
+                                          'first-div-collapsed': !panel.expanded}">
+        <mat-panel-title style="color:#005999">
+          <div style="display: flex; flex-direction: column;">
+            <div class="fix-title">{{i.teamNames}}</div>
+            <div class="fix-subtitle" *ngIf="!panel.expanded">{{i.teamMemebers}}</div>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <div class="row no-gutters" *ngFor="let item of i.display">
+          <div class="col-6 resourcename" title="{{item.fullname}}">{{item.fullName}}</div>
+          <div class="col-1 code">{{item.levelGrade}}</div>
+          <div class="col-2 office">{{item.officeAbbreviation}}</div>
+        </div>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section> -->
+<!-- END COMPONENT: Team-->

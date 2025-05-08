@@ -1,0 +1,11 @@
+<div>
+  <p *ngIf="accessType === 'application'">
+    You do not have appropriate rights to access this application.<br />
+    Please <a href='mailto:staffingsystemsupport.global@bain.com'>click here</a> to contact local Staffing Administrator
+    for assistance.
+  </p>
+  <p *ngIf="accessType === 'page'">
+    You do not have appropriate rights to access this page.<br />
+    You will be redirected to {{redirectToPage}} screen in 5 seconds.
+  </p>
+</div>

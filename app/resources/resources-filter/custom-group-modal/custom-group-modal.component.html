@@ -1,0 +1,57 @@
+<div class="custom-group-modal">
+  <!-- Header -->
+  <div class="modal-header">
+    <h5 class="modal-title word-wrap" title="{{modalTitle}}">{{ modalTitle }}</h5>
+
+    <button class="modal-close" (click)="modalRef.hide()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- Body -->
+  <div class="modal-body">
+    <!-- Group.. -->
+    <app-create-group #createGroup
+      [customGroupForResourcesTab]="true"
+      [groupToEdit]="groupToEdit"
+      [hideTitle]="true">
+    </app-create-group>
+
+    <!-- Validation Message -->
+    <shared-validation-message [validationMessages]="errorMessage"></shared-validation-message>
+
+    <!-- Divider -->
+    <div class="dropdown-divider"></div>
+    
+    <!-- Filter By -->
+    <app-filter-by #customGroupFilterBy [rowsToEdit]="customGroup.filterBy" [menuPosition]="'up'" [resourcesRecentCDList] = "resourcesRecentCDList"
+    [resourcesCommercialModelList] = "resourcesCommercialModelList"></app-filter-by>
+
+    <!-- Divider -->
+    <div class="dropdown-divider"></div>
+      
+    <!-- Sort By -->
+    <app-sort-by #customGroupSortBy [rowsToEdit]="customGroup.sortRows" [menuPosition]="'up'"></app-sort-by>
+
+    <!-- Divider -->
+    <div class="dropdown-divider"></div>
+        
+    <!-- Sharing Info  -->
+    <app-share-group
+      #shareGroup
+      [groupToShare]="customGroup"
+      [sharedWithMembers]="sharedWithMembers"
+      [showHeader]="false"
+      >
+    </app-share-group>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="modal-footer">
+    <button class="btn secondary" (click)="modalRef.hide()">Discard & Close</button>
+
+    <!-- Save | Save New Group -->
+    <button class="btn primary" (click)="upsertPreferenceSupplyGroups()">{{ isEditMode ? "Save" : "Save New Group" }}</button>
+  </div>
+</div>

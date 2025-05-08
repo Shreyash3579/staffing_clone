@@ -1,0 +1,170 @@
+<div class="quick-filters">
+    <!-- Filter Button -->
+    <button class="quick-filters-btn d-flex align-items-center" [class.collapsed]="collapsedFilterArray.includes(filtersEnum.ALL)"
+      (click)="toggleFilter(filtersEnum.ALL)">
+      <i class="fa fa-filter mr-2"></i>
+      <p>
+        Quick Filters
+        <span *ngIf="selectedFiltersLength > 0">({{ selectedFiltersLength }})</span>
+      </p>
+  
+      <!-- Expand / Collapsed Arrow -->
+      <i  id="quick-filter-icon" 
+        class="fa fa-sort-up ml-auto" style="font-size: 15px; height: 8px">
+      </i>
+    </button>
+  
+    <!-- Filters Section -->
+    <div class="filters-section" id="filter-row-all" [class.collapsed]="collapsedFilterArray.includes(filtersEnum.ALL)">
+      <div class="filters-section-header d-flex align-items-center justify-content-between">
+        <p>
+          {{ selectedFiltersLength }} {{ selectedFiltersLength === 1 ? "Filter" : "Filters" }} Applied
+        </p>
+  
+        <!-- Clear All -->
+        <button *ngIf="selectedFiltersLength"  class="d-flex align-items-center justify-content-center"
+          (click)="clearAll()">
+          Clear All
+        </button>
+      </div>
+  
+      <!-- Office Filter Options -->
+      <div class="filter-wrapper" id="filter-row-office" [class.collapsed]="collapsedFilterArray.includes(filtersEnum.OFFICE)">
+        <!-- Filter Menu Toggle -->
+        <div class="filter-section-header">
+          <button class="open-filter-cta" [class.collapsed]="collapsedFilterArray.includes(filtersEnum.OFFICE)"
+            (click)="toggleFilter(filtersEnum.OFFICE)">
+            <span>Office</span>
+            <span class="ml-1" *ngIf="selectedOfficeCodeList.length">
+                ({{ selectedOfficeCodeList.length }})
+            </span>
+            <i class="fa fa-chevron-up ml-auto"></i>
+          </button>
+        </div>
+  
+        <!-- Filter Content -->
+        <div class="filters-section-body">
+          <app-office-dropdown 
+            [officeHierarchy]="officeHierarchy"
+            [selectedOfficeList]="selectedOfficeCodeList" 
+            [title]="'Offices'"
+            [treeViewType]="1"
+            (refreshView)= "onSelectChange($event, filtersEnum.OFFICE)">
+          </app-office-dropdown>
+        </div>
+      </div>
+
+    <!-- Staffing Tags Filter Options -->
+    <div class="filter-wrapper" id="filter-row-staffing-tag" [class.collapsed]="collapsedFilterArray.includes(filtersEnum.STAFFING_TAG)">
+      <!-- Filter Menu Toggle -->
+      <div class="filter-section-header">
+        <button class="open-filter-cta" [class.collapsed]="collapsedFilterArray.includes(filtersEnum.STAFFING_TAG)"
+          (click)="toggleFilter(filtersEnum.STAFFING_TAG)">
+          <span>Staffing Tag</span>
+          <span class="ml-1" *ngIf="selectedStaffingTagCodeList.length">
+              ({{ selectedStaffingTagCodeList.length }})
+          </span>
+          <i class="fa fa-chevron-up ml-auto"></i>
+        </button>
+      </div>
+
+      <!-- Filter Content -->
+      <div class="filters-section-body" *ngIf="staffingTagDropdownList">
+        <app-multi-select-dropdown 
+          [dropdownList]="staffingTagDropdownList" 
+          [title]="'Staffing Tags'"
+          [selectedItems]="selectedStaffingTagCodeList"
+          [treeViewType]="1"
+          (refreshView)="onSelectChange($event, filtersEnum.STAFFING_TAG)">
+        </app-multi-select-dropdown>
+      </div>
+    </div>
+
+  <!-- Level Grades Filter Options -->
+  <div class="filter-wrapper" id="filter-row-level-grade" [class.collapsed]="collapsedFilterArray.includes(filtersEnum.LEVEL_GRADE)">
+    <!-- Filter Menu Toggle -->
+    <div class="filter-section-header">
+      <button class="open-filter-cta" [class.collapsed]="collapsedFilterArray.includes(filtersEnum.LEVEL_GRADE)"
+        (click)="toggleFilter(filtersEnum.LEVEL_GRADE)">
+        <span>Level Grade</span>
+        <span class="ml-1" *ngIf="selectedLevelGradeList.length">
+            ({{ selectedLevelGradeList.length }})
+        </span>
+        <i class="fa fa-chevron-up ml-auto"></i>
+      </button>
+    </div>
+
+    <!-- Filter Content -->
+    <div class="filters-section-body">
+      <app-multi-select-dropdown 
+        [dropdownList]="levelGradeDropdownList" 
+        [title]="'Level Grade'"
+        [selectedItems]="selectedLevelGradeList"
+        [treeViewType]="1"
+        (refreshView)="onSelectChange($event, filtersEnum.LEVEL_GRADE)">
+      </app-multi-select-dropdown>
+    </div>
+  </div>
+
+  <!-- Affiliations Filter Options -->
+  <div class="filter-wrapper" id="filter-row-affiliation" [class.collapsed]="collapsedFilterArray.includes(filtersEnum.AFFILIATION)">
+    <!-- Filter Menu Toggle -->
+    <div class="filter-section-header">
+      <button class="open-filter-cta" [class.collapsed]="collapsedFilterArray.includes(filtersEnum.AFFILIATION)"
+        (click)="toggleFilter(filtersEnum.AFFILIATION)">
+        <span>Affiliation</span>
+        <span class="ml-1" *ngIf="selectedPracticeAreaCodeList.length">
+            ({{ selectedPracticeAreaCodeList.length }})
+        </span>
+        <i class="fa fa-chevron-up ml-auto"></i>
+      </button>
+    </div>
+
+    <!-- Filter Content -->
+    <div class="filters-section-body">
+      <app-multi-select-dropdown 
+        [dropdownList]="practiceAreaDropDownList" 
+        [title]="'Affiliation'"
+        [selectedItems]="selectedPracticeAreaCodeList"
+        [treeViewType]="1"
+        (refreshView)="onSelectChange($event, filtersEnum.AFFILIATION)">
+      </app-multi-select-dropdown>
+    </div>
+  </div>
+
+  <!-- Affiliation Roles Filter Options -->
+  <div *ngIf="selectedPracticeAreaCodeList.length" class="filter-wrapper" id="filter-row-affiliation-role" [class.collapsed]="collapsedFilterArray.includes(filtersEnum.AFFILIATION_ROLE)">
+    <!-- Filter Menu Toggle -->
+    <div class="filter-section-header">
+      <button class="open-filter-cta" [class.collapsed]="collapsedFilterArray.includes(filtersEnum.AFFILIATION_ROLE)"
+        (click)="toggleFilter(filtersEnum.AFFILIATION_ROLE)">
+        <span>Affiliation Roles</span>
+        <span class="ml-1" *ngIf="selectedAffiliationRoleCodeList.length">
+            ({{ selectedAffiliationRoleCodeList.length }})
+        </span>
+        <i class="fa fa-chevron-up ml-auto"></i>
+      </button>
+    </div>
+
+    <!-- Filter Content -->
+    <div class="filters-section-body">
+      <app-multi-select-dropdown 
+        [dropdownList]="affiliationRolesDropdownList" 
+        [title]="'Affiliation'"
+        [selectedItems]="selectedAffiliationRoleCodeList"
+        [treeViewType]="1"
+        (refreshView)="onSelectChange($event, filtersEnum.AFFILIATION_ROLE)">
+      </app-multi-select-dropdown>
+    </div>
+  </div>
+    
+      <!-- Apply Button -->
+      <div class="filters-section-footer">
+        <button class="d-flex align-items-center justify-content-center"
+          (click)="applyFilters()">
+          Apply
+        </button>
+      </div>
+    </div>
+  </div>
+  

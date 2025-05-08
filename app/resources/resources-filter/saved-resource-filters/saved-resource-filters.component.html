@@ -1,0 +1,68 @@
+<!-- Saved filter.. -->
+<div class="saved-resource-filters-wrapper">
+  <!-- ..offices -->
+  <div class="saved-filter-row">
+    <label>Offices</label>
+    <app-office-dropdown [title]="'Offices'" [selectedOfficeList]="selectedOfficeList"
+      [officeHierarchy]="officeHierarchy"
+      (refreshView)=getResourcesBySelectedOfficeHandler($event)></app-office-dropdown>
+  </div>
+
+  <!-- ..staffingTags -->
+  <div class="saved-filter-row">
+    <label>Staffing Tags</label>
+    <app-multi-select-dropdown [title]="'Staffing Tags'" [selectedItems]="selectedStaffingTagList"
+      [dropdownList]="staffingTagDropdownList"
+      (refreshView)="getResourcesBySelectedStaffingTags($event)"></app-multi-select-dropdown>
+  </div>
+
+  <!-- ..levelGrades -->
+  <div class="saved-filter-row">
+    <label>Level Grades</label>
+    <app-multi-select-dropdown [title]="'Level Grades'" [selectedItems]="selectedLevelGradeList"
+      [dropdownList]="levelGradeDropdownList"
+      (refreshView)="getResourcesBySelectedLevelGrades($event)"></app-multi-select-dropdown>
+  </div>
+
+  <!-- ..positions -->
+  <div class="saved-filter-row">
+    <label>Position</label>
+    <app-multi-select-dropdown [title]="'Positions'" [selectedItems]="selectedPositionList"
+      [dropdownList]="positionDropdownList"
+      (refreshView)="getResourcesBySelectedPositionList($event)"></app-multi-select-dropdown>
+  </div>
+
+  <!-- ..staffableAs -->
+  <div class="saved-filter-row">
+    <label>Staffable As</label>
+    <app-multi-select-dropdown [title]="'Staffable As'" [selectedItems]="selectedStaffableAsList"
+      [dropdownList]="staffableAsDropdownList"
+      (refreshView)="getResourcesBySelectedStaffableAs($event)"></app-multi-select-dropdown>
+  </div>
+
+  <!-- ..employeeStatus -->
+  <div class="saved-filter-row">
+    <label>Employee Status</label>
+    <app-multi-select-dropdown [title]="'Employee Status'" [selectedItems]="selectedEmployeeStatusList"
+      [dropdownList]="employeeStatusDropDownList"
+      (refreshView)="getResourcesEmployeeStatusBySelectedValue($event)"></app-multi-select-dropdown>
+  </div>
+
+  <!-- ..affiliations -->
+  <div class="saved-filter-row">
+    <label>Affiliation</label>
+    <app-multi-select-dropdown [title]="'Affiliation'" [selectedItems]="selectedPracticeAreaList"
+      [dropdownList]="practiceAreaDropDownList"
+      (refreshView)="showResourcesPracticeAreaBySelectedValue($event)"></app-multi-select-dropdown>
+  </div>
+
+  <!-- ..affiliation roles -->
+  <ng-container *ngIf="isAffiliationRoleShown">
+  <div class="saved-filter-row">
+    <label>Affiliation Role</label>
+    <app-multi-select-dropdown [title]="'Affiliation Role'" [selectedItems]="selectedRoleNameList"
+      [dropdownList]="roleNameDropdownList"
+      (refreshView)="showResourcesRoleNameBySelectedValue($event)"></app-multi-select-dropdown>
+  </div>
+</ng-container>
+</div>

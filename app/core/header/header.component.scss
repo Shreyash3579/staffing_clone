@@ -1,0 +1,30 @@
+.profile-nav {
+    position: relative;
+}
+
+.rf-overlay-icon-container {
+    position: relative;
+    margin-right: -1.6rem;
+}
+
+.fence-icon {
+    border: none !important;
+    border-radius: 0 !important;
+    opacity: 0.4 !important;
+}
+
+div#banner {
+  // position: absolute;
+  // top: 70px;
+  // left: 15px;
+  background-color: #DDEEEE;
+  width: 98%;
+  margin-left: 1%;
+}
+
+div#banner-content {
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid #000;
+}

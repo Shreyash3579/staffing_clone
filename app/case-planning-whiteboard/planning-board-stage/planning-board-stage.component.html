@@ -1,0 +1,621 @@
+<!-- Whiteboard Section -->
+<div class="case-planning-whiteboard" cdkDropListGroup>
+    <!-- Title -->
+    <!-- Page Header -->
+  <div style="padding: 40px 20px 0px; width: 100%;">
+    <div class="case-planning-header">
+      <!-- <h1 class="case-planning-title">Planning Board</h1> -->
+
+      <!-- Hidden Columns Pill -->
+      <div class="hidden-columns-wrapper" *ngIf="hiddenColumns.length">
+        <h3>Hidden:</h3>
+        <div class="hidden-column" *ngFor="let column of hiddenColumns; let i = index">
+          <span>{{ column }}</span>
+          <button (click)="revealColumnHandler(column)">
+            <i class="fa fa-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Playground/Whiteboard Section -->
+
+      <div *ngIf="!this.isPreviousWeekData">
+        <div *ngIf="playgroundValidationObj.isInValid">
+          <label>{{playgroundValidationObj.errorMessage}}</label>
+        </div>
+
+        <ng-container  *ngIf="!userPlaygroundSessionInfo?.playgroundId">
+          <div class="playground-options-container">
+            <button id="btnCreatePlayground" type="button" class="btn btn-sm"
+               (click)="onPlaygroundOptionSelected('create')">
+                Create Whiteboard
+            </button>
+
+            <button id="btnJoinPlayground" type="button" class="btn btn-sm btn-secondary"
+              *ngIf="!userPlaygroundSessionInfo?.playgroundId" (click)="onPlaygroundOptionSelected('join')">
+                Join Whiteboard
+            </button>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="userPlaygroundSessionInfo?.playgroundId">
+          <div class="playground-options-container">
+            <button id="btnLeavePlayground" type="button" class="btn btn-sm"
+              *ngIf="!userPlaygroundSessionInfo.isCreatedByLoggedInUser"   (click)="onPlaygroundOptionSelected('leave')">
+                Leave Whiteboard
+            </button>
+
+            <button id="btnEndPlayground" type="button" class="btn btn-sm btn-secondary"
+              *ngIf="userPlaygroundSessionInfo.isCreatedByLoggedInUser" (click)="onPlaygroundOptionSelected('end')">
+              <i class="fas fa-times mr-1"></i>
+                End Whiteboard
+            </button>
+
+            <button *ngIf="userPlaygroundSessionInfo?.playgroundId" title="Refresh Whiteboard Data" style="border: none;">
+              <i class="fas fa-sync" (click)="refreshPlanningBoardDataForPlayground()"></i>
+            </button>
+          </div>
+        </ng-container>
+
+
+      </div>
+      <!-- Create/Join Whiteboard Section -->
+
+      <!-- Playground Id -->
+      <h1 *ngIf="userPlaygroundSessionInfo?.playgroundId" class="playground-title">Whiteboard ID:&nbsp;
+        <label style="font-weight:100">{{userPlaygroundSessionInfo.playgroundId}}&nbsp;&nbsp;</label>
+        <a style="display: inline-block; cursor:pointer;" title="Copy to clipboard" [cdkCopyToClipboard]="userPlaygroundSessionInfo.playgroundId"
+          href="javascript:void(0)" (click)="showCopyMessage()">
+          <span>
+            <i class="far fa-copy"></i>
+          </span>
+        </a>&nbsp;
+      </h1>
+      <!-- Playground Id -->
+
+      <!-- Filter Section -->
+      <div class="filter-section-wrapper" *ngIf="!userPlaygroundSessionInfo?.playgroundId">
+        <app-quick-filters
+          (applyQuickFilters)="applyQuickFiltersHandler($event)">
+        </app-quick-filters>
+      </div>
+    </div>
+  </div>
+
+    <div #resizeBox [style.height.px]="height" class="case-planning-whiteboard-wrapper">
+    <!-- Table -->
+    <div class="table-wrapper" *ngIf="planningBoard.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <div class="column-header d-flex align-items-center justify-content-end">
+                <!-- Show Previous/Next Columns Button -->
+                <i *ngIf="!this.isPreviousWeekData && !userPlaygroundSessionInfo?.playgroundId" class="fa fa-arrow-circle-left pointer-cursor" (click)="getDataForPreviousDateRange()"></i>
+                <i *ngIf="this.isPreviousWeekData && !userPlaygroundSessionInfo?.playgroundId" class="fa fa-arrow-circle-right pointer-cursor" (click)="getDataForCurrentDateRange()"></i>
+              </div>
+            </th>
+            <ng-container *ngFor="let planningBoardColumn of planningBoard; let i = index">
+              <th *ngIf="!hiddenColumns.includes(planningBoardColumn.title)" id="column-{{ i + 1 }}">
+                <div  class="column-header d-flex align-items-center justify-content-center">
+                  <!-- Week Label -->
+                  <span class="week-count-label"
+                    >{{ planningBoardColumn.title }}
+                  </span>
+
+                  <!-- Hide Column Button -->
+                  <button class="show-hide-button" (click)="hideColumnHandler(planningBoardColumn.title)">
+                    <i class="fa fa-eye-slash"></i>
+                  </button>
+                </div>
+              </th>
+
+            </ng-container>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- Metrics Row -->
+          <tr *ngIf="planningBoardColumnMetrics.length > 0">
+            <td class="row-cell header">
+              <div class="data-row-0">
+                <!-- Metrics Row -->
+                <div class="row-header">
+                  <div class="d-flex align-items-center">
+                    <p>Metrics</p>
+                    <!-- <button
+                      class="metric-body-cta ml-1"
+                      style="font-size: 8px; font-weight: 500; width: auto"
+                      (click)="toggleAllRows()">
+                      [Expand All]
+                    </button> -->
+                  </div>
+
+                  <button
+                    class="expand-collapse-row-cta"
+                    (click)="toggleCasePlanningBoardRows($event, 0)">
+                    <i class="fa fa-chevron-up"></i>
+                  </button>
+                </div>
+
+                <!-- Metrics Rows -->
+                <!-- Supply, Demand, Balance -->
+                <!-- <ng-container *ngFor="let planningBoardColumn of planningBoardColumnMetrics; let i = index"> -->
+                <ng-container *ngFor="let firstLevel of planningBoardColumnMetrics[0]?.metrics; let i = index">
+                  <div class="metrics-body-row"
+                  [class.collapsed]="!metricsBodyExpandedRowsIds.includes(firstLevel.id + '-body-row-' + i)"
+                  id="{{ firstLevel.id }}-body-row-{{ i }}">
+                    <div class="metrics-body d-flex align-items-center justify-content-between" [class.staffable-teams]="firstLevel.id == 'staffableTeams'">
+                      <ng-container *ngIf="firstLevel.id !== 'staffableTeams'; else staffableTeamsContainer">
+                        <p>{{ firstLevel.name }}</p>
+                        <button
+                          class="expand-collapse-row-cta collapsed"
+                          (click)="toggleMetricsUpperLevelBody(firstLevel.id, $event, i)">
+                          <i class="fa fa-chevron-up" *ngIf="!metricsBodyExpandedRowsIds.includes(firstLevel.id + '-body-row-' + i)"></i>
+                          <i class="fa fa-chevron-down" *ngIf="metricsBodyExpandedRowsIds.includes(firstLevel.id + '-body-row-' + i)"></i>
+                        </button>
+
+                      </ng-container>
+                      <ng-template #staffableTeamsContainer>
+                        <!-- Staffable Teams -->
+                        <div class="d-flex align-items-center">
+                            <img
+                                class="mr-1 mb-1"
+                                src="assets/img/staffable-teams.svg"
+                                alt="person with check icon" />
+                            <p>{{ firstLevel.name }}</p>
+                        </div>
+
+                      </ng-template>
+                    </div>
+
+                    <div class="toggle-bg-color" *ngIf="firstLevel.id === 'supply'">
+                      <div class="toggle-button-wrapper">
+                        <span class="mr-2">Indiv. count</span>
+
+                        <!-- Switch CTA -->
+                        <label class="switch-cta">
+                          <input
+                            type="checkbox"  [checked]="isCountOfIndividualResourcesToggle"
+                            (change)="toggleIndividualCountForSupplyMetrics()" />
+                          <span class="slider"></span>
+                        </label>
+
+                      </div>
+
+                      <div class="toggle-button-wrapper">
+                        <span class="mr-2">Highlight newly Available</span>
+
+                        <!-- Switch CTA -->
+                        <label class="switch-cta">
+                          <input
+                            type="checkbox"  [checked]="enableNewlyAvailableHighlighting"
+                            (change)="toggleHighlightNewlyAvailable()" />
+                          <span class="slider"></span>
+                        </label>
+
+                      </div>
+
+                      <div class="toggle-button-wrapper">
+                        <span class="mr-2">Group by date available</span>
+
+                        <!-- Switch CTA -->
+                        <label class="switch-cta">
+                          <input
+                            type="checkbox"  [checked]="enableMemberGrouping"
+                            (change)="toggleGroupByDateAvailable()" />
+                          <span class="slider"></span>
+                        </label>
+
+                      </div>
+
+                    </div>
+
+                  <!-- Team, Smap, Partner, Add. Exp. -->
+                  <div
+                    *ngFor="let secondLevel of firstLevel.data"
+                    class="metrics-body-row" [class.collapsed]="!metricsBodyExpandedRowsIds.includes(secondLevel.id + '-body-row-' + i)"
+                    id="{{ secondLevel.id }}-body-row-{{ i }}">
+                    <ng-container *ngIf="secondLevel.visible">
+                      <div
+                      class="metrics-body d-flex align-items-center justify-content-between">
+                      <p class="ml-2">{{ secondLevel.name }}</p>
+                      <button
+                        class="expand-collapse-row-cta metric-body-cta collapsed"
+                        (click)="toggleMetricsUpperLevelBody(secondLevel.id, $event, i)">
+                        <i class="fa fa-chevron-up" *ngIf="!metricsBodyExpandedRowsIds.includes(secondLevel.id + '-body-row-' + i)"></i>
+                        <i class="fa fa-chevron-down" *ngIf="metricsBodyExpandedRowsIds.includes(secondLevel.id + '-body-row-' + i)"></i>
+                      </button>
+                    </div>
+
+                      <!-- Available -->
+                      <ng-container
+                        *ngIf="
+                          firstLevel.id !== 'demand' &&
+                          firstLevel.id !== 'balance'
+                        ">
+                        <div
+                          *ngFor="let thirdLevel of secondLevel.available"
+                          class="metrics-body-row">
+                          <div class="metrics-body d-flex align-items-center">
+                            <p class="ml-4 mr-2">{{ thirdLevel.name }}</p>
+                          </div>
+
+                          <!-- A-Level, G-Level, etc -->
+                          <div
+                            *ngFor="let fourthLevel of thirdLevel.levels"
+                            class="metrics-body-row level-wrapper"
+                            [class.collapsed]="!metricsBodyExpandedRowsIds.includes(firstLevel.id + '-' + secondLevel.id
+                              + '-' + thirdLevel.name.toLowerCase() + '-' + fourthLevel.name.toLowerCase()
+                              + '-body-row-' + i)"
+                            id="{{ firstLevel.id }}-{{ secondLevel.id }}-{{
+                              thirdLevel.name.toLowerCase()
+                            }}-{{ fourthLevel.name.toLowerCase() }}-body-row-{{
+                              i
+                            }}"
+                            [ngStyle]="{'height': metricsLowerLevelExpandedRowsIdWithHeight[firstLevel.id + '-' + secondLevel.id
+                            + '-' + thirdLevel.name.toLowerCase() + '-' + fourthLevel.name.toLowerCase()
+                            + '-body-row-' + i] ?? '24px'}"
+
+                            >
+                            <div
+                              class="metrics-body metric-level d-flex align-items-center justify-content-between">
+                              <p class="ml-6">{{ fourthLevel.name }}-Level</p>
+                              <button
+                                class="expand-collapse-row-cta metric-body-cta" [class.collapsed]="!metricsBodyExpandedRowsIds.includes(firstLevel.id + '-' + secondLevel.id
+                                  + '-' + thirdLevel.name.toLowerCase() + '-' + fourthLevel.name.toLowerCase()
+                                  + '-body-row-' + i)"
+                                (click)="
+                                  toggleMetricsLowerLevelBody(
+                                    firstLevel.id +
+                                      '-' +
+                                      secondLevel.id +
+                                      '-' +
+                                      thirdLevel.name.toLowerCase() +
+                                      '-' +
+                                      fourthLevel.name.toLowerCase(),
+                                    $event,
+                                    i
+                                  )
+                                ">
+                                <i class="fa fa-chevron-up" *ngIf="!metricsBodyExpandedRowsIds.includes(firstLevel.id + '-' + secondLevel.id
+                                  + '-' + thirdLevel.name.toLowerCase() + '-' + fourthLevel.name.toLowerCase()
+                                  + '-body-row-' + i)"></i>
+                                <i class="fa fa-chevron-down" *ngIf="metricsBodyExpandedRowsIds.includes(firstLevel.id + '-' + secondLevel.id
+                                  + '-' + thirdLevel.name.toLowerCase() + '-' + fourthLevel.name.toLowerCase()
+                                  + '-body-row-' + i)"></i>
+                              </button>
+                            </div>
+
+                            <!-- Level Row -->
+                            <div
+                              class="metrics-body d-flex align-items-center"
+                              id="level-row">
+                              <!-- Level Row -->
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container>
+
+                      <!-- Prospective -->
+                      <ng-container
+                        *ngIf="
+                          firstLevel.id !== 'demand' &&
+                          firstLevel.id !== 'balance'
+                        ">
+                        <div
+                          *ngFor="let thirdLevel of secondLevel.prospective"
+                          class="metrics-body-row level-wrapper">
+                          <div class="metrics-body d-flex align-items-center">
+                            <p class="ml-4 mr-2">{{ thirdLevel.name }}</p>
+                          </div>
+
+                          <!-- A-Level, G-Level, etc -->
+                          <div
+                            *ngFor="let fourthLevel of thirdLevel.levels"
+                            class="metrics-body-row"
+                            [class.collapsed]="!metricsBodyExpandedRowsIds.includes(firstLevel.id + '-' + secondLevel.id
+                              + '-' + thirdLevel.name.toLowerCase() + '-' + fourthLevel.name.toLowerCase()
+                              + '-body-row-' + i)"
+                            id="{{ firstLevel.id }}-{{ secondLevel.id }}-{{
+                              thirdLevel.name.toLowerCase()
+                            }}-{{ fourthLevel.name.toLowerCase() }}-body-row-{{
+                              i
+                            }}"
+                            [ngStyle]="{'height': metricsLowerLevelExpandedRowsIdWithHeight[firstLevel.id + '-' + secondLevel.id
+                            + '-' + thirdLevel.name.toLowerCase() + '-' + fourthLevel.name.toLowerCase()
+                            + '-body-row-' + i] ?? '24px'}">
+                            <div
+                              class="metrics-body metric-level d-flex align-items-center justify-content-between">
+                              <p class="ml-6">{{ fourthLevel.name }}-Level</p>
+                              <button
+                                class="expand-collapse-row-cta metric-body-cta"
+                                [class.collapsed]="!metricsBodyExpandedRowsIds.includes(firstLevel.id + '-' + secondLevel.id
+                                  + '-' + thirdLevel.name.toLowerCase() + '-' + fourthLevel.name.toLowerCase()
+                                  + '-body-row-' + i)"
+                                (click)="
+                                  toggleMetricsLowerLevelBody(
+                                    firstLevel.id +
+                                      '-' +
+                                      secondLevel.id +
+                                      '-' +
+                                      thirdLevel.name.toLowerCase() +
+                                      '-' +
+                                      fourthLevel.name.toLowerCase(),
+                                    $event,
+                                    i
+                                  )
+                                ">
+                                <i class="fa fa-chevron-up" *ngIf="!metricsBodyExpandedRowsIds.includes(firstLevel.id + '-' + secondLevel.id
+                                  + '-' + thirdLevel.name.toLowerCase() + '-' + fourthLevel.name.toLowerCase()
+                                  + '-body-row-' + i)"></i>
+                                <i class="fa fa-chevron-down" *ngIf="metricsBodyExpandedRowsIds.includes(firstLevel.id + '-' + secondLevel.id
+                                  + '-' + thirdLevel.name.toLowerCase() + '-' + fourthLevel.name.toLowerCase()
+                                  + '-body-row-' + i)"></i>
+                              </button>
+                            </div>
+
+                            <!-- Level Row -->
+                            <div
+                              class="metrics-body d-flex align-items-center"
+                              id="level-row">
+                              <!-- Level Row -->
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container>
+
+                      <ng-container
+                        *ngIf="
+                          firstLevel.id === 'demand' ||
+                          firstLevel.id === 'balance'
+                        ">
+                        <div
+                            *ngFor="let thirdLevel of secondLevel.levels"
+                            class="metrics-body-row"
+                            [class.collapsed]="!metricsBodyExpandedRowsIds.includes(firstLevel.id + '-' + secondLevel.id
+                              + '-' + thirdLevel.name.toLowerCase() + '-body-row-' + i)"
+                            id="{{ firstLevel.id }}-{{ secondLevel.id }}-{{
+                              thirdLevel.name.toLowerCase()
+                            }}-body-row-{{
+                              i
+                            }}"
+                            [ngStyle]="{'height': metricsLowerLevelExpandedRowsIdWithHeight[firstLevel.id + '-' + secondLevel.id
+                            + '-' + thirdLevel.name.toLowerCase() + '-' + '-body-row-' + i] ?? '24px'}">
+                            <div
+                              class="metrics-body metric-level d-flex align-items-center justify-content-between">
+                              <p class="ml-6">{{ thirdLevel.name }}-Level</p>
+                            </div>
+
+                            <!-- Level Row -->
+                            <div
+                              class="metrics-body d-flex align-items-center"
+                              id="level-row">
+                              <!-- Level Row -->
+                            </div>
+                          </div>
+                      </ng-container>
+
+                    </ng-container>
+
+                  </div>
+                  </div>
+                </ng-container>
+                <!-- </ng-container> -->
+              </div>
+            </td>
+
+            <!-- Loop through array to get metrics -->
+            <ng-container
+              *ngFor="
+                let planningBoardColumn of planningBoardColumnMetrics;
+                let i = index
+              ">
+              <ng-container *ngIf="!hiddenColumns.includes(planningBoardColumn.title)">
+                <td
+                style="vertical-align: top"
+                class="metrics-row"
+                id="column-{{ i + 1 }}">
+                <div class="data-row-0">
+                  <div class="metrics-body-row">
+                    <!-- Expand Button -->
+                    <div
+                      class="metrics-body d-flex"
+                      style="
+                        border: none;
+                        border-right: 1px solid #c2c9d1;
+                        box-sizing: content-box;
+                      ">
+                      <!-- <button
+                        class="expand-table-cta ml-auto d-flex align-items-center"
+                        (click)="
+                          openMetricsCommitment(
+                            planningBoardColumn.metrics,
+                            planningBoardColumn.title,
+                            true,
+                            true
+                          )
+                        ">
+                        <span class="d-flex">
+                          <i class="fas fa-arrow-up up-arrow"></i>
+                          <i class="fas fa-arrow-down down-arrow"></i>
+                        </span>
+                      </button> -->
+                    </div>
+                  </div>
+
+                  <!-- Metric Table Row -->
+                  <app-metrics-table
+                    [metrics]="planningBoardColumn.metrics"
+                    [weekOf]="planningBoardColumn.title"
+                    [metricsBodyExpandedRowsIds]="metricsBodyExpandedRowsIds"
+                    [metricsLowerLevelExpandedRowsIdWithHeight]="metricsLowerLevelExpandedRowsIdWithHeight"
+                    [playgroundId]="userPlaygroundSessionInfo?.playgroundId"
+                    [groupByDatesAvailable]="enableMemberGrouping"
+                    [highlightNewlyAvailable]="enableNewlyAvailableHighlighting"
+                    (openAddCommitment)="openMetricsCommitment('', '', false, false)"
+                    (openQuickAddForm)="openQuickAddFormHandler($event)"
+                    (openStaffableTeams)="openMetricsStaffableTeams(planningBoardColumn.title, $event)">
+                  </app-metrics-table>
+                </div>
+              </td>
+              </ng-container>
+
+            </ng-container>
+          </tr>
+
+          <!-- Staff from my Supply, Action Needed, Watching Rows & No Staffing -->
+            <!-- Loop through all buckets -->
+            <tr *ngFor=" let bucket of planningBoardBucketLookUp;let i = index">
+              <!-- Bucket name with expand / collapse cta -->
+              <td class="row-cell header">
+                <div class="data-row-{{ i + 1 }}">
+                  <div class="row-header">
+                    <p>{{ bucket.bucketName }}</p>
+                    <button
+                      class="expand-collapse-row-cta"
+                      (click)="toggleCasePlanningBoardRows($event, i + 1)">
+                      <i class="fa fa-chevron-up"></i>
+                    </button>
+                  </div>
+
+                  <!-- Included in demand label -->
+                  <ng-container *ngIf="bucket.id == 1">
+                    <div class="toggle-button-wrapper">
+                      <span>Included in demand</span>
+                    </div>
+                  </ng-container>
+
+                  <!-- Include in demand label & cta -->
+                  <ng-container *ngIf="bucket.id == 2">
+                    <div class="toggle-button-wrapper">
+                      <span class="mr-2">Include all in demand</span>
+
+                      <!-- Custom Checkbox -->
+                      <app-custom-checkbox
+                        [isChecked]="bucket.includeInDemand"
+                        [isPartiallySelected]="bucket.isPartiallyChecked"
+                        (toggleCheckbox)="toggleIncludeInDemand(bucket)">
+                      </app-custom-checkbox>
+                    </div>
+                  </ng-container>
+                </div>
+              </td>
+
+              <ng-container *ngFor="let planningBoardColumn of planningBoard;let columnIndex = index">
+                <td class="row-cell" *ngIf="!hiddenColumns.includes(planningBoardColumn.title)"
+                  id="column-{{ columnIndex + 1 }}">
+                  <div
+                    class="case-cards-wrapper data-row-{{ i + 1 }}"
+                    id="bucketList-col{{ parentIndex }}-bucket{{ i + 1 }}"
+                    *ngFor="
+                      let bucket of planningBoardColumn.buckets | slice: i:i + 1
+                    "
+                    style="box-shadow: none"
+                    cdkDropList
+                    [cdkDropListData]="bucket"
+                    (cdkDropListDropped)="onCaseDrop($event)"
+                    data-expanded="true">
+                    <div
+                      class="drag-drop-box"
+                      *ngFor="let project of bucket.projects"
+                      cdkDrag
+                      [cdkDragData]="project"
+                      (dragover)="onDragOver($event)"
+                      (drop)="onDrop($event, bucket)">
+                      <case-planning-whiteboard-case-card
+                        [project]="project"
+                        [contextMenuOptions]="contextMenuOptions"
+                        [latestCaseNote]="latestNote"
+                        [showIncludeInDemandCheckbox]="bucket.bucketId == 2"
+                        (contextMenuClick)="
+                          contextMenuClickHandler($event, bucket)
+                        "
+                        (updateProjectChanges)="
+                          updateProjectChangesHandler($event, project)
+                        "
+                        (updatePlanningCardEmitter)="
+                          updatePlanningCardEmitterHandler($event)
+                        "
+                        (openAddTeamSkuForm)="
+                          openAddTeamSkuFormHandler($event)
+                        "
+                        (openPegRFPopUpEmitter)="
+                        openPegRFPopUpHandler($event)
+                        "
+                        (openNotesModalEmmiter)="openNotesModalHandler($event)"
+                        (includeProjectInDemandEmitter)="toggleIncludeProjectInDemand($event, bucket)"
+                        >
+                      </case-planning-whiteboard-case-card>
+                    </div>
+
+                    <!-- If no cases are added -->
+                    <div
+                      *ngIf="!bucket.projects.length"
+                      class="drag-drop-placeholder-area"
+                      (dragover)="onDragOver($event)"
+                      (drop)="onDrop($event, bucket)">
+                      <!-- Drag and drop cases here -->
+                    </div>
+
+                    <!-- If at least one case is added -->
+                    <div
+                      *ngIf="bucket.projects.length"
+                      class="drag-drop-placeholder-area"
+                      (dragover)="onDragOver($event)"
+                      (drop)="onDrop($event, bucket)"
+                      style="height: 100%; min-height: 20px">
+                      <!-- <i class="fa fa-plus-circle icon-color"></i> -->
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+            </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+
+  <!-- Drag Handle -->
+  <div id="gr" class="drag-handle">
+    <i class="fas fa-grip-lines icons-color"></i>
+  </div>
+
+  <!-- New Cases Section -->
+  <div class="new-cases" *ngIf="!!newDemandsData">
+    <div class="new-cases-wrapper">
+      <!-- New Cases Header -->
+      <div class="new-cases-header">
+        <!-- New Cases Title & Count -->
+        <h1>{{ newDemandsData.title }} ({{ newDemandsData.count }})</h1>
+
+        <!-- Search Input -->
+        <app-planning-board-filter (onSearchItemSelect)="onSearchItemSelectHandler($event)">
+        </app-planning-board-filter>
+        <button *ngIf="this.enableBulkSkuButton" type="button" class="btn btn-sm btn-primary skuButton"
+          (click)="setDefaultValuesForSKUs()" [disabled]="disableBulkSkuButton">
+          <i class="fa fa-plus mr-2"></i>
+          <span>Bulk SKU (M+4)</span>
+        </button>
+
+        <button *ngIf="!this.isPreviousWeekData && this.newDemandsData.projects.length > 0" type="button" class="btn btn-sm btn-primary skuButton"
+          (click)="moveNewDemandClickHandler()" [disabled]="disableMoveDemandButton()">
+          <!-- <i class="fa fa-plus mr-2"></i> -->
+          <span>Assign Demands</span>
+        </button>
+      </div>
+
+      <!-- AG Grid Table -->
+      <div class="new-cases-table-wrapper">
+        <div *ngIf="planningBoard">
+          <ag-grid-angular class="ag-theme-alpine" style="width: 100%; height: 500px" [rowData]="rowData" [enableCellChangeFlash]="true"
+            [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowDragManaged]="true" [animateRows]="true" [accentedSort]="true"
+            [gridOptions]="gridOptions" (gridReady)="onGridReady($event)" [getContextMenuItems]="getContextMenuItems"
+            [singleClickEdit]="true" rowSelection="multiple" (selectionChanged)="onSelectionChanged($event)"
+            (cellValueChanged)="onCellValueChanged($event)" (cellClicked)="onCellClicked($event)">
+          </ag-grid-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

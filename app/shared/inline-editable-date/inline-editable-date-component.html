@@ -1,0 +1,15 @@
+<div class="inline-editable inline-editable-text text-nowrap inline-editable-date"
+    [class.active]="editableCol == 'date'" [class.error]="invalidDateUpdated" (click)="editDate()">
+    <div>
+        <label class="no-wrap" *ngIf="inputDate">{{inputDate}}</label>
+        <label class="no-wrap no-date-selected" *ngIf="!inputDate">no end date</label>
+        <input type="text" #date *ngIf="editableCol == 'date'" placeholder="dd-MMM-yyyy" [(ngModel)]="inputDate"
+            [bsConfig]="bsConfig" (blur)="disableDateEdit($event)" bsDatepicker (ngModelChange)="onDateChange($event)">
+        <i class="fa fa-calendar-alt edit-icon"></i>
+
+        <div class="error-message" *ngIf="invalidDateUpdated">
+            {{invalidDateMsg}}
+            <i class="fa fa-times clickable close-error-btn" (click)="hideValidationMessage($event)"></i>
+        </div>
+    </div>
+</div>

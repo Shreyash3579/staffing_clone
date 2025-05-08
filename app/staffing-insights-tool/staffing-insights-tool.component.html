@@ -1,0 +1,237 @@
+<div class="preferences-container">
+    <div class="header-container">
+        <div class="header">
+          <h1>Staffing Preferences</h1>
+          @if(employee){
+            <div class="profile">
+              <div style="display: flex; flex-direction: column;">
+                  <span class="profile-name light">{{employee.firstName}}</span>
+                  <span class="profile-name dark">{{employee.lastName}}</span>
+              </div>
+          
+            <div class="profile-pic">
+                <app-profile-image [height]="80" [width]="80" [imageUrl]="employee.profileImageUrl "></app-profile-image>
+            </div>
+          </div>
+          }
+          
+        </div>
+    </div>
+
+    @if(isPreferencesDataLoaded){
+      <div>
+        <tabset>
+          <tab *ngIf="isFeatureAccessible('staffingInsightsPriorities')">
+            <ng-template tabHeading>
+                <span class="customClass">Priorities</span>
+            </ng-template>
+
+            <div class="priorities-container">
+                @for(priority of prioritiesLabel; track priority.text; let index = $index) {
+                  <div class="item-container priorities-row">
+                      <label class="label">{{ priority.text }}</label>
+                      <shared-single-select-dropdown class="select-button" 
+                          [dropdownList]="priorities" 
+                          [selectedItem]="priority.selectedDropdownValue"
+                          [title]="priority.text" 
+                          [width]="'900px'"
+                          (valueChange)="setPiorityPreferences($event, index)">
+                      </shared-single-select-dropdown>
+                  </div>
+                }
+            </div>
+          </tab>
+          <tab *ngIf="isFeatureAccessible('staffingInsightsPD')"
+            id="tab1" 
+            [active]="activeTab === 'PD'" 
+            (selectTab)="activeTab = 'PD'">
+            <ng-template tabHeading>
+                <span class="customClass">PD</span>
+            </ng-template>
+
+            <div class="priorities-container">
+              @for(pd of pdLabels; track pd.text; let index = $index) {
+                <div class="item-container">
+                    <label class="label">{{ pd.text }}</label>
+                    <shared-multi-select-dropdown class="select-button" 
+                      [dropdownList]="pdPreferencesDropdownList" 
+                      [selectedItems]="pd.selectedDropdownValue"
+                      [title]="pd.text" 
+                      [width]="'900px'"
+                      (valueChange)="setPDPreferences($event, index)">
+                    </shared-multi-select-dropdown>
+                </div>
+
+                @if(pd.selectedDropdownValue.includes("PD0005")){ 
+                  <div class="item-container">
+                      <label class="label">Please describe</label>
+                      <textarea [(ngModel)]="savedPreferencesObj.pdFocusAreasAdditionalInformation"></textarea>
+                  </div>
+                }
+              }
+            </div>
+          </tab>
+          <tab *ngIf="isFeatureAccessible('staffingInsightsIndustries')"
+            [active]="activeTab === 'Industries'" 
+            (selectTab)="activeTab = 'Industries'">
+            <ng-template tabHeading>
+                <span class="customClass active">Industries</span>
+              </ng-template>
+            <div class="priorities-container">
+                @for(industry of industryInterestList; track industry.value; let index = $index) {
+                  <div class="item-container industry-row">
+                    <label class="label">{{ industry.text }}</label>
+                    <shared-multi-select-dropdown class="select-button" 
+                      [dropdownList]="industryPracticeAreaDropdownList" 
+                      [selectedItems]="industry.selectedDropdownValue"
+                      [title]="industry.text" 
+                      [width]="'900px'"
+                      [maxSelectionLimit] = 3
+                      [placeholder]="'Select up to 3 options'"
+                      (valueChange)="setIndustryPreferences($event, index)">
+                    </shared-multi-select-dropdown>
+                  </div>
+                }
+            </div>
+          </tab>
+          <tab *ngIf="isFeatureAccessible('staffingInsightsCapabilities')"
+            [active]="activeTab === 'Capabilities'" 
+            (selectTab)="activeTab = 'Capabilities'">
+            <ng-template tabHeading>
+                <span class="customClass active">Capabilities</span>
+            </ng-template>
+            <div class="priorities-container">
+              @for(capability of capabilityInterestList; track capability.value; let index = $index) {
+                <div class="item-container capability-row">
+                  <label class="label">{{ capability.text }}</label>
+                  <shared-multi-select-dropdown class="select-button" 
+                      [dropdownList]="capabilityPracticeAreaDropdownList" 
+                      [selectedItems]="capability.selectedDropdownValue"
+                      [title]="capability.text" 
+                      [width]="'900px'"
+                      [placeholder]="'Select up to 3 options'"
+                      [maxSelectionLimit] = 3
+                      (valueChange)="setCapabilityPreferences($event, index)">
+                    </shared-multi-select-dropdown>
+                </div>
+              }
+            </div>
+          </tab>
+          <tab *ngIf="isFeatureAccessible('staffingInsightsExperience')"
+            heading="Experience"> 
+            <div class="experience-container">
+                <h2>Capturing your experience and skills</h2>
+                <div class="description" >
+                    <div>
+                        <p>Updating Iris with your pre-Bain experience and qualifications helps us understand your background and expertise.</p>
+                        <p>It's easy to do via a LinkedIn import, or via Iris manually.</p>
+                    </div>
+                    <div>
+                        <p>Record language skills you have via the link below. It's beneficial to focus on languages where you have strong skills. Prioritize languages where you feel confident in your ability to communicate with clients effectively</p>
+                    </div>
+                </div>
+                <div class="buttons">
+                  <button class="update-button" (click)="goToLink(irisUrl)">Update your Iris profile with your pre-Bain experience</button>
+                  <button class="update-button" (click)="goToLink(workdayLanguagesURL)">Update languages in BESS</button>
+                </div>
+                <section class="mt-5">
+                  <h2>Notes to staffing about prior experiences</h2>
+                  <div class="notes">
+                    <div class="note-item">
+                      <label>Anything about your pre-Bain experience that you'd like to flag to staffing?</label>
+                      <textarea [(ngModel)]="savedPreferencesObj.preBainExperience"></textarea>
+                    </div>
+                  </div>
+                </section>
+                
+              </div>
+              
+          </tab>
+          <tab *ngIf="isFeatureAccessible('staffingInsightsTravel')">
+            <ng-template tabHeading>
+                <span class="customClass">Travel</span>
+            </ng-template>
+
+            <div class="priorities-container">
+              <!-- @for(travelOption of travelPreferencesTabOptions; track travelOption.labelText; let index = $index) {
+                <div class="industry">
+                  <label class="label">{{ travelOption.labelText }}</label>
+                  @if(travelOption.dropdownType === 'single'){
+                    <app-single-select-dropdown class="select-button" [dropdownList]="travelOption.data" [selectedItem]="travelOption.selectedDropdownValue"
+                        [title]="''" (valueChange)="setTravelPreferences($event)">
+                    </app-single-select-dropdown>
+                  }
+                  @else{
+                    <app-multi-select-dropdown class="select-button" 
+                      [dropdownList]="travelOption.data" 
+                      [selectedItems]="travelOption.selectedDropdownValue"
+                      [title]="''" 
+                      (refreshView)="setCapabilityPreferences($event, index)">
+                    </app-multi-select-dropdown>
+                  }
+                
+                </div>
+              } -->
+                <div class="item-container">
+                    <label class="label">Travel Preferences</label>
+                    <shared-single-select-dropdown class="select-button" 
+                        [dropdownList]="travelInterestDropdownList" 
+                        [selectedItem]="selectedTravelInterest"
+                        [title]="'Travel Preferences'"
+                        [width]="'900px'"
+                        (valueChange)="setTravelPreferences($event, StaffingPreferenceGroup.TRAVEL_INTEREST)">
+                    </shared-single-select-dropdown>
+                </div>
+
+                @if(selectedTravelInterest !== 'TI0010') {
+                  <div class="item-container">
+                    <label class="label">Which regions are you able to travel to?</label>
+                    <shared-multi-select-dropdown class="select-button" 
+                      [dropdownList]="travelRegionDropDownList" 
+                      [selectedItems]="selectedTravelRegions"
+                      [title]="'travel regions'" 
+                      [width]="'900px'"
+                      (valueChange)="setTravelPreferences($event, StaffingPreferenceGroup.TRAVEL_REGIONS)">
+                    </shared-multi-select-dropdown>
+                  </div>
+
+                  <div class="item-container">
+                      <label class="label">Are you happy to fly long haul, short haul, or both?</label>
+                      <shared-single-select-dropdown class="select-button" 
+                          [dropdownList]="travelDurationDropDownList"
+                          [selectedItem]="selectedTravelDuration"
+                          [title]="'flying preference'"
+                          [width]="'900px'"
+                          (valueChange)="setTravelPreferences($event, StaffingPreferenceGroup.TRAVEL_DURATION)">
+                      </shared-single-select-dropdown>
+                  </div>
+                }
+                
+                <div class="item-container">
+                    <label class="label">Any additional information relating to travel preferences:</label>
+                    <textarea [(ngModel)]="savedPreferencesObj.additionalTravelInfo"></textarea>
+                </div>
+
+                <div class="item-container">
+                    <label class="label">Update your passport and visa information in BESS by clicking the button to the right, then selecting 'More', then 'Passports and Visas'.</label>
+                    <div class="buttons">
+                        <button class="update-button" (click)="goToLink(workdayProfileURL)">Update passport and visa information in BESS</button>
+                    </div>
+                </div>
+            </div>
+          </tab>
+        </tabset>
+        
+      </div>
+      <div class="save-container">
+        <button class="save-button" (click)="savePreferences()">Save Preferences</button>
+      </div>
+
+    <div class="footer-container">
+      Last Updated: 
+        <span class="ml-2">{{savedPreferencesObj.lastUpdatedByName || savedPreferencesObj.lastUpdatedBy}} </span> 
+        <span class="ml-5">{{ savedPreferencesObj.lastUpdated | date:'dd-MMM-yyyy hh:mm a' || ''}}</span>
+    </div>
+    }
+</div>
+  

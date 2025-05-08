@@ -1,0 +1,38 @@
+<div class="dropdown-wrapper d-flex align-items-center">
+    <!-- Label -->
+    <label class="mr-2" *ngIf="dropdownLabel || dropdownLabel.length">{{ dropdownLabel }}</label>
+
+    <!-- Options Wrapper -->
+    <div class="options-wrapper">
+        <!-- Selected Option -->
+        <button class="selected-option d-flex align-items-center" (click)="toggleDropdown()" tabindex="0">
+            <ng-container *ngFor="let group of menuOptions">
+                <ng-container *ngFor="let option of group.items">
+                    <span *ngIf="option.selected">{{ option.text }}</span>
+                </ng-container>
+            </ng-container>
+            <i class="dropdown-icon fa fa-{{ isMenuopen ? 'chevron-up' : 'chevron-down' }} ml-1"></i>
+        </button>
+
+        <!-- List of options -->
+        <div class="dropdown-options" *ngIf="isMenuopen">
+            <!-- Option Groups -->
+            <div class="group" *ngFor="let group of menuOptions">
+                <!-- Group header -->
+                <h5>{{ group.group }}</h5>
+
+                <!-- Options -->
+                <div class="options">
+                    <button
+                        class="d-flex align-items-center"
+                        *ngFor="let option of group.items"
+                        [ngClass]="option.selected ? 'active' : ''"
+                        (click)="selectOption(option)"
+                    >
+                        {{ option.text }} {{ option.selected ? "(default)" : "" }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

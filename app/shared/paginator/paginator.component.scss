@@ -1,0 +1,56 @@
+.page-navigation-container {
+    text-align: center;
+    //padding: 20px;
+    //margin: 20px;
+  }
+  
+    .page-navigation-container > div {
+      display: inline-block;
+    }
+  
+    .page-navigation-container .page-number-container {
+      width: 57px;
+    }
+      .page-navigation-container .page-number-container .page-navigation-arrow-enabled {
+        cursor: pointer;
+      }
+  
+      .page-navigation-container .page-number-container .page-navigation-arrow-disabled {
+        cursor: default;
+      }
+  
+      .page-navigation-container .page-number-container .page-number-div {
+        cursor: pointer;
+        width: 20px;
+        color: #636363;
+        font-size: 13px;
+        font-weight: normal;
+        margin: auto;
+      }
+  
+      .page-navigation-container .page-number-container .page-number-ellipsis {
+        cursor: default !important;
+      }
+  
+      .page-navigation-container .page-number-container .current-page {
+        cursor: default;
+        color: #CC0000;
+        font-weight: bold;
+      }
+  
+      .page-navigation-container .page-number-container .current-page-bar {
+        border-width: 0px;
+        width: 41px;
+        height: 3px;
+        background: inherit;
+        background-color: rgba(204, 0, 0, 1);
+        border: none;
+        border-radius: 0px;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        color: #CC0000;
+        margin: auto;
+        margin-top: 10px;
+      }
+  

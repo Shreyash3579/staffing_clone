@@ -1,0 +1,228 @@
+@import "variables";
+
+.card-placeholder {
+  margin-bottom: 24px;
+  position: relative;
+
+  &__wrapper {
+    border: 2px dashed #07c29f;
+    height: 100%;
+    border-radius: 10px;
+    padding: 5px;
+    position: relative;
+    background: #fff;
+  }
+
+  &__icons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    // width: 0;
+    overflow: hidden;
+    // height: 0;
+    background: #f5f5f5;
+    // padding: 0.5rem;
+    // border-radius: 0px 9px 0 0;
+    z-index: 3;
+    display: none;
+  }
+
+  &__dialog {
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 200;
+    overflow: hidden;
+    padding: 1rem;
+  }
+
+  &__backdrop {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #c4c4c4;
+    opacity: 0.5;
+    z-index: 4;
+  }
+
+  &__button {
+    padding: 0 1rem;
+    outline: none;
+    border: 1px solid #cc0000;
+    border-radius: 3px;
+    background: #cc0000;
+    color: #fff;
+
+    &--secondary {
+      background: #fff;
+      color: #cc0000;
+    }
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem;
+    position: relative;
+
+    label {
+      white-space: pre-wrap;
+      margin-bottom: 0;
+      margin-right: 0.5rem;
+      color: #000;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid #dadada;
+    }
+  }
+
+  &__title {
+    height: 3.29rem;
+    border: 1px solid #c4c4c4;
+    margin-bottom: 0.5rem;
+    position: relative;
+
+    textarea {
+      width: 100%;
+      height: 100%;
+      resize: none;
+      outline: none;
+      border: 1px solid #c4c4c4;
+    }
+  }
+
+  &__title:hover .card-placeholder__icons {
+    // width: 150px !important;
+    padding: 0.5rem;
+    display: block;
+    height: unset;
+  }
+
+  &__content {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    font-size: 12px;
+  }
+
+  &__daterange {
+    input {
+      background-color: $grey-extra-light;
+      min-width: 195px;
+      padding-left: 0px;
+      padding-right: 16px;
+      font-size: 14px;
+      line-height: 1.7;
+      border-left: none;
+    }
+  }
+}
+
+.placeholder-icon {
+  &:hover &--circle {
+    fill: #bc0dff;
+  }
+
+  &:hover &--line {
+    fill: #fff;
+    stroke: #fff;
+  }
+}
+
+.email-icon {
+  &:hover &--circle {
+    fill: #cc0000;
+  }
+}
+
+.thumbtack-icon {
+  &:hover &--circle {
+    fill: #007bff;
+  }
+
+  &:hover &--line {
+    fill: #fff;
+  }
+}
+
+.case-icon {
+  &:hover &--circle {
+    fill: #20b66b;
+  }
+
+  &:hover &--line {
+    stroke: #fff;
+  }
+}
+
+.close-icon {
+  &:hover &--line {
+    stroke: #cc0000;
+  }
+}
+
+.placeholder {
+  &__list {
+    width: 100%;
+    transform: none !important;
+    display: flex;
+    border: 1px dashed #06af8f;
+
+    .name a {
+      font-size: 15px;
+      color: #000;
+      line-height: 17px;
+      max-width: 100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: block;
+    }
+  }
+}
+
+.placeholder__list:last-child {
+  border-bottom: 1px dashed #06af8f;
+}
+
+.card-content-area {
+  // min-height: 198px; commenting for now. Uncommnet when new design is implemented
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.share-icon{
+  background-color: #f7f7f7;
+  padding-top: 10px;
+  cursor: pointer;
+}
+
+.highlight-allocation {
+  background: #adff2f;
+}
+
+.fence-icon {
+  border: none !important;
+  border-radius: 0 !important;
+  opacity: 0.4 !important;
+  width: 20px;
+  /* height: 20px; */
+  vertical-align: middle;
+
+  padding-top: 9px;
+  cursor: pointer;
+}
+
+.rf-overlay-icon-container{
+  background-color: #f7f7f7;
+}

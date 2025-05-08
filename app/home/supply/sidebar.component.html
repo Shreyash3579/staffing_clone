@@ -1,0 +1,19 @@
+<!-- COMPONENT: SIDEBAR-->
+<div class="sidebar">
+  <!-- <button class="btn sidebar__btn--primary mt-3 w-100" (click)="openAddTeamsHandler($event)"><img src="assets/img/createTeam.svg" alt="Create Team Icon"> Create New Team</button> -->
+  <button class="btn sidebar__btn--primary mt-2 mb-3 w-100" (click)="openQuickAddFormHandler($event)"><i
+      class="fas fa-user-plus"></i>Quick Add</button>
+</div>
+
+<home-resources [filteredResourceGroups]="filteredResourceGroups" [searchedResourceGroups]="searchedResourceGroups"
+  [staffingTagsHierarchy]="staffingTagsHierarchy" [resourceLength]="resourceLength" [levelGrades]="levelGrades"
+  [officeHierarchy]="officeHierarchy" [practiceAreas]="practiceAreas" [affiliationRoles]="affiliationRoles" [positionsHierarchy]="positionsHierarchy"
+  (getResourcesIncludingTerminatedBySearchString)="getResourcesIncludingTerminatedBySearchStringHandler($event)"
+  (getResources)="getResourcesHandler($event)" (openQuickAddForm)="openQuickAddFormHandler($event)"
+  (getResourcesSortAndGroupBySelectedValuesEmitter)="getResourcesSortAndGroupBySelectedValuesHandler($event)"
+  (getResourcesAvailabilityBySelectedValuesEmitter)="getResourcesAvailabilityBySelectedValuesHandler($event)"
+  [clearSearch]="clearSearch" (openResourceDetailsDialog)="openResourceDetailsDialogHandler($event)"
+  (openResourcesCommitmentsDialog)="openResourcesCommitmentsDialogHandler($event)">
+</home-resources>
+
+<!-- END COMPONENT: SIDEBAR -->

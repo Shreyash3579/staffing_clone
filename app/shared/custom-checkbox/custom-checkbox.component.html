@@ -1,0 +1,4 @@
+<label class="container" [ngClass]="[getCheckboxSize(), isPartiallySelected ? 'partial' : 'full']">
+  <input type="checkbox" (change)="onToggleCheckbox()" [checked]="isChecked">
+  <span class="checkmark"></span>
+</label>

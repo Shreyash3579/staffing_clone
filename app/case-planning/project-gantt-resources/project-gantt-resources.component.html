@@ -1,0 +1,74 @@
+<div
+    class="resources-wrapper"
+    [ngClass]="isRowCollapsed ? 'collapsed' : ''">
+    <!-- Resource Info -->
+    <div class="resources-info-wrapper">
+        <!-- Case Code & Probbaility Percent -->
+        <p>
+            {{
+                projectDetails.projectType === "NewDemand" || projectDetails.projectType === "ActiveCase"
+                    ? projectDetails.caseCode
+                    : projectDetails.percent
+            }}
+        </p>
+
+        <!-- Client Name -->
+        <p [class.bain-red]="casePlanningNotes && casePlanningNotes.length > 0" title="{{ projectDetails.clientName}}">
+            {{ projectDetails.clientName}}
+        </p>
+
+        <!-- Case Name -->
+        <p title="{{ projectDetails.projectName}}">
+            {{ projectDetails.projectName}}
+        </p>
+
+        <!-- Start Date -->
+        <p title="{{ projectDetails.startDate | date : 'dd-MMM-yy' }}">
+            {{ projectDetails.startDate | date : "dd-MMM-yy" }}
+        </p>
+
+        <!-- End Date -->
+        <p title="{{ projectDetails.endDate | date : 'dd-MMM-yy' }}">
+            {{ projectDetails.endDate | date : "dd-MMM-yy" }}
+        </p>
+
+        <!-- Office Abbreviation -->
+        <p title="{{ projectDetails.officeAbbreviation }}">{{ projectDetails.officeAbbreviation }}</p>
+
+        <!-- Collapse & Expand Row CTA -->
+        <!-- <button
+            class="d-flex align-items-center justify-content-center"
+            (click)="toggleExpandCollapse($event)"
+            [ngClass]="isRowCollapsed || allRowsCollapsed ? 'collapsed' : ''">
+            <i class="fas fa-chevron-{{ isRowCollapsed || allRowsCollapsed ? 'down' : 'up' }}"></i>
+        </button> -->
+    </div>
+
+    <div class="resources-info-wrapper2"  *ngIf="projectDetails.sku">
+        <p></p>
+        <div class="d-flex align-items-center" title="{{projectDetails.sku}}">
+            <p class="sku mr-1">SKU:</p>
+            <button
+                class="sku"
+                (click)="skuTermClickForProjectHandler(projectDetails)">
+                <span >{{ projectDetails.sku }}</span>
+            </button>
+            <!-- <button *ngIf="!projectDetails.sku"
+                class="sku"
+                (click)="openAddTeamSkuFormHandler(projectDetails)">
+                <i class="fas fa-user-plus"></i>
+            </button> -->
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <app-shared-gantt-notes
+    [notes]="casePlanningNotes"
+    [isNotesReadonly]="isNotesReadonly"
+    [rowIndex]="rowIndex"
+    (upsertNote)="upsertCasePlanningNoteHandler($event)"
+    (deleteNotes)="deleteCasePlanningNotesHandler($event)">
+    </app-shared-gantt-notes>
+</div>
+
+

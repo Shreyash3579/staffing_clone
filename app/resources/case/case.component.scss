@@ -1,0 +1,114 @@
+// People Wrapper
+.people-wrapper {
+    box-sizing: border-box;
+    display: grid;
+    font-family: "Graphik";
+    font-size: 10px;
+    gap: 8px;
+    grid-template-columns: 100px auto;
+    max-width: 400px;
+    padding: 10px;
+    width: 400px;
+    max-height: 32px !important;
+  
+    // When collapsed
+    &.collapsed {
+        .profile-picture,
+        .row-2-wrapper,
+        .notes-wrapper {
+            display: none;
+            opacity: 0;
+        }
+    }
+  
+    div,
+    p,
+    a {
+        margin: 0px;
+    }
+  
+    // Name & Profile Image
+    .name-img-wrapper {
+        width: 100%;
+  
+        a {
+            color: #284ce0;
+            display: block;
+            font-weight: 500;
+            width: 100%;
+        }
+  
+        p {
+            color: #121212;
+            font-size: 10px;
+            font-weight: 500;
+            width: 100%;
+        }
+        
+    }
+  
+    // Info Wrapper
+    .info-wrapper {
+        width: 100%;
+  
+        .row-wrapper{
+            gap: 15px;
+        }
+  
+        .row-wrapper {
+            .expand-collapse-cta {
+                display: none;
+            }
+  
+            &:hover {
+                .expand-collapse-cta {
+                    display: block;
+                }
+            }
+        }
+  
+        span {
+            color: #616568;
+            display: block;
+            text-transform: capitalize;
+  
+            &.header-label {
+                font-weight: 500;
+            }
+        }
+  
+        // Case Code
+        .casecode{ 
+            width: 75px;
+        }
+  
+        // Group Date
+        .groupDate {
+            width: 60px;
+        }
+  
+        // Expand & Collapse CTA
+        .expand-collapse-cta {
+            bottom: 3px;
+            position: relative;
+  
+            button {
+                background-color: #ecf0ff;
+                border: none;
+                border-radius: 2px;
+                height: 16px;
+                width: 16px;
+  
+                &.collapsed i {
+                    color: #616568;
+                    transform: rotate(180deg);
+                }
+  
+                i {
+                    color: #284ce0;
+                    transition: all 0.4s ease-in-out;
+                }
+            }
+        }
+    }
+  }

@@ -1,0 +1,66 @@
+<div id="resource-list" class="allocated-resources" cdkDrag>
+    <div style="display: flex; justify-content: space-between;">
+        <div class="teamName">Team Placeholders</div>
+        <div class="close-btn">
+            <span class="fa fa-times" (click)="closePlaceholdersOverlay()"></span>
+        </div>
+    </div>
+
+    <div *ngFor="let allocatedResource of skuResources.placeholderAllocations; index as index">
+        <div class="row no-gutters reources-data">
+            <div class="col-1">
+                <div class="user__image">
+                    <img src="assets/img/user-icon.jpg" alt="User Profile">
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="user__name">
+                    <span *ngIf="allocatedResource.employeeCode ; else forecastPlaceholder" id="lnkResourceName" title="{{allocatedResource.employeeName}}">
+                        {{allocatedResource.employeeName}}
+                    </span>
+                    <ng-template #forecastPlaceholder>
+                        <span id="lnkServiceLineName" title="{{allocatedResource.serviceLineName}}">
+                            {{allocatedResource.serviceLineName}}
+                        </span>
+                    </ng-template>
+
+                </div>
+            </div>
+
+            <div class="col-2">
+                <div class="resource-inner">
+                    <span>
+                        {{allocatedResource.currentLevelGrade}}
+                    </span>
+                    <span>
+                        {{allocatedResource.allocation}} %
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <div class="resource-inner">
+                    <span>
+                        {{allocatedResource.operatingOfficeAbbreviation | uppercase }}
+                    </span>
+                    <span>
+                        {{allocatedResource.endDate | date:"dd-MMM" }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <div class="resource-inner">
+                    <span *ngIf="allocatedResource.commitmentTypeName">
+                        {{allocatedResource.commitmentTypeName }}
+                    </span>
+                    <span *ngIf="allocatedResource.positionGroupName">
+                        {{allocatedResource.positionGroupName }}
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

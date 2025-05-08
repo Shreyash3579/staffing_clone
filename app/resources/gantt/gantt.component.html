@@ -1,0 +1,107 @@
+<div class="resource-gantt-wrapper" #ganttContainer>
+
+  <table class="gantt-table-wrapper" id="ganttContainerDiv">
+    <!-- Table Header -->
+    <thead resources-gantt-header [dateRange]="dateRange"
+      [selectedEmployeeCaseGroupingOption]="selectedEmployeeCaseGroupingOption"
+      [selectedWeeklyMonthlyGroupingOption]="selectedWeeklyMonthlyGroupingOption"
+      [isSelectedPracticeView]="isSelectedPracticeView"
+      (expandCollapseSidebarEmitter)="expandCollapseSidebarHandler($event)"
+      (expandCollapseTopbarEmitter)="expandCollapseTopbarHandler($event)"></thead>
+
+    <!-- Table Body -->
+    <!-- Grouping by Employee Layout -->
+    <ng-container *ngIf="selectedEmployeeCaseGroupingOption !== employeeCaseGroupingEnum.CASES">
+
+      <!-- Virtual Scroll View -->
+      <cdk-virtual-scroll-viewport *ngIf="!isPdfExport; else normalList" [itemSize]="itemSizeForVirtualScroll"
+        class="virtual-scroll-viewport">
+        <ng-container
+          *cdkVirtualFor="let resourceStaffing of resourcesStaffing; trackBy: trackById; let rowIndex = index">
+          <ng-container
+            *ngTemplateOutlet="resourceTemplate; context: { resourceStaffing: resourceStaffing, rowIndex: rowIndex }">
+          </ng-container>
+        </ng-container>
+      </cdk-virtual-scroll-viewport>
+
+      <!-- Normal List View -->
+      <ng-template #normalList>
+        <ng-container *ngFor="let resourceStaffing of resourcesStaffing; trackBy: trackById; let rowIndex = index">
+          <ng-container
+            *ngTemplateOutlet="resourceTemplate; context: { resourceStaffing: resourceStaffing, rowIndex: rowIndex }">
+          </ng-container>
+        </ng-container>
+      </ng-template>
+
+      <!-- Shared Template -->
+      <ng-template #resourceTemplate let-resourceStaffing="resourceStaffing" let-rowIndex="rowIndex">
+        <tbody resources-gantt-body [resourceStaffing]="resourceStaffing" [rowIndex]="rowIndex"
+          [thresholdRangeValue]="thresholdRangeValue" [dateRange]="dateRange" [isTopbarCollapsed]="isTopbarCollapsed"
+          [isLeftSideBarCollapsed]="isLeftSideBarCollapsed" [objGanttCollapsedRows]="objGanttCollapsedRows"
+          [selectedCommitmentTypes]="selectedCommitmentTypes"
+          [selectedEmployeeCaseGroupingOption]="selectedEmployeeCaseGroupingOption"
+          [selectedWeeklyMonthlyGroupingOption]="selectedWeeklyMonthlyGroupingOption"
+          [isSelectedPracticeView]="isSelectedPracticeView" (openQuickAddForm)="openQuickAddFormHandler($event)"
+          (updateResourceAssignmentToProject)="updateResourceAssignmentToProjectHandler($event)"
+          (upsertResourceAllocationsToProject)="upsertResourceAllocationsToProjectHandler($event)"
+          (upsertPlaceholderAllocationsToProject)="upsertPlaceholderAllocationsToProjectHandler($event)"
+          (updateResourceCommitment)="updateResourceCommitmentHandler($event)"
+          (openResourceDetailsDialog)="openResourceDetailsDialogHandler($event)"
+          (openSplitAllocationPopup)="openSplitAllocationPopupHandler($event)"
+          (openCaseDetailsDialog)="openCaseDetailsDialogHandler($event)"
+          (upsertResourceViewNote)="upsertResourceViewNoteHandler($event)"
+          (deleteResourceViewNotes)="deleteResourceViewNotesHandler($event)"
+          (upsertResourceRecentCD)="upsertResourceRecentCDHandler($event)"
+          (deleteResourceRecentCD)="deleteResourceRecentCDHandler($event)"
+          (upsertResourceCommercialModel)="upsertResourceCommercialModelHandler($event)"
+          (deleteResourceCommercialModel)="deleteResourceCommercialModelHandler($event)"
+          (selectedResourceViewTab)="selectedResourceViewTabHandler($event)">
+        </tbody>
+      </ng-template>
+
+    </ng-container>
+
+    <!-- Grouping by Case Code Layout -->
+    <ng-container *ngIf="selectedEmployeeCaseGroupingOption ===  employeeCaseGroupingEnum.CASES">
+      <div class="gantt-body-row" [class.collapsed]="isTopbarCollapsed"
+        *ngFor="let resourceStaffing of resourcesStaffing; trackBy: trackByCaseId;  let rowIndex = index"
+        id="case-group-row-{{ rowIndex }}">
+        <!-- Case Details-->
+        <tbody resources-gantt-case-body [isLeftSideBarCollapsed]="isLeftSideBarCollapsed"
+          [resourcesCountOnCaseOpp]="resourcesCountOnCaseOpp" [objGanttCollapsedRows]="objGanttCollapsedRows"
+          (openQuickAddForm)="openQuickAddFormHandler($event)" [resourceStaffing]="resourceStaffing"
+          [rowIndex]="rowIndex" [dateRange]="dateRange" [isTopbarCollapsed]="isTopbarCollapsed"
+          [selectedWeeklyMonthlyGroupingOption]="selectedWeeklyMonthlyGroupingOption"
+          [isSelectedPracticeView]="isSelectedPracticeView"
+          (collapseExpandCaseGroupEmitter)="collapseExpandIndividualCaseGroupHandler($event, rowIndex)"
+          (openOverlappedTeamsForm)="openOverlappedTeamsPopupHandler($event)"></tbody>
+
+        <!-- Details of Resources working on the case -->
+        <tbody *ngFor="
+            let resource of resourceStaffing.members; trackBy: trackByResourcesId;
+          " resources-gantt-body [resourceStaffing]="resource" [case]="resourceStaffing.caseDetails"
+          [rowIndex]="rowIndex" [thresholdRangeValue]="thresholdRangeValue" [dateRange]="dateRange"
+          [isLeftSideBarCollapsed]="isLeftSideBarCollapsed" [objGanttCollapsedRows]="objGanttCollapsedRows"
+          [selectedCommitmentTypes]="selectedCommitmentTypes"
+          [selectedEmployeeCaseGroupingOption]="selectedEmployeeCaseGroupingOption"
+          [selectedWeeklyMonthlyGroupingOption]="selectedWeeklyMonthlyGroupingOption"
+          [isSelectedPracticeView]="isSelectedPracticeView" (openQuickAddForm)="openQuickAddFormHandler($event)"
+          (updateResourceAssignmentToProject)="updateResourceAssignmentToProjectHandler($event)"
+          (upsertResourceAllocationsToProject)="upsertResourceAllocationsToProjectHandler($event)"
+          (updateResourceCommitment)="updateResourceCommitmentHandler($event)"
+          (openResourceDetailsDialog)="openResourceDetailsDialogHandler($event)"
+          (openSplitAllocationPopup)="openSplitAllocationPopupHandler($event)"
+          (openCaseDetailsDialog)="openCaseDetailsDialogHandler($event)"
+          (upsertResourceViewNote)="upsertResourceViewNoteHandler($event)"
+          (deleteResourceViewNotes)="deleteResourceViewNotesHandler($event)"
+          (upsertResourceRecentCD)="upsertResourceRecentCDHandler($event)"
+          (deleteResourceRecentCD)="deleteResourceRecentCDHandler($event)"
+          (upsertResourceCommercialModel)="upsertResourceCommercialModelHandler($event)"
+          (deleteResourceCommercialModel)="deleteResourceCommercialModelHandler($event)"></tbody>
+      </div>
+    </ng-container>
+
+    <!-- Export functionality: future requirements, should not be removed -->
+    <!-- (ganttBodyLoadedEmitter)="ganttBodyLoadedEmitterHandler()"> -->
+  </table>
+</div>

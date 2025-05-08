@@ -1,0 +1,77 @@
+<div class="staffable-teams-wrapper">
+  <!-- Header -->
+  <div class="staffing-teams-header d-flex align-items-center">
+      <img src="assets/img/staffable-teams.svg" alt="person with check icon" />
+      <h4>Staffable Teams</h4>
+      <p>{{ columnDate }}</p>
+
+      <button (click)="closeModal()">
+          <i class="fas fa-times"></i>
+      </button>
+  </div>
+
+  <!-- Search... -->
+  <!-- Input -->
+  <!-- <div class="search-input-wrapper d-flex align-items-center">
+      <i class="fas fa-search search-icon"></i>
+      <input
+          class="search-input"
+          type="text"
+          placeholder="Search by region or office..."
+          id="officeSearchInput"
+          #officeSearchInput  
+          autocomplete="off"
+          name="searchQuery" />
+      <button class="clear-button" (click)="officeSearchInput.value = ''" *ngIf="officeSearchInput.value.length >= 3">
+          <i class="fas fa-times clear-icon"></i>
+      </button>
+  </div> -->
+  <!-- End Search... -->
+
+  <!-- Team Data -->
+  <div class="teams-wrapper">
+      <!-- Header -->
+      <div class="header-wrapper cell-wrapper">
+          <p *ngIf="isGcTeamCountVisible">General</p>
+          <p *ngIf="isPegTeamCountVisible">PEG</p>
+
+          <div class="total-wrapper">
+              <p *ngIf="isGcTeamCountVisible && isPegTeamCountVisible">Total</p>
+          </div>
+      </div>
+
+      <!-- Regions -->
+      <!-- <div class="group-header cell-wrapper">
+          <p class="header">{{ filteredStaffableTeams.officeName }}</p>
+
+          <p *ngIf="isGcTeamCountVisible">{{ filteredStaffableTeams.gcTeamCount }}</p>
+          <p *ngIf="isPegTeamCountVisible">{{ filteredStaffableTeams.pegTeamCount }}</p>
+
+          <div class="total-wrapper">
+              <p *ngIf="isGcTeamCountVisible && isPegTeamCountVisible" class="header">{{ filteredStaffableTeams.gcTeamCount + filteredStaffableTeams.pegTeamCount }}</p>
+          </div>
+      </div> -->
+
+      <!-- Clusters/Offices -->
+        <!-- <ng-container *ngTemplateOutlet="staffableTeamsContainer; context:{ officeHierarchy: filteredStaffableTeams.staffableTeamChildren, padding: 25 }"></ng-container> -->
+        <app-staffable-team 
+            [officeHierarchy]="filteredStaffableTeams"
+            [isGcTeamCountVisible]="isGcTeamCountVisible"
+            [isPegTeamCountVisible]="isPegTeamCountVisible"
+            [padding]="15"
+            (countChange)="onCountChange($event)">
+        </app-staffable-team>
+  </div>
+
+  <!-- Update Or Cancel Buttons -->
+  <div *ngIf="this.staffableTeamsToUpsertList.length > 0" class="modal-footer">
+    <button id="quick-add-cancel-button" type="button" class="btn btn-sm btn-secondary" (click)="closeModal()">
+      Cancel
+    </button>
+    <button id="quick-add-update-button" type="button" class="btn btn-sm btn-primary"
+      (click)="updateCounts()">
+      Update
+    </button>
+  </div>
+
+

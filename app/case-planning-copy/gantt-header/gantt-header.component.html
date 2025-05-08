@@ -1,0 +1,65 @@
+<header class="d-flex">
+    <!-- Case | Client Info -->
+    <section class="left-side-bar">
+      <div class="left-side-wrapper bordered-cell" [class.show]="!show">
+        <ng-container *ngIf="show">
+          <!-- header columns -->
+          <div class="header-column" *ngFor="let column of headerColumns; let columnIndex = index">
+            <button class="resource-header-button" (click)="toggleSort(columnIndex)">
+                {{ column.field }}
+              </button>
+  
+            <div class="action-buttons-wrapper">
+              <app-custom-checkbox *ngIf="column.field == 'include in demand'"
+                title="{{ isIncludedInDemand ? 'Included in demand' : 'Include in demand' }}"
+                [isChecked]="isIncludedInDemand"
+                (toggleCheckbox)="includeAllInDemand()"></app-custom-checkbox>
+                
+  
+              <button *ngIf="column.sort >= 1" class="resource-header-button" (click)="toggleSort(columnIndex)">
+                <i class="fas fa-arrow-{{ column.sort == 1 ? 'up' : column.sort == 2 ? 'down' : '' }}"></i>
+              </button>
+  
+
+              <button class="resource-header-button resource-header-filter"
+                (click)="column.toggleFilter = !column.toggleFilter">
+                <i class="fas fa-bars"></i>
+  
+                <div class="case-planning-treeview-dropdown">
+                  <app-multi-select-dropdown [dropdownList]="column.filter" [title]="column.label"
+                    [selectedItems]="column.selectedFilterList" (refreshView)="filterProjects($event, columnIndex)" [treeViewType]="1"></app-multi-select-dropdown>
+                </div>
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </section>
+  
+     <!-- Gantt Dates -->
+  <section class="right-side-wrapper">
+    <ng-container *ngIf="!show">
+      <tr class="weeks-row d-flex align-items-center">
+        <ng-container *ngFor="let perDayDate of perDayDates; let i = index">
+          <th class="week-cell bordered-cell d-flex align-items-center justify-content-center"
+            [ngClass]="perDayDates ? perDayDates[i].className : ''" [class.show]="!show"
+            *ngIf="perDayDates[i].weekName != '' && perDayDates[i].weekLength != ''">
+            <span title="{{ perDayDates[i].weekName }}">{{
+              perDayDates[i].weekLength > 1 ? perDayDates[i].weekName : "..."
+              }}</span>
+          </th>
+        </ng-container>
+      </tr>
+    </ng-container>
+
+    <ng-container *ngIf="show">
+      <div class="dates-row d-flex align-items-center">
+        <div *ngFor="let perDayDate of perDayDates; let i = index"
+          class="dates-cell bordered-cell d-flex justify-content-center align-items-center"
+          [ngClass]="perDayDate ? perDayDate.className : ''">
+          <span title="{{ perDayDate.fullDate }}">{{ perDayDate.date }}</span>
+        </div>
+      </div>
+    </ng-container>
+  </section>
+</header>

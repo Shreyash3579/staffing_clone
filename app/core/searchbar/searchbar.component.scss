@@ -1,0 +1,205 @@
+@import "variables";
+
+.close-icon {
+    cursor: pointer;
+}
+.searchbar__overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 54px;
+    bottom: 0;
+}
+.minimize-icon {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.searchbar__result.minimized {
+    height: calc(50vh - 58px); /* Minimized height */
+}
+
+.search_icon {
+    margin: auto;
+    margin-right: 5px;
+}
+
+.filterRadio {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn_label {
+    color: black;
+    font-style: italic;
+}
+
+.btn_filter {
+    font-size: 14px;
+    margin-left: 4px;
+    border-radius: 8px;
+}
+
+.selected-search {
+    border: 2px solid $bain-red;
+}
+
+.searchbar {
+    &__user-language {
+        font-weight: 600;
+    }
+    &__user-certification {
+        font-weight: 600;
+    }
+    //  .XXX{
+    //      background-color: #FFAF52;
+    //      padding-right:0.5rem;
+    //      text-align: center;
+    //      }
+    //  .FRE{
+    //      background-color: #F6E3FF;
+    //      padding-right:0.5rem;
+    //      text-align: center;
+    //  }
+    //  .ACE{
+    //      background-color:  #FFE3E3;
+    //      padding-right:0.5rem;
+    //      text-align: center;
+    //      }
+    //  .MBA{
+    //      background-color:  #48C9FE;;
+    //      padding-right:0.5rem;
+    //      text-align: center;
+    //  }
+    //  .PMP{
+    //      background-color:  #C1DFDD;
+    //      padding-right:0.5rem;
+    //      text-align: center;
+    //  }
+
+    &__result {
+        position: absolute;
+        left: -47px;
+        top: 100%;
+        background-color: #fff;
+        width: 108%;
+        height: calc(100vh - 58px);
+        overflow-y: auto !important;
+
+        padding: 0.5rem 1rem 2rem 1rem;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+        z-index: 1025;// Set the z-index to a value that places the section below the resource context menu (which has a z-index of 1050) and Ensure the z-index is higher than the overlay, which has a z-index of 1000.
+    }
+
+    &__input {
+        max-width: 600px;
+        // min-width: 360px;
+        width: 100%;
+        background-color: #fff;
+        outline: none;
+        border: 1px solid #dadada;
+        border-radius: 5px;
+        display: flex;
+
+        &:focus,
+        &:active {
+            outline: none;
+            border: 1px solid #dadada;
+        }
+    }
+
+    &__resources {
+        h3 {
+            margin-bottom: 1.5625rem;
+            font-size: 18px;
+        }
+    }
+
+    &__cases {
+        margin: 1.5625rem 0;
+
+        h3 {
+            margin-bottom: 1.5625rem;
+            font-size: 18px;
+        }
+    }
+}
+.current-selection-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h3 {
+    color: #000;
+    margin: 0;
+  }
+}
+
+.btn-view-resource {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: #1a73e8;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: normal;
+  text-decoration: underline;
+  margin: 0;
+}
+
+.btn-view-resource i {
+  margin-right: 8px;
+}
+
+.btn-view-resource:hover {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.searchbar__resources-list {
+  margin-bottom: 1rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.btn-clear-selection {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: #d9534f;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: normal;
+  margin-left: 10px;
+}
+
+.btn-clear-selection i {
+  margin-right: 8px;
+}
+
+.btn-clear-selection:hover {
+  font-weight: bold;
+}
+
+.multi-resource-message {
+  background-color: #f3f6ff; 
+  border-radius: 8px;
+  padding: 8px 12px; 
+  font-size: 14px; 
+  color: #3367d6; 
+  align-items: center;
+  margin-top: 16px; 
+  }
+  
+  .multi-resource-message i {
+  margin-right: 8px; 
+  color: #3367d6; 
+  }

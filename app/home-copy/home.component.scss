@@ -1,0 +1,172 @@
+
+//material progress bar override
+.mat-mdc-progress-bar {
+  display: block;
+  height: 2px;
+  overflow: hidden;
+  position: relative;
+  transition: opacity 250ms linear;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+}
+
+h2 {
+  margin-top: 10px; /* Adjusts the space between the progress bar and the text */
+  font-size: 18px; /* Changes the font size */
+  color: #333; /* Adjusts the text color */
+  text-align: center; /* Centers the text */
+}
+
+// loading spinner
+.loading-spinner-wrapper {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  position: fixed;
+  top: 0px;
+  width: 100vw;
+  z-index: 9999999;
+}
+
+main {
+  height: calc(100vh - 58px);
+
+  .staffing-wrapper {
+    display: flex;
+    font-family: "Graphik";
+    height: 100%;
+    position: relative;
+
+    // right side
+    &__content {
+      flex: 1;
+      height: 100%;
+      position: relative;       
+
+      // resource | case wrapper
+      .resource-case-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        height: calc(100% - 50px);
+        padding-left: 350px;
+        position: relative;
+        transition: all 0.2s ease-in-out;
+
+        &.collapsed {
+          padding-left: 0px;
+        }
+
+        #historical-demand {
+          border-right: 1px solid #e0e4e8;
+          box-shadow: 0px 2px 14px rgba(0, 0, 0, 0.15);
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          left: 0px;
+          position: absolute;
+          top: 0px;
+          transition: all 0.2s ease-in-out;
+          width: 350px;
+          z-index: 10;
+
+          .week-wrapper {
+            align-items: center;
+            background: #ecf0ff;
+            border: solid #e0e4e8;
+            border-width: 0px 0px 1px 0px;
+            color: #121212;
+            display: flex;
+            font-size: 12px;
+            font-weight: 500;
+            height: 32px;
+            justify-content: center;
+            padding: 5px 10px;
+            position: relative;
+
+            .pin-historical{
+              align-items: center;
+              //border-width: 0px 1px 0px 0px;
+              display: flex;
+              height: 24px;
+              justify-content: center;
+              position: absolute;
+              right: 40px;
+              width: 24px;
+              border: none;
+
+              i{
+
+                &:hover {
+                  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+                }
+
+                &.fa-thumbtack{
+                  transform: rotate(90deg);
+                
+                  &.pinned{
+                    color: #284ce0;
+                    transform: rotate(0deg);
+                
+                  }
+                }
+              }
+              
+            }
+            
+            .expand-collapse-historical {
+              align-items: center;
+              background-color: #ecf0ff;
+              border: solid #e0e4e8;
+              border-radius: 50rem;
+              border-width: 0px 1px 0px 0px;
+              display: flex;
+              height: 24px;
+              justify-content: center;
+              position: absolute;
+              right: -12px;
+              width: 24px;
+
+              &:hover {
+                box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+              }
+            }
+          }
+
+          &.hidden {
+            box-shadow: none;
+            border-right: 1px solid transparent;
+            left: -340px;
+          }
+        }
+
+        #stage-wrapper {
+          border-right-color: #e0e4e8;
+          height: 100%;
+          overflow: auto;
+        }
+      }
+    }
+  }
+}
+
+// popover styling
+::ng-deep .staffing-page-popover {
+  background: none;
+}
+
+::ng-deep .staffing-page-popover .arrow {
+  display: none;
+}
+
+::ng-deep .staffing-page-popover .popover-body {
+  background: #616568;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-family: "Graphik";
+  font-size: 12px;
+}

@@ -1,0 +1,29 @@
+.inline-editable-date {
+    width: 100px;
+}
+
+.error-message {
+    text-align: left;
+    position: absolute;
+    -ms-transform: translate(-103px,3px);
+    transform: translate(-103px,3px);
+    width: 200px;
+    padding: 12px;
+    background-color: #c00;
+    color: #fff;
+    white-space: normal;
+    border: 1px solid;
+    margin-left: 100px;
+    z-index: 99;
+}
+
+.close-error-btn {
+    display: inline;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.no-date-selected {
+    color: grey
+}

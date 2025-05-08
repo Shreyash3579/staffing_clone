@@ -1,0 +1,23 @@
+<div class="share-align">
+    <ng-container *ngIf="bshowUrlValue">
+        <a style="display: inline-block; cursor:pointer;" title="Copy to clipboard" [cdkCopyToClipboard]="taburl"
+            href="javascript:void(0)" (click)="showcopymessage()" >
+            <span>
+                <i class="far fa-copy"></i>
+            </span>
+        </a>&nbsp;
+        <a style="display: inline-block;cursor:pointer;" title="Send Url To Us" href={{hrefurl}}>
+            <span class="feedback-comments-container">
+                <i class="far fa-envelope"></i>
+            </span>
+        </a>
+        &nbsp;
+        <input title={{taburl}} class="share-link form-control"
+            placeholder="Generated Tableau Custom View Url" type="text" id="taburl" value={{taburl}}
+            name="taburl">&nbsp;
+    </ng-container>
+    &nbsp; &nbsp;
+    <Button class="share-action btn btn-primary" (click)="generateUrl()">Share
+        Custom View</Button>
+    &nbsp; &nbsp;
+</div>

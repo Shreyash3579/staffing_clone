@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h5 class="modal-title">System Confirmation</h5>
+  <button type="button" class="close" (click)="closeForm()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body confirmation-body">
+  <form>
+    <div class="col-12">
+      <label *ngIf="templateConfirmationPopUpBodyMessage != null" [innerHTML] = "templateConfirmationPopUpBodyMessage"></label>
+      <label *ngIf="templateConfirmationPopUpBodyMessage == null">{{confirmationPopUpBodyMessage}}</label>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" *ngIf="templateConfirmationPopUpBodyMessage != null" (click)="goToPreviousPopup()" class="btn btn-secondary mr-auto" title="Click to go back">
+    <i class="fas fa-arrow-left"></i>
+  </button>
+  <button type="button" id="closeModal" class="btn btn-sm btn-secondary" (click)="cancelAction()">Cancel</button>
+  <button type="button" id="continueAction" class="btn btn-sm btn-primary" (click)="continueAction()">Continue</button>
+</div>

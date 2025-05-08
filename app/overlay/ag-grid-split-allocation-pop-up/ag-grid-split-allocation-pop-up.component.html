@@ -1,0 +1,164 @@
+<div ngDraggable>
+  <div id="ag-grid-split-allocation-header" class="modal-header">
+    <h5 class="modal-title">
+      Split Allocation
+    </h5>
+
+    <button type="button" class="close" (click)="closeForm()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div id="ag-grid-split-allocation-body" class="modal-body">
+    <form>
+      <div class="form-row mb-2" *ngIf="formModel.allocations.isInvalid">
+        <div class="col-12 text-danger">
+          {{formModel.allocations.errorMessage}}
+        </div>
+      </div>
+      <div class="form-row mb-3">
+        <!-- Start Date Calendar: START -->
+        <div class="col-4">
+          <label for="commitmentStartDate1" [class.text-danger]="formModel.firstAllocation.startDate.isInvalid">
+            Start Date *
+          </label>
+
+          <div class="input-group calendar-single">
+            <input type="text" name="commitmentStartDate1" placeholder="dd-mmm-yyyy" id="commitmentStartDate1"
+              class="form-control form-control-sm border-right-0" autocomplete="off"
+              [(ngModel)]="formModel.firstAllocation.startDate.value" readonly />
+
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw"></i>
+              </span>
+            </div>
+          </div>
+
+          <div *ngIf="formModel.firstAllocation.startDate.isInvalid" class="text-danger">
+            {{formModel.firstAllocation.startDate.errorMessage}}
+          </div>
+        </div>
+        <!-- Start Date Calendar: END -->
+
+        <!-- End Date Calendar: START -->
+        <div class="col-4">
+          <label for="commitmentEndDate1" [class.text-danger]="formModel.firstAllocation.endDate.isInvalid">
+            End Date *
+          </label>
+
+          <div class="input-group calendar-single">
+
+            <input type="text" name="commitmentEndDate1" placeholder="dd-mmm-yyyy" id="commitmentEndDate1"
+              class="form-control form-control-sm border-right-0" autocomplete="off" [bsConfig]="bsConfig"
+              [(ngModel)]="formModel.firstAllocation.endDate.value" bsDatepicker #dpEnd1="bsDatepicker"
+              (ngModelChange)="endDateChange()" [minDate]="firstMinDate" [maxDate]="firstMaxDate" />
+
+            <div class="input-group-append">
+              <span class="input-group-text" (click)="dpEnd1.toggle()">
+                <i class="fa fa-calendar-alt fa-fw ngx-daterangepicker-action"></i>
+              </span>
+            </div>
+          </div>
+
+          <div *ngIf="formModel.firstAllocation.endDate.isInvalid" class="text-danger">
+            {{formModel.firstAllocation.endDate.errorMessage}}
+          </div>
+        </div>
+        <!-- End Date Calendar: END -->
+
+        <!-- Allocation: START -->
+        <div class="col-4">
+          <label for="commitmentAllocation1" [class.text-danger]="formModel.firstAllocation.allocation.isInvalid">
+            Allocation *
+          </label>
+
+          <input type="text" name="commitmentAllocation1" id="commitmentAllocation1"
+            class="form-control form-control-sm" autocomplete="off"
+            [(ngModel)]='formModel.firstAllocation.allocation.value' placeholder="enter allocation">
+
+          <div *ngIf="formModel.firstAllocation.allocation.isInvalid" class="text-danger">
+            {{formModel.firstAllocation.allocation.errorMessage}}
+          </div>
+        </div>
+        <!-- Allocation: END -->
+      </div>
+
+      <div class="form-row mb-3">
+        <!-- Start Date Calendar: START -->
+        <div class="col-4">
+          <label for="commitmentStartDate2" [class.text-danger]="formModel.secondAllocation.startDate.isInvalid">
+            Start Date *
+          </label>
+
+          <div class="input-group calendar-single">
+            <input type="text" name="commitmentStartDate2" placeholder="dd-mmm-yyyy" id="commitmentStartDate2"
+              class="form-control form-control-sm border-right-0" autocomplete="off" [bsConfig]="bsConfig"
+              [(ngModel)]="formModel.secondAllocation.startDate.value" bsDatepicker #dpStart2="bsDatepicker"
+              (ngModelChange)="startDateChange()" [minDate]="secondMinDate" [maxDate]="secondMaxDate" />
+
+            <div class="input-group-append">
+              <span class="input-group-text" (click)="dpStart2.toggle()">
+                <i class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw"></i>
+              </span>
+            </div>
+          </div>
+
+          <div *ngIf="formModel.secondAllocation.startDate.isInvalid" class="text-danger">
+            {{formModel.secondAllocation.startDate.errorMessage}}
+          </div>
+        </div>
+        <!-- Start Date Calendar: END -->
+
+        <!-- End Date Calendar: START -->
+        <div class="col-4">
+          <label for="commitmentEndDate2" [class.text-danger]="formModel.secondAllocation.endDate.isInvalid">
+            End Date *
+          </label>
+
+          <div class="input-group calendar-single">
+
+            <input type="text" name="commitmentEndDate2" placeholder="dd-mmm-yyyy" id="commitmentEndDate2"
+              class="form-control form-control-sm border-right-0" autocomplete="off"
+              [(ngModel)]="formModel.secondAllocation.endDate.value" readonly />
+
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="fa fa-calendar-alt fa-fw ngx-daterangepicker-action"></i>
+              </span>
+            </div>
+          </div>
+
+          <div *ngIf="formModel.secondAllocation.endDate.isInvalid" class="text-danger">
+            {{formModel.secondAllocation.endDate.errorMessage}}
+          </div>
+        </div>
+        <!-- End Date Calendar: END -->
+
+        <!-- Allocation: START -->
+        <div class="col-4">
+          <label for="commitmentAllocation2" [class.text-danger]="formModel.secondAllocation.allocation.isInvalid">
+            Allocation *
+          </label>
+
+          <input type="text" name="commitmentAllocation2" id="commitmentAllocation2"
+            class="form-control form-control-sm" autocomplete="off"
+            [(ngModel)]='formModel.secondAllocation.allocation.value' placeholder="enter allocation">
+
+          <div *ngIf="formModel.secondAllocation.allocation.isInvalid" class="text-danger">
+            {{formModel.secondAllocation.allocation.errorMessage}}
+          </div>
+        </div>
+        <!-- Allocation: END -->
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button id="ag-grid-split-allocation-cancel" type="button" class="btn btn-sm btn-secondary" (click)="closeForm()">
+      Cancel
+    </button>
+    <button id="ag-grid-split-allocation-update" type="button" class="btn btn-sm btn-primary"
+      (click)="updateCommitment()">
+      Update
+    </button>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+<div id="main-block" cdkDrag>
+    <div class="modal-header">
+        <p class="main-header">Total Count of Resources in Ringfence</p>
+        <span class="float-right close" (click)="closeModal()">
+            <i class="fa fa-times"></i>
+        </span>
+    </div>
+    <div class="modal-body" id="rf-modal">
+        <div class="row no-gutters mb-3">
+            <div class="col-6 padding-0">
+                <div class="dropdown mr-3" id="lstOffice">
+                  <app-office-dropdown [officeHierarchy]="officeHierarchy" [selectedOfficeList]="selectedOfficeList"
+                    [title]="'Offices'" (refreshView)=getDataBySelectedOffices($event)>
+                  </app-office-dropdown>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <app-multi-select-dropdown [dropdownList]="ringFencesDropdownList" [selectedItems]="selectedRingFenceList"
+                    [title]="'Ringfence'" (refreshView)="getDataBySelectedRingfences($event)">
+                </app-multi-select-dropdown>
+            </div>
+
+            <!-- <div class="col-3 date-group" style="padding-left: 20px">
+                <div class="input-group">
+                    <input type="text" name="rfStartDate" placeholder="From"
+                      class="form-control form-control-sm border-right-0" autocomplete="off" [bsConfig]="bsConfig"
+                      [(ngModel)]="rfStartDate" bsDatepicker #dpStart="bsDatepicker" />
+          
+                    <div class="input-group-append">
+                      <span class="input-group-text" (click)="dpStart.toggle()"><i
+                          class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw"></i></span>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+
+        <div class="text-danger" *ngIf="errorMessage">
+            {{errorMessage}} <br/>
+        </div>
+        
+        <div class="table-container" *ngIf="ringfenceData.length">
+          <div class="row no-gutters">
+            <div class="col-12">
+              <div id="ringfenceTable">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Office</th>
+                      <th>Ringfence Type</th>
+                      <th>Office RF Teams</th>
+                      <th>Effective Date</th>
+                      <th>Last Edit</th>
+                      <th>Active RF Resources</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of ringfenceData; let i=index">
+                      <td>{{item.officeName}}</td>
+                      <td>{{item.commitmentTypeName}}</td>
+                      <td class="input_rf">
+                        <input type="text" placeholder="{{item.rfTeamsOwed}}" name="totalRfTeamsOwed" [(ngModel)]="item.rfTeamsOwed" 
+                        (change)="upsertRingfenceDetails(item)"/>
+                      </td>
+                      <td class="table-date">
+                        <div class="input-group">
+                          <input type="text" name="rfStartDate" autocomplete="off" 
+                            class="form-control form-control-sm border-right-0" [bsConfig]="bsConfig"
+                            [(ngModel)]="item.effectiveDate" bsDatepicker #dpSelect="bsDatepicker"
+                            (ngModelChange)="upsertRingfenceDetails(item)" />
+                
+                          <div class="input-group-append">
+                            <span class="input-group-text" (click)="dpSelect.toggle()">
+                              <i class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+  
+                      <td>
+
+                        <div class="row">
+                          <div class="col-sm-10"> 
+                            <span class="data-width" title="{{item.lastUpdatedByName}}">{{item.lastUpdatedByName}}</span>
+                          </div>
+                          <div class="col-sm-2">    
+                            <span class="pl-3 showHistory" *ngIf="item.lastUpdatedByName"> 
+                              <i class="fa fa-history"   aria-hidden="true" (click)="getRingfenceAuditLogByOfficeAndCommitmentCode(i, item.officeCode, item.commitmentTypeCode)"></i>
+
+                              <div class="history-block" *ngIf="!auditLog.length && i === selectedIndex">
+                                  <p class="history-heading">No history available</p>
+                              </div>
+
+                              <div class="history-block" *ngIf="auditLog.length && i === selectedIndex">
+                                <p class="history-heading">Historical Edits</p>
+                                <table id="history-table">
+                                  <thead>
+                                    <th>Effective Date</th>
+                                    <th>Last Edit</th>
+                                    <th>Office RF Teams</th>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let data of auditLog; let i=index">
+                                      <td>{{data.effectiveDate | date: 'dd-MMM-yyy'}}</td>
+                                      <td>{{data.lastUpdatedByName}}</td>
+                                      <td>{{data.rfTeamsOwed}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </span>
+                          </div>
+                        </div>
+
+                      </td>
+                      <td>{{item.totalRFResources}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+    </div>
+</div>
